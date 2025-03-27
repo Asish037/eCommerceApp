@@ -9,7 +9,10 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
       android:theme="@style/AppTheme"
-      android:supportsRtl="true">
+      android:supportsRtl="true"
+       android:autofillHints="smsOTPCode"
+        android:importantForAutofill="yes"
+      >
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
@@ -21,6 +24,7 @@
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+        
       </activity>
     </application>
 </manifest>
