@@ -1,7 +1,7 @@
 
 export const COLORS = {
     theme : '#DB9BAA',
-    button: '#E96E6E',
+    button: '#C23636',
     bottomTab:'#151822',
     sbutton : '#aab29d',
     textInput : '#E1B4C0',
@@ -14,9 +14,10 @@ export const COLORS = {
     orange:'orange',
     liteBlack : '#0e293547',
     gradient : ['#FDF0F3','#FFFBFC','#F7EBEE'],
-    gradientButton : ['#E96E6E','#FFFBFC','#DA8282'],
+    gradientButton : ['#d97979ff','#bf284eff','#9a2626ff'],
     pink: '#F4ADBD',
     grey: '#808080',
-    blue: '#0000FF'
+    blue: '#0000FF',
+    red:'#FF0000'
 
 }

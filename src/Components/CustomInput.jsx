@@ -47,36 +47,22 @@ import {FONTS} from '../Constant/Font';
     if (props.type == 'email') {
       let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
       if (!value) {
-        setErrorText(
-          <Text style={{color: COLORS.themeColor}}>
-            Please enter email address
-          </Text>,
-        );
+        setErrorText('Please enter email address');
       } else if (reg.test(value) === false) {
-        setErrorText(
-          <Text style={{color: COLORS.themeColor}}>
-            The email address must include @
-          </Text>,
-        );
+        setErrorText('The email address must include @');
       } else {
         setErrorText('');
       }
     } else if (props.type == 'password') {
       if (value.length === 0) {
-        setErrorText(
-          <Text style={{color: COLORS.themeColor}}>Please enter password</Text>,
-        );
+        // setErrorText('Please enter password');
       } else {
         setErrorText('');
         setValue(value);
       }
     } else if (props.type == 'text') {
       if (value.length === 0) {
-        setErrorText(
-          <Text style={{color: COLORS.themeColor}}>
-            Please enter {props.placeholder.toLowerCase()} field
-          </Text>,
-        );
+        setErrorText(`Please enter ${props.placeholder.toLowerCase()} field`);
       } else {
         setErrorText('');
         setValue(props.value);
@@ -84,11 +70,7 @@ import {FONTS} from '../Constant/Font';
     } else {
       if (props.isRequired) {
         if (!value) {
-          setErrorText(
-            <Text style={{color: COLORS.themeColor}}>
-              Please enter {placeholder.toLowerCase()}
-            </Text>,
-          );
+          setErrorText(`Please enter ${placeholder.toLowerCase()}`);
         } else {
           setErrorText('');
         }
@@ -102,15 +84,9 @@ import {FONTS} from '../Constant/Font';
     if (props.type == 'email') {
       let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
       if (!val) {
-        setErrorText(
-          <Text style={{color: '#FF641E'}}>Please enter email address</Text>,
-        );
+        setErrorText('Please enter email address');
       } else if (reg.test(val) === false) {
-        setErrorText(
-          <Text style={{color: '#FF641E'}}>
-            The email address must include @
-          </Text>,
-        );
+        setErrorText('The email address must include @');
       } else {
         setErrorText('');
         setValue(val);
@@ -122,11 +98,7 @@ import {FONTS} from '../Constant/Font';
       let reg =
         /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
       if (!val) {
-        setErrorText(
-          <Text style={{color: COLORS.themeColor}}>
-            Please enter {placeholder.toLowerCase()}
-          </Text>,
-        );
+        setErrorText(`Please enter ${placeholder.toLowerCase()}`);
       } else {
         setErrorText('');
         setValue(val);
@@ -134,11 +106,7 @@ import {FONTS} from '../Constant/Font';
     } else {
       if (props.isRequired) {
         if (!val) {
-          setErrorText(
-            <Text style={{color: '#FF641E'}}>
-              Please enter {placeholder.toLowerCase()}
-            </Text>,
-          );
+          setErrorText(`Please enter ${placeholder.toLowerCase()}`);
         } else {
           setErrorText('');
           setValue(val);
@@ -186,9 +154,7 @@ import {FONTS} from '../Constant/Font';
       </View>
       <View style={styles.mrgnBtn}>
         {errorText ? (
-          <View>
-            <Text>{errorText}</Text>
-          </View>
+          <Text style={styles.errorText}>{errorText}</Text>
         ) : null}
       </View>
     </View>
@@ -199,6 +165,13 @@ import {FONTS} from '../Constant/Font';
 export default CustomInput;
 
 const styles = StyleSheet.create({
+  errorText: {
+    color: 'red',
+    fontSize: 12,
+    marginTop: 2,
+    marginLeft: 32, // aligns with input text (icon + padding)
+    alignSelf: 'flex-start',
+  },
   container: {
     flex: 1,
     marginVertical: 10,
@@ -210,7 +183,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   inputFieldContainer: {
-    borderWidth: 1,
+    // borderWidth: 1,
     borderColor: COLORS.button,
     borderRadius: 12,
     flexDirection: 'row',
@@ -227,7 +200,7 @@ const styles = StyleSheet.create({
     color: COLORS.black,
     fontFamily: FONTS.Regular,
     fontSize: moderateScale(15),
-    backgroundColor: COLORS.lightgray,
+    // backgroundColor: COLORS.lightgray,
     paddingLeft: 20,
     borderRadius: 5,
     marginBottom: 7,

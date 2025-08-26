@@ -4,7 +4,7 @@ import Landing from '../Screens/Auth/Landing';
 import PhoneNumber from '../Screens/Auth/PhoneNumber';
 import Register from '../Screens/Auth/Register';
 import Password from '../Screens/Auth/Password';
-import Login from '../Screens/Auth/Login';
+import Login from '../Screens/Auth/LoginScreen';
 import {COLORS} from '../Constant/Colors';
 import Email from '../Screens/Auth/EmailScreen';
 import ForgotPassword from '../Screens/Auth/ForgotPasswordScreen';
