@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Pressable, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Pressable, Icon, ScrollView } from 'react-native';
 import { COLORS } from '../../Constant/Colors';
 import { FONTS } from '../../Constant/Font';
 import Navigation from '../../Service/Navigation';
-import { Icon } from 'native-base';
+// import { Icon } from 'native-base';
 import { moderateScale, verticalScale } from '../../PixelRatio';
 
 export default function CloseButton(props) {

@@ -1,5 +1,5 @@
 import {useIsFocused} from '@react-navigation/native';
-import {Icon} from 'native-base';
+// import {Icon} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {
   Modal,
@@ -7,6 +7,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  Icon,
   TouchableOpacity,
   View,
 } from 'react-native';

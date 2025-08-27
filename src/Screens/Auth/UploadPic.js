@@ -1,4 +1,4 @@
-import {Icon} from 'native-base';
+// import {Icon} from 'native-base';
 import React, {useEffect} from 'react';
 import {
   View,
@@ -8,6 +8,7 @@ import {
   Dimensions,
   TouchableOpacity,
   BackHandler,
+  Icon,
 } from 'react-native';
 import {COLORS} from '../../Constant/Colors';
 import {FONTS} from '../../Constant/Font';

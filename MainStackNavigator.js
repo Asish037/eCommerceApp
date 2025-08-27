@@ -1,26 +1,40 @@
 import React, {useEffect, useState} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import LoginScreen from './src/Screens/Auth/LoginScreen';
-import ForgotPasswordScreen from './src/Screens/Auth/ForgotPasswordScreen';
-import EmailScreen from './src/Screens/Auth/EmailScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Header} from 'react-native/Libraries/NewAppScreen';
+
+import AuthStack from './src/Navigation/AuthStack';
+import Register from './src/Screens/Auth/Register';
+import Otp from './src/Screens/Auth/Otp';
+
+// import LoginScreen from './src/Screens/Auth/LoginScreen';
+// import ForgotPasswordScreen from './src/Screens/Auth/ForgotPasswordScreen';
+// import EmailScreen from './src/Screens/Auth/EmailScreen';
+// Tab Screens
+import HomeScreen from './src/Screens/HomeScreen';
+import CategoriesScreen from './src/Screens/CategoriesScreen';
+import CartScreen from './src/Screens/CartScreen';
+import AccountScreen from './src/Screens/AccountScreen';
+
 import Orders from './src/Screens/Orders';
 import OrderDetails from './src/Screens/OrderDetails';
+
 import BottomTab from './src/Navigation/BottomTab';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import CircularLoader from './src/Components/CircularLoader';
+
 import MyWishList from './src/Screens/MyWishList';
 import ProductDetailsScreen from './src/Screens/ProductDetailsScreen';
-import CartScreen from './src/Screens/CartScreen';
 import ProfileSettings from './src/Screens/ProfileSettings';
 import EditProfile from './src/Screens/EditProfile';
-import Register from './src/Screens/Auth/Register';
+
+
 import EditAddress from './src/Screens/EditAddress';
 import AddressScreen from './src/Screens/AddressScreen';
 import Privacy from './src/Screens/Privacy';
 import AccountDelete from './src/Screens/AccountDelete';
-import { Header } from 'react-native/Libraries/NewAppScreen';
 import HelpCenter from './src/Screens/HelpCenter';
 import MyCoupons from './src/Screens/MyCoupons';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -52,21 +66,26 @@ const MainStackNavigator = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName={'Login'}
+      initialRouteName={'AuthStack'}
       headerMode="none"
       //screenOptions={{ headerShown: false }}
     >
       <Stack.Screen
+        name="AuthStack"
+        component={AuthStack}
+        options={{headerShown: false}}
+      />
+      {/* <Stack.Screen
         name="Login"
         component={LoginScreen}
         options={{headerShown: false}}
-      />
+      /> */}
       <Stack.Screen
         name="MainHome"
         component={BottomTab}
         options={{headerShown: false}}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Email"
         component={EmailScreen}
         options={{headerShown: false}}
@@ -75,7 +94,7 @@ const MainStackNavigator = () => {
         name="ForgotPassword"
         component={ForgotPasswordScreen}
         options={{headerShown: false}}
-      />
+      /> */}
       <Stack.Screen
         name="Orders"
         component={Orders}
@@ -120,54 +139,55 @@ const MainStackNavigator = () => {
         name="EditProfile"
         component={EditProfile}
         options={() => ({
-          title: 'Manage Your Account'
+          title: 'Manage Your Account',
         })}
       />
       <Stack.Screen
         name="EditAddress"
         component={EditAddress}
-        options={({ route }) => ({ title: route.params.pageTitle })}
+        options={({route}) => ({title: route.params.pageTitle})}
       />
-      
+
       <Stack.Screen
         name="AddressScreen"
         component={AddressScreen}
         options={() => ({
-          title: 'Manage Your Address'
+          title: 'Manage Your Address',
         })}
       />
-      
+
       <Stack.Screen
         name="Register"
         component={Register}
         options={{headerShown: false}}
       />
-       <Stack.Screen
+      <Stack.Screen name="Otp" component={Otp} options={{headerShown: false}} />
+      <Stack.Screen
         name="Privacy"
         component={Privacy}
         options={() => ({
-          title: 'Terms AND Conditions'
+          title: 'Terms AND Conditions',
         })}
       />
       <Stack.Screen
         name="AccountDelete"
         component={AccountDelete}
         options={() => ({
-          title: ''
+          title: '',
         })}
       />
       <Stack.Screen
         name="HelpCenter"
         component={HelpCenter}
         options={() => ({
-          title: 'Help Center'
+          title: 'Help Center',
         })}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="MyCoupons"
         component={MyCoupons}
         options={() => ({
-          title: 'My Coupons'
+          title: 'My Coupons',
         })}
       />
     </Stack.Navigator>

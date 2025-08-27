@@ -1,4 +1,4 @@
-import {Icon} from 'native-base';
+// import {Icon} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Icon
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Toast from 'react-native-simple-toast';

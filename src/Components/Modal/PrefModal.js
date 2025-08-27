@@ -8,6 +8,7 @@ import {
   Modal,
   Pressable,
   Platform,
+  Icon
 } from 'react-native';
 import {COLORS} from '../../Constant/Colors';
 import {FONTS} from '../../Constant/Font';
@@ -15,7 +16,7 @@ import {moderateScale} from '../../PixelRatio';
 import GradientButton from '../Button/GradientButton';
 import CheckBox from '@react-native-community/checkbox';
 import AddDrinks from './AddDrinks';
-import {Icon} from 'native-base';
+// import {Icon} from 'native-base';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const {width, height} = Dimensions.get('window');

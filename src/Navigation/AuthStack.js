@@ -1,40 +1,35 @@
 import React from 'react';
-import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Landing from '../Screens/Auth/Landing';
-import PhoneNumber from '../Screens/Auth/PhoneNumber';
+import Otp from '../Screens/Auth/Otp';
 import Register from '../Screens/Auth/Register';
-import Password from '../Screens/Auth/Password';
 import Login from '../Screens/Auth/LoginScreen';
 import {COLORS} from '../Constant/Colors';
-import Email from '../Screens/Auth/EmailScreen';
-import ForgotPassword from '../Screens/Auth/ForgotPasswordScreen';
-import UploadPic from '../Screens/Auth/UploadPic';
-import Preference from '../Screens/Auth/Preference';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function AuthStack() {
   return (
     <Stack.Navigator
       screenOptions={{
-        cardStyle: {backgroundColor: COLORS.button},
+        headerShown: false,
         gestureEnabled: true,
-        backgroundColor: COLORS.button,
-        gestureDirection: 'horizontal',
-        // ...TransitionPresets.FadeFromBottomAndroid,
-        ...TransitionPresets.SlideFromRightIOS,
+        animation: 'slide_from_right',
       }}
-      initialRouteName="PhoneNumber"
-      headerMode="none">
+      initialRouteName="Landing">
+      {/* Main Auth Flow: Landing → Register → OTP → Main App */}
       <Stack.Screen name="Landing" component={Landing} />
-      <Stack.Screen name="PhoneNumber" component={PhoneNumber} />
       <Stack.Screen name="Register" component={Register} />
-      <Stack.Screen name="Password" component={Password} />
+      <Stack.Screen name="Otp" component={Otp} />
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Email" component={Email} />
-      <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-      <Stack.Screen name="UploadPic" component={UploadPic} />
-      <Stack.Screen name="Preference" component={Preference} />
+
+      {/* Optional: Other auth routes if needed */}
+      {/* <Stack.Screen name="PhoneNumber" component={PhoneNumber} /> */}
+      {/* <Stack.Screen name="Password" component={Password} /> */}
+      {/* <Stack.Screen name="Email" component={Email} /> */}
+      {/* <Stack.Screen name="ForgotPassword" component={ForgotPassword} /> */}
+      {/* <Stack.Screen name="UploadPic" component={UploadPic} /> */}
+      {/* <Stack.Screen name="Preference" component={Preference} /> */}
     </Stack.Navigator>
   );
 }

@@ -2,16 +2,18 @@ import { View, Text, Image } from "react-native";
 import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "../Screens/HomeScreen";
 // import Icon from "react-native-vector-icons/dist/FontAwesome";
 // import Entypo from "react-native-vector-icons/dist/Entypo";
-import ProductDetailsScreen from "../Screens/ProductDetailsScreen";
-import CartScreen from "../Screens/CartScreen";
-import ReorderScreen from "../Screens/ReorderScreen";
-import AccountScreen from "../Screens/AccountScreen";
-import LoginScreen from "../Screens/Auth/LoginScreen"
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { CartContext, CartProvider } from "./../Context/CartContext";
+
+import LoginScreen from "../Screens/Auth/LoginScreen"
+
+import HomeScreen from "../Screens/HomeScreen";
+import ProductDetailsScreen from "../Screens/ProductDetailsScreen";
+import CartScreen from "../Screens/CartScreen";
+import CategoriesScreen from "../Screens/CategoriesScreen";
+import AccountScreen from "../Screens/AccountScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -24,7 +26,13 @@ const MyHomeStack = () => {
       }}
     >
       <Stack.Screen name="HOME" component={HomeScreen} />
+      <Stack.Screen name="CATEGORIES" component={CategoriesScreen} />
+      <Stack.Screen name="CART" component={CartScreen} />
+      <Stack.Screen name="ACCOUNT" component={AccountScreen} />
+
       <Stack.Screen name="PRODUCT_DETAILS" component={ProductDetailsScreen} />
+      {/* <Stack.Screen name="ORDERS" component={Orders} /> */}
+
     </Stack.Navigator>
   );
 };
@@ -40,14 +48,14 @@ const AuthStack = () => {
         // ...TransitionPresets.FadeFromBottomAndroid,
         //...TransitionPresets.SlideFromRightIOS,
       }}
-      initialRouteName="PhoneNumber"
+      initialRouteName="HomeScreen"
       //headerMode="none"
       >
       {/* <Stack.Screen name="Landing" component={Landing} />
       <Stack.Screen name="PhoneNumber" component={PhoneNumber} />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Password" component={Password} /> */}
-      <Stack.Screen name="Login" component={LoginScreen} />
+      {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
       {/* <Stack.Screen name="Email" component={Email} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
       <Stack.Screen name="UploadPic" component={UploadPic} />
@@ -98,8 +106,8 @@ const BottomTab = () => {
             }}
           />
           <Tab.Screen
-            name="REORDER"
-            component={ReorderScreen}
+            name="categories"
+            component={CategoriesScreen}
             options={{
               tabBarIcon: ({ focused, size }) => {
                 if (focused) {

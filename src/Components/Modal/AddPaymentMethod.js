@@ -1,6 +1,6 @@
-import {Icon} from 'native-base';
+// import {Icon} from 'native-base';
 import React, {useEffect, useState} from 'react';
-import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Pressable, StyleSheet, Text, Icon,  TextInput, View} from 'react-native';
 import {CreditCardInput} from 'react-native-credit-card-input';
 import SimpleToast from 'react-native-simple-toast';
 import GradientButton from '../../Component/Button/GradientButton';

@@ -1,7 +1,7 @@
-import {Icon} from 'native-base';
+// import {Icon} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {Modal, SafeAreaView} from 'react-native';
-import {View, Text, FlatList, StyleSheet, TextInput} from 'react-native';
+import {View, Text, FlatList, Icon, StyleSheet, TextInput} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import {COLORS} from '../../Constant/Colors';
 import {FONTS} from '../../Constant/Font';

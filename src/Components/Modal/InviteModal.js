@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Icon, StyleSheet, TextInput, ScrollView } from 'react-native';
 import { COLORS } from '../../Constant/Colors';
 import { FONTS } from '../../Constant/Font';
 import Navigation from '../../Service/Navigation';
-import { Icon } from 'native-base';
+// import { Icon } from 'native-base';
 import { moderateScale, verticalScale } from '../../PixelRatio';
 import NormalButton from '../Button/NormalButton';
 import GlobalStyles from '../GlobalStyle';

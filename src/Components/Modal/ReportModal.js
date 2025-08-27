@@ -1,11 +1,12 @@
 import CheckBox from '@react-native-community/checkbox';
-import {Icon} from 'native-base';
+// import {Icon} from 'native-base';
 import React, {useState} from 'react';
 import {
   Dimensions,
   Platform,
   Pressable,
   StyleSheet,
+  Icon,
   Text,
   TouchableOpacity,
   View,

@@ -1,6 +1,6 @@
-import {Icon, Radio} from 'native-base';
+// import {Icon, Radio} from 'native-base';
 import React, {useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View, Icon, Radio} from 'react-native';
 import SimpleToast from 'react-native-simple-toast';
 import {COLORS} from '../../Constant/Colors';
 import {FONTS} from '../../Constant/Font';

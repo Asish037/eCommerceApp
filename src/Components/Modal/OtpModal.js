@@ -5,8 +5,10 @@ import {
   TouchableOpacity,
   StyleSheet,
   TextInput,
+  Text,
+  Icon
 } from 'react-native';
-import {Text, Icon} from 'native-base';
+// import {Text, Icon} from 'native-base';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {FONTS} from '../../Constant/Font';
 import {COLORS} from '../../Constant/Colors';
@@ -15,7 +17,7 @@ import ImageWithTitle from '../Header/ImageWithTitle';
 import BackHeader from '../Header/BackHeader';
 import GradientButton from '../Button/GradientButton';
 import {moderateScale} from '../../PixelRatio';
-import Auth from '../../Service/Auth';
+import Auth from '../../Service/Auth.js';
 import SimpleToast from 'react-native-simple-toast';
 
 const {width, height} = Dimensions.get('window');

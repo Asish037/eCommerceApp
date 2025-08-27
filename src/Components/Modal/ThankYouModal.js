@@ -1,6 +1,6 @@
-import {Icon} from 'native-base';
+// import {Icon} from 'native-base';
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity, View, Icon} from 'react-native';
 import {COLORS} from '../../Constant/Colors';
 import {FONTS} from '../../Constant/Font';
 import {moderateScale} from '../../PixelRatio';

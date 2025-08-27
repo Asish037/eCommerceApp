@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const ReorderScreen = () => {
+const CategoriesScreen = () => {
   return (
     <View>
       <Text>Coming soon</Text>
@@ -9,6 +9,6 @@ const ReorderScreen = () => {
   )
 }
 
-export default ReorderScreen
+export default CategoriesScreen
 
 const styles = StyleSheet.create({})

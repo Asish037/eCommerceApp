@@ -1,9 +1,10 @@
-import {Icon} from 'native-base';
+// import {Icon} from 'native-base';
 import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
   TextInput,
+  Icon,
   TouchableOpacity,
   View,
 } from 'react-native';

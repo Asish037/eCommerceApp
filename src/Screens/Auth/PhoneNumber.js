@@ -1,4 +1,4 @@
-import {Icon} from 'native-base';
+// import {Icon} from 'native-base';
 import React from 'react';
 import {
   Dimensions,
@@ -9,15 +9,16 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Icon,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import SimpleToast from 'react-native-simple-toast';
 import {useDispatch} from 'react-redux';
-import GradientButton from '../../Component/Button/GradientButton';
-import GlobalStyles from '../../Component/GlobalStyle';
-import CustomImageBackground from '../../Component/ImageBackground/CustomImageBackground';
-import CloseButton from '../../Component/Modal/CloseButton';
-import Otp from '../../Component/Modal/OtpModal';
+import GradientButton from '../../Components/Button/GradientButton';
+import GlobalStyles from '../../Components/GlobalStyle';
+import CustomImageBackground from '../../Components/ImageBackground/CustomImageBackground';
+import CloseButton from '../../Components/Modal/CloseButton';
+import Otp from '../../Components/Modal/OtpModal';
 import {COLORS} from '../../Constant/Colors';
 import {FONTS} from '../../Constant/Font';
 import {moderateScale, verticalScale} from '../../PixelRatio';

@@ -1,6 +1,6 @@
-import {View, Text, Pressable} from 'react-native';
+import {View, Text,Icon, Pressable} from 'react-native';
 import React from 'react';
-import {Icon} from 'native-base';
+// import {Icon} from 'native-base';
 import GlobalStyle from '../Style/GlobalStyle';
 import {COLORS} from '../../Constant/Colors';
 

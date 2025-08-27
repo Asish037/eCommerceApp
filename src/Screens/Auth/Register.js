@@ -24,7 +24,7 @@ import {ETHNCITY_TYPE, GENDER} from '../../Constant/DATA';
 import {useNavigation} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {ImageBackground} from 'react-native';
-import model2 from '../../assets/model2.jpg';
+import model4 from '../../assets/model9.jpg';
 import CustomInput from '../../Components/CustomInput';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -40,288 +40,230 @@ export default function Register() {
 
   const [name, setName] = React.useState('');
   const [phone, setPhone] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [error, setError] = React.useState('');
+  // const [email, setEmail] = React.useState('');
+  // const [password, setPassword] = React.useState('');
 
   // Define the registerUser function to handle registration logic
   const registerUser = () => {
-    if (
-      name == '' ||
-      phone == '' ||
-      email == '' ||
-      password == ''
-      // zip == '' ||
-      // firstname == '' ||
-      // lastname == ''
-      // ||
-      // gender == '' ||
-      // Object.keys(city).length == 0 ||
-      // dob == 'DOB' ||
-      // ethncity == '' ||
-      // Object.keys(states).length == 0
-    ) {
-      Toast.show('Please fill out all the required fields!');
+    if (!phone || phone.length < 9) {
+      setError('Please enter a valid mobile number (at least 9 digits).');
       return;
     }
-
+    if (!name) {
+      setError('Please enter your name.');
+      return;
+    }
+    setError('');
     let data = {
-      // firstname: firstname,
-      // lastname: lastname,
-      // gender: gender,
-      // dob: dateOfBirth,
-      // zipcode: Number(zip),
-      // ethncity: ethncity,
-      // state: Object.keys(states).length > 0 ? states?.id : '',
-      // city: Object.keys(city).length > 0 ? city?.id : '',
       name: name,
       phone: phone,
-      email: email,
-      password: password,
     };
-
-    console.log('data', data);
-    // return;
-
-    navigation.navigate('Login', {data});
+    navigation.navigate('Otp', {data});
   };
 
   return (
-    <ImageBackground source={model2} style={styles.bgImage} resizeMode="cover">
-      {/* Stronger blur overlay for background, can use BlurView for real blur */}
-      <View style={styles.blurOverlay} />
-      <View style={styles.absoluteFill}>
-        <View style={{flex: 1}}>
-          <ScrollView
-            style={{marginHorizontal: 0}}
-            contentContainerStyle={{
-              alignItems: 'flex-start',
-              paddingTop: 24,
-              paddingHorizontal: 18,
-            }}
-            showsVerticalScrollIndicator={false}>
-            <View style={styles.body}>
-              {/* Logo and title, smaller font, left aligned */}
-              <Text style={styles.logoText}>
-                <Text style={styles.logoBold}>Style</Text>ON
-              </Text>
-              <ImageWithTitle
-                title="Create Account"
-                style={styles.createTitle}
-              />
-              {/* All input fields and buttons wrapped in a single parent View, left aligned */}
-              <View style={styles.formContainer}>
-                {/* Name */}
-                <View style={styles.inputFieldContainer}>
-                  <CustomInput
-                    label="Your Name"
-                    placeholder="Name"
-                    keyboardType="text"
-                    onChangeText={text => setName(text)}
-                    icon={
-                      <MaterialCommunityIcons
-                        name={'account'}
-                        size={18} // smaller icon
-                        color={COLORS.button}
-                        style={styles.icon}
-                      />
-                    }
-                    inputStyle={styles.inputStyle} // smaller font, left align
-                    labelStyle={styles.labelStyle}
-                  />
-                </View>
-                {/* Phone */}
-                <View style={styles.inputFieldContainer}>
-                  <CustomInput
-                    label="Enter Phone Number"
-                    placeholder="Enter Phone Number"
-                    keyboardType="phone-pad"
-                    onChangeText={text => setPhone(text)}
-                    icon={
-                      <MaterialCommunityIcons
-                        name={'phone'}
-                        size={18}
-                        color={COLORS.button}
-                        style={styles.icon}
-                      />
-                    }
-                    inputStyle={styles.inputStyle}
-                    labelStyle={styles.labelStyle}
-                  />
-                </View>
-                {/* Email */}
-                <View style={styles.inputFieldContainer}>
-                  <CustomInput
-                    label="Enter Email"
-                    placeholder="Enter Email"
-                    keyboardType="email-address"
-                    onChangeText={text => setEmail(text)}
-                    icon={
-                      <MaterialCommunityIcons
-                        name={'email-edit-outline'}
-                        size={18}
-                        color={COLORS.button}
-                        style={styles.icon}
-                      />
-                    }
-                    inputStyle={styles.inputStyle}
-                    labelStyle={styles.labelStyle}
-                  />
-                </View>
-                {/* Password */}
-                <View style={styles.inputFieldContainer}>
-                  <CustomInput
-                    label="Enter Password"
-                    placeholder="Enter Password"
-                    keyboardType="password"
-                    secureTextEntry={true}
-                    type="password"
-                    onChangeText={text => setPassword(text)}
-                    icon={
-                      <MaterialIcons
-                        name={'lock'}
-                        size={18}
-                        color={COLORS.button}
-                        style={styles.icon}
-                      />
-                    }
-                    inputStyle={styles.inputStyle}
-                    labelStyle={styles.labelStyle}
-                  />
-                </View>
-                {/* Next Button */}
-                <View style={styles.buttonContainer}>
-                  <GradientButton
-                    title="Next"
-                    onPress={registerUser}
-                    style={styles.gradientButton}
-                    textStyle={styles.buttonText}
-                  />
-                </View>
-                {/* Sign In Link, smaller font, left aligned */}
-                <Text style={styles.signInPrompt}>
-                  Already have an account?{' '}
-                  <Text
-                    onPress={() => navigation.navigate('Login')}
-                    style={styles.signInText}>
-                    Sign In
-                  </Text>
-                </Text>
-              </View>
-            </View>
-          </ScrollView>
+    <View style={{flex: 1}}>
+      <ImageBackground
+        source={model4}
+        style={styles.bgImage}
+        resizeMode="fit">
+        {/* Logo at top left, over image */}
+        <View style={styles.logoContainer}>
+          <Text style={styles.logoText}>
+            <Text>Style</Text><Text style={styles.logoBold}>ON</Text>
+          </Text>
         </View>
-      </View>
-    </ImageBackground>
+        {/* Login box at bottom, not full height */}
+        <View style={styles.loginBoxOuter}>
+          <View style={styles.loginBox}>
+            <Text style={styles.loginTitle}>Login / Signup</Text>
+            {/* <Text style={styles.loginSubtitle}>
+              Join us now to be a part of StyleON family.
+            </Text> */}
+            {/* Name input */}
+            <View style={styles.inputRowFull}>
+              <TextInput
+                style={styles.nameInput}
+                placeholder="Enter Name"
+                placeholderTextColor="#B0B0B0"
+                value={name}
+                onChangeText={setName}
+                autoCapitalize="words"
+                returnKeyType="next"
+              />
+            </View>
+            {/* Phone input */}
+            <View style={styles.inputRow}>
+              <View style={styles.countryCodeBox}>
+                <Text style={styles.flag}>🇮🇳</Text>
+                <Text style={styles.countryCode}>+91</Text>
+              </View>
+              <TextInput
+                style={styles.mobileInput}
+                placeholder="Enter Mobile Number"
+                placeholderTextColor="#B0B0B0"
+                keyboardType="phone-pad"
+                value={phone}
+                maxLength={10}
+                onChangeText={text => setPhone(text.replace(/[^0-9]/g, ''))}
+              />
+            </View>
+            {error ? <Text style={styles.errorText}>{error}</Text> : null}
+            <TouchableOpacity
+              style={styles.continueContainer}
+              onPress={registerUser}>
+              <LinearGradient
+                colors={COLORS.gradientButton}
+                style={styles.continueBtn}>
+                <Text style={styles.continueText}>CONTINUE</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ImageBackground>
+    </View>
   );
 }
 
+// Styles should be defined outside the component and passed to StyleSheet.create
 const styles = StyleSheet.create({
+  // New styles for the new UI
+  inputRowFull: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    backgroundColor: '#F5F5F5',
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    marginBottom: 10,
+    height: 48,
+  },
   bgImage: {
-    flex: 1,
+    flex: 1, // Add this line to make the image fill the container
     width: '100%',
     height: '100%',
-    justifyContent: 'flex-start', // push content to top
-    alignItems: 'flex-start', // align to left
   },
-  blurOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(255, 255, 255, 0.62)', // Stronger blur effect
-    zIndex: 1,
+  nameInput: {
+    flex: 1,
+    fontSize: 16,
+    color: '#222',
+    backgroundColor: 'transparent',
+    paddingVertical: 0,
+    paddingHorizontal: 8,
+    height: 48,
   },
-  absoluteFill: {
-    ...StyleSheet.absoluteFillObject,
-    zIndex: 2,
+  logoContainer: {
+    position: 'absolute',
+    top: 32,
+    left: 18,
+    zIndex: 10,
   },
   logoText: {
-    fontSize: 20, // smaller font
-    fontWeight: 'bold',
+    fontSize: 22,
+    fontWeight: 'semibold',
     color: 'red',
-    marginBottom: 4,
-    marginTop: 0,
-    textAlign: 'left',
-    alignSelf: 'flex-start',
+    letterSpacing: 1,
   },
   logoBold: {
     color: 'red',
     fontWeight: '900',
   },
-  createTitle: {
-    fontSize: 14, // smaller font
-    color: 'red',
-    marginBottom: 10,
-    alignSelf: 'flex-start',
-    textAlign: 'left',
+  loginBoxOuter: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    paddingBottom: 0,
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
-  body: {
-    alignItems: 'flex-start', // left align
+  loginBox: {
     width: '100%',
-    margin: 0,
-    padding: 0,
-  },
-  formContainer: {
-    width: '100%',
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    paddingHorizontal: 18,
+    paddingTop: 18,
+    paddingBottom: 32,
     alignItems: 'flex-start',
-    marginTop: 5,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: -2},
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 8,
+    minHeight: 180,
+    marginBottom: 0,
   },
-  inputFieldContainer: {
-    width: '95%',
-    height: 44,
+  loginTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#222',
+    marginBottom: 2,
+    marginTop: 0,
+  },
+  loginSubtitle: {
+    fontSize: 13,
+    color: '#ba6060ff',
+    marginBottom: 18,
+  },
+  inputRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 0,
-    marginVertical: 14, // more gap between fields
-    marginHorizontal: 0,
-  },
-  inputStyle: {
-    fontSize: 14, // smaller font
-    fontWeight: 600,
-    backgroundColor: 'transparent', // fully transparent input background
-    color: '#070707ff',
-    paddingLeft: 8,
-    borderRadius: 5,
-    height: 36,
     width: '100%',
-    // Remove any border/shadow if CustomInput supports it
+    backgroundColor: '#F5F5F5',
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    marginBottom: 10,
+    height: 48,
   },
-  labelStyle: {
-    fontSize: 11, // smaller label
-    color: '#333',
-    marginBottom: 2,
-    marginLeft: 2,
-    textAlign: 'left',
-    alignSelf: 'flex-start',
-  },
-  buttonContainer: {
-    width: '95%',
-    marginTop: 20,
-    marginBottom: 24, // more gap below button
-    alignSelf: 'flex-start',
-  },
-  gradientButton: {
-    height: 25,
-    borderRadius: 15,
-    width: '100%',
-    justifyContent: 'center',
+  countryCodeBox: {
+    flexDirection: 'row',
     alignItems: 'center',
+    marginRight: 6,
   },
-  buttonText: {
-    fontSize: 14, // smaller font
+  flag: {
+    fontSize: 20,
+    marginRight: 2,
+  },
+  countryCode: {
+    fontSize: 16,
+    color: '#222',
     fontWeight: 'bold',
+    marginRight: 4,
   },
-  signInPrompt: {
-    color: COLORS.button,
-    fontFamily: FONTS.Medium,
-    fontWeight: 600,
-    fontSize: 15,
-    marginTop: 24, // more gap above sign in text
-    marginBottom: 8,
-    textAlign: 'left',
-    alignSelf: 'flex-start',
+  mobileInput: {
+    flex: 1,
+    fontSize: 16,
+    color: '#222',
+    backgroundColor: 'transparent',
+    paddingVertical: 0,
+    paddingHorizontal: 8,
+    height: 48,
   },
-  signInText: {
-    fontFamily: FONTS.title,
-    textDecorationLine: 'underline',
-    fontSize: 15,
-    color: COLORS.red,
+  continueContainer: {
+    width: '100%',
+  },
+  continueBtn: {
+    width: '100%',
+    borderRadius: 8,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    marginTop: 12,
+    marginBottom: 0,
+  },
+  continueText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+    letterSpacing: 1,
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 13,
+    marginBottom: 4,
+    marginTop: 2,
   },
 });
