@@ -36,10 +36,11 @@ const EditProfile = () => {
     // }
 
     setdisabled(true);
-    // let data = {
-    //   email: email,
-    //   password: pass,
-    // };
+    let data = {
+      email: email,
+      mobileNumber: mobileNumber,
+      fullname: fullname,
+    };
 
     setdisabled(false);
     Toast.show('Update Profile Successfully!', Toast.SHORT);
@@ -47,7 +48,9 @@ const EditProfile = () => {
   };
 
   return (
-    <LinearGradient colors={COLORS.gradient} style={styles.container}>
+    <LinearGradient
+      colors={['#d8b2bbff', '#cbb5bbff']}
+      style={styles.container}>
       <View style={styles.headerSection}>
         <Text style={styles.hedaerUserName}>{'Hey,\nJohn Henry'}</Text>
         {/* <Image
@@ -111,30 +114,48 @@ const EditProfile = () => {
           <View style={styles.body}>
             <View style={styles.inputFieldContainer}>
               <CustomInput
-                    label='Your Email' placeholder='zerodegreecoder@gmail.com'
-                    keyboardType="email-address"
-                    icon={
-                        <MaterialCommunityIcons name={"email-edit-outline"} size={22} color={COLORS.button} style={styles.icon} />
-                    }
-                />
+                label="Your Email"
+                placeholder="zerodegreecoder@gmail.com"
+                keyboardType="email-address"
+                icon={
+                  <MaterialCommunityIcons
+                    name={'email-edit-outline'}
+                    size={22}
+                    color={COLORS.button}
+                    style={styles.icon}
+                  />
+                }
+              />
             </View>
             <View style={styles.inputFieldContainer}>
-               <CustomInput
-                    label='Your Mobile Number' placeholder='9876543209'
-                    keyboardType={'phone-pad'}
-                    icon={
-                        <MaterialCommunityIcons name={"phone-check"} size={22} color={COLORS.button} style={styles.icon} />
-                    }
-                />
+              <CustomInput
+                label="Your Mobile Number"
+                placeholder="9876543209"
+                keyboardType={'phone-pad'}
+                icon={
+                  <MaterialCommunityIcons
+                    name={'phone-check'}
+                    size={22}
+                    color={COLORS.button}
+                    style={styles.icon}
+                  />
+                }
+              />
             </View>
             <View style={styles.inputFieldContainer}>
-               <CustomInput
-                    label='Your Full Name' placeholder='Jhon Henry'
-                     keyboardType="text"
-                    icon={
-                        <MaterialCommunityIcons name={"account"} size={22} color={COLORS.button} style={styles.icon} />
-                    }
-                />
+              <CustomInput
+                label="Your Full Name"
+                placeholder="Jhon Henry"
+                keyboardType="text"
+                icon={
+                  <MaterialCommunityIcons
+                    name={'account'}
+                    size={22}
+                    color={COLORS.button}
+                    style={styles.icon}
+                  />
+                }
+              />
             </View>
             <View>
               <GradientButton
@@ -212,7 +233,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
-    margin: 10
+    margin: 10,
   },
   isHighlighted: {
     borderColor: 'green',

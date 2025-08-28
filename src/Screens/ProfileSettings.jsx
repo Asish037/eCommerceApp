@@ -20,7 +20,7 @@ import {useNavigation} from '@react-navigation/native';
 const ProfileSettings = () => {
   const navigation = useNavigation();
   return (
-    <LinearGradient colors={COLORS.gradient} style={styles.container}>
+    <LinearGradient colors={['#d8b2bbff', '#cbb5bbff']} style={styles.container}>
       <View style={styles.headerSection}>
         <Text style={styles.hedaerUserName}>{'Hey,\nJohn Henry'}</Text>
         <Image

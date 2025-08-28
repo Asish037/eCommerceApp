@@ -23,7 +23,7 @@ const Orders = () => {
   const [ordersData, setOrdersData] = useState(myorderData.orders);
 
   return (
-    <LinearGradient colors={COLORS.gradient} style={styles.container}>
+    <LinearGradient colors={['#d8b2bbff', '#cbb5bbff']} style={styles.container}>
       <View style={styles.headerSection}>
         <Text>
           {'Order ID:\n APK - 1234567899900'}

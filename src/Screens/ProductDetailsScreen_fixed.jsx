@@ -360,7 +360,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   coverImage: {
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     flex: 1,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,

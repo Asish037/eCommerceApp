@@ -12,54 +12,78 @@ import LinearGradient from "react-native-linear-gradient";
 import Header from "../Components/Header";
 import Tags from "../Components/Tags";
 import ProductCard from "../Components/ProductCard";
-import coupon from "../data/coupon.json";
+import data from "../data/data.json";
 import { useNavigation } from "@react-navigation/native";
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { COLORS } from "../Constant/Colors";
-import { moderateScale } from "../PixelRatio";
-import Coupons from "../Components/Coupons";
-import CouponCard from "../Components/CouponCard";
 
-const MyCoupons = () => {
-  const [couponLists, setCopnonLists] = useState(coupon.coupons);
+const HomeScreen = () => {
+  const [products, setProducts] = useState(data.products);
   const navigation = useNavigation();
-  const handleCouponDetails = (item) => {
-   //navigation.navigate("PRODUCT_DETAILS", { item });
+  const handleProductDetails = (item) => {
+   navigation.navigate("PRODUCT_DETAILS", { item });
+  };
+  const toggleFavorite = (item) => {
+    setProducts(
+      products.map((prod) => {
+        if (prod.id === item.id) {
+          console.log("prod: ", prod);
+          return {
+            ...prod,
+            isFavorite: !prod.isFavorite,
+          };
+        }
+        return prod;
+      })
+    );
   };
 
   return (
     <LinearGradient colors={['#d8b2bbff', '#cbb5bbff']} style={styles.container}>
+      {/* header */}
+
+      {/* <Tags /> */}
 
       <FlatList
         ListHeaderComponent={
           <>
             <>
-              <View style={styles.headerSection}>
-                <Text style={styles.headingText}>My Coupons</Text>
-                <MaterialCommunityIcons
-            name="wallet-giftcard"
-            style={{color: COLORS.button, fontSize: moderateScale(30)}}
-          />
+              <Header />
+              <View>
+                <Text style={styles.headingText}>Match Your Style</Text>
+                <View style={styles.inputContainer}>
+                  <Image
+                    source={require("../assets/search.png")}
+                    style={styles.searchIcon}
+                  />
+                  <TextInput placeholder="Search" style={styles.textInput} />
+                </View>
               </View>
             </>
-            <Coupons />
+            <Tags />
           </>
         }
-        data={couponLists}
-        numColumns={1}
+        data={products}
+        numColumns={2}
         renderItem={({ item }) => (
-          <CouponCard
+          <ProductCard
             item={item}
-            handleCouponClick={handleCouponDetails}
+            handleProductClick={handleProductDetails}
+            toggleFavorite={toggleFavorite}
           />
         )}
         showsVerticalScrollIndicator={false}
       />
       <View>
+        {/* <Text>HomeScreen</Text>
+        <Text>HomeScreen</Text> */}
       </View>
     </LinearGradient>
   );
 };
+
+
+
+export default HomeScreen;
+
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
@@ -89,17 +113,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "Poppins-Regular",
   },
-  headerSection: {
-    width: '90%',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    padding: 10,
-    borderBottomWidth: 0.2,
-    borderColor: COLORS.textInput,
-    paddingBottom: 10,
-  },
 });
-export default MyCoupons;
+
 
 

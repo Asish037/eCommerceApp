@@ -1,63 +1,71 @@
-import {
-  FlatList,
-  StyleSheet,
-  Text, 
-  TouchableOpacity,
-  View,
-} from "react-native";
-import React, { useContext } from "react";
-import LinearGradient from "react-native-linear-gradient";
-import Header from "../Components/Header";
-import CartCard from "../Components/CartCard";
-import { fonts } from "../utils/fonts";
-import { CartContext } from "../Context/CartContext";
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useContext} from 'react';
+import LinearGradient from 'react-native-linear-gradient';
+import Header from '../Components/Header';
+import CartCard from '../Components/CartCard';
+import {fonts} from '../utils/fonts';
+import {CartContext} from '../Context/CartContext';
 import {COLORS} from '../Constant/Colors';
 import {FONTS} from '../Constant/Font';
 
 const CartScreen = () => {
-  const { cartItems, deleteCartItem, totalPrice } = useContext(CartContext);
+  const {cartItems, deleteCartItem, totalPrice} = useContext(CartContext);
 
-  const handleDeleteItem = async (id) => {
+  const handleDeleteItem = async id => {
     await deleteCartItem(id);
   };
+
+  const shippingCost = 0.0;
+  const grandTotal = (parseFloat(totalPrice) + shippingCost).toFixed(2);
+
   return (
-    <LinearGradient colors={["#FDF0F3", "#FFFBFC"]} style={styles.container}>
-      <View style={styles.header}>
-        <Header isCart={true} />
+    <View style={styles.container}>
+      <LinearGradient
+        colors={['#d8b2bbff', '#cbb5bbff']}
+        style={styles.gradientContainer}>
+        <View style={styles.header}>
+          <Header isCart={true} />
+        </View>
+        <FlatList
+          data={cartItems}
+          renderItem={({item}) => (
+            <CartCard item={item} handleDelete={handleDeleteItem} />
+          )}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            marginTop: 20,
+            paddingBottom: 20,
+            paddingHorizontal: 16,
+          }}
+          keyExtractor={item => item.id.toString()}
+        />
+      </LinearGradient>
+
+      {/* Bottom Total Section with White Background */}
+      <View style={styles.bottomContainer}>
+        <View style={styles.totalSection}>
+          <View style={styles.totalRow}>
+            <Text style={styles.totalLabel}>Subtotal:</Text>
+            <Text style={styles.totalValue}>${totalPrice}</Text>
+          </View>
+          <View style={styles.totalRow}>
+            <Text style={styles.totalLabel}>Shipping:</Text>
+            <Text style={styles.totalValue}>
+              {shippingCost === 0 ? 'Free' : `$${shippingCost.toFixed(2)}`}
+            </Text>
+          </View>
+          <View style={styles.divider} />
+          <View style={styles.totalRow}>
+            <Text style={styles.grandTotalLabel}>Total:</Text>
+            <Text style={styles.grandTotalValue}>${grandTotal}</Text>
+          </View>
+        </View>
+
+        <TouchableOpacity style={styles.checkoutButton}>
+          <Text style={styles.checkoutButtonText}>Proceed to Checkout</Text>
+        </TouchableOpacity>
       </View>
-      <FlatList
-        data={cartItems}
-        renderItem={({ item }) => (
-          <CartCard item={item} handleDelete={handleDeleteItem} />
-        )} 
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ marginTop: 40, paddingBottom: 200 }}
-        ListFooterComponent={
-          <>
-            <View style={styles.bottomContentContainer}>
-              <View style={styles.flexRowContainer}>
-                <Text style={styles.titleText}>Total:</Text>
-                <Text style={styles.priceText}>${totalPrice}</Text>
-              </View>
-              <View style={styles.flexRowContainer}>
-                <Text style={styles.titleText}>Shpping:</Text>
-                <Text style={styles.priceText}>$0.0</Text>
-              </View>
-              <View style={styles.divider} />
-              <View style={styles.flexRowContainer}>
-                <Text style={styles.titleText}>Grand Total:</Text>
-                <Text style={[styles.priceText, styles.grandPriceText]}>
-                  ${totalPrice}
-                </Text>
-              </View>
-            </View>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Checkout</Text>
-            </TouchableOpacity>
-          </>
-        }
-      />
-    </LinearGradient>
+    </View>
   );
 };
 
@@ -65,50 +73,88 @@ export default CartScreen;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 15,
+    flex: 1,
   },
-  header: {},
-  flexRowContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginVertical: 5,
+  gradientContainer: {
+    flex: 1,
+    paddingTop: 15,
   },
-  bottomContentContainer: {
-    marginHorizontal: 10,
-    marginTop: 30,
+  header: {
+    paddingHorizontal: 15,
   },
-  titleText: {
-    fontSize: 18,
-    color: "#757575",
-    fontWeight: "500",
+  bottomContainer: {
+    backgroundColor: '#FFFFFF',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingTop: 24,
+    paddingBottom: 34,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: -4,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
+    elevation: 8,
   },
-  priceText: {
-    fontSize: 18,
-    color: "#757575",
-    fontWeight: "600",
+  totalSection: {
+    marginBottom: 20,
+  },
+  totalRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginVertical: 8,
+  },
+  totalLabel: {
+    fontSize: 16,
+    color: '#666666',
+    fontWeight: '500',
+    fontFamily: fonts.regular,
+  },
+  totalValue: {
+    fontSize: 16,
+    color: '#2C2C2C',
+    fontWeight: '600',
+    fontFamily: fonts.medium,
   },
   divider: {
-    borderWidth: 1,
-    borderColor: "#C0C0C0",
-    marginTop: 10,
-    marginBottom: 5,
+    borderWidth: 0.5,
+    borderColor: '#E0E0E0',
+    marginVertical: 12,
   },
-  grandPriceText: {
-    color: "#3C3C3C",
-    fontWeight: "700",
+  grandTotalLabel: {
+    fontSize: 18,
+    color: '#2C2C2C',
+    fontWeight: '700',
+    fontFamily: fonts.medium,
   },
-  button: {
-    backgroundColor: COLORS.button,
-    height: 60,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 20,
-    marginTop: 30,
+  grandTotalValue: {
+    fontSize: 20,
+    color: '#E94560',
+    fontWeight: '700',
+    fontFamily: fonts.medium,
   },
-  buttonText: {
-    fontSize: 24,
-    color: "#FFFFFF",
-    fontWeight: "700",
-    fontFamily: fonts.regular,
+  checkoutButton: {
+    backgroundColor: '#E94560',
+    height: 56,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 16,
+    shadowColor: '#E94560',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 6,
+  },
+  checkoutButtonText: {
+    fontSize: 18,
+    color: '#FFFFFF',
+    fontWeight: '700',
+    fontFamily: fonts.medium,
   },
 });

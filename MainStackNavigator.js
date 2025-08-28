@@ -34,6 +34,7 @@ import Privacy from './src/Screens/Privacy';
 import AccountDelete from './src/Screens/AccountDelete';
 import HelpCenter from './src/Screens/HelpCenter';
 import MyCoupons from './src/Screens/MyCoupons';
+import MenuDrawer from './src/Screens/MenuDrawer';
 
 
 const Stack = createNativeStackNavigator();
@@ -66,7 +67,8 @@ const MainStackNavigator = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName={'AuthStack'}
+      // initialRouteName={'AuthStack'}
+      initialRouteName={'MainHome'}
       headerMode="none"
       //screenOptions={{ headerShown: false }}
     >
@@ -103,17 +105,33 @@ const MainStackNavigator = () => {
         })}
       />
       <Stack.Screen
+        name="Categories"
+        component={CategoriesScreen}
+        options={() => ({
+          title: 'Categories',
+        })}
+      />
+      <Stack.Screen
         name="OrderDetails"
         component={OrderDetails}
         options={() => ({
-          title: 'Details',
+          // title: 'Details',
+          headerShown: false,
+        })}
+      />
+      <Stack.Screen
+        name="MenuDrawer"
+        component={MenuDrawer}
+        options={() => ({
+          title: 'Menu',
         })}
       />
       <Stack.Screen
         name="MyWishList"
         component={MyWishList}
         options={() => ({
-          title: 'My wishlist',
+          // title: 'My wishlist',
+          headerShown: false,
         })}
       />
       <Stack.Screen
@@ -121,6 +139,7 @@ const MainStackNavigator = () => {
         component={ProductDetailsScreen}
         options={() => ({
           title: 'My Products',
+          headerShown: false,
         })}
       />
       <Stack.Screen
@@ -133,6 +152,7 @@ const MainStackNavigator = () => {
         component={ProfileSettings}
         options={() => ({
           title: 'Profile Settings',
+          headerShown: false,
         })}
       />
       <Stack.Screen

@@ -105,7 +105,7 @@ export default function EmailScreen() {
     }
   };
   return (
-    <LinearGradient colors={['#114041', '#151721']} style={styles.container}>
+    <LinearGradient colors={['#d8b2bbff', '#cbb5bbff']} style={styles.container}>
       <KeyboardAwareScrollView contentContainerStyle={{flex: 1}}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}

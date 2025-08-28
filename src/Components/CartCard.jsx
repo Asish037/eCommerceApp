@@ -1,32 +1,69 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
-import { fonts } from "../utils/fonts";
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useContext} from 'react';
+import {fonts} from '../utils/fonts';
+import {CartContext} from '../Context/CartContext';
 
-const CartCard = ({ item, handleDelete }) => {
-  console.log(JSON.stringify(item))
-  const imageUrl =
-    "https://res.cloudinary.com/dlc5c1ycl/image/upload/v1710567613/cwlk21f74nd9iamrlzkh.png";
+const CartCard = ({item, handleDelete}) => {
+  console.log(JSON.stringify(item));
+  const {updateCartItemQuantity} = useContext(CartContext);
+
+  const currentQuantity = item.quantity || 1;
+
+  const handleQuantityChange = action => {
+    if (action === 'increment') {
+      updateCartItemQuantity(item.id, currentQuantity + 1);
+    } else if (action === 'decrement') {
+      if (currentQuantity > 1) {
+        updateCartItemQuantity(item.id, currentQuantity - 1);
+      }
+    }
+  };
+
   return (
     <View style={styles.card}>
-      <Image source={{ uri: item.image }} style={styles.image} />
+      <View style={styles.imageContainer}>
+        <Image source={{uri: item.image}} style={styles.image} />
+      </View>
+
       <View style={styles.content}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.price}>${item.price}</Text>
-        <View style={styles.textCircleContainer}>
-          <View
-            style={[styles.circle, { backgroundColor: item?.color || "red" }]}
-          ></View>
-          <View style={styles.sizeContainer}>
-            <Text style={styles.sizeText}>{item.size}</Text>
+        <View style={styles.headerRow}>
+          <Text style={styles.title} numberOfLines={2}>
+            {item.title}
+          </Text>
+          <TouchableOpacity
+            style={styles.deleteButton}
+            onPress={() => handleDelete(item.id)}>
+            <Image
+              source={require('../assets/deleteIcon.png')}
+              style={styles.deleteIcon}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.sizeRow}>
+          <Text style={styles.sizeLabel}>Size {item.size || 'M'}</Text>
+        </View>
+
+        <Text style={styles.price}>
+          ${(item.price * currentQuantity).toFixed(2)}
+        </Text>
+
+        <View style={styles.bottomRow}>
+          <View style={styles.quantityContainer}>
+            <TouchableOpacity
+              onPress={() => handleQuantityChange('decrement')}
+              style={styles.quantityButton}>
+              <Text style={styles.quantityButtonText}>-</Text>
+            </TouchableOpacity>
+            <Text style={styles.quantityText}>{currentQuantity}</Text>
+            <TouchableOpacity
+              onPress={() => handleQuantityChange('increment')}
+              style={styles.quantityButton}>
+              <Text style={styles.quantityButtonText}>+</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
-      <TouchableOpacity onPress={() => handleDelete(item.id)}>
-        <Image
-          source={require("../assets/deleteIcon.png")}
-          style={styles.deleteIcon}
-        />
-      </TouchableOpacity>
     </View>
   );
 };
@@ -35,58 +72,106 @@ export default CartCard;
 
 const styles = StyleSheet.create({
   card: {
-    flexDirection: "row",
-    marginVertical: 15,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    marginVertical: 8,
+    marginHorizontal: 4,
+    padding: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  imageContainer: {
+    marginRight: 16,
   },
   image: {
-    height: 125,
-    width: "30%",
-    resizeMode: "contain",
-    borderRadius: 20,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "700",
-    fontFamily: fonts.medium,
-    color: "#444444",
-  },
-  price: {
-    fontSize: 18,
-    fontFamily: fonts.medium,
-    color: "#797979",
-    marginVertical: 7,
-    fontWeight: "700",
+    height: 80,
+    width: 80,
+    resizeMode: 'cover',
+    borderRadius: 12,
   },
   content: {
     flex: 1,
-    padding: 5,
   },
-  circle: {
-    height: 32,
-    width: 32,
-    borderRadius: 16,
+  headerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 4,
   },
-  sizeContainer: {
-    backgroundColor: "#FFFFFF",
-    height: 32,
-    width: 32,
-    borderRadius: 16,
-    justifyContent: "center",
-    alignItems: "center",
-    marginHorizontal: 20,
-  },
-  sizeText: {
-    fontSize: 18,
-    fontWeight: "700",
+  title: {
+    fontSize: 16,
+    fontWeight: '600',
     fontFamily: fonts.medium,
-    //color: "#797979",
+    color: '#2C2C2C',
+    flex: 1,
+    marginRight: 12,
+    lineHeight: 20,
   },
-  textCircleContainer: {
-    flexDirection: "row",
+  sizeRow: {
+    marginBottom: 8,
+  },
+  sizeLabel: {
+    fontSize: 14,
+    fontFamily: fonts.regular,
+    color: '#666666',
+  },
+  price: {
+    fontSize: 16,
+    fontFamily: fonts.medium,
+    color: '#2C2C2C',
+    fontWeight: '600',
+    marginBottom: 12,
+  },
+  deleteButton: {
+    backgroundColor: 'transparent',
+    padding: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   deleteIcon: {
-    height: 30,
-    width: 30,
-    marginTop: 10,
+    height: 16,
+    width: 16,
+    tintColor: '#999999',
+  },
+  bottomRow: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  quantityContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F8F8F8',
+    borderRadius: 16,
+    paddingHorizontal: 2,
+  },
+  quantityButton: {
+    backgroundColor: '#E5E5E5',
+    borderRadius: 12,
+    width: 24,
+    height: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  quantityButtonText: {
+    color: '#2C2C2C',
+    fontSize: 14,
+    fontWeight: '600',
+    fontFamily: fonts.medium,
+  },
+  quantityText: {
+    fontSize: 14,
+    fontWeight: '600',
+    fontFamily: fonts.medium,
+    color: '#2C2C2C',
+    marginHorizontal: 10,
   },
 });

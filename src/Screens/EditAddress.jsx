@@ -49,7 +49,7 @@ const AddressScreen = () => {
   };
 
   return (
-    <LinearGradient colors={COLORS.gradient} style={styles.container}>
+    <LinearGradient colors={['#d8b2bbff', '#cbb5bbff']} style={styles.container}>
       <ScrollView>  
         <View style={styles.body}>
         <View style={styles.inputFieldContainer}>

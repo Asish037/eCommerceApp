@@ -9,7 +9,7 @@ import React, { useState } from "react";
 
 const Tags = () => {
   const [selected, setSelected] = useState("Trending Now");
-  const tags = ["Trending Now", "All", "New", "Fashion", "Mens"];
+  const tags = ["Trending Now", "Featured", "New Arrivals", "Winter", "Summer"];
   return (
     <View style={styles.container}>
       <FlatList
@@ -42,16 +42,16 @@ const styles = StyleSheet.create({
   tagText: {
     fontSize: 16,
     fontFamily: "Poppins-Regular",
-    borderRadius: 10,
-    paddingHorizontal: 30,
-    paddingVertical: 10,
+    borderRadius: 20,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
     marginHorizontal: 10,
     backgroundColor: "#DFDCDC",
     color: "#938F8F",
     fontWeight: "700",
   },
   isSelected: {
-    backgroundColor: "#E96E6E",
+    backgroundColor: "#9d2c2cff",
     color: "#FFFFFF",
   },
   container: {
