@@ -36,52 +36,53 @@ export default function EmailScreen() {
 
   useEffect(() => {
     RNOtpVerify.getOtp()
-        .then((p) => {
-            RNOtpVerify.addListener((message) => {
-              console.log('hello=='+message)
-                try {
-                    if (message && message !== 'Timeout Error') {
-                        const otp = /(\d{4})/g.exec(message)[1];
-                        if (otp.length === 4) {
-                          setOtp(otp)
-                            //setOtpArray(otp.split(''));
-                        }
-                    } else {
-                        console.log( 'OTPVerification: RNOtpVerify.getOtp - message=>', message );
-                    }
-                } catch (error) {
-                    console.log('OTPVerification: RNOtpVerify.getOtp error=>', error );
-                }
-            });
-        })
-        .catch((error) => {
-            console.log('getOtp=='+error);
+      .then(p => {
+        RNOtpVerify.addListener(message => {
+          console.log('hello==' + message);
+          try {
+            if (message && message !== 'Timeout Error') {
+              const otp = /(\d{4})/g.exec(message)[1];
+              if (otp.length === 4) {
+                setOtp(otp);
+                //setOtpArray(otp.split(''));
+              }
+            } else {
+              console.log(
+                'OTPVerification: RNOtpVerify.getOtp - message=>',
+                message,
+              );
+            }
+          } catch (error) {
+            console.log('OTPVerification: RNOtpVerify.getOtp error=>', error);
+          }
         });
+      })
+      .catch(error => {
+        console.log('getOtp==' + error);
+      });
 
     return () => {
       RNOtpVerify.removeListener();
-  };
-}, []);
+    };
+  }, []);
 
- 
-
-  useEffect(()=>{
+  useEffect(() => {
     const getHash = () => {
       RNOtpVerify.getHash()
-          .then((hash) => {
-              console.log('App.js: Application hash is=> ', hash);
-   //message example
-              console.log(`<#> Dear User,
+        .then(hash => {
+          console.log('App.js: Application hash is=> ', hash);
+          //message example
+          console.log(`<#> Dear User,
               1091 is your OTP for verification. (Remaining Time: 10 minutes and 0 seconds)
                ${hash[0]}`);
-          })
-          .catch((error) => {
-              console.log(error);
-          });
-  };
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    };
 
-  getHash();
-  })
+    getHash();
+  });
 
   const otpHandler = message => {
     const otpnew = /(\d{6})/g.exec(message)[1];
@@ -105,7 +106,9 @@ export default function EmailScreen() {
     }
   };
   return (
-    <LinearGradient colors={['#d8b2bbff', '#cbb5bbff']} style={styles.container}>
+    <LinearGradient
+      colors={['#e3e3e3ff', '#c3adb1ff']}
+      style={styles.container}>
       <KeyboardAwareScrollView contentContainerStyle={{flex: 1}}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}

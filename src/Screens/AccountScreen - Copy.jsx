@@ -18,7 +18,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
 import Header from '../Components/Header';
 
-const ProfileSettings = () => {
+const ViewProfile = () => {
   const navigation = useNavigation();
   return (
     <LinearGradient
@@ -29,10 +29,10 @@ const ProfileSettings = () => {
         <Text style={styles.hedaerUserName}>{'Hey,\nJohn Henry'}</Text>
         <Image
           style={{
-            width: moderateScale(95),
-            height: moderateScale(95),
+            width: moderateScale(55),
+            height: moderateScale(55),
             borderRadius: moderateScale(50),
-            borderWidth: 4,
+            borderWidth: 3,
             borderColor: COLORS.button,
             marginBottom: 5,
           }}
@@ -46,81 +46,120 @@ const ProfileSettings = () => {
           <View style={styles.body}>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('EditProfile');
+                navigation.navigate('Orders');
               }}>
               <View style={styles.bodySection}>
                 <View style={styles.bodyPart}>
-                  <Text style={styles.headTitle}>Manage Account</Text>
+                  <Text style={styles.headTitle}>Orders</Text>
                   <Text style={styles.headSubTitle}>
-                    Manage your profile information
+                    Check your order Status(track,return etc)
                   </Text>
                 </View>
                 <View style={styles.bodyPartSmall}>
                   <MaterialCommunityIcons
-                    name="account-edit-outline"
+                    name="cart-outline"
                     size={30}
-                    style={{color: COLORS.button, fontSize: moderateScale(30)}}
+                    style={{color: COLORS.black, fontSize: moderateScale(30)}}
                   />
                 </View>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('AddressScreen');
+                navigation.navigate('Orders');
               }}>
               <View style={styles.bodySection}>
                 <View style={styles.bodyPart}>
-                  <Text style={styles.headTitle}>Manage Address</Text>
+                  <Text style={styles.headTitle}>Payments Methods</Text>
                   <Text style={styles.headSubTitle}>
-                    Manage your address information
+                    Manage your saved payment methods
                   </Text>
                 </View>
                 <View style={styles.bodyPartSmall}>
                   <MaterialIcons
-                    name="add-location-alt"
+                    name="payment"
                     size={30}
-                    style={{color: COLORS.button, fontSize: moderateScale(30)}}
+                    style={{color: COLORS.black, fontSize: moderateScale(30)}}
                   />
                 </View>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('Privacy');
+                navigation.navigate('MyWishList');
               }}>
               <View style={styles.bodySection}>
                 <View style={styles.bodyPart}>
-                  <Text style={styles.headTitle}>Terms and Conditions</Text>
+                  <Text style={styles.headTitle}>Wishlist</Text>
                   <Text style={styles.headSubTitle}>
-                    Explore terms and conditions related to your MJ accounts
+                    Buy from items saved in Wishlist
                   </Text>
                 </View>
                 <View style={styles.bodyPartSmall}>
                   <MaterialCommunityIcons
-                    name="file-document-outline"
+                    name="cards-heart-outline"
                     size={30}
-                    style={{color: COLORS.button, fontSize: moderateScale(30)}}
+                    style={{color: COLORS.black, fontSize: moderateScale(30)}}
                   />
                 </View>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('AccountDelete');
+                navigation.navigate('ProfileSettings');
               }}>
               <View style={styles.bodySection}>
                 <View style={styles.bodyPart}>
-                  <Text style={styles.headTitle}>Delete Account</Text>
+                  <Text style={styles.headTitle}>Profile</Text>
                   <Text style={styles.headSubTitle}>
-                    Your account will no longer be accessible to use on any
-                    device
+                    Edit/update your profile details & more
+                  </Text>
+                </View>
+                <View style={styles.bodyPartSmall}>
+                  <FontAwesome
+                    name="user-o"
+                    size={30}
+                    style={{color: COLORS.black, fontSize: moderateScale(30)}}
+                  />
+                </View>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('MyCoupons');
+              }}>
+              <View style={styles.bodySection}>
+                <View style={styles.bodyPart}>
+                  <Text style={styles.headTitle}>My Coupons</Text>
+                  <Text style={styles.headSubTitle}>
+                    Browse coupons to get discount on Nykaa
                   </Text>
                 </View>
                 <View style={styles.bodyPartSmall}>
                   <MaterialCommunityIcons
-                    name="delete-forever"
+                    name="wallet-giftcard"
                     size={30}
-                    style={{color: COLORS.button, fontSize: moderateScale(30)}}
+                    style={{color: COLORS.black, fontSize: moderateScale(30)}}
+                  />
+                </View>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('HelpCenter');
+              }}>
+              <View style={styles.bodySection}>
+                <View style={styles.bodyPart}>
+                  <Text style={styles.headTitle}>Help Center</Text>
+                  <Text style={styles.headSubTitle}>
+                    FAQs, Live Chat, Customer Support
+                  </Text>
+                </View>
+                <View style={styles.bodyPartSmall}>
+                  <MaterialCommunityIcons
+                    name="help-circle-outline"
+                    size={30}
+                    style={{color: COLORS.black, fontSize: moderateScale(30)}}
                   />
                 </View>
               </View>
@@ -132,7 +171,7 @@ const ProfileSettings = () => {
   );
 };
 
-export default ProfileSettings;
+export default ViewProfile;
 
 const styles = StyleSheet.create({
   container: {
@@ -140,31 +179,33 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 5,
   },
   headerSection: {
     width: '90%',
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     alignItems: 'center',
     padding: 20,
     borderBottomWidth: 0.2,
     borderColor: COLORS.textInput,
-    paddingBottom: 20,
+    paddingBottom: 15,
   },
   hedaerUserName: {
     color: COLORS.black,
     fontFamily: FONTS.Bold,
-    fontSize: moderateScale(25),
+    fontSize: moderateScale(20),
     fontWeight: '700',
+    marginTop: 5,
   },
   headTitle: {
-    color: COLORS.black,
+    color: COLORS.button,
     fontFamily: FONTS.title,
-    fontSize: moderateScale(25),
+    fontSize: moderateScale(20),
     fontWeight: '700',
   },
   headSubTitle: {
-    color: COLORS.grey,
+    color: COLORS.black,
     fontFamily: FONTS.LightItalic,
     fontSize: moderateScale(12),
     fontWeight: '400',

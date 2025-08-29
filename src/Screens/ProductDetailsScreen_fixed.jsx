@@ -192,7 +192,9 @@ const ProductDetailsScreen = () => {
   };
 
   return (
-    <LinearGradient colors={['#d8b2bbff', '#cbb5bbff']} style={styles.container}>
+    <LinearGradient
+      colors={['#e3e3e3ff', '#c3adb1ff']}
+      style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>

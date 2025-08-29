@@ -152,6 +152,12 @@ export const CartProvider = ({children}) => {
     updateCartItemQuantity,
     totalPrice,
     getTotalQuantity,
+    user,
+    login,
+    logout,
+    loadUserData,
+    saveMessage,
+    messages,
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

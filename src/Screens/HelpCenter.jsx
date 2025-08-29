@@ -16,11 +16,15 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
+import Header from '../Components/Header';
 
 const HelpCenter = () => {
   const navigation = useNavigation();
   return (
-    <LinearGradient colors={['#d8b2bbff', '#cbb5bbff']} style={styles.container}>
+    <LinearGradient
+      colors={['#e3e3e3ff', '#c3adb1ff']}
+      style={styles.container}>
+      <Header />
       <View style={styles.headerSection}>
         <Text style={styles.headTitle}>Help Center</Text>
         <View style={styles.bodyPartSmall}>

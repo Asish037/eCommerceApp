@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,8 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   Dimensions,
+  StatusBar,
+  FlatList,
 } from 'react-native';
 import {COLORS} from '../Constant/Colors';
 import {FONTS} from '../Constant/Font';
@@ -18,187 +20,245 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
 import Moment from 'moment';
-
+import Header from '../Components/Header';
 
 const OrderDetails = ({route}) => {
   const navigation = useNavigation();
   const {items} = route.params;
-  console.log('bbbb==' + JSON.stringify(items.items[0]));
+  const [rating, setRating] = useState(0);
+
+  const getStatusIcon = status => {
+    switch (status) {
+      case 'Shipped':
+        return 'truck-delivery';
+      case 'Delivered':
+        return 'check-circle';
+      case 'Processing':
+        return 'clock-outline';
+      default:
+        return 'package-variant-closed';
+    }
+  };
+
+  const getStatusColor = status => {
+    switch (status) {
+      case 'Shipped':
+        return COLORS.orange || '#FF6B35';
+      case 'Delivered':
+        return COLORS.green || '#4CAF50';
+      case 'Processing':
+        return COLORS.yellow || '#FFC107';
+      default:
+        return COLORS.gray || '#757575';
+    }
+  };
+
+  const renderStars = () => {
+    return Array.from({length: 5}, (_, index) => (
+      <TouchableOpacity
+        key={`rating-star-${index}`}
+        onPress={() => setRating(index + 1)}>
+        <MaterialCommunityIcons
+          name={index < rating ? 'star' : 'star-outline'}
+          size={moderateScale(25)}
+          color={index < rating ? '#FFD700' : COLORS.button}
+        />
+      </TouchableOpacity>
+    ));
+  };
+
+  const renderOrderItem = ({item}) => (
+    <View style={styles.orderItemCard}>
+      <Image
+        source={{uri: item.thumbnail_image}}
+        style={styles.orderItemImage}
+      />
+      <View style={styles.orderItemDetails}>
+        <Text style={styles.orderItemName} numberOfLines={2}>
+          {item.product_name}
+        </Text>
+        <Text style={styles.orderItemBrand}>{item.brand}</Text>
+        <View style={styles.orderItemSpecs}>
+          <Text style={styles.orderItemSpec}>
+            {item.size ? `Size: ${item.size}` : `Weight: ${item.weight}`}
+          </Text>
+          <Text style={styles.orderItemSpec}>Qty: {item.quantity}</Text>
+        </View>
+        <Text style={styles.orderItemPrice}>${item.total}</Text>
+      </View>
+    </View>
+  );
+
   return (
-    <LinearGradient colors={COLORS.gradient} style={styles.container}>
-      <View style={styles.headerSection}>
-        <View style={styles.productCard}>
-          <View style={styles.imgCard}>
-            <Image
-              style={{
-                width: moderateScale(100),
-                height: moderateScale(100),
-                // borderColor: COLORS.theme,
-                // borderWidth: 10,
-                marginBottom: 5,
-                shadowOffset: {
-                  width: 0,
-                  height: 4,
-                },
-                shadowOpacity: 0.3,
-                shadowRadius: 6,
-                elevation: 14,
-              }}
-              source={{
-                uri: items.items[0].thumbnail_image,
-              }}
-            />
-          </View>
-          <Text style={{...styles.headTitle, color: COLORS.button, padding: 5}}>
-            {/* {'Panjabi Kurta,\nFloral Design'} */}
-            {items.items[0].brand}
+    <LinearGradient
+      colors={['#e3e3e3ff', '#c3adb1ff']}
+      style={styles.container}>
+      <Header />
+
+      {/* Order Status Header */}
+      <View style={styles.statusHeader}>
+        <View style={styles.statusIconContainer}>
+          <MaterialCommunityIcons
+            name={getStatusIcon(items.shipping_status)}
+            size={moderateScale(40)}
+            color={getStatusColor(items.shipping_status)}
+          />
+        </View>
+        <View style={styles.statusTextContainer}>
+          <Text style={styles.statusTitle}>
+            {items.shipping_status === 'Shipped'
+              ? 'Order Delivered'
+              : 'Order Status'}
           </Text>
-          <Text style={{...styles.headSubTitle, color: COLORS.button}}>
-            {/* {'Panjabi Kurta,\nFloral Design'} */}
-            {items.items[0].product_name}
+          <Text style={styles.statusSubtitle}>Order #{items.order_id}</Text>
+          <Text style={styles.statusDate}>
+            {Moment(items.order_date).format('MMMM DD, YYYY')}
           </Text>
-          <Text style={{...styles.headSubTitle, color: COLORS.button}}>
-         {` ${items.items[0].size ?  `Size - `+ items.items[0].size : `Weight - `+ items.items[0].weight }` }
+        </View>
+        <View style={styles.paymentStatusContainer}>
+          <Text
+            style={[
+              styles.paymentStatus,
+              {color: getStatusColor(items.payment.payment_status)},
+            ]}>
+            {items.payment.payment_status}
           </Text>
-          <View style={styles.deliverSec}>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-around', padding: 2}}>
-              <MaterialCommunityIcons
-                name="truck-delivery-outline"
-                size={'20'}
-                style={{color: COLORS.white, fontSize: moderateScale(25)}}
-              />
-              <Text style={{...styles.headTitle, color: COLORS.black}}>
-                {`${items.shipping_status === 'Shipped' ? 'Delivered - ' + items.order_id : 'Arriving...' + items.order_id} `}
-              </Text>
-              <View style={{paddingLeft: 10}}>
-              <Text
-                style={{
-                  ...styles.headSubTitle,
-                  color: COLORS.green,
-                  alignSelf: 'flex-start' 
-                }}>
-                {items.payment.payment_status}
-              </Text>
-              </View>
-            </View>
-            <Text style={{...styles.headSubTitle, color: COLORS.white}}>
-              {'On '+Moment(items.items[0].order_date).format('llll')}
-              {/* {'On Thu, 3rd Oct 2024'} */}
-            </Text>     
-          </View>
         </View>
       </View>
-      <ScrollView>
-        <View style={styles.body}>
-          <View style={styles.bodySection}>
-            <View style={styles.rateSection}>
-              <Image
-                source={{
-                  uri: items.items[0].thumbnail_image,
-                }}
-                style={{
-                  height: 60,
-                  width: 60,
-                  borderRadius: 30,
-                  resizeMode: 'center',
-                  borderColor: COLORS.button,
-                  borderWidth: 2,
-                }}
+
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}>
+        {/* Order Items */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Order Items</Text>
+          <FlatList
+            data={items.items}
+            renderItem={renderOrderItem}
+            keyExtractor={item => item.item_id}
+            scrollEnabled={false}
+          />
+        </View>
+
+        {/* Delivery Address */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Delivery Address</Text>
+          <View style={styles.addressCard}>
+            <View style={styles.addressHeader}>
+              <MaterialCommunityIcons
+                name="map-marker"
+                size={moderateScale(20)}
+                color={COLORS.button}
               />
-              <View style={styles.bodyPart}>
-                <Text style={{...styles.headTitle, color: COLORS.button}}>
-                  Rate this product
-                </Text>
-                <View style={{flexDirection: 'row'}}>
-                  <MaterialCommunityIcons
-                    name="star-outline"
-                    size={'20'}
-                    style={{
-                      color: COLORS.button,
-                      fontSize: moderateScale(25),
-                    }}
-                  />
-                  <MaterialCommunityIcons
-                    name="star-outline"
-                    size={'20'}
-                    style={{
-                      color: COLORS.button,
-                      fontSize: moderateScale(25),
-                    }}
-                  />
-                  <MaterialCommunityIcons
-                    name="star-outline"
-                    size={'20'}
-                    style={{
-                      color: COLORS.button,
-                      fontSize: moderateScale(25),
-                    }}
-                  />
-                  <MaterialCommunityIcons
-                    name="star-outline"
-                    size={'20'}
-                    style={{
-                      color: COLORS.button,
-                      fontSize: moderateScale(25),
-                    }}
-                  />
-                  <MaterialCommunityIcons
-                    name="star-outline"
-                    size={'20'}
-                    style={{
-                      color: COLORS.button,
-                      fontSize: moderateScale(25),
-                    }}
-                  />
-                </View>
-                <Text style={styles.headSubTitle}>
-                  Rate & Review to earn MJ Credit
-                </Text>
-              </View>
+              <Text style={styles.addressName}>{items.customer.name}</Text>
+              <Text style={styles.addressPhone}>{items.customer.phone}</Text>
             </View>
+            <Text style={styles.addressText}>
+              {`${items.customer.shipping_address.street}, ${items.customer.shipping_address.city}, ${items.customer.shipping_address.state} - ${items.customer.shipping_address.zip_code}, ${items.customer.shipping_address.country}`}
+            </Text>
           </View>
-          <View style={styles.deliverAddress}>
-            <View>
-              <Text style={styles.headTitle}>Delivery Address</Text>
-              <View>
-                <Text style={styles.headTitle}>
-                  {items.customer.name} | {`${items.customer.phone}`}{' '}
-                </Text>
-              </View>
-              <View>
-                <Text style={styles.headSubTitle}>
-                {`${items.customer.shipping_address.street} - ${items.customer.shipping_address.city}, ${items.customer.shipping_address.state} - ${items.customer.shipping_address.zip_code}, ${items.customer.shipping_address.country}`}
-                </Text>
-              </View>
+        </View>
+
+        {/* Order Summary */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Order Summary</Text>
+          <View style={styles.summaryCard}>
+            <View style={styles.summaryRow}>
+              <Text style={styles.summaryLabel}>Payment Method</Text>
+              <Text style={styles.summaryValue}>
+                {items.payment.payment_method}
+              </Text>
             </View>
+            <View style={styles.summaryRow}>
+              <Text style={styles.summaryLabel}>Total Amount</Text>
+              <Text style={styles.summaryValueTotal}>
+                ${items.payment.total_amount}
+              </Text>
+            </View>
+            {items.tracking_number && (
+              <View style={styles.summaryRow}>
+                <Text style={styles.summaryLabel}>Tracking Number</Text>
+                <Text style={styles.summaryValueTracking}>
+                  {items.tracking_number}
+                </Text>
+              </View>
+            )}
           </View>
-          <View style={styles.totalPriceSec}>
-            <Text style={styles.headTitle}>Total Item Price</Text>
-            {/* <Text style={styles.headTitle}> $ {`${items.payment.total_amount}`} </Text> */}
-            <Text style={styles.headTitle}> {`${items.payment.total_amount}`} </Text>         
-          </View>
-          <View><Text style={styles.headSubTitle}> By using {`${items.payment.payment_method}`} </Text></View>
-          <View style={styles.updateSentSec}>
-            <Text style={styles.headTitle}>Updates sent to</Text>
-            <View style={{flexDirection: 'row'}}>
+        </View>
+
+        {/* Contact Information */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Updates sent to</Text>
+          <View style={styles.contactCard}>
+            <View style={styles.contactRow}>
               <MaterialCommunityIcons
                 name="phone"
-                size={'20'}
-                style={{color: COLORS.button, fontSize: moderateScale(25)}}
+                size={moderateScale(20)}
+                color={COLORS.button}
               />
-              <Text style={styles.headTitle}> | {`${items.customer.phone}`}  </Text>
+              <Text style={styles.contactText}>{items.customer.phone}</Text>
             </View>
-            <View style={{flexDirection: 'row'}}>
+            <View style={styles.contactRow}>
               <MaterialCommunityIcons
                 name="email"
-                size={'20'}
-                style={{color: COLORS.button, fontSize: moderateScale(25)}}
+                size={moderateScale(20)}
+                color={COLORS.button}
               />
-              <Text style={styles.headTitle}> | {`${items.customer.email}`} </Text>
+              <Text style={styles.contactText}>{items.customer.email}</Text>
             </View>
           </View>
         </View>
+
+        {/* Rate Product */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Rate this order</Text>
+          <View style={styles.ratingCard}>
+            <Image
+              source={{uri: items.items[0].thumbnail_image}}
+              style={styles.ratingProductImage}
+            />
+            <View style={styles.ratingContent}>
+              <Text style={styles.ratingTitle}>How was your experience?</Text>
+              <View style={styles.starsContainer}>{renderStars()}</View>
+              <Text style={styles.ratingSubtitle}>
+                Rate & Review to earn MJ Credits
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Reviews Section */}
+        {items.reviews && items.reviews.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Customer Reviews</Text>
+            {items.reviews.map((review, index) => (
+              <View
+                key={`review-${index}-${
+                  review.reviewerEmail || review.reviewerName
+                }-${review.date}`}
+                style={styles.reviewCard}>
+                <View style={styles.reviewHeader}>
+                  <Text style={styles.reviewerName}>{review.reviewerName}</Text>
+                  <View style={styles.reviewRating}>
+                    {Array.from({length: 5}, (_, i) => (
+                      <MaterialCommunityIcons
+                        key={`review-${index}-star-${i}`}
+                        name={i < review.rating ? 'star' : 'star-outline'}
+                        size={moderateScale(14)}
+                        color={i < review.rating ? '#FFD700' : COLORS.gray}
+                      />
+                    ))}
+                  </View>
+                </View>
+                <Text style={styles.reviewComment}>{review.comment}</Text>
+                <Text style={styles.reviewDate}>
+                  {Moment(review.date).format('MMM DD, YYYY')}
+                </Text>
+              </View>
+            ))}
+          </View>
+        )}
       </ScrollView>
     </LinearGradient>
   );
@@ -210,145 +270,334 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
+    padding: 10,
   },
-  headerSection: {
-    width: '95%',
+  backButton: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
     alignItems: 'center',
-    padding: 20,
-    borderBottomWidth: 0.2,
-    borderColor: COLORS.textInput,
-    paddingBottom: 20,
+    paddingHorizontal: moderateScale(20),
+    paddingVertical: moderateScale(10),
+    marginTop: moderateScale(5),
   },
-  headTitle: {
-    //fontFamily: FONTS.Bold,
-    fontSize: moderateScale(15),
-    fontWeight: 'bold',
-    fontFamily: FONTS.Regular,
+  backButtonText: {
+    color: COLORS.black,
+    fontFamily: FONTS.Medium,
+    fontSize: moderateScale(16),
+    marginLeft: moderateScale(8),
   },
-  headSubTitle: {
-    //fontFamily: FONTS.Medium,
-    ontFamily: FONTS.Regular,
-    fontSize: moderateScale(12),
+  scrollView: {
+    flex: 1,
   },
-  productCard: {
+  scrollContent: {
+    paddingBottom: moderateScale(30),
+  },
+  statusHeader: {
     backgroundColor: COLORS.white,
-    borderRadius: 15,
-    padding: 16,
+    marginHorizontal: moderateScale(15),
+    marginTop: moderateScale(10),
+    borderRadius: moderateScale(15),
+    padding: moderateScale(20),
+    flexDirection: 'row',
+    alignItems: 'center',
     shadowColor: COLORS.black,
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 3,
     },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    elevation: 14,
-    width: moderateScale(300),
-    height: moderateScale(400),
-    justifyContent: 'center',
-    alignItems: 'center',
+    shadowOpacity: 0.15,
+    shadowRadius: 4.65,
+    elevation: 8,
   },
-  body: {
-    //width: '100%',
-    width: Dimensions.get('screen').width,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
+  statusIconContainer: {
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    borderRadius: moderateScale(30),
+    padding: moderateScale(15),
+    marginRight: moderateScale(15),
   },
-  bodySection: {
-    padding: 10,
-    //width: '90%',
-    borderBottomWidth: 0.2,
-    borderColor: COLORS.textInput,
-    padding: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'flex-start',
+  statusTextContainer: {
+    flex: 1,
   },
-  bodyPart: {
-    alignItems: 'flex-start',
-    flexDirection: 'column',
-    width: '70%',
-    justifyContent: 'space-evenly',
+  statusTitle: {
+    color: COLORS.black,
+    fontFamily: FONTS.Bold,
+    fontSize: moderateScale(18),
+    fontWeight: '700',
   },
-  bodyPartSmall: {
-    width: '30%',
-    alignItems: 'flex-start',
+  statusSubtitle: {
+    color: COLORS.button,
+    fontFamily: FONTS.Medium,
+    fontSize: moderateScale(14),
+    marginTop: moderateScale(2),
   },
-  imgCard: {
+  statusDate: {
+    color: COLORS.gray || '#757575',
+    fontFamily: FONTS.Regular,
+    fontSize: moderateScale(12),
+    marginTop: moderateScale(4),
+  },
+  paymentStatusContainer: {
+    backgroundColor: 'rgba(76, 175, 80, 0.1)',
+    paddingHorizontal: moderateScale(12),
+    paddingVertical: moderateScale(6),
+    borderRadius: moderateScale(15),
+  },
+  paymentStatus: {
+    fontFamily: FONTS.Bold,
+    fontSize: moderateScale(12),
+    fontWeight: '600',
+  },
+  section: {
+    marginHorizontal: moderateScale(15),
+    marginTop: moderateScale(15),
+  },
+  sectionTitle: {
+    color: COLORS.black,
+    fontFamily: FONTS.Bold,
+    fontSize: moderateScale(16),
+    fontWeight: '700',
+    marginBottom: moderateScale(12),
+  },
+  orderItemCard: {
     backgroundColor: COLORS.white,
-    borderRadius: 15,
-    padding: 16,
-    shadowColor: COLORS.theme,
+    borderRadius: moderateScale(12),
+    padding: moderateScale(15),
+    marginBottom: moderateScale(10),
+    flexDirection: 'row',
+    shadowColor: COLORS.black,
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 2,
     },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    elevation: 14,
-    width: moderateScale(100),
-    height: moderateScale(100),
-    justifyContent: 'center',
-    alignItems: 'center',
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
-  deliverSec: {
-    backgroundColor: COLORS.pink,
-    borderRadius: 10,
-    padding: 16,
-    paddingBottom: 10,
-    shadowColor: COLORS.theme,
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    elevation: 14,
-    width: moderateScale(290),
-    height: moderateScale(60),
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    position: 'absolute',
-    bottom: 10,
-    left: 5,
-  },
-  rateSection: {
-    width: '100%',
-    flexDirection: 'row',
-    backgroundColor: COLORS.white,
-    width: Dimensions.get('screen').width, //moderateScale(390),
+  orderItemImage: {
+    width: moderateScale(70),
     height: moderateScale(70),
-    justifyContent: 'space-evenly',
-    padding: 10,
-    margin: 10,
+    borderRadius: moderateScale(10),
+    backgroundColor: COLORS.lightGray || '#F5F5F5',
+    marginRight: moderateScale(15),
   },
-  deliverAddress: {
-    width: '100%',
-    flexDirection: 'column',
-    backgroundColor: COLORS.white,
-    justifyContent: 'space-around',
-    padding: 15,
-    margin: 10,
-  },
-  totalPriceSec: {
-    width: '100%',
-    flexDirection: 'row',
-    backgroundColor: COLORS.white,
+  orderItemDetails: {
+    flex: 1,
     justifyContent: 'space-between',
-    padding: 10,
-    margin: 10,
   },
-  updateSentSec: {
-    width: '100%',
-    flexDirection: 'column',
+  orderItemName: {
+    color: COLORS.black,
+    fontFamily: FONTS.Bold,
+    fontSize: moderateScale(14),
+    fontWeight: '600',
+    lineHeight: moderateScale(18),
+  },
+  orderItemBrand: {
+    color: COLORS.button,
+    fontFamily: FONTS.Medium,
+    fontSize: moderateScale(12),
+    marginTop: moderateScale(2),
+  },
+  orderItemSpecs: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: moderateScale(5),
+  },
+  orderItemSpec: {
+    color: COLORS.gray || '#757575',
+    fontFamily: FONTS.Regular,
+    fontSize: moderateScale(11),
+  },
+  orderItemPrice: {
+    color: COLORS.black,
+    fontFamily: FONTS.Bold,
+    fontSize: moderateScale(16),
+    fontWeight: '700',
+    alignSelf: 'flex-end',
+  },
+  addressCard: {
     backgroundColor: COLORS.white,
-    justifyContent: 'space-evenly',
-    padding: 10,
-    margin: 10,
+    borderRadius: moderateScale(12),
+    padding: moderateScale(15),
+    shadowColor: COLORS.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  addressHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: moderateScale(10),
+  },
+  addressName: {
+    color: COLORS.black,
+    fontFamily: FONTS.Bold,
+    fontSize: moderateScale(14),
+    fontWeight: '600',
+    marginLeft: moderateScale(8),
+    flex: 1,
+  },
+  addressPhone: {
+    color: COLORS.button,
+    fontFamily: FONTS.Medium,
+    fontSize: moderateScale(12),
+  },
+  addressText: {
+    color: COLORS.gray || '#757575',
+    fontFamily: FONTS.Regular,
+    fontSize: moderateScale(12),
+    lineHeight: moderateScale(16),
+  },
+  summaryCard: {
+    backgroundColor: COLORS.white,
+    borderRadius: moderateScale(12),
+    padding: moderateScale(15),
+    shadowColor: COLORS.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  summaryRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: moderateScale(8),
+    borderBottomWidth: 0.5,
+    borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+  },
+  summaryLabel: {
+    color: COLORS.gray || '#757575',
+    fontFamily: FONTS.Regular,
+    fontSize: moderateScale(14),
+  },
+  summaryValue: {
+    color: COLORS.black,
+    fontFamily: FONTS.Medium,
+    fontSize: moderateScale(14),
+    fontWeight: '500',
+  },
+  summaryValueTotal: {
+    color: COLORS.black,
+    fontFamily: FONTS.Bold,
+    fontSize: moderateScale(18),
+    fontWeight: '700',
+  },
+  summaryValueTracking: {
+    color: COLORS.button,
+    fontFamily: FONTS.Medium,
+    fontSize: moderateScale(12),
+    fontWeight: '500',
+  },
+  contactCard: {
+    backgroundColor: COLORS.white,
+    borderRadius: moderateScale(12),
+    padding: moderateScale(15),
+    shadowColor: COLORS.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  contactRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: moderateScale(8),
+  },
+  contactText: {
+    color: COLORS.black,
+    fontFamily: FONTS.Medium,
+    fontSize: moderateScale(14),
+    marginLeft: moderateScale(10),
+  },
+  ratingCard: {
+    backgroundColor: COLORS.white,
+    borderRadius: moderateScale(12),
+    padding: moderateScale(15),
+    flexDirection: 'row',
+    alignItems: 'center',
+    shadowColor: COLORS.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  ratingProductImage: {
+    width: moderateScale(60),
+    height: moderateScale(60),
+    borderRadius: moderateScale(30),
+    backgroundColor: COLORS.lightGray || '#F5F5F5',
+    marginRight: moderateScale(15),
+  },
+  ratingContent: {
+    flex: 1,
+  },
+  ratingTitle: {
+    color: COLORS.black,
+    fontFamily: FONTS.Bold,
+    fontSize: moderateScale(14),
+    fontWeight: '600',
+    marginBottom: moderateScale(8),
+  },
+  starsContainer: {
+    flexDirection: 'row',
+    marginBottom: moderateScale(8),
+  },
+  ratingSubtitle: {
+    color: COLORS.gray || '#757575',
+    fontFamily: FONTS.Regular,
+    fontSize: moderateScale(12),
+  },
+  reviewCard: {
+    backgroundColor: COLORS.white,
+    borderRadius: moderateScale(12),
+    padding: moderateScale(15),
+    marginBottom: moderateScale(10),
+    shadowColor: COLORS.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  reviewHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: moderateScale(8),
+  },
+  reviewerName: {
+    color: COLORS.black,
+    fontFamily: FONTS.Bold,
+    fontSize: moderateScale(14),
+    fontWeight: '600',
+  },
+  reviewRating: {
+    flexDirection: 'row',
+  },
+  reviewComment: {
+    color: COLORS.gray || '#757575',
+    fontFamily: FONTS.Regular,
+    fontSize: moderateScale(13),
+    lineHeight: moderateScale(18),
+    marginBottom: moderateScale(8),
+  },
+  reviewDate: {
+    color: COLORS.gray || '#757575',
+    fontFamily: FONTS.Regular,
+    fontSize: moderateScale(11),
   },
 });

@@ -130,6 +130,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
+    overflow: 'hidden',
+    // height: 400
   },
   coverImage: {
     height: 200,

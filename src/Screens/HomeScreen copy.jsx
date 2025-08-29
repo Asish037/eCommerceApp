@@ -6,38 +6,40 @@ import {
   Text,
   TextInput,
   View,
-} from "react-native";
-import React, { useState } from "react";
-import LinearGradient from "react-native-linear-gradient";
-import Header from "../Components/Header";
-import Tags from "../Components/Tags";
-import ProductCard from "../Components/ProductCard";
-import data from "../data/data.json";
-import { useNavigation } from "@react-navigation/native";
+} from 'react-native';
+import React, {useState} from 'react';
+import LinearGradient from 'react-native-linear-gradient';
+import Header from '../Components/Header';
+import Tags from '../Components/Tags';
+import ProductCard from '../Components/ProductCard';
+import data from '../data/data.json';
+import {useNavigation} from '@react-navigation/native';
 
 const HomeScreen = () => {
   const [products, setProducts] = useState(data.products);
   const navigation = useNavigation();
-  const handleProductDetails = (item) => {
-   navigation.navigate("PRODUCT_DETAILS", { item });
+  const handleProductDetails = item => {
+    navigation.navigate('PRODUCT_DETAILS', {item});
   };
-  const toggleFavorite = (item) => {
+  const toggleFavorite = item => {
     setProducts(
-      products.map((prod) => {
+      products.map(prod => {
         if (prod.id === item.id) {
-          console.log("prod: ", prod);
+          console.log('prod: ', prod);
           return {
             ...prod,
             isFavorite: !prod.isFavorite,
           };
         }
         return prod;
-      })
+      }),
     );
   };
 
   return (
-    <LinearGradient colors={['#d8b2bbff', '#cbb5bbff']} style={styles.container}>
+    <LinearGradient
+      colors={['#e3e3e3ff', '#c3adb1ff']}
+      style={styles.container}>
       {/* header */}
 
       {/* <Tags /> */}
@@ -51,7 +53,7 @@ const HomeScreen = () => {
                 <Text style={styles.headingText}>Match Your Style</Text>
                 <View style={styles.inputContainer}>
                   <Image
-                    source={require("../assets/search.png")}
+                    source={require('../assets/search.png')}
                     style={styles.searchIcon}
                   />
                   <TextInput placeholder="Search" style={styles.textInput} />
@@ -63,7 +65,7 @@ const HomeScreen = () => {
         }
         data={products}
         numColumns={2}
-        renderItem={({ item }) => (
+        renderItem={({item}) => (
           <ProductCard
             item={item}
             handleProductClick={handleProductDetails}
@@ -80,8 +82,6 @@ const HomeScreen = () => {
   );
 };
 
-
-
 export default HomeScreen;
 
 const styles = StyleSheet.create({
@@ -92,17 +92,17 @@ const styles = StyleSheet.create({
 
   headingText: {
     fontSize: 28,
-    color: "#000000",
+    color: '#000000',
     marginVertical: 20,
-    fontFamily: "Poppins-Regular",
+    fontFamily: 'Poppins-Regular',
   },
   inputContainer: {
-    width: "100%",
-    backgroundColor: "#FFFFFF",
+    width: '100%',
+    backgroundColor: '#FFFFFF',
     height: 48,
     borderRadius: 12,
-    alignItems: "center",
-    flexDirection: "row",
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   searchIcon: {
     height: 26,
@@ -111,9 +111,6 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontSize: 18,
-    fontFamily: "Poppins-Regular",
+    fontFamily: 'Poppins-Regular',
   },
 });
-
-
-

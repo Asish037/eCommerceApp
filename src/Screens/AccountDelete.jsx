@@ -26,7 +26,9 @@ const AccountDelete = () => {
     console.log('hello');
   };
   return (
-    <LinearGradient colors={['#d8b2bbff', '#cbb5bbff']} style={styles.container}>
+    <LinearGradient
+      colors={['#e3e3e3ff', '#c3adb1ff']}
+      style={styles.container}>
       <ScrollView
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
@@ -179,10 +181,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  bottomSec:{
+  bottomSec: {
     padding: 5,
     bottom: 10,
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 });

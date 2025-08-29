@@ -10,23 +10,8 @@ import {
 import React, {useState, useRef, useEffect} from 'react';
 import {fonts} from '../utils/fonts';
 import {useNavigation, useRoute} from '@react-navigation/native';
-
-/**
- * Dynamic Header Component with Smart Search Functionality
- *
- * Features:
- * - On Categories screen: Navigates to Categories and focuses search input
- * - On Product Details, MyWishList, Cart screens: Shows inline search in header
- * - Animated search input with smooth transitions
- * - Search text clearing functionality
- *
- * Props:
- * @param {boolean} isCart - Legacy prop (kept for compatibility)
- * @param {function} onSearchChange - Callback function when search text changes
- *
- * Usage:
- * <Header onSearchChange={(text) => handleSearch(text)} />
- */
+import {addToCart} from '../utils/helper';
+import {CartContext} from '../Context/CartContext';
 
 const Header = ({isCart, onSearchChange}) => {
   const navigation = useNavigation();
@@ -284,7 +269,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   inlineInputContainer: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'transparent',
     height: 36,
     borderRadius: 18,
     alignItems: 'center',
@@ -305,12 +290,13 @@ const styles = StyleSheet.create({
     width: 18,
     marginLeft: 12,
     marginRight: 8,
+    tintColor: 'red'
   },
   inlineTextInput: {
     flex: 1,
     fontSize: 14,
     fontFamily: 'Poppins-Regular',
-    color: '#333',
+    color: '#2c2c2c',
     paddingVertical: 0,
     paddingRight: 8,
   },

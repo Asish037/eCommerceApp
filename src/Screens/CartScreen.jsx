@@ -7,9 +7,11 @@ import {fonts} from '../utils/fonts';
 import {CartContext} from '../Context/CartContext';
 import {COLORS} from '../Constant/Colors';
 import {FONTS} from '../Constant/Font';
+import {useNavigation} from '@react-navigation/native';
 
 const CartScreen = () => {
   const {cartItems, deleteCartItem, totalPrice} = useContext(CartContext);
+  const navigation = useNavigation();
 
   const handleDeleteItem = async id => {
     await deleteCartItem(id);
@@ -21,7 +23,7 @@ const CartScreen = () => {
   return (
     <View style={styles.container}>
       <LinearGradient
-        colors={['#d8b2bbff', '#cbb5bbff']}
+        colors={['#e3e3e3ff', '#c3adb1ff']}
         style={styles.gradientContainer}>
         <View style={styles.header}>
           <Header isCart={true} />
@@ -40,6 +42,8 @@ const CartScreen = () => {
           keyExtractor={item => item.id.toString()}
         />
       </LinearGradient>
+      {/* separator */}
+      {/* <View style={styles.separator} /> */}
 
       {/* Bottom Total Section with White Background */}
       <View style={styles.bottomContainer}>
@@ -61,7 +65,9 @@ const CartScreen = () => {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.checkoutButton}>
+        <TouchableOpacity
+          style={styles.checkoutButton}
+          onPress={() => navigation.navigate('Payment', {grandTotal})}>
           <Text style={styles.checkoutButtonText}>Proceed to Checkout</Text>
         </TouchableOpacity>
       </View>
@@ -77,16 +83,16 @@ const styles = StyleSheet.create({
   },
   gradientContainer: {
     flex: 1,
-    paddingTop: 15,
+    paddingTop: 5,
   },
   header: {
     paddingHorizontal: 15,
   },
   bottomContainer: {
-    backgroundColor: '#FFFFFF',
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    paddingHorizontal: 20,
+    backgroundColor: '#ddbbbbff',
+    // borderTopLeftRadius: 50,
+    // borderTopRightRadius: 50,
+    paddingHorizontal: 15,
     paddingTop: 24,
     paddingBottom: 34,
     shadowColor: '#000',
@@ -97,9 +103,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 12,
     elevation: 8,
+    // Add a top border with the same color as the background
+    // to fill the gap created by the rounded corners.
+    borderTopWidth: 1,
+    borderColor: '#ddbbbbff',
   },
   totalSection: {
     marginBottom: 20,
+    paddingHorizontal: 10,
   },
   totalRow: {
     flexDirection: 'row',
@@ -109,7 +120,7 @@ const styles = StyleSheet.create({
   },
   totalLabel: {
     fontSize: 16,
-    color: '#666666',
+    color: '#1f0303ff',
     fontWeight: '500',
     fontFamily: fonts.regular,
   },
@@ -121,7 +132,7 @@ const styles = StyleSheet.create({
   },
   divider: {
     borderWidth: 0.5,
-    borderColor: '#E0E0E0',
+    borderColor: '#a54848ff',
     marginVertical: 12,
   },
   grandTotalLabel: {
