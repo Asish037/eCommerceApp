@@ -23,6 +23,7 @@ import {useNavigation} from '@react-navigation/native';
 import GradientButton from '../Components/Button/GradientButton';
 import Toast from 'react-native-simple-toast';
 import {fonts} from '../utils/fonts';
+import Header from '../Components/Header';
 
 const EditAddress = ({route}) => {
   const navigation = useNavigation();
@@ -172,17 +173,17 @@ const EditAddress = ({route}) => {
     }
   };
 
-  const CustomHeader = () => (
-    <View style={styles.headerContainer}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}>
-        <Ionicons name="arrow-back" size={24} color={COLORS.white} />
-      </TouchableOpacity>
-      <Text style={styles.headerTitle}>{pageTitle}</Text>
-      <View style={styles.headerRightSpace} />
-    </View>
-  );
+  // const CustomHeader = () => (
+  //   <View style={styles.headerContainer}>
+  //     <TouchableOpacity
+  //       style={styles.backButton}
+  //       onPress={() => navigation.goBack()}>
+  //       <Ionicons name="arrow-back" size={24} color={COLORS.white} />
+  //     </TouchableOpacity>
+  //     <Text style={styles.headerTitle}>{pageTitle}</Text>
+  //     <View style={styles.headerRightSpace} />
+  //   </View>
+  // );
 
   const InputField = ({
     icon,
@@ -197,7 +198,7 @@ const EditAddress = ({route}) => {
       <View style={styles.inputWrapper}>
         <MaterialCommunityIcons
           name={icon}
-          size={20}
+          size={25}
           color={COLORS.gradientButton[1]}
           style={styles.inputIcon}
         />
@@ -210,6 +211,10 @@ const EditAddress = ({route}) => {
             keyboardType={keyboardType}
             value={value}
             onChangeText={onChangeText}
+            editable={true}
+            selectTextOnFocus={true}
+            autoCorrect={false}
+            autoCapitalize="words"
           />
         </View>
       </View>
@@ -219,21 +224,23 @@ const EditAddress = ({route}) => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar
+      {/* <StatusBar
         backgroundColor={COLORS.gradientButton[1]}
         barStyle="light-content"
-      />
+      /> */}
       <Animated.View style={[styles.animatedContainer, {opacity: fadeAnim}]}>
         <LinearGradient
-          colors={['#f8f9fa', '#e9ecef']}
+          colors={['#e3e3e3ff', '#c3adb1ff']}
           style={styles.container}>
-          <CustomHeader />
+          <Header />
 
           <ScrollView
             style={styles.scrollView}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.scrollContentContainer}
-            keyboardShouldPersistTaps="handled">
+            keyboardShouldPersistTaps="handled"
+            nestedScrollEnabled={true}
+            scrollEnabled={true}>
             <View style={styles.formContainer}>
               <View style={styles.sectionHeader}>
                 <MaterialIcons
@@ -402,36 +409,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-  },
-  headerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: moderateScale(20),
-    paddingVertical: verticalScale(15),
-    backgroundColor: COLORS.gradientButton[1],
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-  },
-  backButton: {
-    padding: moderateScale(8),
-    borderRadius: moderateScale(20),
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-  },
-  headerTitle: {
-    fontSize: moderateScale(18),
-    fontWeight: '600',
-    color: COLORS.white,
-    fontFamily: fonts.medium,
-  },
-  headerRightSpace: {
-    width: moderateScale(40),
+    padding: 10,
   },
   scrollView: {
     flex: 1,
@@ -440,16 +418,16 @@ const styles = StyleSheet.create({
     paddingBottom: verticalScale(100),
   },
   formContainer: {
-    padding: moderateScale(20),
+    padding: moderateScale(10),
   },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: verticalScale(20),
-    marginBottom: verticalScale(15),
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(25),
     paddingBottom: verticalScale(10),
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.gradientButton[1] + '30',
+    borderBottomColor: COLORS.gradientButton[1],
   },
   sectionTitle: {
     fontSize: moderateScale(16),
@@ -459,25 +437,16 @@ const styles = StyleSheet.create({
     fontFamily: fonts.medium,
   },
   inputContainer: {
-    marginBottom: verticalScale(20),
+    marginBottom: verticalScale(15),
   },
   inputWrapper: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    backgroundColor: COLORS.white,
+    backgroundColor: 'transparent',
     borderRadius: moderateScale(12),
     paddingHorizontal: moderateScale(15),
-    paddingVertical: moderateScale(5),
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    borderWidth: 1,
-    borderColor: COLORS.lightgray,
+    paddingVertical: moderateScale(8),
+    marginBottom: verticalScale(5),
   },
   inputFieldWrapper: {
     flex: 1,
@@ -486,17 +455,19 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(14),
     fontWeight: '600',
     color: COLORS.gradientButton[1],
-    marginBottom: verticalScale(5),
+    marginBottom: verticalScale(2),
     fontFamily: fonts.medium,
   },
   textInput: {
     fontSize: moderateScale(14),
     color: COLORS.black,
     paddingVertical: verticalScale(8),
-    paddingHorizontal: 0,
+    paddingHorizontal: moderateScale(4),
     fontFamily: fonts.regular,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.lightgray,
+    borderBottomColor: COLORS.gradientButton[1],
+    backgroundColor: 'transparent',
+    minHeight: verticalScale(35),
   },
   inputIcon: {
     marginRight: moderateScale(10),
@@ -509,27 +480,29 @@ const styles = StyleSheet.create({
     fontFamily: fonts.regular,
   },
   buttonContainer: {
-    position: 'absolute',
+    position: 'relative',
     bottom: 0,
-    left: 0,
+    left: 50,
     right: 0,
-    backgroundColor: COLORS.white,
-    paddingHorizontal: moderateScale(20),
-    paddingVertical: verticalScale(15),
-    elevation: 8,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: -2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    borderTopLeftRadius: moderateScale(20),
-    borderTopRightRadius: moderateScale(20),
+    // backgroundColor: COLORS.white,
+    paddingHorizontal: moderateScale(10),
+    paddingVertical: verticalScale(10),
+    // elevation: 8,
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: -2,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 3.84,
+    // borderTopLeftRadius: moderateScale(30),
+    // borderTopRightRadius: moderateScale(20),
   },
   saveButton: {
-    width: '100%',
-    borderRadius: moderateScale(12),
+    width: '80%',
+    borderRadius: moderateScale(15),
+    // paddingVertical: verticalScale(12),
+
   },
   buttonContainerKeyboard: {
     paddingBottom: verticalScale(5),
@@ -546,8 +519,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: verticalScale(12),
-    paddingHorizontal: moderateScale(16),
+    paddingVertical: verticalScale(10),
+    paddingHorizontal: moderateScale(5),
     marginRight: moderateScale(8),
     backgroundColor: COLORS.white,
     borderRadius: moderateScale(8),
@@ -579,35 +552,36 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: verticalScale(15),
-    paddingHorizontal: moderateScale(15),
-    backgroundColor: COLORS.white,
+    paddingVertical: verticalScale(13),
+    paddingHorizontal: moderateScale(12),
+    // backgroundColor: COLORS.white,
+    backgroundColor: 'transparent',
     borderRadius: moderateScale(12),
     marginBottom: verticalScale(20),
-    elevation: 1,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    // elevation: 1,
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 1,
+    // },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 2,
   },
   defaultToggleLeft: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   defaultToggleText: {
-    fontSize: moderateScale(16),
+    fontSize: moderateScale(15),
     fontWeight: '500',
     color: COLORS.black,
     marginLeft: moderateScale(8),
     fontFamily: fonts.medium,
   },
   toggleSwitch: {
-    width: moderateScale(50),
-    height: verticalScale(26),
-    backgroundColor: '#ccc',
+    width: moderateScale(40),
+    height: verticalScale(15),
+    backgroundColor: '#dcb1b1ff',
     borderRadius: moderateScale(13),
     justifyContent: 'center',
     paddingHorizontal: moderateScale(2),

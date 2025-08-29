@@ -153,7 +153,7 @@ const PaymentScreen = () => {
 
       {/* Bottom Action Button */}
       <View style={styles.bottomSection}>
-        <LinearGradient colors={COLORS.gradientButton} style={styles.payButton}>
+        <View style={styles.payButton}>
           <TouchableOpacity
             style={styles.payButtonTouchable}
             onPress={() => {
@@ -169,7 +169,7 @@ const PaymentScreen = () => {
               Pay ${parseFloat(total).toFixed(2)}
             </Text>
           </TouchableOpacity>
-        </LinearGradient>
+        </View>
       </View>
     </LinearGradient>
   );
@@ -180,26 +180,27 @@ export default PaymentScreen;
 const styles = StyleSheet.create({
   gradientContainer: {
     flex: 1,
-    paddingTop: 10,
+    padding: 10,
   },
   content: {
     flex: 1,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
   },
   headerSection: {
     marginTop: 10,
-    marginBottom: 25,
+    marginBottom: 15,
   },
   screenTitle: {
-    fontSize: 28,
+    fontSize: 25,
     fontWeight: 'bold',
     color: COLORS.black,
     fontFamily: FONTS.Bold,
     marginBottom: 5,
   },
   screenSubtitle: {
-    fontSize: 16,
-    color: COLORS.grey,
+    fontSize: 14,
+    // color: COLORS.grey,
+    color: '#2c2c2c',
     fontFamily: FONTS.Regular,
   },
 
@@ -277,7 +278,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     borderWidth: 2,
     borderColor: 'transparent',
-    shadowColor: COLORS.black,
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 1,
@@ -287,8 +288,10 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   selectedPaymentMethod: {
-    borderColor: COLORS.theme,
-    backgroundColor: COLORS.pink ,
+    borderColor: "transparent",
+    backgroundColor: "#E94560",
+    // shadowColor: "#000",
+
   },
   paymentMethodContent: {
     flexDirection: 'row',
@@ -300,7 +303,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   paymentMethodText: {
-    fontSize: 14,
+    fontSize: 15,
     color: COLORS.black,
     fontFamily: FONTS.Medium,
     flex: 1,
@@ -331,8 +334,8 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   changeAddressText: {
-    color: COLORS.theme,
-    fontSize: 14,
+    color: "red",
+    fontSize: 15,
     fontWeight: '600',
     fontFamily: FONTS.Medium,
   },
@@ -413,27 +416,27 @@ const styles = StyleSheet.create({
   },
   addressButtonText: {
     fontSize: 16,
-    color: COLORS.theme,
+    // color: COLORS.theme,
     fontFamily: FONTS.Medium,
     textAlign: 'center',
   },
 
   // Bottom Section
   bottomSection: {
-    paddingHorizontal: 20,
-    paddingBottom: 30,
-    paddingTop: 15,
-    backgroundColor: COLORS.white,
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    shadowColor: COLORS.black,
+    backgroundColor: '#E94560',
+    height: 56,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 16,
+    shadowColor: '#E94560',
     shadowOffset: {
       width: 0,
-      height: -2,
+      height: 4,
     },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.3,
     shadowRadius: 8,
-    elevation: 10,
+    elevation: 6,
+
   },
   payButton: {
     borderRadius: 15,
@@ -447,7 +450,7 @@ const styles = StyleSheet.create({
   payButtonText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: COLORS.white,
+    // color: COLORS.white,
     fontFamily: FONTS.Bold,
   },
 });

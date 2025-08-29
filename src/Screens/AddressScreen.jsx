@@ -63,7 +63,7 @@ const AddressScreen = () => {
       ];
 
       const loadAddresses = () => {
-        // In real app, load from AsyncStorage or API
+        // Simulate API call
         setAddresses(sampleAddresses);
         setSelectedAddressId(
           currentSelectedAddress?.id || sampleAddresses[0]?.id,
@@ -335,7 +335,7 @@ const AddressScreen = () => {
             const selectedAddress = addresses.find(
               addr => addr.id === selectedAddressId,
             );
-            navigation.navigate('PaymentScreen', {
+            navigation.navigate('PaymentMethod', {
               selectedAddress,
               grandTotal: route.params?.grandTotal,
             });
