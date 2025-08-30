@@ -11,6 +11,7 @@ import {
   TextInput,
   Animated,
   Keyboard,
+  KeyboardAvoidingView,
 } from 'react-native';
 import {COLORS} from '../Constant/Colors';
 import {FONTS} from '../Constant/Font';
@@ -174,15 +175,15 @@ const EditAddress = ({route}) => {
   };
 
   // const CustomHeader = () => (
-  //   <View style={styles.headerContainer}>
-  //     <TouchableOpacity
-  //       style={styles.backButton}
-  //       onPress={() => navigation.goBack()}>
-  //       <Ionicons name="arrow-back" size={24} color={COLORS.white} />
-  //     </TouchableOpacity>
-  //     <Text style={styles.headerTitle}>{pageTitle}</Text>
-  //     <View style={styles.headerRightSpace} />
-  //   </View>
+  // <View style={styles.headerContainer}>
+  // <TouchableOpacity
+  // style={styles.backButton}
+  // onPress={() => navigation.goBack()}>
+  // <Ionicons name="arrow-back" size={24} color={COLORS.white} />
+  // </TouchableOpacity>
+  // <Text style={styles.headerTitle}>{pageTitle}</Text>
+  // <View style={styles.headerRightSpace} />
+  // </View>
   // );
 
   const InputField = ({
@@ -215,6 +216,7 @@ const EditAddress = ({route}) => {
             selectTextOnFocus={true}
             autoCorrect={false}
             autoCapitalize="words"
+            onFocus={() => console.log(formData)}
           />
         </View>
       </View>
@@ -227,172 +229,185 @@ const EditAddress = ({route}) => {
       {/* <StatusBar
         backgroundColor={COLORS.gradientButton[1]}
         barStyle="light-content"
-      /> */}
-      <Animated.View style={[styles.animatedContainer, {opacity: fadeAnim}]}>
-        <LinearGradient
-          colors={['#e3e3e3ff', '#c3adb1ff']}
-          style={styles.container}>
-          <Header />
+        /> */}
+      <KeyboardAvoidingView behavior="padding" style={{flex: 1}}>
+        <Animated.View style={[styles.animatedContainer, {opacity: fadeAnim}]}>
+          <LinearGradient
+            colors={['#e3e3e3ff', '#c3adb1ff']}
+            style={styles.container}>
+            <Header />
 
-          <ScrollView
-            style={styles.scrollView}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.scrollContentContainer}
-            keyboardShouldPersistTaps="handled"
-            nestedScrollEnabled={true}
-            scrollEnabled={true}>
-            <View style={styles.formContainer}>
-              <View style={styles.sectionHeader}>
-                <MaterialIcons
-                  name="location-on"
-                  size={24}
-                  color={COLORS.gradientButton[1]}
+            <ScrollView
+              style={styles.scrollView}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.scrollContentContainer}
+              keyboardShouldPersistTaps="handled"
+              nestedScrollEnabled={true}
+              scrollEnabled={true}>
+              <View style={styles.formContainer}>
+                <View style={styles.sectionHeader}>
+                  <MaterialIcons
+                    name="location-on"
+                    size={24}
+                    color={COLORS.gradientButton[1]}
+                  />
+                  <Text style={styles.sectionTitle}>Address Details</Text>
+                </View>
+
+                <InputField
+                  icon="map-marker-outline"
+                  label="Pincode"
+                  placeholder="Enter 6-digit pincode"
+                  keyboardType="numeric"
+                  value={formData.pincode}
+                  onChangeText={value => handleInputChange('pincode', value)}
+                  error={errors.pincode}
                 />
-                <Text style={styles.sectionTitle}>Address Details</Text>
-              </View>
 
-              <InputField
-                icon="map-marker-outline"
-                label="Pincode"
-                placeholder="Enter 6-digit pincode"
-                keyboardType="numeric"
-                value={formData.pincode}
-                onChangeText={value => handleInputChange('pincode', value)}
-                error={errors.pincode}
-              />
+                <InputField
+                  icon="home-outline"
+                  label="House/Flat/Building No."
+                  placeholder="Enter house/flat number"
+                  keyboardType="default"
+                  value={formData.houseNumber}
+                  onChangeText={value =>
+                    handleInputChange('houseNumber', value)
+                  }
+                  error={errors.houseNumber}
+                />
 
-              <InputField
-                icon="home-outline"
-                label="House/Flat/Building No."
-                placeholder="Enter house/flat number"
-                keyboardType="default"
-                value={formData.houseNumber}
-                onChangeText={value => handleInputChange('houseNumber', value)}
-                error={errors.houseNumber}
-              />
+                <InputField
+                  icon="road"
+                  label="Road Name/Area/Colony"
+                  placeholder="Enter road name or area"
+                  keyboardType="default"
+                  value={formData.roadName}
+                  onChangeText={value => handleInputChange('roadName', value)}
+                  error={errors.roadName}
+                />
 
-              <InputField
-                icon="road"
-                label="Road Name/Area/Colony"
-                placeholder="Enter road name or area"
-                keyboardType="default"
-                value={formData.roadName}
-                onChangeText={value => handleInputChange('roadName', value)}
-                error={errors.roadName}
-              />
-
-              {/* Address Type Selector */}
-              <View style={styles.addressTypeContainer}>
-                <Text style={styles.sectionTitle}>Address Type</Text>
-                <View style={styles.addressTypeButtons}>
-                  {['Home', 'Office', 'Other'].map(type => (
-                    <TouchableOpacity
-                      key={type}
-                      style={[
-                        styles.addressTypeButton,
-                        formData.addressType === type &&
-                          styles.selectedAddressType,
-                      ]}
-                      onPress={() => handleInputChange('addressType', type)}>
-                      <MaterialIcons
-                        name={
-                          type === 'Home'
-                            ? 'home'
-                            : type === 'Office'
-                            ? 'business'
-                            : 'location-on'
-                        }
-                        size={20}
-                        color={
-                          formData.addressType === type
-                            ? COLORS.white
-                            : COLORS.button
-                        }
-                      />
-                      <Text
+                {/* Address Type Selector */}
+                <View style={styles.addressTypeContainer}>
+                  <Text style={styles.sectionTitle}>Address Type</Text>
+                  <View style={styles.addressTypeButtons}>
+                    {['Home', 'Office', 'Other'].map(type => (
+                      <TouchableOpacity
+                        key={type}
                         style={[
-                          styles.addressTypeText,
+                          styles.addressTypeButton,
                           formData.addressType === type &&
-                            styles.selectedAddressTypeText,
-                        ]}>
-                        {type}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
+                            styles.selectedAddressType,
+                        ]}
+                        onPress={() => handleInputChange('addressType', type)}>
+                        <MaterialIcons
+                          name={
+                            type === 'Home'
+                              ? 'home'
+                              : type === 'Office'
+                              ? 'business'
+                              : 'location-on'
+                          }
+                          size={20}
+                          color={
+                            formData.addressType === type
+                              ? COLORS.white
+                              : COLORS.button
+                          }
+                        />
+                        <Text
+                          style={[
+                            styles.addressTypeText,
+                            formData.addressType === type &&
+                              styles.selectedAddressTypeText,
+                          ]}>
+                          {type}
+                        </Text>
+                      </TouchableOpacity>
+                    ))}
+                  </View>
                 </View>
-              </View>
 
-              {/* Default Address Toggle */}
-              <TouchableOpacity
-                style={styles.defaultToggleContainer}
-                onPress={() =>
-                  handleInputChange('isDefault', !formData.isDefault)
-                }>
-                <View style={styles.defaultToggleLeft}>
-                  <MaterialIcons name="star" size={20} color={COLORS.button} />
-                  <Text style={styles.defaultToggleText}>
-                    Set as default address
-                  </Text>
-                </View>
-                <View
-                  style={[
-                    styles.toggleSwitch,
-                    formData.isDefault && styles.toggleSwitchActive,
-                  ]}>
+                {/* Default Address Toggle */}
+                <TouchableOpacity
+                  style={styles.defaultToggleContainer}
+                  onPress={() =>
+                    handleInputChange('isDefault', !formData.isDefault)
+                  }>
+                  <View style={styles.defaultToggleLeft}>
+                    <MaterialIcons
+                      name="star"
+                      size={20}
+                      color={COLORS.button}
+                    />
+                    <Text style={styles.defaultToggleText}>
+                      Set as default address
+                    </Text>
+                  </View>
                   <View
                     style={[
-                      styles.toggleIndicator,
-                      formData.isDefault && styles.toggleIndicatorActive,
-                    ]}
+                      styles.toggleSwitch,
+                      formData.isDefault && styles.toggleSwitchActive,
+                    ]}>
+                    <View
+                      style={[
+                        styles.toggleIndicator,
+                        formData.isDefault && styles.toggleIndicatorActive,
+                      ]}
+                    />
+                  </View>
+                </TouchableOpacity>
+
+                <View style={styles.sectionHeader}>
+                  <MaterialIcons
+                    name="contact-phone"
+                    size={24}
+                    color={COLORS.gradientButton[1]}
                   />
+                  <Text style={styles.sectionTitle}>Contact Information</Text>
                 </View>
-              </TouchableOpacity>
 
-              <View style={styles.sectionHeader}>
-                <MaterialIcons
-                  name="contact-phone"
-                  size={24}
-                  color={COLORS.gradientButton[1]}
+                <InputField
+                  icon="account-outline"
+                  label="Contact Name"
+                  placeholder="Enter contact person name"
+                  keyboardType="default"
+                  value={formData.contactName}
+                  onChangeText={value =>
+                    handleInputChange('contactName', value)
+                  }
+                  error={errors.contactName}
                 />
-                <Text style={styles.sectionTitle}>Contact Information</Text>
+
+                <InputField
+                  icon="phone-outline"
+                  label="Phone Number"
+                  placeholder="Enter 10-digit phone number"
+                  keyboardType="phone-pad"
+                  value={formData.phoneNumber}
+                  onChangeText={value =>
+                    handleInputChange('phoneNumber', value)
+                  }
+                  error={errors.phoneNumber}
+                />
               </View>
-
-              <InputField
-                icon="account-outline"
-                label="Contact Name"
-                placeholder="Enter contact person name"
-                keyboardType="default"
-                value={formData.contactName}
-                onChangeText={value => handleInputChange('contactName', value)}
-                error={errors.contactName}
-              />
-
-              <InputField
-                icon="phone-outline"
-                label="Phone Number"
-                placeholder="Enter 10-digit phone number"
-                keyboardType="phone-pad"
-                value={formData.phoneNumber}
-                onChangeText={value => handleInputChange('phoneNumber', value)}
-                error={errors.phoneNumber}
+            </ScrollView>
+            {/* button container */}
+            <View
+              pointerEvents="box-none"
+              style={[
+                styles.buttonContainer,
+                keyboardVisible && styles.buttonContainerKeyboard,
+              ]}>
+              <GradientButton
+                title={isLoading ? 'Saving...' : 'Save Address'}
+                onPress={saveNewAddress}
+                disabled={isLoading}
+                style={styles.saveButton}
               />
             </View>
-          </ScrollView>
-
-          <View
-            style={[
-              styles.buttonContainer,
-              keyboardVisible && styles.buttonContainerKeyboard,
-            ]}>
-            <GradientButton
-              title={isLoading ? 'Saving...' : 'Save Address'}
-              onPress={saveNewAddress}
-              disabled={isLoading}
-              style={styles.saveButton}
-            />
-          </View>
-        </LinearGradient>
-      </Animated.View>
+          </LinearGradient>
+        </Animated.View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
@@ -409,7 +424,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    padding: 10,
+    padding: 15,
   },
   scrollView: {
     flex: 1,
@@ -438,11 +453,12 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginBottom: verticalScale(15),
+    backgroundColor: 'black',
   },
   inputWrapper: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    backgroundColor: 'transparent',
+    alignItems: 'center',
+    backgroundColor: 'blue',
     borderRadius: moderateScale(12),
     paddingHorizontal: moderateScale(15),
     paddingVertical: moderateScale(8),
@@ -466,7 +482,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.regular,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.gradientButton[1],
-    backgroundColor: 'transparent',
+    backgroundColor: 'yellow',
     minHeight: verticalScale(35),
   },
   inputIcon: {
@@ -480,29 +496,21 @@ const styles = StyleSheet.create({
     fontFamily: fonts.regular,
   },
   buttonContainer: {
-    position: 'relative',
-    bottom: 0,
-    left: 50,
+    // position: 'absolute', // stick to bottom
+    bottom: 20,
+    left: 0,
     right: 0,
-    // backgroundColor: COLORS.white,
+    alignItems: 'center', // center the button
     paddingHorizontal: moderateScale(10),
     paddingVertical: verticalScale(10),
-    // elevation: 8,
-    // shadowColor: '#000',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: -2,
-    // },
-    // shadowOpacity: 0.25,
-    // shadowRadius: 3.84,
-    // borderTopLeftRadius: moderateScale(30),
-    // borderTopRightRadius: moderateScale(20),
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(10),
+    alignSelf: 'center',
   },
   saveButton: {
     width: '80%',
     borderRadius: moderateScale(15),
     // paddingVertical: verticalScale(12),
-
   },
   buttonContainerKeyboard: {
     paddingBottom: verticalScale(5),
@@ -561,8 +569,8 @@ const styles = StyleSheet.create({
     // elevation: 1,
     // shadowColor: '#000',
     // shadowOffset: {
-    //   width: 0,
-    //   height: 1,
+    // width: 0,
+    // height: 1,
     // },
     // shadowOpacity: 0.1,
     // shadowRadius: 2,

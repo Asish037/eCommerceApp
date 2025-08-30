@@ -158,7 +158,7 @@ const PaymentScreen = () => {
             style={styles.payButtonTouchable}
             onPress={() => {
               // Handle payment processing
-              navigation.navigate('PaymentMethod', {
+              navigation.navigate('ConfirmOrder', {
                 selectedPaymentMethod,
                 total,
               });

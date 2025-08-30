@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 5,
     marginHorizontal: 10,
-    backgroundColor: "#DFDCDC",
-    color: "#938F8F",
+    color: "#c4c4c4ff",
+    backgroundColor: "#5a4c4cc7",
     fontWeight: "700",
   },
   isSelected: {

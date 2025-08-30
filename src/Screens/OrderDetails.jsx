@@ -95,41 +95,41 @@ const OrderDetails = ({route}) => {
       style={styles.container}>
       <Header />
 
-      {/* Order Status Header */}
-      <View style={styles.statusHeader}>
-        <View style={styles.statusIconContainer}>
-          <MaterialCommunityIcons
-            name={getStatusIcon(items.shipping_status)}
-            size={moderateScale(40)}
-            color={getStatusColor(items.shipping_status)}
-          />
-        </View>
-        <View style={styles.statusTextContainer}>
-          <Text style={styles.statusTitle}>
-            {items.shipping_status === 'Shipped'
-              ? 'Order Delivered'
-              : 'Order Status'}
-          </Text>
-          <Text style={styles.statusSubtitle}>Order #{items.order_id}</Text>
-          <Text style={styles.statusDate}>
-            {Moment(items.order_date).format('MMMM DD, YYYY')}
-          </Text>
-        </View>
-        <View style={styles.paymentStatusContainer}>
-          <Text
-            style={[
-              styles.paymentStatus,
-              {color: getStatusColor(items.payment.payment_status)},
-            ]}>
-            {items.payment.payment_status}
-          </Text>
-        </View>
-      </View>
 
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}>
+        {/* Order Status Header */}
+        <View style={styles.statusHeader}>
+          <View style={styles.statusIconContainer}>
+            <MaterialCommunityIcons
+              name={getStatusIcon(items.shipping_status)}
+              size={moderateScale(35)}
+              color={getStatusColor(items.shipping_status)}
+            />
+          </View>
+          <View style={styles.statusTextContainer}>
+            <Text style={styles.statusTitle}>
+              {items.shipping_status === 'Shipped'
+                ? 'Order Delivered'
+                : 'Order Status'}
+            </Text>
+            <Text style={styles.statusSubtitle}>Order #{items.order_id}</Text>
+            <Text style={styles.statusDate}>
+              {Moment(items.order_date).format('MMMM DD, YYYY')}
+            </Text>
+          </View>
+          <View style={styles.paymentStatusContainer}>
+            <Text
+              style={[
+                styles.paymentStatus,
+                {color: getStatusColor(items.payment.payment_status)},
+              ]}>
+              {items.payment.payment_status}
+            </Text>
+          </View>
+        </View>
         {/* Order Items */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Order Items</Text>
@@ -246,7 +246,7 @@ const OrderDetails = ({route}) => {
                         key={`review-${index}-star-${i}`}
                         name={i < review.rating ? 'star' : 'star-outline'}
                         size={moderateScale(14)}
-                        color={i < review.rating ? '#FFD700' : COLORS.gray}
+                        color={i < review.rating ? '#e82929da' : COLORS.gray}
                       />
                     ))}
                   </View>
@@ -272,47 +272,36 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
   },
-  backButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: moderateScale(20),
-    paddingVertical: moderateScale(10),
-    marginTop: moderateScale(5),
-  },
-  backButtonText: {
-    color: COLORS.black,
-    fontFamily: FONTS.Medium,
-    fontSize: moderateScale(16),
-    marginLeft: moderateScale(8),
-  },
   scrollView: {
     flex: 1,
   },
   scrollContent: {
-    paddingBottom: moderateScale(30),
+    paddingBottom: moderateScale(10),
   },
   statusHeader: {
-    backgroundColor: COLORS.white,
-    marginHorizontal: moderateScale(15),
+    // backgroundColor: COLORS.white,
+    marginHorizontal: moderateScale(10),
     marginTop: moderateScale(10),
     borderRadius: moderateScale(15),
-    padding: moderateScale(20),
+    padding: moderateScale(10),
     flexDirection: 'row',
     alignItems: 'center',
-    shadowColor: COLORS.black,
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.15,
-    shadowRadius: 4.65,
-    elevation: 8,
+    justifyContent: 'space-between',
+    // shadowColor: COLORS.black,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 3,
+    // },
+    // shadowOpacity: 0.15,
+    // shadowRadius: 4.65,
+    // elevation: 8,
   },
   statusIconContainer: {
     backgroundColor: 'rgba(0, 0, 0, 0.05)',
     borderRadius: moderateScale(30),
-    padding: moderateScale(15),
-    marginRight: moderateScale(15),
+    padding: moderateScale(2),
+    marginRight: moderateScale(10),
+
   },
   statusTextContainer: {
     flex: 1,
@@ -320,64 +309,67 @@ const styles = StyleSheet.create({
   statusTitle: {
     color: COLORS.black,
     fontFamily: FONTS.Bold,
-    fontSize: moderateScale(18),
+    fontSize: moderateScale(17),
     fontWeight: '700',
   },
   statusSubtitle: {
     color: COLORS.button,
     fontFamily: FONTS.Medium,
-    fontSize: moderateScale(14),
+    fontSize: moderateScale(13),
     marginTop: moderateScale(2),
   },
   statusDate: {
-    color: COLORS.gray || '#757575',
+    color: COLORS.gray || '#474545ff',
     fontFamily: FONTS.Regular,
     fontSize: moderateScale(12),
     marginTop: moderateScale(4),
   },
   paymentStatusContainer: {
-    backgroundColor: 'rgba(76, 175, 80, 0.1)',
-    paddingHorizontal: moderateScale(12),
+    backgroundColor: 'rgba(10, 85, 13, 0.26)',
+    paddingHorizontal: moderateScale(10),
     paddingVertical: moderateScale(6),
     borderRadius: moderateScale(15),
   },
   paymentStatus: {
     fontFamily: FONTS.Bold,
-    fontSize: moderateScale(12),
-    fontWeight: '600',
+    fontSize: moderateScale(11),
+    fontWeight: '700',
   },
   section: {
-    marginHorizontal: moderateScale(15),
-    marginTop: moderateScale(15),
+    marginHorizontal: moderateScale(10),
+    marginTop: moderateScale(10),
   },
   sectionTitle: {
     color: COLORS.black,
     fontFamily: FONTS.Bold,
-    fontSize: moderateScale(16),
+    fontSize: moderateScale(15),
     fontWeight: '700',
-    marginBottom: moderateScale(12),
+    marginBottom: moderateScale(5),
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+
   },
   orderItemCard: {
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
     borderRadius: moderateScale(12),
-    padding: moderateScale(15),
-    marginBottom: moderateScale(10),
+    padding: moderateScale(5),
+    marginBottom: moderateScale(5),
     flexDirection: 'row',
-    shadowColor: COLORS.black,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
+    // shadowColor: COLORS.black,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 3.84,
+    // elevation: 5,
   },
   orderItemImage: {
     width: moderateScale(70),
     height: moderateScale(70),
     borderRadius: moderateScale(10),
-    backgroundColor: COLORS.lightGray || '#F5F5F5',
-    marginRight: moderateScale(15),
+    // backgroundColor: COLORS.lightGray || '#F5F5F5',
+    marginRight: moderateScale(20),
   },
   orderItemDetails: {
     flex: 1,
@@ -402,40 +394,40 @@ const styles = StyleSheet.create({
     marginTop: moderateScale(5),
   },
   orderItemSpec: {
-    color: COLORS.gray || '#757575',
+    color: COLORS.gray || '#181717ff',
     fontFamily: FONTS.Regular,
     fontSize: moderateScale(11),
   },
   orderItemPrice: {
     color: COLORS.black,
     fontFamily: FONTS.Bold,
-    fontSize: moderateScale(16),
+    fontSize: moderateScale(14),
     fontWeight: '700',
     alignSelf: 'flex-end',
   },
   addressCard: {
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
     borderRadius: moderateScale(12),
-    padding: moderateScale(15),
-    shadowColor: COLORS.black,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
+    padding: moderateScale(10),
+    // shadowColor: COLORS.black,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 3.84,
+    // elevation: 5,
   },
   addressHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: moderateScale(10),
+    marginBottom: moderateScale(5),
   },
   addressName: {
     color: COLORS.black,
     fontFamily: FONTS.Bold,
     fontSize: moderateScale(14),
-    fontWeight: '600',
+    fontWeight: '650',
     marginLeft: moderateScale(8),
     flex: 1,
   },
@@ -443,25 +435,26 @@ const styles = StyleSheet.create({
     color: COLORS.button,
     fontFamily: FONTS.Medium,
     fontSize: moderateScale(12),
+    fontWeight: '600',
   },
   addressText: {
-    color: COLORS.gray || '#757575',
+    color: COLORS.gray || '#343232ff',
     fontFamily: FONTS.Regular,
     fontSize: moderateScale(12),
     lineHeight: moderateScale(16),
   },
   summaryCard: {
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
     borderRadius: moderateScale(12),
-    padding: moderateScale(15),
-    shadowColor: COLORS.black,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
+    padding: moderateScale(10),
+    // shadowColor: COLORS.black,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 3.84,
+    // elevation: 5,
   },
   summaryRow: {
     flexDirection: 'row',
@@ -472,7 +465,7 @@ const styles = StyleSheet.create({
     borderBottomColor: 'rgba(0, 0, 0, 0.1)',
   },
   summaryLabel: {
-    color: COLORS.gray || '#757575',
+    color: COLORS.gray || '#2b2929ff',
     fontFamily: FONTS.Regular,
     fontSize: moderateScale(14),
   },
@@ -485,32 +478,32 @@ const styles = StyleSheet.create({
   summaryValueTotal: {
     color: COLORS.black,
     fontFamily: FONTS.Bold,
-    fontSize: moderateScale(18),
+    fontSize: moderateScale(15),
     fontWeight: '700',
   },
   summaryValueTracking: {
     color: COLORS.button,
     fontFamily: FONTS.Medium,
     fontSize: moderateScale(12),
-    fontWeight: '500',
+    fontWeight: '600',
   },
   contactCard: {
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
     borderRadius: moderateScale(12),
-    padding: moderateScale(15),
-    shadowColor: COLORS.black,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
+    padding: moderateScale(10),
+    // shadowColor: COLORS.black,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 3.84,
+    // elevation: 5,
   },
   contactRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: moderateScale(8),
+    paddingVertical: moderateScale(5),
   },
   contactText: {
     color: COLORS.black,
@@ -519,25 +512,25 @@ const styles = StyleSheet.create({
     marginLeft: moderateScale(10),
   },
   ratingCard: {
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
     borderRadius: moderateScale(12),
-    padding: moderateScale(15),
+    padding: moderateScale(10),
     flexDirection: 'row',
     alignItems: 'center',
-    shadowColor: COLORS.black,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
+    // shadowColor: COLORS.black,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 3.84,
+    // elevation: 5,
   },
   ratingProductImage: {
     width: moderateScale(60),
     height: moderateScale(60),
     borderRadius: moderateScale(30),
-    backgroundColor: COLORS.lightGray || '#F5F5F5',
+    backgroundColor: COLORS.lightGray || 'transparent',
     marginRight: moderateScale(15),
   },
   ratingContent: {
@@ -552,26 +545,26 @@ const styles = StyleSheet.create({
   },
   starsContainer: {
     flexDirection: 'row',
-    marginBottom: moderateScale(8),
+    marginBottom: moderateScale(7),
   },
   ratingSubtitle: {
-    color: COLORS.gray || '#757575',
+    color: COLORS.gray || '#3b3a3aff',
     fontFamily: FONTS.Regular,
     fontSize: moderateScale(12),
   },
   reviewCard: {
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
     borderRadius: moderateScale(12),
-    padding: moderateScale(15),
+    padding: moderateScale(10),
     marginBottom: moderateScale(10),
-    shadowColor: COLORS.black,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
+    // shadowColor: COLORS.black,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 3.84,
+    // elevation: 5,
   },
   reviewHeader: {
     flexDirection: 'row',
@@ -583,20 +576,20 @@ const styles = StyleSheet.create({
     color: COLORS.black,
     fontFamily: FONTS.Bold,
     fontSize: moderateScale(14),
-    fontWeight: '600',
+    fontWeight: '700',
   },
   reviewRating: {
     flexDirection: 'row',
   },
   reviewComment: {
-    color: COLORS.gray || '#757575',
+    color: COLORS.gray || '#2c2a2aff',
     fontFamily: FONTS.Regular,
     fontSize: moderateScale(13),
     lineHeight: moderateScale(18),
     marginBottom: moderateScale(8),
   },
   reviewDate: {
-    color: COLORS.gray || '#757575',
+    color: COLORS.gray || '#2c2a2aff',
     fontFamily: FONTS.Regular,
     fontSize: moderateScale(11),
   },

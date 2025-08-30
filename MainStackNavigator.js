@@ -39,7 +39,7 @@ import MenuDrawer from './src/Screens/MenuDrawer';
 import PaymentScreen from './src/Screens/PaymentMethod';
 import PaymentMethod from './src/Screens/PaymentScreen';
 import OrderConfirm from './src/Screens/OrderConfirm';
-
+import ConfirmOrder from './src/Screens/ConfirmOrder';
 
 
 const Stack = createNativeStackNavigator();
@@ -130,6 +130,7 @@ const MainStackNavigator = () => {
         component={MenuDrawer}
         options={() => ({
           title: 'Menu',
+          headerShown: false, 
         })}
       />
       <Stack.Screen
@@ -160,6 +161,14 @@ const MainStackNavigator = () => {
           title: 'Profile Settings',
           headerShown: false,
 
+        })}
+      />
+      <Stack.Screen
+        name="ConfirmOrder"
+        component={ConfirmOrder}
+        options={() => ({
+          title: 'Confirm Order',
+          headerShown: false,
         })}
       />
       <Stack.Screen

@@ -57,7 +57,7 @@ const HomeScreen = () => {
               </ImageBackground>
 
               {/* <Header /> */}
-              <View>
+              <View style={{marginTop: 5, marginBottom: 0, justifyContent: 'flex-start'}}>
                 {/* <Text style={styles.headingText}>Match Your Style</Text> */}
                 {/* <View style={styles.inputContainer}>
                   <Image
@@ -66,9 +66,9 @@ const HomeScreen = () => {
                   />
                   <TextInput placeholder="Search" style={styles.textInput} />
                 </View> */}
+                <Tags />
               </View>
             </>
-            <Tags />
           </>
         }
         data={products}
@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     padding: 10,
+    marginBottom: 60,
   },
   ImageBackground: {
     height: 200,

@@ -195,7 +195,8 @@ const ProductDetailsScreen = () => {
     <LinearGradient
       colors={['#e3e3e3ff', '#c3adb1ff']}
       style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false}
+        contentContainerStyle={{paddingBottom: 20}}>
         {/* Header */}
         <View style={styles.header}>
           <Header onSearchChange={handleSearchChange} />
@@ -399,7 +400,7 @@ const styles = StyleSheet.create({
   },
   ratingStars: {
     fontSize: 18,
-    color: '#FFA500',
+    color: '#e82929da',
     marginRight: 8,
   },
   ratingText: {
@@ -476,7 +477,7 @@ const styles = StyleSheet.create({
   },
   tabContainer: {
     flexDirection: 'row',
-    backgroundColor: '#F8F9FA',
+    // backgroundColor: '#F8F9FA',
     borderRadius: 12,
     padding: 4,
     marginBottom: 16,
@@ -489,7 +490,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   activeTab: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#d72a2aff',
     elevation: 1,
     shadowColor: '#000',
     shadowOffset: {
@@ -506,7 +507,7 @@ const styles = StyleSheet.create({
     color: '#666666',
   },
   activeTabText: {
-    color: '#E94560',
+    color: '#fff9faff',
     fontWeight: '600',
   },
   tabContent: {
@@ -525,7 +526,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 8,
     borderBottomWidth: 1,
-    borderBottomColor: '#F0F0F0',
+    borderBottomColor: '#000',
   },
   specLabel: {
     fontSize: 14,
@@ -558,7 +559,7 @@ const styles = StyleSheet.create({
   reviewRating: {
     fontSize: 14,
     fontFamily: fonts.regular,
-    color: '#FFA500',
+    color: '#e82929da',
   },
   reviewText: {
     fontSize: 14,

@@ -262,7 +262,7 @@ const AddressScreen = () => {
           <Text style={styles.screenTitle}>
             {fromPayment ? 'Select Delivery Address' : 'Manage Addresses'}
           </Text>
-          {!fromPayment && selectedAddressId && (
+          {/* {!fromPayment && selectedAddressId && (
             <TouchableOpacity
               style={styles.headerEditButton}
               onPress={() => {
@@ -280,8 +280,9 @@ const AddressScreen = () => {
               />
               <Text style={styles.headerEditText}>Edit Selected</Text>
             </TouchableOpacity>
-          )}
+          )} */}
         </View>
+        {/* Subtitle */}
         <Text style={styles.screenSubtitle}>
           {fromPayment
             ? 'Choose where you want your order delivered'
@@ -289,6 +290,7 @@ const AddressScreen = () => {
         </Text>
       </View>
 
+      {/* Address List */}
       <FlatList
         data={addresses}
         renderItem={renderAddressCard}
@@ -298,6 +300,7 @@ const AddressScreen = () => {
         ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
 
+      {/* Add New Address Button */}
       {!fromPayment && (
         <TouchableOpacity
           style={styles.addNewAddressButton}
@@ -309,7 +312,8 @@ const AddressScreen = () => {
         </TouchableOpacity>
       )}
 
-      {!fromPayment && selectedAddressId && (
+      {/* Floating Edit Button */}
+      {/* {!fromPayment && selectedAddressId && (
         <TouchableOpacity
           style={styles.floatingEditButton}
           onPress={() => {
@@ -326,8 +330,9 @@ const AddressScreen = () => {
             color={COLORS.white}
           />
         </TouchableOpacity>
-      )}
+      )} */}
 
+      {/* Continue Button */}
       {fromPayment && selectedAddressId && (
         <TouchableOpacity
           style={styles.continueButton}
@@ -346,6 +351,7 @@ const AddressScreen = () => {
         </TouchableOpacity>
       )}
 
+        {/* Messages custom */}
       <CustomAlert
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
@@ -417,20 +423,21 @@ export default AddressScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 10,
+    padding: 10,
   },
   headerSection: {
-    paddingHorizontal: moderateScale(20),
+    marginTop: verticalScale(10),
+    paddingHorizontal: moderateScale(15),
     paddingBottom: verticalScale(20),
   },
   titleContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: verticalScale(8),
+    marginBottom: verticalScale(10),
   },
   screenTitle: {
-    fontSize: moderateScale(24),
+    fontSize: moderateScale(20),
     fontWeight: '700',
     color: COLORS.black,
     fontFamily: FONTS.Bold,
@@ -461,21 +468,21 @@ const styles = StyleSheet.create({
   },
   screenSubtitle: {
     fontSize: moderateScale(14),
-    color: COLORS.gray || '#666',
+    color: COLORS.gray || '#212020ff',
     fontFamily: FONTS.Regular,
-    lineHeight: moderateScale(20),
+    lineHeight: moderateScale(10),
   },
   addressList: {
-    paddingHorizontal: moderateScale(20),
+    paddingHorizontal: moderateScale(10),
     paddingBottom: verticalScale(100),
   },
   separator: {
-    height: verticalScale(15),
+    height: verticalScale(10),
   },
   addressCard: {
     backgroundColor: COLORS.white,
     borderRadius: moderateScale(12),
-    padding: moderateScale(16),
+    padding: moderateScale(14),
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: {
@@ -500,7 +507,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: verticalScale(12),
+    marginBottom: verticalScale(8),
   },
   addressTypeContainer: {
     flexDirection: 'row',
@@ -527,14 +534,14 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.Medium,
   },
   addressDetails: {
-    marginBottom: verticalScale(12),
+    marginBottom: verticalScale(10),
   },
   contactName: {
     fontSize: moderateScale(16),
     fontWeight: '600',
     color: COLORS.black,
     fontFamily: FONTS.Medium,
-    marginBottom: verticalScale(4),
+    marginBottom: verticalScale(3),
   },
   addressLine: {
     fontSize: moderateScale(14),
@@ -558,7 +565,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   actionButton: {
-    padding: moderateScale(8),
+    padding: moderateScale(7),
     marginLeft: moderateScale(8),
     borderRadius: moderateScale(20),
     backgroundColor: 'rgba(0,0,0,0.05)',
@@ -600,8 +607,8 @@ const styles = StyleSheet.create({
   addNewAddressButton: {
     position: 'absolute',
     bottom: verticalScale(20),
-    left: moderateScale(20),
-    right: moderateScale(20),
+    left: moderateScale(30),
+    right: moderateScale(30),
     backgroundColor: COLORS.white,
     borderRadius: moderateScale(12),
     padding: moderateScale(16),

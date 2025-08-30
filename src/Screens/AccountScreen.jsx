@@ -36,26 +36,23 @@ const ViewProfile = () => {
       colors={['#e3e3e3ff', '#c3adb1ff']}
       style={styles.container}>
       {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Profile</Text>
-        <TouchableOpacity
-          style={styles.settingsButton}
-          onPress={() => navigation.navigate('Settings')}>
-          <Ionicons name="settings-outline" size={24} color={COLORS.black} />
-        </TouchableOpacity>
-      </View>
-
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContainer}>
         {/* Profile Section */}
+        <View style={styles.header}>
+          <Text style={styles.headerTitle}>Profile</Text>
+          <TouchableOpacity
+            style={styles.settingsButton}
+            onPress={() => navigation.navigate('Settings')}>
+            <Ionicons name="settings-outline" size={24} color={COLORS.black} />
+          </TouchableOpacity>
+        </View>
         <View style={styles.profileSection}>
           <View style={styles.profileImageContainer}>
             <Image
               style={styles.profileImage}
-              source={{
-                uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE_5aeaS13y24e1D7KBOIPNUwGflPnLR8AuQQUQ6tHDnycRg_2woHNm3fX1K_UYtxizZw&usqp=CAU',
-              }}
+              source={require('../assets/girl1.png')}
             />
           </View>
           <View style={styles.profileInfoContainer}>
@@ -274,8 +271,9 @@ export default ViewProfile;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: moderateScale(16),
-    paddingTop: moderateScale(10),
+    padding: 10,
+    // paddingHorizontal: moderateScale(10),
+    // paddingTop: moderateScale(5),
   },
   scrollContainer: {
     paddingBottom: moderateScale(20),
@@ -353,7 +351,7 @@ const styles = StyleSheet.create({
     // shadowColor: '#000',
     // shadowOffset: {
     //   width: 0,
-      // height: 2,
+    // height: 2,
     // },
     // shadowOpacity: 0.1,
     // shadowRadius: 8,
@@ -381,10 +379,10 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: moderateScale(18),
     fontWeight: '600',
-    color: "#000000ff",
+    color: '#000000ff',
     fontFamily: FONTS.Bold,
     marginBottom: moderateScale(8),
-    paddingHorizontal: moderateScale(4),
+    paddingHorizontal: moderateScale(12),
   },
   orderTrackingContainer: {
     flexDirection: 'row',
@@ -411,7 +409,7 @@ const styles = StyleSheet.create({
     width: moderateScale(40),
     height: moderateScale(40),
     borderRadius: moderateScale(12),
-    // backgroundColor: '#f8f9fa',
+    backgroundColor: '#f8f9fa',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: moderateScale(8),
@@ -440,26 +438,26 @@ const styles = StyleSheet.create({
   menuItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: moderateScale(16),
-    paddingHorizontal: moderateScale(20),
+    paddingVertical: moderateScale(11),
+    paddingHorizontal: moderateScale(10),
     borderBottomWidth: 0.5,
     borderBottomColor: '#F0F0F0',
   },
   menuIconContainer: {
-    width: moderateScale(48),
-    height: moderateScale(48),
+    width: moderateScale(40),
+    height: moderateScale(40),
     borderRadius: moderateScale(12),
     backgroundColor: '#f8f9fa',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: moderateScale(16),
+    marginRight: moderateScale(15),
   },
   menuText: {
     flex: 1,
-    fontSize: moderateScale(16),
+    fontSize: moderateScale(14),
     color: COLORS.black,
     fontFamily: FONTS.Medium,
-    fontWeight: '600',
-    lineHeight: moderateScale(20),
+    fontWeight: '650',
+    lineHeight: moderateScale(15),
   },
 });

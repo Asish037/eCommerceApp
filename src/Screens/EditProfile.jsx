@@ -209,7 +209,7 @@ const EditProfile = () => {
                 disabled={disabled}
                 activeOpacity={0.8}>
                 <LinearGradient
-                  colors={disabled ? ['#ccc', '#999'] : COLORS.gradientButton}
+                  colors={disabled ? ['#ccc', '#999'] : ['#E94560', '#E94560']}
                   style={styles.saveButtonGradient}>
                   <Text style={styles.saveButtonText}>
                     {disabled ? 'Saving...' : 'Save Changes'}
@@ -229,13 +229,13 @@ export default EditProfile;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: moderateScale(8),
+    padding: moderateScale(10),
   },
   headerSection: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: moderateScale(15),
+    paddingHorizontal: moderateScale(5),
     paddingVertical: verticalScale(15),
     marginHorizontal: moderateScale(10),
     marginTop: verticalScale(5),
@@ -249,10 +249,11 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start', // Align text to the left
   },
   greetingText: {
-    fontSize: moderateScale(11),
-    color: COLORS.grey,
+    fontSize: moderateScale(20),
+    // color: COLORS.grey,
     fontFamily: FONTS.Regular,
     marginBottom: verticalScale(1),
+    color: '#3a3a3aff',
   },
   userName: {
     fontSize: moderateScale(18),
@@ -262,8 +263,8 @@ const styles = StyleSheet.create({
     marginBottom: verticalScale(2),
   },
   subText: {
-    fontSize: moderateScale(10),
-    color: COLORS.grey,
+    fontSize: moderateScale(12),
+    color: '#3a3a3aff',
     fontFamily: FONTS.Regular,
   },
   profileImageContainer: {
@@ -352,30 +353,35 @@ const styles = StyleSheet.create({
   inputFieldContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
+    // backgroundColor: '#f8f9fa',
     borderRadius: moderateScale(10),
-    borderWidth: 1,
-    borderColor: '#e9ecef',
-    paddingHorizontal: moderateScale(12),
-    height: verticalScale(40),
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.03,
-    shadowRadius: 2,
-    elevation: 1,
+    paddingHorizontal: moderateScale(10),
+    paddingVertical: verticalScale(6),
+    // borderWidth: 1,
+
+    // borderColor: '#e9ecef',
+    // paddingHorizontal: moderateScale(12),
+    // height: verticalScale(40),
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 1,
+    // },
+    // shadowOpacity: 0.03,
+    // shadowRadius: 2,
+    // elevation: 1,
   },
   inputIcon: {
     marginRight: moderateScale(10),
+    fontSize: moderateScale(20),
   },
   textInput: {
     flex: 1,
-    fontSize: moderateScale(13),
+    fontSize: moderateScale(15),
     color: COLORS.black,
     fontFamily: FONTS.Regular,
     paddingVertical: 0,
+    
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -401,6 +407,7 @@ const styles = StyleSheet.create({
   },
   saveButton: {
     flex: 1,
+    backgroundColor: '#E94560',
     height: verticalScale(38),
     borderRadius: moderateScale(10),
     overflow: 'hidden',

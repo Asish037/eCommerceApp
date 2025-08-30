@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
     color: '#1f0303ff',
     fontWeight: '500',
     fontFamily: fonts.regular,
+    letterSpacing: 0.5,
   },
   totalValue: {
     fontSize: 16,

@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   rating: {
     fontSize: 12,
     fontFamily: fonts.regular,
-    color: '#FFA500',
+    color: '#e82929da',
     marginRight: 4,
   },
   ratingCount: {
