@@ -88,9 +88,7 @@ const EditProfile = () => {
   return (
     <>
       {/* <StatusBar barStyle="light-content" backgroundColor="#bf284e" /> */}
-      <LinearGradient
-        colors={['#e3e3e3ff', '#c3adb1ff']}
-        style={styles.container}>
+      <LinearGradient colors={COLORS.gradient} style={styles.container}>
         <Header />
 
         {/* Profile Header Section */}
@@ -339,7 +337,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginBottom: verticalScale(15),
-    backgroundColor: "transparent"
+    backgroundColor: 'transparent',
   },
   inputWrapper: {
     marginBottom: verticalScale(12),
@@ -388,7 +386,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: COLORS.black,
     fontFamily: FONTS.Regular,
-
   },
   buttonContainer: {
     flexDirection: 'row',

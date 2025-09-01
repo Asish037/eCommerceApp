@@ -90,11 +90,8 @@ const OrderDetails = ({route}) => {
   );
 
   return (
-    <LinearGradient
-      colors={['#e3e3e3ff', '#c3adb1ff']}
-      style={styles.container}>
+    <LinearGradient colors={COLORS.gradient} style={styles.container}>
       <Header />
-
 
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -301,7 +298,6 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(30),
     padding: moderateScale(2),
     marginRight: moderateScale(10),
-
   },
   statusTextContainer: {
     flex: 1,
@@ -347,7 +343,6 @@ const styles = StyleSheet.create({
     marginBottom: moderateScale(5),
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-
   },
   orderItemCard: {
     // backgroundColor: COLORS.white,

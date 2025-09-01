@@ -19,9 +19,7 @@ const Privacy = () => {
   const navigation = useNavigation();
 
   return (
-    <LinearGradient
-      colors={['#e3e3e3ff', '#c3adb1ff']}
-      style={styles.container}>
+    <LinearGradient colors={COLORS.gradient} style={styles.container}>
       <Header />
       <ScrollView
         contentContainerStyle={{flexGrow: 1}}

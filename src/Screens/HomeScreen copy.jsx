@@ -14,6 +14,7 @@ import Tags from '../Components/Tags';
 import ProductCard from '../Components/ProductCard';
 import data from '../data/data.json';
 import {useNavigation} from '@react-navigation/native';
+import { COLORS } from '../Constant/Colors';
 
 const HomeScreen = () => {
   const [products, setProducts] = useState(data.products);
@@ -37,9 +38,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <LinearGradient
-      colors={['#e3e3e3ff', '#c3adb1ff']}
-      style={styles.container}>
+    <LinearGradient colors={COLORS.gradient} style={styles.container}>
       {/* header */}
 
       {/* <Tags /> */}

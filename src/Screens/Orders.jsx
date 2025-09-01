@@ -182,7 +182,7 @@ const Orders = () => {
 
   return (
     <LinearGradient
-      colors={['#e3e3e3ff', '#c3adb1ff'] || ['#e3e3e3ff', '#c3adb1ff']}
+      colors={COLORS.gradient || COLORS.gradient}
       style={styles.container}>
       {/* <StatusBar
         barStyle="dark-content"
@@ -194,73 +194,72 @@ const Orders = () => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContainer}>
-          
-          <View style={styles.headerSection}>
-            <Text style={styles.headerTitle}>{title || 'My Orders'}</Text>
-            <Text style={styles.headerSubtitle}>
-              {ordersData.length} order{ordersData.length !== 1 ? 's' : ''} • Total:
-              $
-              {ordersData
-                .reduce(
-                  (sum, order) => sum + parseFloat(order.payment.total_amount),
-                  0,
-                )
-                .toFixed(2)}
-            </Text>
-          </View>
-          <FlatList
-            data={ordersData}
-            renderItem={renderOrderItem}
-            keyExtractor={item => item.order_id.toString()}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.listContainer}
-            ListEmptyComponent={() => {
-              const getEmptyMessage = () => {
-                switch (filter) {
-                  case 'unpaid':
-                    return {
-                      title: 'No Pending Payments',
-                      message: 'All your orders are paid!',
-                    };
-                  case 'paid':
-                    return {
-                      title: 'No Orders to Ship',
-                      message: 'No orders waiting to be shipped.',
-                    };
-                  case 'shipped':
-                    return {
-                      title: 'No Shipped Orders',
-                      message: 'No orders are currently in transit.',
-                    };
-                  case 'delivered':
-                    return {
-                      title: 'No Orders to Review',
-                      message: 'You have reviewed all delivered orders!',
-                    };
-                  default:
-                    return {
-                      title: 'No Orders Found',
-                      message: 'Start shopping to see your orders here.',
-                    };
-                }
-              };
+        <View style={styles.headerSection}>
+          <Text style={styles.headerTitle}>{title || 'My Orders'}</Text>
+          <Text style={styles.headerSubtitle}>
+            {ordersData.length} order{ordersData.length !== 1 ? 's' : ''} •
+            Total: $
+            {ordersData
+              .reduce(
+                (sum, order) => sum + parseFloat(order.payment.total_amount),
+                0,
+              )
+              .toFixed(2)}
+          </Text>
+        </View>
+        <FlatList
+          data={ordersData}
+          renderItem={renderOrderItem}
+          keyExtractor={item => item.order_id.toString()}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.listContainer}
+          ListEmptyComponent={() => {
+            const getEmptyMessage = () => {
+              switch (filter) {
+                case 'unpaid':
+                  return {
+                    title: 'No Pending Payments',
+                    message: 'All your orders are paid!',
+                  };
+                case 'paid':
+                  return {
+                    title: 'No Orders to Ship',
+                    message: 'No orders waiting to be shipped.',
+                  };
+                case 'shipped':
+                  return {
+                    title: 'No Shipped Orders',
+                    message: 'No orders are currently in transit.',
+                  };
+                case 'delivered':
+                  return {
+                    title: 'No Orders to Review',
+                    message: 'You have reviewed all delivered orders!',
+                  };
+                default:
+                  return {
+                    title: 'No Orders Found',
+                    message: 'Start shopping to see your orders here.',
+                  };
+              }
+            };
 
-              const emptyMsg = getEmptyMessage();
+            const emptyMsg = getEmptyMessage();
 
-              return (
-                <View style={styles.emptyContainer}>
-                  <MaterialCommunityIcons
-                    name="package-variant"
-                    size={moderateScale(60)}
-                    color={COLORS.grey}
-                  />
-                  <Text style={styles.emptyTitle}>{emptyMsg.title}</Text>
-                  <Text style={styles.emptyMessage}>{emptyMsg.message}</Text>
-                </View>
-              );
-            }}
-          />
-        </ScrollView>
+            return (
+              <View style={styles.emptyContainer}>
+                <MaterialCommunityIcons
+                  name="package-variant"
+                  size={moderateScale(60)}
+                  color={COLORS.grey}
+                />
+                <Text style={styles.emptyTitle}>{emptyMsg.title}</Text>
+                <Text style={styles.emptyMessage}>{emptyMsg.message}</Text>
+              </View>
+            );
+          }}
+        />
+      </ScrollView>
     </LinearGradient>
   );
 };
@@ -312,7 +311,7 @@ const styles = StyleSheet.create({
     paddingBottom: moderateScale(20),
   },
   orderCard: {
-    backgroundColor:  "#ffc6c6ff",
+    backgroundColor: '#ffc6c6ff',
     marginVertical: moderateScale(8),
     marginHorizontal: moderateScale(5),
     borderRadius: moderateScale(15),
@@ -462,7 +461,7 @@ const styles = StyleSheet.create({
     marginTop: moderateScale(20),
   },
   emptyMessage: {
-    color:  '#6c757dff',
+    color: '#6c757dff',
     fontFamily: FONTS.Regular,
     fontSize: moderateScale(14),
     textAlign: 'center',

@@ -22,9 +22,7 @@ const CartScreen = () => {
 
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={['#e3e3e3ff', '#c3adb1ff']}
-        style={styles.gradientContainer}>
+      <LinearGradient colors={COLORS.gradient} style={styles.gradientContainer}>
         <View style={styles.header}>
           <Header isCart={true} />
         </View>

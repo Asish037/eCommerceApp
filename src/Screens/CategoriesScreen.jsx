@@ -15,6 +15,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import ProductCard from '../Components/ProductCard';
 import {fonts} from '../utils/fonts';
 import data from '../data/data.json';
+import { COLORS } from '../Constant/Colors';
 
 const {width} = Dimensions.get('window');
 
@@ -241,9 +242,7 @@ const CategoriesScreen = () => {
   );
 
   return (
-    <LinearGradient
-      colors={['#e3e3e3ff', '#c3adb1ff']}
-      style={styles.container}>
+    <LinearGradient colors={COLORS.gradient} style={styles.container}>
       {/* Search Input */}
       <View style={styles.searchContainer}>
         <View style={styles.inputContainer}>

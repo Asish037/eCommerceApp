@@ -21,9 +21,7 @@ import Header from '../Components/Header';
 const ViewProfile = () => {
   const navigation = useNavigation();
   return (
-    <LinearGradient
-      colors={['#e3e3e3ff', '#c3adb1ff']}
-      style={styles.container}>
+    <LinearGradient colors={COLORS.gradient} style={styles.container}>
       <Header />
       <View style={styles.headerSection}>
         <Text style={styles.hedaerUserName}>{'Hey,\nJohn Henry'}</Text>

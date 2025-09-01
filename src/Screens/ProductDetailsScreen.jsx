@@ -13,6 +13,7 @@ import Header from '../Components/Header';
 import {fonts} from '../utils/fonts';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {CartContext} from '../Context/CartContext';
+import {COLORS} from '../Constant/Colors';
 
 const {width} = Dimensions.get('window');
 
@@ -192,10 +193,9 @@ const ProductDetailsScreen = () => {
   };
 
   return (
-    <LinearGradient
-      colors={['#e3e3e3ff', '#c3adb1ff']}
-      style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}
+    <LinearGradient colors={COLORS.gradient} style={styles.container}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={{paddingBottom: 20}}>
         {/* Header */}
         <View style={styles.header}>

@@ -238,9 +238,7 @@ const EditAddress = ({route}) => {
         /> */}
       <KeyboardAvoidingView behavior="padding" style={{flex: 1}}>
         <Animated.View style={[styles.animatedContainer, {opacity: fadeAnim}]}>
-          <LinearGradient
-            colors={['#e3e3e3ff', '#c3adb1ff']}
-            style={styles.container}>
+          <LinearGradient colors={COLORS.gradient} style={styles.container}>
             <Header />
 
             <ScrollView

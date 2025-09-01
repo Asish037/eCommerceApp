@@ -15,6 +15,7 @@ import ProductCard from '../Components/ProductCard';
 import data from '../data/data.json';
 import {useNavigation} from '@react-navigation/native';
 import sale from '../assets/sale2.jpeg';
+import { COLORS } from '../Constant/Colors';
 
 const HomeScreen = () => {
   const [products, setProducts] = useState(data.products);
@@ -38,9 +39,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <LinearGradient
-      colors={['#e3e3e3ff', '#c3adb1ff']}
-      style={styles.container}>
+    <LinearGradient colors={COLORS.gradient} style={styles.container}>
       <Header />
 
       {/* <Tags /> */}
@@ -57,7 +56,12 @@ const HomeScreen = () => {
               </ImageBackground>
 
               {/* <Header /> */}
-              <View style={{marginTop: 5, marginBottom: 0, justifyContent: 'flex-start'}}>
+              <View
+                style={{
+                  marginTop: 5,
+                  marginBottom: 0,
+                  justifyContent: 'flex-start',
+                }}>
                 {/* <Text style={styles.headingText}>Match Your Style</Text> */}
                 {/* <View style={styles.inputContainer}>
                   <Image

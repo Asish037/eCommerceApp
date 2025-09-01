@@ -254,7 +254,7 @@ const AddressScreen = () => {
   };
 
   return (
-    <LinearGradient colors={['#e3e3e3ff', '#c3adb1ff']} style={styles.container}>
+    <LinearGradient colors={COLORS.gradient} style={styles.container}>
       <Header />
 
       <View style={styles.headerSection}>
@@ -351,7 +351,7 @@ const AddressScreen = () => {
         </TouchableOpacity>
       )}
 
-        {/* Messages custom */}
+      {/* Messages custom */}
       <CustomAlert
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
