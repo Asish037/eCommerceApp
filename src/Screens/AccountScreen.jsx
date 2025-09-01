@@ -440,8 +440,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: moderateScale(11),
     paddingHorizontal: moderateScale(10),
-    borderBottomWidth: 0.5,
-    borderBottomColor: '#F0F0F0',
+    borderBottomWidth: 0.8,
+    borderBottomColor: '#000000ff',
   },
   menuIconContainer: {
     width: moderateScale(40),

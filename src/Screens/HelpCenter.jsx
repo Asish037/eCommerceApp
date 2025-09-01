@@ -25,16 +25,17 @@ const HelpCenter = () => {
       colors={['#e3e3e3ff', '#c3adb1ff']}
       style={styles.container}>
       <Header />
-      <View style={styles.headerSection}>
-        <Text style={styles.headTitle}>Help Center</Text>
-        <View style={styles.bodyPartSmall}>
-          <MaterialIcons
-            name="headphones"
-            style={{color: COLORS.button, fontSize: moderateScale(30)}}
-          />
-        </View>
-      </View>
+
       <ScrollView>
+        <View style={styles.headerSection}>
+          <Text style={styles.headTitle}>Help Center</Text>
+          <View style={styles.bodyPartSmall}>
+            <MaterialIcons
+              name="headphones"
+              style={{color: COLORS.button, fontSize: moderateScale(25)}}
+            />
+          </View>
+        </View>
         <View style={styles.bodyPart}>
           <Text style={[styles.headSubTitle, {paddingLeft: 20}]}>
             Browse Topics
@@ -88,7 +89,7 @@ const HelpCenter = () => {
             </View>
           </View>
           <View>
-            <Text style={[styles.headSubTitle, {paddingLeft: 20}]}>
+            <Text style={[styles.headSubTitle, {paddingLeft: 10}]}>
               {' '}
               Need more help ?
             </Text>
@@ -143,29 +144,31 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     justifyContent: 'center',
+    padding: 20,
     alignItems: 'center',
   },
   headerSection: {
-    width: '90%',
+    width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 20,
-    borderBottomWidth: 0.2,
+    padding: 10,
+    borderBottomWidth: 1,
     borderColor: COLORS.textInput,
-    paddingBottom: 20,
+    // paddingBottom: 0,
   },
   headTitle: {
     color: COLORS.black,
     fontFamily: FONTS.title,
-    fontSize: moderateScale(35),
+    fontSize: moderateScale(30),
     fontWeight: '700',
   },
   headSubTitle: {
     color: COLORS.black,
     fontFamily: FONTS.LightItalic,
-    fontSize: moderateScale(20),
+    fontSize: moderateScale(18),
     fontWeight: '500',
+    marginVertical: 10,
   },
   bodySection: {
     padding: 10,
@@ -201,16 +204,18 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 6,
     elevation: 14,
-    width: moderateScale(130),
-    height: moderateScale(120),
+    width: moderateScale(120),
+    height: moderateScale(100),
     justifyContent: 'center',
     alignItems: 'center',
   },
   topicText: {
     color: COLORS.black,
     fontFamily: FONTS.LightItalic,
-    fontSize: moderateScale(15),
+    fontSize: moderateScale(14),
     fontWeight: '400',
+    textAlign: 'left',
+
   },
   buttonBox: {
     margin: 10,

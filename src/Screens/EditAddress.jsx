@@ -120,6 +120,7 @@ const EditAddress = ({route}) => {
   };
 
   const saveNewAddress = async () => {
+    console.log('Save button pressed!'); // Debug log
     if (!validateForm()) {
       Toast.show('Please fill all required fields correctly!', Toast.SHORT);
       return;
@@ -196,30 +197,35 @@ const EditAddress = ({route}) => {
     error,
   }) => (
     <View style={styles.inputContainer}>
-      <View style={styles.inputWrapper}>
-        <MaterialCommunityIcons
-          name={icon}
-          size={25}
-          color={COLORS.gradientButton[1]}
-          style={styles.inputIcon}
-        />
-        <View style={styles.inputFieldWrapper}>
-          <Text style={styles.inputLabel}>{label}</Text>
-          <TextInput
-            style={styles.textInput}
-            placeholder={placeholder}
-            placeholderTextColor={COLORS.grey}
-            keyboardType={keyboardType}
-            value={value}
-            onChangeText={onChangeText}
-            editable={true}
-            selectTextOnFocus={true}
-            autoCorrect={false}
-            autoCapitalize="words"
-            onFocus={() => console.log(formData)}
-          />
-        </View>
-      </View>
+      <Text style={styles.inputLabel}>{label}</Text>
+      <TextInput
+        style={styles.textInput}
+        placeholder={placeholder}
+        placeholderTextColor={COLORS.grey}
+        keyboardType={keyboardType}
+        value={value}
+        onChangeText={text => {
+          console.log('Text changed:', text, 'for field:', label);
+          onChangeText(text);
+        }}
+        editable={true}
+        selectTextOnFocus={true}
+        autoCorrect={false}
+        autoCapitalize="words"
+        onFocus={() => {
+          console.log('TextInput FOCUSED:', label);
+        }}
+        onBlur={() => {
+          console.log('TextInput BLURRED:', label);
+        }}
+        onPressIn={() => {
+          console.log('TextInput PRESSED IN:', label);
+        }}
+        testID={`textInput-${label}`}
+        accessible={true}
+        accessibilityLabel={`${label} input field`}
+        pointerEvents="auto"
+      />
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
     </View>
   );
@@ -242,7 +248,6 @@ const EditAddress = ({route}) => {
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.scrollContentContainer}
               keyboardShouldPersistTaps="handled"
-              nestedScrollEnabled={true}
               scrollEnabled={true}>
               <View style={styles.formContainer}>
                 <View style={styles.sectionHeader}>
@@ -254,37 +259,106 @@ const EditAddress = ({route}) => {
                   <Text style={styles.sectionTitle}>Address Details</Text>
                 </View>
 
-                <InputField
-                  icon="map-marker-outline"
-                  label="Pincode"
-                  placeholder="Enter 6-digit pincode"
-                  keyboardType="numeric"
-                  value={formData.pincode}
-                  onChangeText={value => handleInputChange('pincode', value)}
-                  error={errors.pincode}
-                />
+                <View style={{marginBottom: 20}}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 'bold',
+                      marginBottom: 5,
+                      color: COLORS.gradientButton[1],
+                    }}>
+                    Pincode:
+                  </Text>
+                  <TextInput
+                    style={{
+                      height: 50,
+                      borderWidth: 1,
+                      borderColor: COLORS.gradientButton[1],
+                      backgroundColor: COLORS.white,
+                      paddingHorizontal: 15,
+                      borderRadius: 8,
+                      fontSize: 16,
+                      color: COLORS.black,
+                    }}
+                    placeholder="Enter 6-digit pincode"
+                    keyboardType="numeric"
+                    value={formData.pincode}
+                    onChangeText={value => handleInputChange('pincode', value)}
+                    editable={true}
+                    pointerEvents="auto"
+                  />
+                  {errors.pincode ? (
+                    <Text style={styles.errorText}>{errors.pincode}</Text>
+                  ) : null}
+                </View>
 
-                <InputField
-                  icon="home-outline"
-                  label="House/Flat/Building No."
-                  placeholder="Enter house/flat number"
-                  keyboardType="default"
-                  value={formData.houseNumber}
-                  onChangeText={value =>
-                    handleInputChange('houseNumber', value)
-                  }
-                  error={errors.houseNumber}
-                />
+                <View style={{marginBottom: 20}}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 'bold',
+                      marginBottom: 5,
+                      color: COLORS.gradientButton[1],
+                    }}>
+                    House/Flat/Building No.:
+                  </Text>
+                  <TextInput
+                    style={{
+                      height: 50,
+                      borderWidth: 1,
+                      borderColor: COLORS.gradientButton[1],
+                      backgroundColor: COLORS.white,
+                      paddingHorizontal: 15,
+                      borderRadius: 8,
+                      fontSize: 16,
+                      color: COLORS.black,
+                    }}
+                    placeholder="Enter house/flat number"
+                    keyboardType="default"
+                    value={formData.houseNumber}
+                    onChangeText={value =>
+                      handleInputChange('houseNumber', value)
+                    }
+                    editable={true}
+                    pointerEvents="auto"
+                  />
+                  {errors.houseNumber ? (
+                    <Text style={styles.errorText}>{errors.houseNumber}</Text>
+                  ) : null}
+                </View>
 
-                <InputField
-                  icon="road"
-                  label="Road Name/Area/Colony"
-                  placeholder="Enter road name or area"
-                  keyboardType="default"
-                  value={formData.roadName}
-                  onChangeText={value => handleInputChange('roadName', value)}
-                  error={errors.roadName}
-                />
+                <View style={{marginBottom: 20}}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 'bold',
+                      marginBottom: 5,
+                      color: COLORS.gradientButton[1],
+                    }}>
+                    Road Name/Area/Colony:
+                  </Text>
+                  <TextInput
+                    style={{
+                      height: 50,
+                      borderWidth: 1,
+                      borderColor: COLORS.gradientButton[1],
+                      backgroundColor: COLORS.white,
+                      paddingHorizontal: 15,
+                      borderRadius: 8,
+                      fontSize: 16,
+                      color: COLORS.black,
+                    }}
+                    placeholder="Enter road name or area"
+                    keyboardType="default"
+                    value={formData.roadName}
+                    onChangeText={value => handleInputChange('roadName', value)}
+                    editable={true}
+                    pointerEvents="auto"
+                  />
+                  {errors.roadName ? (
+                    <Text style={styles.errorText}>{errors.roadName}</Text>
+                  ) : null}
+                </View>
 
                 {/* Address Type Selector */}
                 <View style={styles.addressTypeContainer}>
@@ -366,45 +440,95 @@ const EditAddress = ({route}) => {
                   <Text style={styles.sectionTitle}>Contact Information</Text>
                 </View>
 
-                <InputField
-                  icon="account-outline"
-                  label="Contact Name"
-                  placeholder="Enter contact person name"
-                  keyboardType="default"
-                  value={formData.contactName}
-                  onChangeText={value =>
-                    handleInputChange('contactName', value)
-                  }
-                  error={errors.contactName}
-                />
+                <View style={{marginBottom: 20}}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 'bold',
+                      marginBottom: 5,
+                      color: COLORS.gradientButton[1],
+                    }}>
+                    Contact Name:
+                  </Text>
+                  <TextInput
+                    style={{
+                      height: 50,
+                      borderWidth: 1,
+                      borderColor: COLORS.gradientButton[1],
+                      backgroundColor: COLORS.white,
+                      paddingHorizontal: 15,
+                      borderRadius: 8,
+                      fontSize: 16,
+                      color: COLORS.black,
+                    }}
+                    placeholder="Enter contact person name"
+                    keyboardType="default"
+                    value={formData.contactName}
+                    onChangeText={value =>
+                      handleInputChange('contactName', value)
+                    }
+                    editable={true}
+                    pointerEvents="auto"
+                  />
+                  {errors.contactName ? (
+                    <Text style={styles.errorText}>{errors.contactName}</Text>
+                  ) : null}
+                </View>
 
-                <InputField
-                  icon="phone-outline"
-                  label="Phone Number"
-                  placeholder="Enter 10-digit phone number"
-                  keyboardType="phone-pad"
-                  value={formData.phoneNumber}
-                  onChangeText={value =>
-                    handleInputChange('phoneNumber', value)
-                  }
-                  error={errors.phoneNumber}
-                />
+                <View style={{marginBottom: 20}}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 'bold',
+                      marginBottom: 5,
+                      color: COLORS.gradientButton[1],
+                    }}>
+                    Phone Number:
+                  </Text>
+                  <TextInput
+                    style={{
+                      height: 50,
+                      borderWidth: 1,
+                      borderColor: COLORS.gradientButton[1],
+                      backgroundColor: COLORS.white,
+                      paddingHorizontal: 15,
+                      borderRadius: 8,
+                      fontSize: 16,
+                      color: COLORS.black,
+                    }}
+                    placeholder="Enter 10-digit phone number"
+                    keyboardType="phone-pad"
+                    value={formData.phoneNumber}
+                    onChangeText={value =>
+                      handleInputChange('phoneNumber', value)
+                    }
+                    editable={true}
+                    pointerEvents="auto"
+                  />
+                  {errors.phoneNumber ? (
+                    <Text style={styles.errorText}>{errors.phoneNumber}</Text>
+                  ) : null}
+                </View>
+
+                {/* Save Button inside ScrollView */}
+                <View
+                  style={{
+                    alignItems: 'center',
+                    marginTop: 30,
+                    marginBottom: 20,
+                  }}>
+                  <GradientButton
+                    title={isLoading ? 'Saving...' : 'Save Address'}
+                    onPress={saveNewAddress}
+                    disabled={isLoading}
+                    style={{
+                      width: '80%',
+                      borderRadius: moderateScale(15),
+                    }}
+                  />
+                </View>
               </View>
             </ScrollView>
-            {/* button container */}
-            <View
-              pointerEvents="box-none"
-              style={[
-                styles.buttonContainer,
-                keyboardVisible && styles.buttonContainerKeyboard,
-              ]}>
-              <GradientButton
-                title={isLoading ? 'Saving...' : 'Save Address'}
-                onPress={saveNewAddress}
-                disabled={isLoading}
-                style={styles.saveButton}
-              />
-            </View>
           </LinearGradient>
         </Animated.View>
       </KeyboardAvoidingView>
@@ -430,7 +554,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContentContainer: {
-    paddingBottom: verticalScale(100),
+    paddingBottom: verticalScale(20),
   },
   formContainer: {
     padding: moderateScale(10),
@@ -453,37 +577,25 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginBottom: verticalScale(15),
-    backgroundColor: 'black',
-  },
-  inputWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'blue',
-    borderRadius: moderateScale(12),
-    paddingHorizontal: moderateScale(15),
-    paddingVertical: moderateScale(8),
-    marginBottom: verticalScale(5),
-  },
-  inputFieldWrapper: {
-    flex: 1,
+    backgroundColor: 'transparent',
   },
   inputLabel: {
     fontSize: moderateScale(14),
     fontWeight: '600',
     color: COLORS.gradientButton[1],
-    marginBottom: verticalScale(2),
+    marginBottom: verticalScale(8),
     fontFamily: fonts.medium,
   },
   textInput: {
+    height: 50,
+    borderWidth: 1,
+    borderColor: COLORS.gradientButton[1],
+    backgroundColor: COLORS.white,
+    paddingHorizontal: 15,
+    borderRadius: 8,
     fontSize: moderateScale(14),
     color: COLORS.black,
-    paddingVertical: verticalScale(8),
-    paddingHorizontal: moderateScale(4),
     fontFamily: fonts.regular,
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.gradientButton[1],
-    backgroundColor: 'yellow',
-    minHeight: verticalScale(35),
   },
   inputIcon: {
     marginRight: moderateScale(10),
@@ -496,16 +608,14 @@ const styles = StyleSheet.create({
     fontFamily: fonts.regular,
   },
   buttonContainer: {
-    // position: 'absolute', // stick to bottom
-    bottom: 20,
-    left: 0,
-    right: 0,
+    // Remove absolute positioning
     alignItems: 'center', // center the button
     paddingHorizontal: moderateScale(10),
     paddingVertical: verticalScale(10),
     marginTop: verticalScale(10),
     marginBottom: verticalScale(10),
-    alignSelf: 'center',
+    backgroundColor: 'transparent', // Remove debug color
+    // Normal flex layout instead of absolute positioning
   },
   saveButton: {
     width: '80%',

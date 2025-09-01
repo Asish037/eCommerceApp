@@ -83,11 +83,11 @@ const Orders = () => {
   const getStatusColor = status => {
     switch (status) {
       case 'Shipped':
-        return COLORS.orange || '#FF6B35';
+        return COLORS.orange || '#ff6b35ff';
       case 'Delivered':
         return COLORS.green || '#4CAF50';
       case 'Processing':
-        return COLORS.yellow || '#c7a005ff';
+        return COLORS.yellow || '#a38304ff';
       default:
         return COLORS.gray || '#757575';
     }
@@ -312,18 +312,18 @@ const styles = StyleSheet.create({
     paddingBottom: moderateScale(20),
   },
   orderCard: {
-    // backgroundColor: COLORS.white,
+    backgroundColor:  "#ffc6c6ff",
     marginVertical: moderateScale(8),
     marginHorizontal: moderateScale(5),
     borderRadius: moderateScale(15),
-    // shadowColor: COLORS.black,
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 3,
-    // },
-    // shadowOpacity: 0.15,
-    // shadowRadius: 4.65,
-    // elevation: 8,
+    shadowColor: COLORS.black,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 4.65,
+    elevation: 8,
     overflow: 'hidden',
   },
   orderHeader: {

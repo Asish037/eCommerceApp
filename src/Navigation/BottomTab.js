@@ -83,6 +83,7 @@ const CartTabIcon = ({focused, size}) => {
 const MyHomeStack = () => {
   return (
     <Stack.Navigator
+      style={{backgroundColor: 'transparent'}}
       screenOptions={{
         headerShown: false,
       }}>
@@ -132,6 +133,21 @@ const BottomTab = () => {
         screenOptions={{
           headerShown: false,
           tabBarShowLabel: false,
+          tabBarStyle: {
+            // position: 'absolute',
+            bottom: 0,
+            left: 20,
+            right: 20,
+            elevation: 5,
+            height: 50,
+            // overflow: 'hidden',
+            borderRadius: 20,
+            // backgroundColor: 'transparent',
+            backgroundColor: '#ffdbdbee', 
+          },
+          tabBarActiveTintColor: '#E94560',
+          tabBarInactiveTintColor: '#040101ff',
+          
         }}>
         <Tab.Screen
           name="HOME_STACK"

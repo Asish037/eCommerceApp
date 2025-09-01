@@ -1,0 +1,245 @@
+
+{
+    "products": [
+        {
+            "id": "1",
+            "name": "! Mukhi Rudraksha",
+            "price": 29.99,
+            "description": "A rare spiritual bead used for meditation and healing.",
+            "image": "https://via.placeholder.com/150",
+            "category": "Category 1",
+            "reviews": [
+                {
+                    "user": "User A",
+                    "rating": 4,
+                    "comment": "Great product!"
+                },
+                {
+                    "user": "User B",
+                    "rating": 5,
+                    "comment": "Exceeded my expectations."
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "name": "2 Mukhi Rudraksha",
+            "price":  39.99,
+            "description": "A bead symbolizing unity and harmony.",
+            "image": "https://via.placeholder.com/150",
+            "category": "Category 2",
+            "reviews": [
+                {
+                    "user": "User C",
+                    "rating": 4,
+                    "comment": "Very good quality."
+                },
+                {
+                    "user": "User D",
+                    "rating": 5,
+                    "comment": "I love this product!"
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "name": "3 Mukhi Rudraksha",
+            "price": 49.99,
+            "description": "A bead representing the fire element and promoting self-confidence.",
+            "image": "https://via.placeholder.com/150",
+            "category": "Category 3",
+            "reviews": [
+                {
+                    "user": "User E",
+                    "rating": 4,
+                    "comment": "Good value for money."
+                },
+                {
+                    "user": "User F",
+                    "rating": 5,
+                    "comment": "Highly recommend!"
+                }
+            ]
+        },
+        {
+            "id": "4",
+            "name": "4 Mukhi Rudraksha",
+            "price": 59.99,
+            "description": "A bead representing the four elements and promoting balance.",
+            "image": "https://via.placeholder.com/150",
+            "category": "Category 4",
+            "reviews": [
+                {
+                    "user": "User G",
+                    "rating": 4,
+                    "comment": "Very satisfied with this purchase."
+                },
+                {
+                    "user": "User H",
+                    "rating": 5,
+                    "comment": "Best product ever!"
+                }
+            ]
+        },
+        {
+            "id": "5",
+            "name": "5 Mukhi Rudraksha",
+            "price": 59.99,
+            "description": "A bead representing the five elements and promoting overall well-being.",
+            "image": "https://via.placeholder.com/150",
+            "category": "Category 5",
+            "reviews": [
+                {
+                    "user": "User G",
+                    "rating": 4,
+                    "comment": "Very satisfied with this purchase."
+                },
+                {
+                    "user": "User H",
+                    "rating": 5,
+                    "comment": "Best product ever!"
+                }
+            ]
+        },
+        {
+            "id": "6",
+            "name": "6 Mukhi Rudraksha",
+            "price": 49.99,
+            "description": "A bead representing the six elements and promoting balance.",
+            "image": "https://via.placeholder.com/150",
+            "category": "Category 6",
+            "reviews": [
+                {
+                    "user": "User E",
+                    "rating": 4,
+                    "comment": "Good value for money."
+                },
+                {
+                    "user": "User F",
+                    "rating": 5,
+                    "comment": "Highly recommend!"
+                }
+            ]
+        },
+        {
+            "id": "7",
+            "name": "7 Mukhi Rudraksha",
+            "price": 49.99,
+            "description": "A bead representing the seven elements and promoting spiritual growth.",
+            "image": "https://via.placeholder.com/150",
+            "category": "Category 7",
+            "reviews": [
+                {
+                    "user": "User E",
+                    "rating": 4,
+                    "comment": "Good value for money."
+                },
+                {
+                    "user": "User F",
+                    "rating": 5,
+                    "comment": "Highly recommend!"
+                }
+            ]
+        },
+        {
+            "id": "8",
+            "name": "8 Mukhi Rudraksha",
+            "price": 49.99,
+            "description": "A bead representing the eight elements and promoting abundance.",
+            "image": "https://via.placeholder.com/150",
+            "category": "Category 8",
+            "reviews": [
+                {
+                    "user": "User E",
+                    "rating": 4,
+                    "comment": "Good value for money."
+                },
+                {
+                    "user": "User F",
+                    "rating": 5,
+                    "comment": "Highly recommend!"
+                }
+            ]
+        },
+        {
+            "id": "9",
+            "name": "9 Mukhi Rudraksha",
+            "price": 49.99,
+            "description": "A bead representing the nine elements and promoting protection.",
+            "image": "https://via.placeholder.com/150",
+            "category": "Category 9",
+            "reviews": [
+                {
+                    "user": "User E",
+                    "rating": 4,
+                    "comment": "Good value for money."
+                },
+                {
+                    "user": "User F",
+                    "rating": 5,
+                    "comment": "Highly recommend!"
+                }
+            ]
+        },
+        {
+            "id": "10",
+            "name": "10 Mukhi Rudraksha",
+            "price": 49.99,
+            "description": "A bead representing the ten elements and promoting harmony.",
+            "image": "https://via.placeholder.com/150",
+            "category": "Category 10",
+            "reviews": [
+                {
+                    "user": "User E",
+                    "rating": 4,
+                    "comment": "Good value for money."
+                },
+                {
+                    "user": "User F",
+                    "rating": 5,
+                    "comment": "Highly recommend!"
+                }
+            ]
+        },
+        {
+            "id": "11",
+            "name": "11 Mukhi Rudraksha Mala",
+            "price": 79.99,
+            "description": "A bead representing the eleven elements and promoting enlightenment.",
+            "image": "https://via.placeholder.com/150",
+            "category": "Category 11",
+            "reviews": [
+                {
+                    "user": "User E",
+                    "rating": 4,
+                    "comment": "Good value for money."
+                },
+                {
+                    "user": "User F",
+                    "rating": 5,
+                    "comment": "Highly recommend!"
+                }
+            ]
+        },
+        {
+            "id": "12",
+            "name": "12 Mukhi Rudraksha Bracelet",
+            "price": 79.99,
+            "description": "A bead representing the twelve elements and promoting cosmic connection.",
+            "image": "https://via.placeholder.com/150",
+            "category": "Category 12",
+            "reviews": [
+                {
+                    "user": "User E",
+                    "rating": 4,
+                    "comment": "Good value for money."
+                },
+                {
+                    "user": "User F",
+                    "rating": 5,
+                    "comment": "Highly recommend!"
+                }
+            ]
+        }
+    ]
+}

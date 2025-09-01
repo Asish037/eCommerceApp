@@ -4,226 +4,357 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  TextInput,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
-import Header from '../Components/Header';
-import {useNavigation, useRoute} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Header from '../Components/Header';
+import {useNavigation} from '@react-navigation/native';
 import {COLORS} from '../Constant/Colors';
 import {FONTS} from '../Constant/Font';
 
-const PaymentScreen = () => {
+const PaymentMethod = ({route}) => {
   const navigation = useNavigation();
-  const route = useRoute();
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('cash');
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const total = route.params?.grandTotal || '0.00';
-  const selectedAddress = route.params?.selectedAddress;
+  // Payment form states
+  const [cardNumber, setCardNumber] = useState('');
+  const [expiryDate, setExpiryDate] = useState('');
+  const [cvv, setCvv] = useState('');
+  const [cardHolderName, setCardHolderName] = useState('');
+  const [upiId, setUpiId] = useState('');
+  const [bankAccount, setBankAccount] = useState('');
+  const [ifscCode, setIfscCode] = useState('');
 
-  const paymentMethods = [
-    {id: 'cash', name: 'Cash', icon: '💵'},
-    {id: 'credit', name: 'Credit Card', icon: '💳'},
-    {id: 'debit', name: 'Debit Card', icon: '💳'},
-    {id: 'paypal', name: 'PayPal', icon: '🅿️'},
-  ];
+  // Handle the  parameters from CartScreen
+  const grandTotal = route.params?.grandTotal || '0.00';
+  const cartItems = route.params?.cartItems || [];
+  const selectedPaymentMethod = route.params?.selectedPaymentMethod || 'Card';
 
-  const renderPaymentMethod = method => (
-    <TouchableOpacity
-      key={method.id}
-      style={[
-        styles.paymentMethodCard,
-        selectedPaymentMethod === method.id && styles.selectedPaymentMethod,
-      ]}
-      onPress={() => setSelectedPaymentMethod(method.id)}>
-      <View style={styles.paymentMethodContent}>
-        <Text style={styles.paymentMethodIcon}>{method.icon}</Text>
-        <Text style={styles.paymentMethodText}>{method.name}</Text>
-      </View>
-      <View
-        style={[
-          styles.radioButton,
-          selectedPaymentMethod === method.id && styles.radioButtonSelected,
-        ]}
-      />
-    </TouchableOpacity>
-  );
+  console.log('PaymentMethod - Received params:', route.params);
+  console.log('PaymentMethod - Grand Total:', grandTotal);
+  console.log('PaymentMethod - Cart Items:', cartItems.length);
+  console.log('PaymentMethod - Payment Method:', selectedPaymentMethod);
+
+  const handlePayment = () => {
+    setIsProcessing(true);
+
+    // Simulate payment processing
+    setTimeout(() => {
+      setIsProcessing(false);
+      Alert.alert(
+        'Payment Successful!',
+        `Your payment of $${grandTotal} has been processed successfully.`,
+        [
+          {
+            text: 'OK',
+            onPress: () =>
+              navigation.navigate('OrderConfirm', {
+                selectedPaymentMethod,
+                total: grandTotal,
+                cartItems,
+              }),
+          },
+        ],
+      );
+    }, 2000);
+  };
+
+  const formatCardNumber = text => {
+    const cleaned = text.replace(/\D/g, '');
+    const formatted = cleaned.replace(/(\d{4})(?=\d)/g, '$1 ');
+    setCardNumber(formatted);
+  };
+
+  const formatExpiryDate = text => {
+    const cleaned = text.replace(/\D/g, '');
+    const formatted = cleaned.replace(/(\d{2})(?=\d)/, '$1/');
+    setExpiryDate(formatted);
+  };
+
+  const renderPaymentForm = () => {
+    switch (selectedPaymentMethod) {
+      case 'Card':
+      case 'Credit/Debit Card':
+        return (
+          <View style={styles.paymentFormContainer}>
+            <Text style={styles.formTitle}>Card Details</Text>
+
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputLabel}>Card Number</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="1234 5678 9012 3456"
+                value={cardNumber}
+                onChangeText={formatCardNumber}
+                keyboardType="numeric"
+                maxLength={19}
+                placeholderTextColor={COLORS.grey}
+              />
+            </View>
+
+            <View style={styles.rowInputContainer}>
+              <View style={styles.halfInputContainer}>
+                <Text style={styles.inputLabel}>Expiry Date</Text>
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="MM/YY"
+                  value={expiryDate}
+                  onChangeText={formatExpiryDate}
+                  keyboardType="numeric"
+                  maxLength={5}
+                  placeholderTextColor={COLORS.grey}
+                />
+              </View>
+
+              <View style={styles.halfInputContainer}>
+                <Text style={styles.inputLabel}>CVV</Text>
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="123"
+                  value={cvv}
+                  onChangeText={setCvv}
+                  keyboardType="numeric"
+                  maxLength={3}
+                  secureTextEntry
+                  placeholderTextColor={COLORS.grey}
+                />
+              </View>
+            </View>
+
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputLabel}>Cardholder Name</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="John Doe"
+                value={cardHolderName}
+                onChangeText={setCardHolderName}
+                placeholderTextColor={COLORS.grey}
+              />
+            </View>
+          </View>
+        );
+
+      case 'UPI':
+      case 'UPI Payment':
+        return (
+          <View style={styles.paymentFormContainer}>
+            <Text style={styles.formTitle}>UPI Payment</Text>
+
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputLabel}>UPI ID</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="yourname@upi"
+                value={upiId}
+                onChangeText={setUpiId}
+                keyboardType="email-address"
+                placeholderTextColor={COLORS.grey}
+              />
+            </View>
+
+            <View style={styles.upiOptions}>
+              <Text style={styles.optionsTitle}>Quick UPI Apps</Text>
+              <View style={styles.upiAppsContainer}>
+                <TouchableOpacity style={styles.upiAppButton}>
+                  <Text style={styles.upiAppText}>📱 GPay</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.upiAppButton}>
+                  <Text style={styles.upiAppText}>💜 PhonePe</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.upiAppButton}>
+                  <Text style={styles.upiAppText}>💙 Paytm</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        );
+
+      case 'NetBanking':
+      case 'Net Banking':
+        return (
+          <View style={styles.paymentFormContainer}>
+            <Text style={styles.formTitle}>Net Banking</Text>
+
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputLabel}>Account Number</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="Enter your account number"
+                value={bankAccount}
+                onChangeText={setBankAccount}
+                keyboardType="numeric"
+                placeholderTextColor={COLORS.grey}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputLabel}>IFSC Code</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="ABCD0123456"
+                value={ifscCode}
+                onChangeText={setIfscCode}
+                autoCapitalize="characters"
+                placeholderTextColor={COLORS.grey}
+              />
+            </View>
+          </View>
+        );
+
+      case 'Cash':
+      case 'Cash on Delivery':
+      default:
+        return (
+          <View style={styles.paymentFormContainer}>
+            <Text style={styles.formTitle}>Cash on Delivery</Text>
+            <View style={styles.codInfoContainer}>
+              <Text style={styles.codInfoText}>💵</Text>
+              <Text style={styles.codDescription}>
+                You will pay ${grandTotal} in cash when your order is delivered
+                to your doorstep.
+              </Text>
+            </View>
+            <View style={styles.codNotesContainer}>
+              <Text style={styles.codNotesTitle}>Please Note:</Text>
+              <Text style={styles.codNotesText}>• Have exact change ready</Text>
+              <Text style={styles.codNotesText}>
+                • Payment will be collected by delivery partner
+              </Text>
+              <Text style={styles.codNotesText}>
+                • Additional charges may apply for COD
+              </Text>
+            </View>
+          </View>
+        );
+    }
+  };
 
   return (
-    <LinearGradient colors={COLORS.gradient} style={styles.gradientContainer}>
-      <Header />
+    <LinearGradient colors={COLORS.gradient} style={styles.container}>
+      <View style={styles.header}>
+        <Header />
+      </View>
 
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        {/* Header Title */}
-        <View style={styles.headerSection}>
-          <Text style={styles.screenTitle}>Payment Method</Text>
-          <Text style={styles.screenSubtitle}>
-            Choose your preferred payment option
-          </Text>
-        </View>
+      <ScrollView
+        style={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.contentContainer}>
+
+          {/* Page Title */}
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>Complete Payment</Text>
+            <Text style={styles.subtitle}>Secure payment for your order</Text>
+          </View>
 
         {/* Order Summary Card */}
-        <View style={styles.summaryCard}>
+        <View style={styles.orderSummaryCard}>
           <Text style={styles.cardTitle}>Order Summary</Text>
           <View style={styles.summaryRow}>
-            <Text style={styles.summaryLabel}>Subtotal:</Text>
-            <Text style={styles.summaryValue}>
-              ${parseFloat(total).toFixed(2)}
-            </Text>
+            <Text style={styles.summaryLabel}>Items:</Text>
+            <Text style={styles.summaryValue}>{cartItems.length} items</Text>
           </View>
           <View style={styles.summaryRow}>
-            <Text style={styles.summaryLabel}>Shipping:</Text>
-            <Text style={styles.summaryValue}>Free</Text>
+            <Text style={styles.summaryLabel}>Subtotal:</Text>
+            <Text style={styles.summaryValue}>${grandTotal}</Text>
           </View>
           <View style={styles.divider} />
           <View style={styles.summaryRow}>
-            <Text style={styles.totalLabel}>Total:</Text>
-            <Text style={styles.totalValue}>
-              ${parseFloat(total).toFixed(2)}
-            </Text>
+            <Text style={styles.totalLabel}>Total Amount:</Text>
+            <Text style={styles.totalValue}>${grandTotal}</Text>
           </View>
         </View>
 
-        {/* Payment Methods */}
-        <View style={styles.paymentSection}>
-          <Text style={styles.sectionTitle}>Select Payment Method</Text>
-          {paymentMethods.map(renderPaymentMethod)}
+        {/* Payment Method Display */}
+        <View style={styles.selectedMethodCard}>
+          <Text style={styles.selectedMethodLabel}>Payment Method:</Text>
+          <Text style={styles.selectedMethodText}>{selectedPaymentMethod}</Text>
         </View>
 
-        {/* Address Section */}
-        <View style={styles.addressSection}>
-          <View style={styles.addressSectionHeader}>
-            <Text style={styles.sectionTitle}>Delivery Address</Text>
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('AddressScreen', {
-                  fromPayment: true,
-                  grandTotal: total,
-                  selectedAddress,
-                })
-              }>
-              <Text style={styles.changeAddressText}>Change</Text>
-            </TouchableOpacity>
-          </View>
-
-          {selectedAddress ? (
-            <View style={styles.selectedAddressCard}>
-              <View style={styles.addressHeader}>
-                <MaterialIcons
-                  name={selectedAddress.type === 'Home' ? 'home' : 'business'}
-                  size={20}
-                  color={COLORS.button}
-                />
-                <Text style={styles.addressType}>{selectedAddress.type}</Text>
-                {selectedAddress.isDefault && (
-                  <View style={styles.defaultBadge}>
-                    <Text style={styles.defaultBadgeText}>Default</Text>
-                  </View>
-                )}
-              </View>
-              <Text style={styles.addressContactName}>
-                {selectedAddress.contactName}
+        {/* Dynamic Payment Form */}
+        {renderPaymentForm()}
+        
+        {/* Bottom Payment Button */}
+        <View style={styles.bottomContainer}>
+          <TouchableOpacity
+            style={[styles.payButton, isProcessing && styles.payButtonDisabled]}
+            onPress={handlePayment}
+            disabled={isProcessing}>
+            <LinearGradient
+              colors={
+                isProcessing ? [COLORS.grey, COLORS.grey] : COLORS.gradientButton
+              }
+              style={styles.payButtonGradient}>
+              <Text style={styles.payButtonText}>
+                {isProcessing ? 'Processing...' : `Pay $${grandTotal}`}
               </Text>
-              <Text style={styles.addressLine}>
-                {selectedAddress.addressLine1}
-              </Text>
-              <Text style={styles.addressLine}>
-                {selectedAddress.addressLine2}
-              </Text>
-              <Text style={styles.addressPhone}>
-                {selectedAddress.phoneNumber}
-              </Text>
-            </View>
-          ) : (
-            <TouchableOpacity
-              style={styles.addressButton}
-              onPress={() =>
-                navigation.navigate('AddressScreen', {
-                  fromPayment: true,
-                  grandTotal: total,
-                })
-              }>
-              <Text style={styles.addressButtonText}>
-                📍 Select Delivery Address
-              </Text>
-            </TouchableOpacity>
-          )}
+              {isProcessing && (
+                <Text style={styles.payButtonSubtext}>Please wait</Text>
+              )}
+            </LinearGradient>
+          </TouchableOpacity>
         </View>
       </ScrollView>
 
-      {/* Bottom Action Button */}
-      <View style={styles.bottomSection}>
-        <View style={styles.payButton}>
-          <TouchableOpacity
-            style={styles.payButtonTouchable}
-            onPress={() => {
-              // Handle payment processing
-              navigation.navigate('ConfirmOrder', {
-                selectedPaymentMethod,
-                total,
-              });
-              console.log('Processing payment with:', selectedPaymentMethod);
-              // You can add payment processing logic here
-            }}>
-            <Text style={styles.payButtonText}>
-              Pay ${parseFloat(total).toFixed(2)}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
     </LinearGradient>
   );
 };
 
-export default PaymentScreen;
+export default PaymentMethod;
 
 const styles = StyleSheet.create({
-  gradientContainer: {
+  container: {
     flex: 1,
-    padding: 10,
   },
-  content: {
+  header: {
+    paddingHorizontal: 15,
+    paddingTop: 5,
+  },
+  scrollContainer: {
     flex: 1,
-    paddingHorizontal: 10,
   },
-  headerSection: {
-    marginTop: 10,
-    marginBottom: 15,
+  contentContainer: {
+    paddingHorizontal: 20,
+    paddingBottom: 20,
   },
-  screenTitle: {
-    fontSize: 25,
+  titleContainer: {
+    marginTop: 20,
+    marginBottom: 25,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 28,
     fontWeight: 'bold',
     color: COLORS.black,
     fontFamily: FONTS.Bold,
-    marginBottom: 5,
+    marginBottom: 8,
   },
-  screenSubtitle: {
-    fontSize: 14,
-    // color: COLORS.grey,
-    color: '#2c2c2c',
+  subtitle: {
+    fontSize: 16,
+    color: COLORS.grey,
     fontFamily: FONTS.Regular,
+    textAlign: 'center',
   },
-
-  // Order Summary Card
-  summaryCard: {
+  orderSummaryCard: {
     backgroundColor: COLORS.white,
-    borderRadius: 15,
+    borderRadius: 16,
     padding: 20,
-    marginBottom: 25,
+    marginBottom: 20,
     shadowColor: COLORS.black,
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 4,
     },
     shadowOpacity: 0.1,
     shadowRadius: 8,
-    elevation: 5,
+    elevation: 6,
   },
   cardTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 18,
+    fontWeight: '600',
     color: COLORS.black,
-    fontFamily: FONTS.Bold,
+    fontFamily: FONTS.SemiBold,
     marginBottom: 15,
   },
   summaryRow: {
@@ -241,216 +372,195 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: COLORS.black,
     fontFamily: FONTS.Medium,
+    fontWeight: '500',
   },
   divider: {
     height: 1,
     backgroundColor: COLORS.lightgray,
-    marginVertical: 10,
+    marginVertical: 15,
   },
   totalLabel: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: COLORS.black,
-    fontFamily: FONTS.Bold,
+    fontFamily: FONTS.SemiBold,
   },
   totalValue: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
     color: COLORS.button,
     fontFamily: FONTS.Bold,
   },
-
-  // Payment Methods Section
-  paymentSection: {
-    marginBottom: 25,
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: COLORS.black,
-    fontFamily: FONTS.Bold,
-    marginBottom: 15,
-  },
-  paymentMethodCard: {
-    backgroundColor: COLORS.white,
-    borderRadius: 12,
-    padding: 10,
-    marginBottom: 12,
-    borderWidth: 2,
-    borderColor: 'transparent',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  selectedPaymentMethod: {
-    borderColor: "transparent",
-    backgroundColor: "#E94560",
-    // shadowColor: "#000",
-
-  },
-  paymentMethodContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
-  paymentMethodIcon: {
-    fontSize: 24,
-    marginRight: 10,
-  },
-  paymentMethodText: {
-    fontSize: 15,
-    color: COLORS.black,
-    fontFamily: FONTS.Medium,
-    flex: 1,
-  },
-  radioButton: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: "grey",
-    position: 'absolute',
-    right: 15,
-    top: 15,
-  },
-  radioButtonSelected: {
-    borderColor: "grey",
-    backgroundColor: "#807979ff",
-  },
-
-  // Address Section
-  addressSection: {
-    marginBottom: 20,
-  },
-  addressSectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  changeAddressText: {
-    color: "red",
-    fontSize: 15,
-    fontWeight: '600',
-    fontFamily: FONTS.Medium,
-  },
-  selectedAddressCard: {
-    backgroundColor: COLORS.white,
+  selectedMethodCard: {
+    backgroundColor: COLORS.cream,
     borderRadius: 12,
     padding: 16,
-    borderWidth: 1,
-    borderColor: COLORS.theme,
-    shadowColor: COLORS.black,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    marginBottom: 20,
+    borderLeftWidth: 4,
+    borderLeftColor: COLORS.button,
   },
-  addressHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  addressType: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: COLORS.theme,
-    marginLeft: 8,
-    fontFamily: FONTS.Medium,
-  },
-  defaultBadge: {
-    backgroundColor: '#4CAF50',
-    borderRadius: 10,
-    paddingHorizontal: 6,
-    paddingVertical: 2,
-    marginLeft: 8,
-  },
-  defaultBadgeText: {
-    color: COLORS.white,
-    fontSize: 10,
-    fontWeight: '500',
-    fontFamily: FONTS.Medium,
-  },
-  addressContactName: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: COLORS.black,
-    fontFamily: FONTS.Medium,
+  selectedMethodLabel: {
+    fontSize: 14,
+    color: COLORS.grey,
+    fontFamily: FONTS.Regular,
     marginBottom: 4,
   },
-  addressLine: {
-    fontSize: 14,
-    color: COLORS.grey,
-    fontFamily: FONTS.Regular,
-    lineHeight: 20,
-    marginBottom: 2,
-  },
-  addressPhone: {
-    fontSize: 14,
-    color: COLORS.grey,
-    fontFamily: FONTS.Regular,
-    marginTop: 4,
-  },
-  addressButton: {
-    backgroundColor: COLORS.white,
-    borderRadius: 12,
-    padding: 15,
-    borderWidth: 1,
-    borderColor: COLORS.theme,
-    shadowColor: COLORS.black,
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  addressButtonText: {
+  selectedMethodText: {
     fontSize: 16,
-    // color: COLORS.theme,
+    color: COLORS.black,
     fontFamily: FONTS.Medium,
-    textAlign: 'center',
+    fontWeight: '600',
   },
-
-  // Bottom Section
-  bottomSection: {
-    backgroundColor: '#E94560',
-    height: 56,
-    alignItems: 'center',
-    justifyContent: 'center',
+  paymentFormContainer: {
+    backgroundColor: COLORS.white,
     borderRadius: 16,
-    shadowColor: '#E94560',
+    padding: 20,
+    marginBottom: 20,
+    shadowColor: COLORS.black,
     shadowOffset: {
       width: 0,
       height: 4,
     },
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 6,
-
+  },
+  formTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: COLORS.black,
+    fontFamily: FONTS.SemiBold,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  inputContainer: {
+    marginBottom: 16,
+  },
+  inputLabel: {
+    fontSize: 14,
+    color: COLORS.black,
+    fontFamily: FONTS.Medium,
+    marginBottom: 8,
+    fontWeight: '500',
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: COLORS.lightgray,
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    fontSize: 16,
+    color: COLORS.black,
+    fontFamily: FONTS.Regular,
+    backgroundColor: COLORS.white,
+  },
+  rowInputContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+  },
+  halfInputContainer: {
+    flex: 0.48,
+  },
+  upiOptions: {
+    marginTop: 20,
+  },
+  optionsTitle: {
+    fontSize: 16,
+    color: COLORS.black,
+    fontFamily: FONTS.Medium,
+    marginBottom: 12,
+    fontWeight: '500',
+  },
+  upiAppsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  upiAppButton: {
+    backgroundColor: COLORS.lightgray,
+    borderRadius: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    flex: 0.3,
+    alignItems: 'center',
+  },
+  upiAppText: {
+    fontSize: 12,
+    color: COLORS.black,
+    fontFamily: FONTS.Regular,
+    textAlign: 'center',
+  },
+  codInfoContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  codInfoText: {
+    fontSize: 48,
+    marginBottom: 16,
+  },
+  codDescription: {
+    fontSize: 16,
+    color: COLORS.grey,
+    fontFamily: FONTS.Regular,
+    textAlign: 'center',
+    lineHeight: 24,
+  },
+  codNotesContainer: {
+    backgroundColor: COLORS.cream,
+    borderRadius: 12,
+    padding: 16,
+  },
+  codNotesTitle: {
+    fontSize: 16,
+    color: COLORS.black,
+    fontFamily: FONTS.Medium,
+    marginBottom: 8,
+    fontWeight: '600',
+  },
+  codNotesText: {
+    fontSize: 14,
+    color: COLORS.grey,
+    fontFamily: FONTS.Regular,
+    marginBottom: 4,
+  },
+  bottomContainer: {
+    backgroundColor: COLORS.white,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 30,
+    shadowColor: COLORS.black,
+    shadowOffset: {
+      width: 0,
+      height: -4,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 10,
   },
   payButton: {
-    borderRadius: 15,
+    borderRadius: 16,
     overflow: 'hidden',
   },
-  payButtonTouchable: {
+  payButtonDisabled: {
+    opacity: 0.7,
+  },
+  payButtonGradient: {
     paddingVertical: 18,
+    paddingHorizontal: 24,
     alignItems: 'center',
     justifyContent: 'center',
   },
   payButtonText: {
     fontSize: 18,
-    fontWeight: 'bold',
-    // color: COLORS.white,
+    color: COLORS.white,
     fontFamily: FONTS.Bold,
+    fontWeight: 'bold',
+    marginBottom: 2,
+  },
+  payButtonSubtext: {
+    fontSize: 14,
+    color: COLORS.white,
+    fontFamily: FONTS.Regular,
+    opacity: 0.9,
   },
 });

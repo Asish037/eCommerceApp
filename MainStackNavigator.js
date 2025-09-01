@@ -36,8 +36,8 @@ import AccountDelete from './src/Screens/AccountDelete';
 import HelpCenter from './src/Screens/HelpCenter';
 import MyCoupons from './src/Screens/MyCoupons';
 import MenuDrawer from './src/Screens/MenuDrawer';
-import PaymentScreen from './src/Screens/PaymentMethod';
-import PaymentMethod from './src/Screens/PaymentScreen';
+import PaymentScreen from './src/Screens/PaymentScreen';
+import PaymentMethod from './src/Screens/PaymentMethod';
 import OrderConfirm from './src/Screens/OrderConfirm';
 import ConfirmOrder from './src/Screens/ConfirmOrder';
 
@@ -72,8 +72,8 @@ const MainStackNavigator = () => {
 
   return (
     <Stack.Navigator
-      // initialRouteName={'AuthStack'}
-      initialRouteName={'MainHome'}
+      initialRouteName={'AuthStack'}
+      // initialRouteName={'MainHome'}
       headerMode="none"
       //screenOptions={{ headerShown: false }}
     >
