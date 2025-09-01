@@ -335,16 +335,18 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginBottom: verticalScale(15),
     textAlign: 'center',
+    marginLeft: moderateScale(8),
   },
   inputContainer: {
-    marginBottom: verticalScale(0),
+    marginBottom: verticalScale(15),
+    backgroundColor: "transparent"
   },
   inputWrapper: {
     marginBottom: verticalScale(12),
   },
   inputLabel: {
     fontSize: moderateScale(12),
-    color: COLORS.black,
+    color: COLORS.gradientButton[1],
     fontFamily: FONTS.Bold,
     fontWeight: '600',
     marginBottom: verticalScale(6),
@@ -376,12 +378,17 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(20),
   },
   textInput: {
+    height: 50,
     flex: 1,
-    fontSize: moderateScale(15),
+    borderWidth: 1,
+    borderColor: COLORS.gradientButton[1],
+    backgroundColor: COLORS.white,
+    paddingHorizontal: 15,
+    borderRadius: 8,
+    fontSize: 16,
     color: COLORS.black,
     fontFamily: FONTS.Regular,
-    paddingVertical: 0,
-    
+
   },
   buttonContainer: {
     flexDirection: 'row',

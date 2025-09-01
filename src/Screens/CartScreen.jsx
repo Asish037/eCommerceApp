@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ddbbbbff',
     // borderTopLeftRadius: 50,
     // borderTopRightRadius: 50,
+    height: 260,
     paddingHorizontal: 15,
     paddingTop: 24,
     paddingBottom: 34,
@@ -105,6 +106,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 12,
     elevation: 8,
+
     // Add a top border with the same color as the background
     // to fill the gap created by the rounded corners.
     borderTopWidth: 1,
