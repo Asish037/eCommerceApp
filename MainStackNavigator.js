@@ -72,8 +72,8 @@ const MainStackNavigator = () => {
 
   return (
     <Stack.Navigator
-      // initialRouteName={'AuthStack'}
-      initialRouteName={'MainHome'}
+      initialRouteName={'AuthStack'}
+      // initialRouteName={'MainHome'}
       headerMode="none"
       //screenOptions={{ headerShown: false }}
     >
