@@ -104,9 +104,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 12,
     elevation: 8,
-
-    // Add a top border with the same color as the background
-    // to fill the gap created by the rounded corners.
     borderTopWidth: 1,
     borderColor: '#ddbbbbff',
   },
@@ -151,7 +148,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.medium,
   },
   checkoutButton: {
-    backgroundColor: '#E94560',
+    backgroundColor: COLORS.button,
     height: 56,
     alignItems: 'center',
     justifyContent: 'center',

@@ -141,9 +141,9 @@ const BottomTab = () => {
             elevation: 5,
             height: 50,
             // overflow: 'hidden',
-            borderRadius: 20,
+            // borderRadius: 20,
             // backgroundColor: 'transparent',
-            backgroundColor: '#ffdbdbee', 
+            backgroundColor: '#ffffffff', 
           },
           tabBarActiveTintColor: '#E94560',
           tabBarInactiveTintColor: '#040101ff',
@@ -159,8 +159,8 @@ const BottomTab = () => {
                   <Image
                     source={require('../assets/focused/home.png')}
                     style={{
-                      height: size,
-                      width: size,
+                      height: 24,
+                      width: 24,
                       resizeMode: 'center',
                     }}
                   />
@@ -170,8 +170,8 @@ const BottomTab = () => {
                   <Image
                     source={require('../assets/normal/home.png')}
                     style={{
-                      height: size,
-                      width: size,
+                      height: 24,
+                      width: 24,
                       resizeMode: 'center',
                     }}
                   />
@@ -190,8 +190,8 @@ const BottomTab = () => {
                   <Image
                     source={require('../assets/focused/reorder.png')}
                     style={{
-                      height: size,
-                      width: size,
+                      height: 24,
+                      width: 24,
                       resizeMode: 'center',
                     }}
                   />
@@ -201,8 +201,8 @@ const BottomTab = () => {
                   <Image
                     source={require('../assets/normal/reorder.png')}
                     style={{
-                      height: size,
-                      width: size,
+                      height: 24,
+                      width: 24,
                       resizeMode: 'center',
                     }}
                   />
@@ -216,7 +216,7 @@ const BottomTab = () => {
           component={CartScreen}
           options={{
             tabBarIcon: ({focused, size}) => (
-              <CartTabIcon focused={focused} size={size} />
+              <CartTabIcon focused={focused} size={30} />
             ),
           }}
         />

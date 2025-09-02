@@ -86,10 +86,6 @@ const HomeScreen = () => {
         )}
         showsVerticalScrollIndicator={false}
       />
-      <View>
-        {/* <Text>HomeScreen</Text>
-        <Text>HomeScreen</Text> */}
-      </View>
     </LinearGradient>
   );
 };
@@ -97,7 +93,7 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     padding: 10,
-    marginBottom: 60,
+    marginBottom: 15,
   },
   ImageBackground: {
     height: 200,

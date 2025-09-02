@@ -87,7 +87,7 @@ const Orders = () => {
       case 'Delivered':
         return COLORS.green || '#4CAF50';
       case 'Processing':
-        return COLORS.yellow || '#a38304ff';
+        return COLORS.cyan || '#046147';
       default:
         return COLORS.gray || '#757575';
     }
@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
     paddingBottom: moderateScale(20),
   },
   orderCard: {
-    backgroundColor: '#ffc6c6ff',
+    backgroundColor: COLORS.card,
     marginVertical: moderateScale(8),
     marginHorizontal: moderateScale(5),
     borderRadius: moderateScale(15),
@@ -358,8 +358,8 @@ const styles = StyleSheet.create({
   },
   statusText: {
     fontFamily: FONTS.Medium,
-    fontSize: moderateScale(12),
-    fontWeight: '700',
+    fontSize: moderateScale(11),
+    fontWeight: '650',
     marginLeft: moderateScale(6),
   },
   orderContent: {

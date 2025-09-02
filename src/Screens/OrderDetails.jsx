@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
     paddingBottom: moderateScale(10),
   },
   statusHeader: {
-    // backgroundColor: COLORS.white,
+    backgroundColor: COLORS.card,
     marginHorizontal: moderateScale(10),
     marginTop: moderateScale(10),
     borderRadius: moderateScale(15),
@@ -284,14 +284,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    // shadowColor: COLORS.black,
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 3,
-    // },
-    // shadowOpacity: 0.15,
-    // shadowRadius: 4.65,
-    // elevation: 8,
+    shadowColor: COLORS.black,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 4.65,
+    elevation: 8,
   },
   statusIconContainer: {
     backgroundColor: 'rgba(0, 0, 0, 0.05)',
@@ -363,7 +363,7 @@ const styles = StyleSheet.create({
     width: moderateScale(70),
     height: moderateScale(70),
     borderRadius: moderateScale(10),
-    // backgroundColor: COLORS.lightGray || '#F5F5F5',
+    backgroundColor: COLORS.lightGray || '#F5F5F5',
     marginRight: moderateScale(20),
   },
   orderItemDetails: {
@@ -525,7 +525,7 @@ const styles = StyleSheet.create({
     width: moderateScale(60),
     height: moderateScale(60),
     borderRadius: moderateScale(30),
-    backgroundColor: COLORS.lightGray || 'transparent',
+    backgroundColor: COLORS.white,
     marginRight: moderateScale(15),
   },
   ratingContent: {
@@ -548,18 +548,18 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(12),
   },
   reviewCard: {
-    // backgroundColor: COLORS.white,
+    backgroundColor: COLORS.card,
     borderRadius: moderateScale(12),
     padding: moderateScale(10),
     marginBottom: moderateScale(10),
-    // shadowColor: COLORS.black,
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2,
-    // },
-    // shadowOpacity: 0.1,
-    // shadowRadius: 3.84,
-    // elevation: 5,
+    shadowColor: COLORS.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   reviewHeader: {
     flexDirection: 'row',
