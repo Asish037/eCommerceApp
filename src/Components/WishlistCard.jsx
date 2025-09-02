@@ -17,7 +17,8 @@ const ProductCard = ({
   // Truncate description to 4 words
   const truncatedDescription =
     item.description?.split(' ').slice(0, 4).join(' ') + '...' ||
-    'No description available...';
+    'Classic premier brand...';
+
 
   // Format rating display
   const renderStars = rating => {
@@ -128,8 +129,8 @@ export default ProductCard;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginHorizontal: 10,
+    width: '45%', // Fixed width instead of flex: 1
+    marginHorizontal: 8,
     marginVertical: 10,
     backgroundColor: '#FFFFFF',
     borderRadius: 20,
@@ -141,6 +142,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
+    overflow: 'hidden',
   },
   coverImage: {
     height: 200,
@@ -169,9 +171,9 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   description: {
-    fontSize: 12,
+    fontSize: 13,
     fontFamily: fonts.regular,
-    color: '#666666',
+    color: '#000000ff',
     marginBottom: 8,
     lineHeight: 16,
   },
@@ -183,7 +185,7 @@ const styles = StyleSheet.create({
   rating: {
     fontSize: 12,
     fontFamily: fonts.regular,
-    color: '#FFA500',
+    color: '#e82929da',
     marginRight: 4,
   },
   ratingCount: {

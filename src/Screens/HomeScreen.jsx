@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     padding: 10,
-    marginBottom: 15,
+    marginBottom: 16,
   },
   ImageBackground: {
     height: 200,

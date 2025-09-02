@@ -367,8 +367,9 @@ export default CategoriesScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
     paddingTop: 16,
+    paddingBottom: 8,
   },
   searchContainer: {
     marginBottom: 20,
@@ -494,16 +495,21 @@ const styles = StyleSheet.create({
   },
   productsContainer: {
     flex: 1,
+    paddingHorizontal: 4,
+    // padding: 16,
   },
   productsGrid: {
     paddingBottom: 20,
+    paddingTop: 8,
   },
   row: {
     justifyContent: 'space-between',
     marginBottom: 16,
+    paddingHorizontal: 8,
   },
   productCardContainer: {
-    width: (width - 48) / 2, // Account for padding and spacing
+    width: '48%',
+    marginHorizontal: 0,
   },
   noProductsContainer: {
     flex: 1,

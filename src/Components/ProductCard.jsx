@@ -2,6 +2,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useContext} from 'react';
 import {fonts} from '../utils/fonts';
 import {CartContext} from '../Context/CartContext';
+import { COLORS } from '../Constant/Colors';
 
 const ProductCard = ({item, handleProductClick, toggleFavorite}) => {
   const {cartItems, addToCartItem} = useContext(CartContext);
@@ -34,6 +35,7 @@ const ProductCard = ({item, handleProductClick, toggleFavorite}) => {
       addToCartItem(item);
     }
   };
+  
   return (
     <TouchableOpacity
       style={styles.container}
@@ -118,9 +120,8 @@ export default ProductCard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: 10,
     marginVertical: 10,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.card,
     borderRadius: 20,
     elevation: 3,
     shadowColor: '#000',
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
   contentContainer: {
     padding: 12,
@@ -162,7 +163,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 12,
     fontFamily: fonts.regular,
-    color: '#666666',
+    color: '#393939ff',
     marginBottom: 8,
     lineHeight: 16,
   },

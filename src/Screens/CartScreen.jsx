@@ -80,19 +80,21 @@ export default CartScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // padding: 16,
+    marginBottom: 16,
   },
   gradientContainer: {
     flex: 1,
-    paddingTop: 5,
+    padding: 15,
   },
   header: {
-    paddingHorizontal: 15,
+    // paddingHorizontal: 15,
   },
   bottomContainer: {
     backgroundColor: '#ddbbbbff',
     // borderTopLeftRadius: 50,
     // borderTopRightRadius: 50,
-    height: 260,
+    height: 240,
     paddingHorizontal: 15,
     paddingTop: 24,
     paddingBottom: 34,
@@ -149,10 +151,10 @@ const styles = StyleSheet.create({
   },
   checkoutButton: {
     backgroundColor: COLORS.button,
-    height: 56,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 16,
+    borderRadius: 18,
     shadowColor: '#E94560',
     shadowOffset: {
       width: 0,
@@ -163,7 +165,7 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   checkoutButtonText: {
-    fontSize: 18,
+    fontSize: 17,
     color: '#FFFFFF',
     fontWeight: '700',
     fontFamily: fonts.medium,
