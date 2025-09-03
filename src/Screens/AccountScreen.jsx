@@ -287,13 +287,14 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: moderateScale(25),
     fontWeight: '700',
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Bold,
   },
   settingsButton: {
     padding: moderateScale(8),
     borderRadius: moderateScale(8),
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    // backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: 'transparent'
   },
   profileSection: {
     flexDirection: 'row',
@@ -328,13 +329,13 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: moderateScale(20),
     fontWeight: '700',
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Bold,
     marginBottom: moderateScale(4),
   },
   userEmail: {
     fontSize: moderateScale(14),
-    color: '#06080aff',
+    color: COLORS.subtext,
     fontWeight: '500',
     fontFamily: FONTS.Regular,
   },
@@ -367,7 +368,7 @@ const styles = StyleSheet.create({
   },
   statLabel: {
     fontSize: moderateScale(13),
-    color: '#000000ff',
+    color: COLORS.text,
     fontFamily: FONTS.Regular,
     fontWeight: '500',
   },
@@ -377,7 +378,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: moderateScale(18),
     fontWeight: '600',
-    color: '#000000ff',
+    color: COLORS.text,
     fontFamily: FONTS.Bold,
     marginBottom: moderateScale(8),
     paddingHorizontal: moderateScale(12),
@@ -414,7 +415,7 @@ const styles = StyleSheet.create({
   },
   orderLabel: {
     fontSize: moderateScale(12),
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Medium,
     textAlign: 'center',
     fontWeight: '600',
@@ -453,7 +454,7 @@ const styles = StyleSheet.create({
   menuText: {
     flex: 1,
     fontSize: moderateScale(14),
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Medium,
     fontWeight: '650',
     lineHeight: moderateScale(15),

@@ -283,7 +283,7 @@ const PaymentMethod = ({route}) => {
             disabled={isProcessing}>
             <LinearGradient
               colors={
-                isProcessing ? [COLORS.grey, COLORS.grey] : COLORS.gradientButton
+                isProcessing ? ['#393634ff', '#232220ff'] : ['#ff8400ff', '#af5e07ff']
               }
               style={styles.payButtonGradient}>
               <Text style={styles.payButtonText}>
@@ -326,13 +326,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Bold,
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
-    color: COLORS.grey,
+    color: COLORS.subtext,
     fontFamily: FONTS.Regular,
     textAlign: 'center',
   },
@@ -353,7 +353,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.SemiBold,
     marginBottom: 15,
   },
@@ -365,12 +365,12 @@ const styles = StyleSheet.create({
   },
   summaryLabel: {
     fontSize: 16,
-    color: COLORS.grey,
+    color: COLORS.subtext,
     fontFamily: FONTS.Regular,
   },
   summaryValue: {
     fontSize: 16,
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Medium,
     fontWeight: '500',
   },
@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
   totalLabel: {
     fontSize: 18,
     fontWeight: '600',
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.SemiBold,
   },
   totalValue: {
@@ -392,7 +392,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.Bold,
   },
   selectedMethodCard: {
-    backgroundColor: COLORS.cream,
+    backgroundColor: COLORS.card,
     borderRadius: 12,
     padding: 16,
     marginBottom: 20,
@@ -401,18 +401,18 @@ const styles = StyleSheet.create({
   },
   selectedMethodLabel: {
     fontSize: 14,
-    color: COLORS.grey,
+    color: COLORS.subtext,
     fontFamily: FONTS.Regular,
     marginBottom: 4,
   },
   selectedMethodText: {
     fontSize: 16,
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Medium,
     fontWeight: '600',
   },
   paymentFormContainer: {
-    backgroundColor: COLORS.white,
+    backgroundColor: '#A40606',
     borderRadius: 16,
     padding: 20,
     marginBottom: 20,
@@ -428,7 +428,7 @@ const styles = StyleSheet.create({
   formTitle: {
     fontSize: 20,
     fontWeight: '600',
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.SemiBold,
     marginBottom: 20,
     textAlign: 'center',
@@ -438,7 +438,7 @@ const styles = StyleSheet.create({
   },
   inputLabel: {
     fontSize: 14,
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Medium,
     marginBottom: 8,
     fontWeight: '500',
@@ -450,7 +450,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 14,
     fontSize: 16,
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Regular,
     backgroundColor: COLORS.white,
   },
@@ -467,7 +467,7 @@ const styles = StyleSheet.create({
   },
   optionsTitle: {
     fontSize: 16,
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Medium,
     marginBottom: 12,
     fontWeight: '500',
@@ -486,7 +486,7 @@ const styles = StyleSheet.create({
   },
   upiAppText: {
     fontSize: 12,
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Regular,
     textAlign: 'center',
   },
@@ -500,7 +500,7 @@ const styles = StyleSheet.create({
   },
   codDescription: {
     fontSize: 16,
-    color: COLORS.grey,
+    color: COLORS.subtext,
     fontFamily: FONTS.Regular,
     textAlign: 'center',
     lineHeight: 24,
@@ -512,14 +512,14 @@ const styles = StyleSheet.create({
   },
   codNotesTitle: {
     fontSize: 16,
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Medium,
     marginBottom: 8,
     fontWeight: '600',
   },
   codNotesText: {
     fontSize: 14,
-    color: COLORS.grey,
+    color: COLORS.subtext,
     fontFamily: FONTS.Regular,
     marginBottom: 4,
   },

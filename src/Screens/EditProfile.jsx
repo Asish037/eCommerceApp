@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState,useEffect, useContext} from 'react';
 import {
   View,
   Text,
@@ -29,6 +29,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const EditProfile = () => {
   const navigation = useNavigation();
+
   const {user, login} = useContext(CartContext);
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [email, setemail] = useState(
@@ -44,11 +45,115 @@ const EditProfile = () => {
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE_5aeaS13y24e1D7KBOIPNUwGflPnLR8AuQQUQ6tHDnycRg_2woHNm3fX1K_UYtxizZw&usqp=CAU',
   );
 
+  /*
+  const {user, login} = useContext(CartContext);
+  const [fullName, setFullName] = useState('')
+  const [email, setEmail] = useState('')
+  const [mobileNumber, setMobileNumber] = useState('')
+  const [profileImageUri, setProfileImageUri] = useState('')
+  const [disabled, setDisabled] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const [isSaving, setIsSaving] = useState(false) 
+  */
+
+  /*
+  const fetchUserData = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch('https://api.example.com/user');
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log('User data fetched:', data);
+        setFullName(data.fullname);
+        setEmail(data.email);
+        setMobileNumber(data.mobileNumber);
+        setProfileImageUri(data.profileImage);
+      } else {
+        Toast.show(data.message || 'Failed to fetch user data');
+        console.error('API Error:', data);
+      }
+    } catch (error) {
+      Toast.show('An error occurred while fetching user data');
+      console.error('Error fetching user data:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(()=>{
+    if(user?.id){
+      fetchUserData();
+    }
+    else{
+      Toast.show('User not found');
+    }
+
+  }, [])
+
+  */
   const saveDetails = async () => {
+
     if (!email || !mobileNumber || !fullname) {
       Toast.show('Please fill all required fields!');
       return;
     }
+
+
+    // setIsSaving(true);
+    // let data = {
+    //   email: email,
+    //   mobileNumber: mobileNumber,
+    //   fullname: fullname,
+    //   profileImage: profileImageUri,
+    // };
+
+    /*
+    try{
+      const response = await fetch('https://api.example.com/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+    if (response.ok) {
+        // If API update is successful, also update local context and storage
+        await AsyncStorage.setItem('userData', JSON.stringify(updatedUserData));
+        await login(updatedUserData);
+        Toast.show('Profile Updated Successfully!', Toast.LONG);
+        setTimeout(() => {
+          navigation.goBack();
+        }, 1000);
+      } else {
+        const errorData = await response.json();
+        Toast.show(`Failed to save profile: ${errorData.message}`);
+        console.error('API Error:', errorData);
+      }
+    } catch (error) {
+      Toast.show('Failed to save profile. Please try again.');
+      console.error('Error saving profile:', error);
+    }
+
+    const handleImagePicker = () => {
+    Toast.show('Image picker functionality to be implemented');
+  };
+
+  // Conditionally render a loading screen
+  if (isLoading) {
+    return (
+      <LinearGradient colors={COLORS.gradient} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={styles.loadingContainer}>
+          <Text style={styles.loadingText}>Loading Profile...</Text>
+        </View>
+      </LinearGradient>
+    );
+  }
+    
+    */
 
     setdisabled(true);
     let updatedUserData = {
@@ -139,7 +244,7 @@ const EditProfile = () => {
                 <View style={styles.inputFieldContainer}>
                   <MaterialCommunityIcons
                     name="account-outline"
-                    size={16}
+                    size={25}
                     color={COLORS.button}
                     style={styles.inputIcon}
                   />
@@ -158,7 +263,7 @@ const EditProfile = () => {
                 <View style={styles.inputFieldContainer}>
                   <MaterialCommunityIcons
                     name="email-outline"
-                    size={16}
+                    size={25}
                     color={COLORS.button}
                     style={styles.inputIcon}
                   />
@@ -178,7 +283,7 @@ const EditProfile = () => {
                 <View style={styles.inputFieldContainer}>
                   <MaterialCommunityIcons
                     name="phone-outline"
-                    size={16}
+                    size={25}
                     color={COLORS.button}
                     style={styles.inputIcon}
                   />
@@ -207,7 +312,7 @@ const EditProfile = () => {
                 disabled={disabled}
                 activeOpacity={0.8}>
                 <LinearGradient
-                  colors={disabled ? ['#ccc', '#999'] : ['#E94560', '#E94560']}
+                  colors={disabled ? ['#ccc', '#999'] : ['#ff8400ff', '#af5e07ff']}
                   style={styles.saveButtonGradient}>
                   <Text style={styles.saveButtonText}>
                     {disabled ? 'Saving...' : 'Save Changes'}
@@ -251,7 +356,7 @@ const styles = StyleSheet.create({
     // color: COLORS.grey,
     fontFamily: FONTS.Regular,
     marginBottom: verticalScale(1),
-    color: '#3a3a3aff',
+    color: COLORS.text,
   },
   userName: {
     fontSize: moderateScale(18),
@@ -262,7 +367,7 @@ const styles = StyleSheet.create({
   },
   subText: {
     fontSize: moderateScale(12),
-    color: '#3a3a3aff',
+    color: COLORS.subtext,
     fontFamily: FONTS.Regular,
   },
   profileImageContainer: {
@@ -344,7 +449,7 @@ const styles = StyleSheet.create({
   },
   inputLabel: {
     fontSize: moderateScale(12),
-    color: COLORS.gradientButton[1],
+    color: COLORS.text,
     fontFamily: FONTS.Bold,
     fontWeight: '600',
     marginBottom: verticalScale(6),
@@ -397,8 +502,8 @@ const styles = StyleSheet.create({
     flex: 1,
     height: verticalScale(38),
     borderRadius: moderateScale(10),
-    borderWidth: 1.5,
-    borderColor: COLORS.button,
+    borderWidth: 2,
+    borderColor: '#e67700ff',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'transparent',
@@ -407,11 +512,11 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(13),
     color: COLORS.button,
     fontFamily: FONTS.Bold,
-    fontWeight: '600',
+    fontWeight: '700',
   },
   saveButton: {
     flex: 1,
-    backgroundColor: '#E94560',
+    backgroundColor: COLORS.gradientButton[0],
     height: verticalScale(38),
     borderRadius: moderateScale(10),
     overflow: 'hidden',

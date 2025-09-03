@@ -195,20 +195,20 @@ const styles = StyleSheet.create({
   screenTitle: {
     fontSize: 25,
     fontWeight: 'bold',
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Bold,
     marginBottom: 5,
   },
   screenSubtitle: {
     fontSize: 14,
     // color: COLORS.grey,
-    color: '#2c2c2c',
+    color: COLORS.subtext,
     fontFamily: FONTS.Regular,
   },
 
   // Order Summary Card
   summaryCard: {
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.card,
     borderRadius: 15,
     padding: 20,
     marginBottom: 25,
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Bold,
     marginBottom: 15,
   },
@@ -236,12 +236,12 @@ const styles = StyleSheet.create({
   },
   summaryLabel: {
     fontSize: 16,
-    color: COLORS.grey,
+    color: COLORS.subtext,
     fontFamily: FONTS.Regular,
   },
   summaryValue: {
     fontSize: 16,
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Medium,
   },
   divider: {
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
   totalLabel: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Bold,
   },
   totalValue: {
@@ -269,12 +269,12 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Bold,
     marginBottom: 15,
   },
   paymentMethodCard: {
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.card,
     borderRadius: 12,
     padding: 10,
     marginBottom: 12,
@@ -291,7 +291,7 @@ const styles = StyleSheet.create({
   },
   selectedPaymentMethod: {
     borderColor: 'transparent',
-    backgroundColor: '#E94560',
+    backgroundColor: '#A40606',
     // shadowColor: "#000",
   },
   paymentMethodContent: {
@@ -305,7 +305,7 @@ const styles = StyleSheet.create({
   },
   paymentMethodText: {
     fontSize: 15,
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Medium,
     flex: 1,
   },
@@ -313,15 +313,15 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderRadius: 10,
-    borderWidth: 2,
-    borderColor: 'grey',
+    borderWidth: 1,
+    borderColor: '#171010ff',
     position: 'absolute',
     right: 15,
     top: 15,
   },
   radioButtonSelected: {
     borderColor: 'grey',
-    backgroundColor: '#807979ff',
+    backgroundColor: '#171010ff',
   },
 
   // Address Section
@@ -335,17 +335,17 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   changeAddressText: {
-    color: 'red',
+    color: COLORS.text,
     fontSize: 15,
     fontWeight: '600',
     fontFamily: FONTS.Medium,
   },
   selectedAddressCard: {
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.button,
     borderRadius: 12,
     padding: 16,
     borderWidth: 1,
-    borderColor: COLORS.theme,
+    borderColor: COLORS.button,
     shadowColor: COLORS.black,
     shadowOffset: {
       width: 0,
@@ -363,7 +363,7 @@ const styles = StyleSheet.create({
   addressType: {
     fontSize: 16,
     fontWeight: '600',
-    color: COLORS.theme,
+    color: COLORS.button,
     marginLeft: 8,
     fontFamily: FONTS.Medium,
   },
@@ -383,20 +383,20 @@ const styles = StyleSheet.create({
   addressContactName: {
     fontSize: 16,
     fontWeight: '600',
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Medium,
     marginBottom: 4,
   },
   addressLine: {
     fontSize: 14,
-    color: COLORS.grey,
+    color: COLORS.subtext,
     fontFamily: FONTS.Regular,
     lineHeight: 20,
     marginBottom: 2,
   },
   addressPhone: {
     fontSize: 14,
-    color: COLORS.grey,
+    color: COLORS.subtext,
     fontFamily: FONTS.Regular,
     marginTop: 4,
   },
@@ -405,8 +405,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 15,
     borderWidth: 1,
-    borderColor: COLORS.theme,
-    shadowColor: COLORS.black,
+    borderColor: COLORS.button,
+    shadowColor: COLORS.text,
     shadowOffset: {
       width: 0,
       height: 1,
@@ -424,12 +424,12 @@ const styles = StyleSheet.create({
 
   // Bottom Section
   bottomSection: {
-    backgroundColor: '#E94560',
+    backgroundColor: COLORS.card,
     height: 56,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 16,
-    shadowColor: '#E94560',
+    shadowColor: COLORS.button,
     shadowOffset: {
       width: 0,
       height: 4,

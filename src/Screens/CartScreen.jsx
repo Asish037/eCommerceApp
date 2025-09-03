@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     // paddingHorizontal: 15,
   },
   bottomContainer: {
-    backgroundColor: '#ddbbbbff',
+    backgroundColor: '#A40606',
     // borderTopLeftRadius: 50,
     // borderTopRightRadius: 50,
     height: 240,
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     shadowRadius: 12,
     elevation: 8,
     borderTopWidth: 1,
-    borderColor: '#ddbbbbff',
+    borderColor: '#ff9a2dff',
   },
   totalSection: {
     marginBottom: 20,
@@ -121,14 +121,14 @@ const styles = StyleSheet.create({
   },
   totalLabel: {
     fontSize: 16,
-    color: '#1f0303ff',
-    fontWeight: '500',
+    color: COLORS.text,
+    fontWeight: '600',
     fontFamily: fonts.regular,
     letterSpacing: 0.5,
   },
   totalValue: {
     fontSize: 16,
-    color: '#2C2C2C',
+    color: COLORS.text,
     fontWeight: '600',
     fontFamily: fonts.medium,
   },
@@ -139,19 +139,20 @@ const styles = StyleSheet.create({
   },
   grandTotalLabel: {
     fontSize: 18,
-    color: '#2C2C2C',
+    color: COLORS.text,
     fontWeight: '700',
     fontFamily: fonts.medium,
   },
   grandTotalValue: {
     fontSize: 20,
-    color: '#E94560',
+    color: COLORS.button,
     fontWeight: '700',
     fontFamily: fonts.medium,
   },
   checkoutButton: {
     backgroundColor: COLORS.button,
     height: 50,
+    marginBottom: 20,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 18,

@@ -301,14 +301,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: moderateScale(23),
     fontWeight: '700',
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Bold,
     marginTop: moderateScale(4),
     marginBottom: moderateScale(4),
   },
   subtitle: {
     fontSize: moderateScale(13),
-    color: '#2c2c2c',
+    color: COLORS.subtext,
     fontFamily: FONTS.Regular,
     lineHeight: moderateScale(20),
   },
@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: moderateScale(16),
     fontWeight: '600',
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Medium,
     marginBottom: moderateScale(10),
     paddingHorizontal: moderateScale(6),
@@ -365,16 +365,16 @@ const styles = StyleSheet.create({
   },
   menuText: {
     fontSize: moderateScale(14),
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Medium,
     fontWeight: '600',
     lineHeight: moderateScale(20),
     marginBottom: moderateScale(2),
   },
   menuSubText: {
-    fontSize: moderateScale(13),
-    color: '#6C757D',
+    fontSize: moderateScale(12),
+    color: COLORS.subtext,
     fontFamily: FONTS.Regular,
-    lineHeight: moderateScale(16),
+    lineHeight: moderateScale(15),
   },
 });

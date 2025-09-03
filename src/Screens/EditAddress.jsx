@@ -46,6 +46,22 @@ const EditAddress = ({route}) => {
   const [keyboardVisible, setKeyboardVisible] = useState(false);
   const fadeAnim = useState(new Animated.Value(0))[0];
 
+  /*
+  const [formData , SetFormData] = useState({
+    pincode: '',
+    houseNumber: '',
+    roadName: '',
+    contactName: '',
+    phoneNumber: '',
+    addressType: 'Home',
+    isDefault: false,
+  });
+  const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+
+  */
+
+
   useEffect(() => {
     // Animate screen entrance
     Animated.timing(fadeAnim, {
@@ -118,6 +134,57 @@ const EditAddress = ({route}) => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+  /*
+  const saveNewAddress = async() => {
+    console.log('save button pressed!'); 
+    if (!validateForm()) {
+      Toast.show('Please fill all required fields correctly!', Toast.SHORT);
+      return;
+    }
+
+    setIsLoading(true);
+
+    const isEditing = !!route.params?.addressData;
+    const method = isEditing ? 'PUT' : 'POST';
+    const URL = isEditing ? `https://your-api.com/addresses/${route.params.addressData.id}`
+        : 'https://your-api.com/addresses';
+
+    try {
+      const payload = { ...formData };
+      if (isEditing) {
+        payload.id = route.params.addressData.id;
+      }
+      const response = await fetch(URL, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error('Network response was not ok');
+      }
+      const savedData = await response.json();
+      console.log('Address saved successfully:', savedData);
+
+      if (isEditing) {
+        navigation.navigate('AddressScreen', { updatedAddress: savedData });
+        Toast.show('Address updated successfully!', Toast.SHORT);
+      } else {
+        navigation.navigate('AddressScreen', { newAddress: savedData });
+        Toast.show('Address added successfully!', Toast.SHORT);
+      }
+    } catch (error) {
+      console.error('Error saving address:', error);
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  }
+  
+  */
 
   const saveNewAddress = async () => {
     console.log('Save button pressed!'); // Debug log
@@ -260,10 +327,10 @@ const EditAddress = ({route}) => {
                 <View style={{marginBottom: 20}}>
                   <Text
                     style={{
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: 'bold',
                       marginBottom: 5,
-                      color: COLORS.gradientButton[1],
+                      color: COLORS.subtext,
                     }}>
                     Pincode:
                   </Text>
@@ -293,10 +360,10 @@ const EditAddress = ({route}) => {
                 <View style={{marginBottom: 20}}>
                   <Text
                     style={{
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: 'bold',
                       marginBottom: 5,
-                      color: COLORS.gradientButton[1],
+                      color: COLORS.subtext,
                     }}>
                     House/Flat/Building No.:
                   </Text>
@@ -328,10 +395,10 @@ const EditAddress = ({route}) => {
                 <View style={{marginBottom: 20}}>
                   <Text
                     style={{
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: 'bold',
                       marginBottom: 5,
-                      color: COLORS.gradientButton[1],
+                      color: COLORS.subtext,
                     }}>
                     Road Name/Area/Colony:
                   </Text>
@@ -433,7 +500,7 @@ const EditAddress = ({route}) => {
                   <MaterialIcons
                     name="contact-phone"
                     size={24}
-                    color={COLORS.gradientButton[1]}
+                    color={COLORS.icon}
                   />
                   <Text style={styles.sectionTitle}>Contact Information</Text>
                 </View>
@@ -441,10 +508,10 @@ const EditAddress = ({route}) => {
                 <View style={{marginBottom: 20}}>
                   <Text
                     style={{
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: 'bold',
                       marginBottom: 5,
-                      color: COLORS.gradientButton[1],
+                      color: COLORS.subtext,
                     }}>
                     Contact Name:
                   </Text>
@@ -476,10 +543,10 @@ const EditAddress = ({route}) => {
                 <View style={{marginBottom: 20}}>
                   <Text
                     style={{
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: 'bold',
                       marginBottom: 5,
-                      color: COLORS.gradientButton[1],
+                      color: COLORS.subtext,
                     }}>
                     Phone Number:
                   </Text>
@@ -569,7 +636,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: moderateScale(16),
     fontWeight: '600',
-    color: COLORS.gradientButton[1],
+    color: COLORS.text,
     marginLeft: moderateScale(8),
     fontFamily: fonts.medium,
   },
@@ -580,7 +647,7 @@ const styles = StyleSheet.create({
   inputLabel: {
     fontSize: moderateScale(14),
     fontWeight: '600',
-    color: COLORS.gradientButton[1],
+    color: COLORS.text,
     marginBottom: verticalScale(8),
     fontFamily: fonts.medium,
   },
@@ -657,7 +724,7 @@ const styles = StyleSheet.create({
   addressTypeText: {
     fontSize: moderateScale(14),
     fontWeight: '500',
-    color: COLORS.button,
+    color: COLORS.text,
     marginLeft: moderateScale(6),
     fontFamily: fonts.medium,
   },

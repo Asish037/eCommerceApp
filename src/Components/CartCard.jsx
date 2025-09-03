@@ -2,6 +2,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useContext} from 'react';
 import {fonts} from '../utils/fonts';
 import {CartContext} from '../Context/CartContext';
+import { COLORS } from '../Constant/Colors';
 
 const CartCard = ({item, handleDelete}) => {
   console.log(JSON.stringify(item));
@@ -72,7 +73,7 @@ export default CartCard;
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.card,
     borderRadius: 16,
     marginVertical: 8,
     marginHorizontal: 4,

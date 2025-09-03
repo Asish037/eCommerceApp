@@ -121,6 +121,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginVertical: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    marginHorizontal: 10,
     backgroundColor: COLORS.card,
     borderRadius: 20,
     elevation: 3,
@@ -139,11 +142,11 @@ const styles = StyleSheet.create({
     width: '100%',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
   },
   contentContainer: {
-    padding: 12,
-    paddingBottom: 16,
+    padding: 10,
+    paddingBottom: 4,
   },
   title: {
     fontSize: 16,
@@ -157,7 +160,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: fonts.medium,
     fontWeight: '700',
-    color: '#E94560',
+    color: COLORS.button,
     marginBottom: 6,
   },
   description: {
@@ -175,7 +178,7 @@ const styles = StyleSheet.create({
   rating: {
     fontSize: 12,
     fontFamily: fonts.regular,
-    color: '#e82929da',
+    color: COLORS.button,
     marginRight: 4,
   },
   ratingCount: {
@@ -195,12 +198,12 @@ const styles = StyleSheet.create({
   cartButtonDefault: {
     backgroundColor: '#FFE4E6',
     borderWidth: 1,
-    borderColor: '#E94560',
+    borderColor: COLORS.button,
   },
   cartButtonAdded: {
-    backgroundColor: '#E94560',
+    backgroundColor: COLORS.button,
     borderWidth: 1,
-    borderColor: '#E94560',
+    borderColor: COLORS.button,
   },
   cartIcon: {
     width: 16,
@@ -208,7 +211,7 @@ const styles = StyleSheet.create({
     marginRight: 6,
   },
   cartIconDefault: {
-    tintColor: '#E94560',
+    tintColor: COLORS.icon,
   },
   cartIconAdded: {
     tintColor: '#FFFFFF',
@@ -219,7 +222,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   cartButtonTextDefault: {
-    color: '#E94560',
+    color: COLORS.button,
   },
   cartButtonTextAdded: {
     color: '#FFFFFF',
@@ -243,5 +246,6 @@ const styles = StyleSheet.create({
   faviorate: {
     height: 20,
     width: 20,
+    tintColor: COLORS.button,
   },
 });

@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   FlatList,
   StatusBar,
+  ActivityIndicator
 } from 'react-native';
 import {COLORS} from '../Constant/Colors';
 import {FONTS} from '../Constant/Font';
@@ -25,8 +26,13 @@ import Moment from 'moment';
 const Orders = () => {
   const navigation = useNavigation();
   const route = useRoute();
+
   const [ordersData, setOrdersData] = useState([]);
   const [allOrders] = useState(myorderData.orders);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+
 
   // Get route parameters
   const {status, title, filter} = route.params || {};
@@ -67,6 +73,65 @@ const Orders = () => {
     setOrdersData(filteredOrders);
   }, [filter, allOrders]);
 
+  /*
+    useEffect((
+      () => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch('https://api.example.com/orders');
+            if(!response.ok){
+              throw new Error('Failed to fetch orders');
+            
+            }
+            const data = await response.json();
+            let filteredOrders = data.orders;
+            if (filter) {
+              switch (filter) {
+                case 'unpaid':
+                  filteredOrders = allOrders.filter(
+                    order => order.payment.payment_status !== 'Completed',
+                  );
+                  break;
+                case 'paid':
+                  filteredOrders = allOrders.filter(
+                    order =>
+                      order.payment.payment_status === 'Completed' &&
+                      order.shipping_status === 'Processing',
+                  );
+                  break;
+                case 'shipped':
+                  filteredOrders = allOrders.filter(
+                    order => order.shipping_status === 'Shipped',
+                  );
+                  break;
+                case 'delivered':
+                  filteredOrders = allOrders.filter(
+                    order => order.shipping_status === 'Delivered',
+                  );
+                  break;
+                default:
+                  filteredOrders = allOrders;
+              }
+            }
+            setOrdersData(filteredOrders);  
+            setError(null);
+          } catch (error) {
+            setError('An error occurred while fetching orders');
+            console.error("Error fetching orders:", error);
+            setOrdersData([]);  // clear orders data on error
+          } finally {
+            setIsLoading(false);
+          }
+        };
+
+        fetchData();
+      }
+    ),[])
+  
+  */
+
+
+
   const getStatusIcon = status => {
     switch (status) {
       case 'Shipped':
@@ -97,6 +162,7 @@ const Orders = () => {
     <TouchableOpacity
       onPress={() => {
         navigation.navigate('OrderDetails', {items: item});
+        // navigation.navigate('OrderDetails', {orderId: item.order_id});
       }}
       style={styles.orderCard}>
       <View style={styles.orderHeader}>
@@ -188,7 +254,28 @@ const Orders = () => {
         barStyle="dark-content"
         backgroundColor="transparent"
         translucent
-      /> */}
+      />
+      {isLoading ? (
+        <View style={styles.centerContainer}>
+          <ActivityIndicator size="large" color={COLORS.button} />
+          <Text style={styles.loadingText}>Loading your orders...</Text>
+        </View>
+      ) : error ? (
+        <View style={styles.centerContainer}>
+          <MaterialIcons name="error-outline" size={moderateScale(60)} color={COLORS.red} />
+          <Text style={styles.errorText}>{error}</Text>
+        </View>
+      ) : (
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContainer}>
+          <View style={styles.headerSection}>
+            <Text style={styles.headerTitle}>{title || 'My Orders'}</Text>
+            <Text style={styles.headerSubtitle}>
+              {ordersData.length} order{ordersData.length !== 1 ? 's' : ''} • Total: ${ordersData.reduce((sum, order) => sum + parseFloat(order.payment.total_amount), 0).toFixed(2)}
+            </Text>
+          </View>
+      
+      
+      */}
       <Header />
 
       <ScrollView
@@ -478,4 +565,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: moderateScale(40),
     lineHeight: moderateScale(20),
   },
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    marginTop: moderateScale(10),
+    color: COLORS.black,
+    fontFamily: FONTS.Medium,
+  },
+  errorText: {
+    marginTop: moderateScale(10),
+    color: COLORS.red,
+    fontFamily: FONTS.Medium,
+    textAlign: 'center',
+    paddingHorizontal: moderateScale(20),
+  },
 });
+

@@ -12,6 +12,8 @@ import {fonts} from '../utils/fonts';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {addToCart} from '../utils/helper';
 import {CartContext} from '../Context/CartContext';
+import { COLORS } from '../Constant/Colors';
+import ionicons from 'react-native-vector-icons/Ionicons';
 
 const Header = ({isCart, onSearchChange}) => {
   const navigation = useNavigation();
@@ -90,7 +92,8 @@ const Header = ({isCart, onSearchChange}) => {
     try {
       if (route.name === 'HOME' || route.name === 'MainHome') {
         // On home screen, show menu drawer
-        navigation.navigate('MenuDrawer');
+        navigation.navigate('MainHome');
+        // navigation.openDrawer();
       } else {
         // On other screens, go back
         if (navigation.canGoBack()) {
@@ -144,6 +147,7 @@ const Header = ({isCart, onSearchChange}) => {
               <Image
                 source={require('../assets/search.png')}
                 style={styles.inlineSearchIcon}
+                tintColor={COLORS.yellow}
               />
               <TextInput
                 ref={searchInputRef}
@@ -219,7 +223,7 @@ export default Header;
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    padding: 5,
+    padding: 8,
   },
   header: {
     flexDirection: 'row',
@@ -240,22 +244,26 @@ const styles = StyleSheet.create({
   appDrawerIcon: {
     height: 24,
     width: 24,
+    tintColor: COLORS.icon
     // marginLeft: 10,
   },
   appSearchIcon: {
     height: 24,
     width: 24,
     marginLeft: 10,
+    tintColor: COLORS.icon
   },
   appFavoriteIcon: {
     height: 24,
     width: 24,
     marginLeft: 10,
+    tintColor: COLORS.icon
   },
   appCartIcon: {
     height: 24,
     width: 24,
     marginLeft: 10,
+    tintColor: COLORS.icon
   },
   iconContainer: {
     flexDirection: 'row',
