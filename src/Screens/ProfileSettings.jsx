@@ -90,7 +90,7 @@ const ProfileSettings = () => {
                 <View style={styles.bodyPart}>
                   <Text style={styles.headTitle}>Terms and Conditions</Text>
                   <Text style={styles.headSubTitle}>
-                    Explore terms and conditions related to your MJ accounts
+                    Explore terms and conditions related to your Shopnova accounts
                   </Text>
                 </View>
                 <View style={styles.bodyPartSmall}>

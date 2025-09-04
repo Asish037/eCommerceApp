@@ -2,7 +2,6 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useContext} from 'react';
 import {fonts} from '../utils/fonts';
 import {CartContext} from '../Context/CartContext';
-import { COLORS } from '../Constant/Colors';
 
 const ProductCard = ({
   item,
@@ -18,8 +17,7 @@ const ProductCard = ({
   // Truncate description to 4 words
   const truncatedDescription =
     item.description?.split(' ').slice(0, 4).join(' ') + '...' ||
-    'Classic premier brand...';
-
+    'No description available...';
 
   // Format rating display
   const renderStars = rating => {
@@ -130,10 +128,10 @@ export default ProductCard;
 
 const styles = StyleSheet.create({
   container: {
-    width: '45%', // Fixed width instead of flex: 1
-    marginHorizontal: 8,
+    flex: 1,
+    marginHorizontal: 10,
     marginVertical: 10,
-    backgroundColor: COLORS.card,
+    backgroundColor: '#FFFFFF',
     borderRadius: 20,
     elevation: 3,
     shadowColor: '#000',
@@ -143,7 +141,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
-    overflow: 'hidden',
   },
   coverImage: {
     height: 200,
@@ -168,13 +165,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: fonts.medium,
     fontWeight: '700',
-    color: COLORS.button,
+    color: '#E94560',
     marginBottom: 6,
   },
   description: {
-    fontSize: 13,
+    fontSize: 12,
     fontFamily: fonts.regular,
-    color: '#000000ff',
+    color: '#666666',
     marginBottom: 8,
     lineHeight: 16,
   },
@@ -186,13 +183,13 @@ const styles = StyleSheet.create({
   rating: {
     fontSize: 12,
     fontFamily: fonts.regular,
-    color: COLORS.button,
+    color: '#FFA500',
     marginRight: 4,
   },
   ratingCount: {
     fontSize: 10,
     fontFamily: fonts.regular,
-    color: COLORS.button,
+    color: '#999999',
   },
   cartButton: {
     flexDirection: 'row',
@@ -206,12 +203,12 @@ const styles = StyleSheet.create({
   cartButtonDefault: {
     backgroundColor: '#FFE4E6',
     borderWidth: 1,
-    borderColor: COLORS.button,
+    borderColor: '#E94560',
   },
   cartButtonAdded: {
-    backgroundColor: COLORS.button,
+    backgroundColor: '#E94560',
     borderWidth: 1,
-    borderColor: COLORS.button,
+    borderColor: '#E94560',
   },
   cartIcon: {
     width: 16,
@@ -219,7 +216,7 @@ const styles = StyleSheet.create({
     marginRight: 6,
   },
   cartIconDefault: {
-    tintColor: COLORS.button,
+    tintColor: '#E94560',
   },
   cartIconAdded: {
     tintColor: '#FFFFFF',
@@ -230,7 +227,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   cartButtonTextDefault: {
-    color: COLORS.button,
+    color: '#E94560',
   },
   cartButtonTextAdded: {
     color: '#FFFFFF',
@@ -270,11 +267,10 @@ const styles = StyleSheet.create({
   faviorate: {
     height: 20,
     width: 20,
-    tintColor: COLORS.button,
   },
   deleteIcon: {
     height: 20,
     width: 20,
-    tintColor: COLORS.button, // Red color for delete icon
+    tintColor: '#E94560', // Red color for delete icon
   },
 });

@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Platform,
 } from 'react-native';
 import GradientButton from '../../Components/Button/GradientButton';
 import ImageWithTitle from '../../Components/Header/ImageWithTitle';
@@ -28,6 +29,10 @@ import model4 from '../../assets/model9.jpg';
 import CustomInput from '../../Components/CustomInput';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import axios from '../../Components/axios';
+import qs from 'qs';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { requestNotificationPermission } from '../../utils/requestNotificationPermission';
 
 const datet = new Date();
 
@@ -41,24 +46,63 @@ export default function Register() {
   const [name, setName] = React.useState('');
   const [phone, setPhone] = React.useState('');
   const [error, setError] = React.useState('');
+  const [fcmToken, setFcmToken] = React.useState('');
   // const [email, setEmail] = React.useState('');
   // const [password, setPassword] = React.useState('');
 
-  // Define the registerUser function to handle registration logic
-  const registerUser = () => {
-    if (!phone || phone.length < 9) {
-      setError('Please enter a valid mobile number (at least 9 digits).');
-      return;
+  React.useEffect(() => {
+    getStoredFcmToken();
+  }, []);
+
+  const getStoredFcmToken = async () => {
+    try {
+      const token = await AsyncStorage.getItem('fcmToken');
+      if (token !== null) {
+        console.log('Stored FCM Token:', token);
+        setFcmToken(token)
+        return token;
+      } else {
+        console.log('No FCM token found');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error reading FCM token:', error);
+      return null;
     }
+  };
+
+  // Define the registerUser function to handle registration logic
+  const registerUser = async() => {
     if (!name) {
       setError('Please enter your name.');
       return;
     }
+    if (!phone || phone.length < 9) {
+      setError('Please enter a valid mobile number (at least 9 digits).');
+      return;
+    }
+    
     setError('');
     let data = {
       name: name,
-      phone: phone,
+      phone: phone
     };
+    // ✅ Only include FCM token if it's available
+    // if (token) {
+    //   data.fcm_token = token;
+    // } else {
+    //   console.warn('FCM token not available');
+    // }
+    // console.log('Sending data:', data);
+    // let options = {
+    //   method: 'POST',
+    //   headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    //   data: qs.stringify(data),
+    //   url: 'login',
+    // };
+
+    // const res = await axios(options);
+    // console.log(res);
     navigation.navigate('Otp', {data});
   };
 
@@ -76,7 +120,10 @@ export default function Register() {
         </View>
         {/* Login box at bottom, not full height */}
         <View style={styles.loginBoxOuter}>
-          <View style={styles.loginBox}>
+          <ScrollView 
+            style={styles.loginBox}
+            contentContainerStyle={styles.loginBoxContent}
+            showsVerticalScrollIndicator={false}>
             <Text style={styles.loginTitle}>Login / Signup</Text>
             {/* <Text style={styles.loginSubtitle}>
               Join us now to be a part of StyleON family.
@@ -114,12 +161,14 @@ export default function Register() {
               style={styles.continueContainer}
               onPress={registerUser}>
               <LinearGradient
-                colors={COLORS.gradientButton}
+                colors={['#FFD700', '#FFA500', '#FF8C00']}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 0}}
                 style={styles.continueBtn}>
                 <Text style={styles.continueText}>CONTINUE</Text>
               </LinearGradient>
             </TouchableOpacity>
-          </View>
+          </ScrollView>
         </View>
       </ImageBackground>
     </View>
@@ -155,8 +204,8 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     position: 'absolute',
-    top: 32,
-    left: 18,
+    top: Platform.OS === 'ios' ? 40 : 30,
+    left: Platform.OS === 'ios' ? 18 : 10,
     zIndex: 10,
   },
   logoText: {
@@ -187,7 +236,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
     paddingTop: 18,
     paddingBottom: 32,
-    alignItems: 'flex-start',
     shadowColor: '#000',
     shadowOffset: {width: 0, height: -2},
     shadowOpacity: 0.08,
@@ -195,6 +243,10 @@ const styles = StyleSheet.create({
     elevation: 8,
     minHeight: 180,
     marginBottom: 0,
+  },
+  loginBoxContent: {
+    flexGrow: 1,
+    alignItems: 'flex-start',
   },
   loginTitle: {
     fontSize: 18,
@@ -244,21 +296,27 @@ const styles = StyleSheet.create({
   },
   continueContainer: {
     width: '100%',
+    height: verticalScale(40),
+    marginTop: 10,
+    marginBottom: 20,
+    justifyContent: 'center',
   },
   continueBtn: {
     width: '100%',
-    borderRadius: 8,
-    paddingVertical: 16,
-    paddingHorizontal: 24,
+    height: '100%',
+    borderRadius: 28,
     alignItems: 'center',
-    marginTop: 12,
-    marginBottom: 0,
+    justifyContent: 'center',
+    overflow: 'hidden',
   },
   continueText: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
     letterSpacing: 1,
+    textAlign: 'center',
+    includeFontPadding: false,
+    textAlignVertical: 'center',
   },
   errorText: {
     color: 'red',

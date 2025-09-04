@@ -18,7 +18,7 @@ import {
   searchIcon,
   whiteMenuIcon,
 } from '../images';
-import colors from '../common/colors';
+import {COLORS} from '../Constant/Colors';
 import {CustomText, CustomImageButton, CustomTextInput} from './';
 import {GenericStyles} from '../styles/GenericStyles';
 
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flex: 1,
     flexDirection: 'row',
-    borderColor: colors.WHITE_GREY,
+    borderColor: COLORS.whiteGrey,
     borderWidth: 1,
     borderRadius: 4,
     margin: 10,

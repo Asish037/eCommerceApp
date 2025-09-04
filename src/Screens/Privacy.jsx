@@ -21,13 +21,15 @@ const Privacy = () => {
   return (
     <LinearGradient colors={COLORS.gradient} style={styles.container}>
       <Header />
-      <ScrollView
-        contentContainerStyle={{flexGrow: 1}}
-        showsVerticalScrollIndicator={false}>
-        {/* <StatusBar color="#555" /> */}
-        <View style={styles.bodyContainer}>
-          <Text style={styles.titleHead}>Privacy Policy</Text>
-        </View>
+      <View style={styles.contentWrapper}>
+        <ScrollView
+          contentContainerStyle={{flexGrow: 1}}
+          showsVerticalScrollIndicator={false}>
+          {/* <StatusBar color="#555" /> */}
+          <View style={styles.headerSpacing} />
+          <View style={styles.titleContainer}>
+            <Text style={styles.titleHead}>Privacy Policy</Text>
+          </View>
 
         <View style={styles.bodyContainer}>
           <Text style={styles.subHead}>Last Updated: January 2025</Text>
@@ -229,7 +231,8 @@ const Privacy = () => {
           the significant changes to the Privacy Policy, in the manner as may be
           required under applicable laws.
         </Text>
-      </ScrollView>
+        </ScrollView>
+      </View>
     </LinearGradient>
   );
 };
@@ -239,26 +242,39 @@ export default Privacy;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: 10,
-    marginVertical: 10,
     borderColor: COLORS.black,
     borderWidth: 2,
     borderRadius: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
+    width: '100%',
+    height: '100%'
+  },
+  contentWrapper: {
+    flex: 1,
     padding: 10,
-    alignContent: 'center',
+    // marginTop: 60, // Adjust this value based on your header height
+  },
+  headerSpacing: {
+    height: 20,
+  },
+  titleContainer: {
+    width: '100%',
+    paddingHorizontal: 0,
+    paddingVertical: 10,
+    marginHorizontal: 0,
   },
   bodyContainer: {
     margin: 10,
   },
   titleHead: {
-    alignContent: 'center',
+    width: '100%',
+    textAlign: 'center',
     color: COLORS.black,
     fontWeight: '800',
     fontFamily: fonts.bold,
     fontSize: 30,
     textDecorationLine: 'underline',
+    paddingHorizontal: 0,
+    marginHorizontal: 0,
   },
   subHead: {
     alignContent: 'center',

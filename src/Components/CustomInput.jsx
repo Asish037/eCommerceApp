@@ -8,7 +8,7 @@ import {
 import React, {useState, useRef, forwardRef, useImperativeHandle} from 'react';
 
 import Feather from 'react-native-vector-icons/Feather';
-import {useTheme} from '@react-navigation/native';
+// import {useTheme} from '@react-navigation/native';
 import {COLORS} from '../Constant/Colors';
 import {moderateScale, verticalScale} from '../PixelRatio';
 import {FONTS} from '../Constant/Font';
@@ -40,7 +40,7 @@ import {FONTS} from '../Constant/Font';
       inputRef.current.focus();
     },
   }));
-  const {colors} = useTheme();
+  // const {colors} = useTheme();
   console.log('deghhhh=='+JSON.stringify(props.type))
 
   const validateEmail = () => {
@@ -123,7 +123,7 @@ import {FONTS} from '../Constant/Font';
         style={[
           styles.inputLabel,
           {
-            color: colors.textPrimary,
+            color: COLORS.black,
           },
         ]}>
         {props.label}
@@ -132,9 +132,9 @@ import {FONTS} from '../Constant/Font';
       <View style={styles.inputFieldContainer}>
         {props.icon}
         <TextInput
-          style={[styles.textInput, {color: colors.textPrimary}]}
+          style={[styles.textInput, {color: COLORS.black}]}
           placeholder={props.placeholder}
-          placeholderTextColor={colors.iconSecondary}
+          placeholderTextColor={COLORS.grey}
           secureTextEntry={props.type === 'password' && secureTextEntery}
           keyboardType={props.keyboardType} 
           onChangeText={event => handleChange(event)}

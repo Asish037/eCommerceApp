@@ -1,0 +1,303 @@
+import React, {useEffect} from 'react';
+import {
+  Modal,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import GradientButton from '../../Components/Button/GradientButton';
+import ImageWithTitle from '../../Components/Header/ImageWithTitle';
+import {COLORS} from '../../Constant/Colors';
+import {FONTS} from '../../Constant/Font';
+import {moderateScale, verticalScale} from '../../PixelRatio';
+import moment from 'moment';
+//import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import Toast from 'react-native-simple-toast';
+// import Picker from '../../Components/DropDownPicker/Picker';
+import CountryCityModal from '../../Components/Modal/CountryCityModal';
+import {ETHNCITY_TYPE, GENDER} from '../../Constant/DATA';
+//import Auth from '../../Service/Auth';
+import {useNavigation} from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
+import {ImageBackground} from 'react-native';
+import model4 from '../../assets/model9.jpg';
+import CustomInput from '../../Components/CustomInput';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
+const datet = new Date();
+
+const year = datet.getFullYear();
+const month = datet.getMonth();
+const day = datet.getDate();
+
+export default function Register() {
+  const navigation = useNavigation();
+
+  const [name, setName] = React.useState('');
+  const [phone, setPhone] = React.useState('');
+  const [error, setError] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(false);
+  // const [email, setEmail] = React.useState('');
+  // const [password, setPassword] = React.useState('');
+
+  // const []
+
+  // Define the registerUser function to handle registration logic
+  const registerUser = () => {
+    if (!phone || phone.length < 9) {
+      setError('Please enter a valid mobile number (at least 9 digits).');
+      return;
+    }
+    if (!name) {
+      setError('Please enter your name.');
+      return;
+    }
+    setError('');
+    let data = {
+      name: name,
+      phone: phone,
+    };
+    navigation.navigate('Otp', {data});
+  };
+
+  /*
+  const handleloginRegister = async () => {
+
+    if (name === '') {
+      setError('Please enter your name.');
+      return;
+    }
+
+    if (!phone || phone.length < 9) {
+      setError('Please enter a valid mobile number (at least 9 digits).');
+      return;
+    }
+
+    setError(''); 
+    setIsLoading(true);
+
+    try{
+      const response = await fetch('https://your-api-endpoint.com/register', {
+        method: 'POST',
+        headers: {)
+    
+    }catch{}
+  
+  
+  
+  */
+
+
+
+
+
+  return (
+    <View style={{flex: 1}}>
+      <ImageBackground
+        source={model4}
+        style={styles.bgImage}
+        resizeMode="fit">
+        {/* Logo at top left, over image */}
+        <View style={styles.logoContainer}>
+          <Text style={styles.logoText}>
+            <Text>Style</Text><Text style={styles.logoBold}>ON</Text>
+          </Text>
+        </View>
+        {/* Login box at bottom, not full height */}
+        <View style={styles.loginBoxOuter}>
+          <View style={styles.loginBox}>
+            <Text style={styles.loginTitle}>Login / Signup</Text>
+            {/* <Text style={styles.loginSubtitle}>
+              Join us now to be a part of StyleON family.
+            </Text> */}
+            {/* Name input */}
+            <View style={styles.inputRowFull}>
+              <TextInput
+                style={styles.nameInput}
+                placeholder="Enter Name"
+                placeholderTextColor="#B0B0B0"
+                value={name}
+                onChangeText={setName}
+                autoCapitalize="words"
+                returnKeyType="next"
+              />
+            </View>
+            {/* Phone input */}
+            <View style={styles.inputRow}>
+              <View style={styles.countryCodeBox}>
+                <Text style={styles.flag}>🇮🇳</Text>
+                <Text style={styles.countryCode}>+91</Text>
+              </View>
+              <TextInput
+                style={styles.mobileInput}
+                placeholder="Enter Mobile Number"
+                placeholderTextColor="#B0B0B0"
+                keyboardType="phone-pad"
+                value={phone}
+                maxLength={10}
+                onChangeText={text => setPhone(text.replace(/[^0-9]/g, ''))}
+              />
+            </View>
+            {error ? <Text style={styles.errorText}>{error}</Text> : null}
+            <TouchableOpacity
+              style={styles.continueContainer}
+              onPress={registerUser}>
+              <LinearGradient
+                colors={COLORS.gradientButton}
+                style={styles.continueBtn}>
+                <Text style={styles.continueText}>CONTINUE</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ImageBackground>
+    </View>
+  );
+}
+
+// Styles should be defined outside the component and passed to StyleSheet.create
+const styles = StyleSheet.create({
+  // New styles for the new UI
+  inputRowFull: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    backgroundColor: '#F5F5F5',
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    marginBottom: 10,
+    height: 48,
+  },
+  bgImage: {
+    flex: 1, // Add this line to make the image fill the container
+    width: '100%',
+    height: '100%',
+  },
+  nameInput: {
+    flex: 1,
+    fontSize: 16,
+    color: '#222',
+    backgroundColor: 'transparent',
+    paddingVertical: 0,
+    paddingHorizontal: 8,
+    height: 48,
+  },
+  logoContainer: {
+    position: 'absolute',
+    top: 32,
+    left: 18,
+    zIndex: 10,
+  },
+  logoText: {
+    fontSize: 22,
+    fontWeight: 'semibold',
+    color: COLORS.button,
+    letterSpacing: 1,
+  },
+  logoBold: {
+    color: COLORS.button,
+    fontWeight: '900',
+  },
+  loginBoxOuter: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    paddingBottom: 0,
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+  loginBox: {
+    width: '100%',
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    paddingHorizontal: 18,
+    paddingTop: 18,
+    paddingBottom: 32,
+    alignItems: 'flex-start',
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: -2},
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 8,
+    minHeight: 180,
+    marginBottom: 0,
+  },
+  loginTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#222',
+    marginBottom: 2,
+    marginTop: 0,
+  },
+  loginSubtitle: {
+    fontSize: 13,
+    color: '#ba6060ff',
+    marginBottom: 18,
+  },
+  inputRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    backgroundColor: '#F5F5F5',
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    marginBottom: 10,
+    height: 48,
+  },
+  countryCodeBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 6,
+  },
+  flag: {
+    fontSize: 20,
+    marginRight: 2,
+  },
+  countryCode: {
+    fontSize: 16,
+    color: '#222',
+    fontWeight: 'bold',
+    marginRight: 4,
+  },
+  mobileInput: {
+    flex: 1,
+    fontSize: 16,
+    color: '#222',
+    backgroundColor: 'transparent',
+    paddingVertical: 0,
+    paddingHorizontal: 8,
+    height: 48,
+  },
+  continueContainer: {
+    width: '100%',
+  },
+  continueBtn: {
+    width: '100%',
+    borderRadius: 8,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    marginTop: 12,
+    marginBottom: 0,
+  },
+  continueText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+    letterSpacing: 1,
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 13,
+    marginBottom: 4,
+    marginTop: 2,
+  },
+});

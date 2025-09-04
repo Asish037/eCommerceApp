@@ -4,7 +4,7 @@ import Landing from '../Screens/Auth/Landing';
 import Otp from '../Screens/Auth/Otp';
 import Register from '../Screens/Auth/Register';
 import Login from '../Screens/Auth/LoginScreen';
-import {COLORS} from '../Constant/Colors';
+// import {COLORS} from '../Constant/Colors';
 
 const Stack = createNativeStackNavigator();
 

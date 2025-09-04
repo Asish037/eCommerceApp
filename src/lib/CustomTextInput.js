@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, ViewPropTypes, TextInput} from 'react-native';
 import PropTypes from 'prop-types';
 
-import colors from '../common/colors';
+import {COLORS} from '../Constant/Colors';
 import {GenericStyles} from '../styles/GenericStyles';
 
 const CustomTextInput = (props) => {
@@ -31,7 +31,7 @@ const CustomTextInput = (props) => {
 const styles = StyleSheet.create({
   containerStyle: {
     flexDirection: 'row',
-    borderColor: colors.WHITE_GREY,
+    borderColor: COLORS.whiteGrey,
     borderWidth: 1,
     borderRadius: 4,
     padding: 8,

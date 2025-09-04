@@ -1,15 +1,15 @@
 import { TouchableOpacity, Text } from 'react-native';
 import React from 'react';
 
-import colors from '../common/colors';
+import {COLORS} from '../Constant/Colors';
 
 const CustomButton = (props) => {
   const style = {};
   if (props.type === 'fill') {
-    style.backgroundColor = colors.BLUE;
+    style.backgroundColor = COLORS.blue;
     style.borderWidth = 0;
   } else if (props.type === 'default') {
-    style.borderColor = colors.BLUE;
+    style.borderColor = COLORS.blue;
   } else if (props.type === 'link') {
     style.borderWidth = 0;
   }
@@ -30,7 +30,7 @@ const CustomButton = (props) => {
         props.buttonStyle,
         props.disabled ? { opacity: 0.5 } : {},
       ]}>
-      <Text style={[{ textTransform: 'uppercase', fontSize: 12, color: colors.BLUE }, props.textStyle]}>{props.text}</Text>
+      <Text style={[{ textTransform: 'uppercase', fontSize: 12, color: COLORS.blue }, props.textStyle]}>{props.text}</Text>
     </TouchableOpacity>
   );
 };

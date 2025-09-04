@@ -6,6 +6,8 @@ import {
   Dimensions,
   ImageBackground,
   TouchableOpacity,
+  Platform,
+  SafeAreaView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {COLORS} from '../../Constant/Colors';
@@ -42,87 +44,102 @@ export default function Landing() {
   // }, [])
 
   return (
-    //  <CustomImageBackground>
-    //   <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-    //      <Image
-    //      style={{width: width/1.5,resizeMode:'contain'}}
-    //      source={require('../../assets/logo.png')}
-    //      />
-    //      <View style={{height:150,width:'100%'}}>
-    //       <Swiper
-    //       style={styles.wrapper}
-    //       showsButtons={false}
-    //       dotColor={COLORS.textInput}
-    //       activeDotColor={COLORS.button}
-    //       >
-    //          {
-    //              DATA.map((it,key)=>
-    //               <View style={styles.slide} key={key}>
-    //                    <Text style={styles.text}>{it.title}</Text>
-    //                    <Text style={styles.subtext}>{it.subtitle}</Text>
-    //               </View>
-    //              )
-    //          }
-    //       </Swiper>
-    //      </View>
-    //    </View>
-    //    </CustomImageBackground>
+    Platform.OS === 'ios' ? (
+      <SafeAreaView style={styles.container}>
+        <ImageBackground source={model6} style={styles.bgimage} resizeMode="cover">
+          <View style={styles.topContent}>
+            <View style={styles.logoContainer}>
+              <Text style={styles.logoText}>
+                <Text>Style</Text>
+                <Text style={styles.logoBold}>ON</Text>
+              </Text>
+            </View>
+            <View style={styles.taglineContainer}>
+              <Text style={styles.tagline}>Curating the Best You</Text>
+            </View>
+          </View>
 
-    <ImageBackground source={model6} style={styles.bgimage} resizeMode="cover">
-      <View style={styles.topContent}>
-        <View style={styles.logoContainer}>
-          <Text style={styles.logoText}>
-            <Text>Style</Text>
-            <Text style={styles.logoBold}>ON</Text>
-          </Text>
+          <View style={styles.bottomContent}>
+            <TouchableOpacity
+              style={styles.exploreContainer}
+              onPress={() => Navigation.navigate('Register')}>
+              <LinearGradient
+                colors={COLORS.gradient}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 0}}
+                style={styles.gradientButton}>
+                <Text style={styles.buttonText}>Lets Explore</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
+      </SafeAreaView>
+    ) : (
+      <ImageBackground source={model6} style={styles.bgimage} resizeMode="cover">
+        <View style={styles.topContent}>
+          <View style={styles.logoContainer}>
+            <Text style={styles.logoText}>
+              <Text>Style</Text>
+              <Text style={styles.logoBold}>ON</Text>
+            </Text>
+          </View>
+          <View style={styles.taglineContainer}>
+            <Text style={styles.tagline}>Curating the Best You</Text>
+          </View>
         </View>
-        <View style={styles.taglineContainer}>
-          <Text style={styles.tagline}>Curating the Best You</Text>
-        </View>
-      </View>
 
-      <View style={styles.bottomContent}>
-        <TouchableOpacity
-          style={styles.exploreContainer}
-          onPress={() => Navigation.navigate('Register')}>
-          <LinearGradient
-            colors={COLORS.gradientButton}
-            style={styles.gradientButton}>
-            <Text style={styles.buttonText}>Lets Explore</Text>
-          </LinearGradient>
-        </TouchableOpacity>
-      </View>
-    </ImageBackground>
+        <View style={styles.bottomContent}>
+          <TouchableOpacity
+            style={styles.exploreContainer}
+            onPress={() => Navigation.navigate('Register')}>
+            <LinearGradient
+              colors={['#FFD700', '#FFA500', '#FF8C00']}
+              start={{x: 0, y: 0}}
+              end={{x: 1, y: 0}}
+              style={styles.gradientButton}>
+              <Text style={styles.buttonText}>Lets Explore</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
+    )
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Platform.OS === 'ios' ? 'black' : undefined,
+  },
   bgimage: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: moderateScale(50),
+    paddingTop: 35,
+    paddingBottom: 45,
   },
   topContent: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-start',
     width: '100%',
+    paddingTop: 10,
   },
   bottomContent: {
     alignItems: 'center',
-    paddingBottom: moderateScale(20),
+    paddingBottom: 25,
+    width: '100%',
   },
   logoContainer: {
-    marginBottom: moderateScale(16),
+    marginBottom: 16,
     alignItems: 'flex-start',
-    marginLeft: moderateScale(20),
+    marginLeft: 20,
     width: '100%',
   },
   taglineContainer: {
-    marginBottom: moderateScale(32),
+    marginBottom: 36,
     alignItems: 'flex-start',
-    marginLeft: moderateScale(20),
+    marginLeft: 20,
     width: '100%',
   },
   logoText: {
@@ -145,19 +162,40 @@ const styles = StyleSheet.create({
   exploreContainer: {
     width: '75%',
     alignSelf: 'center',
+    marginBottom: 10,
   },
   gradientButton: {
     width: '100%',
-    paddingVertical: moderateScale(12),
-    paddingHorizontal: moderateScale(20),
-    borderRadius: moderateScale(25),
+    height: Platform.OS === 'ios' ? 90 : 60,
+    paddingVertical: Platform.OS === 'ios' ? 20 : 15,
+    paddingHorizontal: 0,
+    borderRadius: 30,
     alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    overflow: 'hidden',
   },
   buttonText: {
-    fontSize: moderateScale(16),
-    fontFamily: FONTS.title,
+    fontSize: 16,
+    fontFamily: Platform.OS === 'ios' ? 'System' : FONTS.title,
     fontWeight: 'bold',
-    color: COLORS.white,
+    color: '#FFFFFF',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    includeFontPadding: false,
+    paddingVertical: 0,
+    paddingHorizontal: 0,
+    marginVertical: 0,
+    marginHorizontal: 0,
+    ...(Platform.OS === 'ios' && {
+      lineHeight: 18,
+      letterSpacing: 0.5,
+      transform: [{translateY: -20}],
+    }),
   },
 });
 

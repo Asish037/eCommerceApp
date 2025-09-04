@@ -13,16 +13,16 @@ import {
   ScrollView,
   Platform,
 } from 'react-native';
-import GlobalStyles from '../../Component/GlobalStyle';
-import SocialLogin from '../../Component/SocialLogin';
+import GlobalStyles from '../../Components/GlobalStyle';
+import SocialLogin from '../../Components/SocialLogin';
 import {COLORS} from '../../Constant/Colors';
 import {FONTS} from '../../Constant/Font';
 import {moderateScale, verticalScale} from '../../PixelRatio';
 import Navigation from '../../Service/Navigation';
-import GradientButton from '../../Component/Button/GradientButton';
-import ImageWithTitle from '../../Component/Header/ImageWithTitle';
+import GradientButton from '../../Components/Button/GradientButton';
+import ImageWithTitle from '../../Components/Header/ImageWithTitle';
 import CheckBox from '@react-native-community/checkbox';
-import CustomImageBackground from '../../Component/ImageBackground/CustomImageBackground';
+import CustomImageBackground from '../../Components/ImageBackground/CustomImageBackground';
 import Toast from 'react-native-simple-toast';
 import Auth from '../../Service/Auth';
 import {setUser} from '../../Redux/reducer/user';

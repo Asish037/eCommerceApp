@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  Platform,
 } from 'react-native';
 import React, {useState} from 'react';
 import Header from '../Components/Header';
@@ -154,24 +155,22 @@ const PaymentScreen = () => {
 
       {/* Bottom Action Button */}
       <View style={styles.bottomSection}>
-        <View style={styles.payButton}>
-          <TouchableOpacity
-            style={styles.payButtonTouchable}
-            onPress={() => {
-              // Handle payment processing
-              navigation.navigate('ConfirmOrder', {
-                selectedPaymentMethod,
-                total,
-                cartItems,
-              });
-              console.log('Processing payment with:', selectedPaymentMethod);
-              // You can add payment processing logic here
-            }}>
-            <Text style={styles.payButtonText}>
-              Pay ${parseFloat(total).toFixed(2)}
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          style={styles.payButton}
+          onPress={() => {
+            // Handle payment processing
+            navigation.navigate('ConfirmOrder', {
+              selectedPaymentMethod,
+              total,
+              cartItems,
+            });
+            console.log('Processing payment with:', selectedPaymentMethod);
+            // You can add payment processing logic here
+          }}>
+          <Text style={styles.payButtonText}>
+            Pay ${parseFloat(total).toFixed(2)}
+          </Text>
+        </TouchableOpacity>
       </View>
     </LinearGradient>
   );
@@ -182,33 +181,36 @@ export default PaymentScreen;
 const styles = StyleSheet.create({
   gradientContainer: {
     flex: 1,
-    padding: 10,
+    width: '100%',
+    height: '100%',
   },
   content: {
     flex: 1,
-    paddingHorizontal: 10,
+    paddingHorizontal: 16,
+    paddingTop: Platform.OS === 'ios' ? 20 : 10,
   },
   headerSection: {
-    marginTop: 10,
-    marginBottom: 15,
+    marginTop: Platform.OS === 'ios' ? 20 : 10,
+    marginBottom: 20,
+    paddingHorizontal: 4,
   },
   screenTitle: {
     fontSize: 25,
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Bold,
     marginBottom: 5,
   },
   screenSubtitle: {
     fontSize: 14,
     // color: COLORS.grey,
-    color: COLORS.subtext,
+    color: '#2c2c2c',
     fontFamily: FONTS.Regular,
   },
 
   // Order Summary Card
   summaryCard: {
-    backgroundColor: COLORS.card,
+    backgroundColor: COLORS.white,
     borderRadius: 15,
     padding: 20,
     marginBottom: 25,
@@ -224,7 +226,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Bold,
     marginBottom: 15,
   },
@@ -236,12 +238,12 @@ const styles = StyleSheet.create({
   },
   summaryLabel: {
     fontSize: 16,
-    color: COLORS.subtext,
+    color: COLORS.grey,
     fontFamily: FONTS.Regular,
   },
   summaryValue: {
     fontSize: 16,
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Medium,
   },
   divider: {
@@ -252,7 +254,7 @@ const styles = StyleSheet.create({
   totalLabel: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Bold,
   },
   totalValue: {
@@ -269,12 +271,12 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Bold,
     marginBottom: 15,
   },
   paymentMethodCard: {
-    backgroundColor: COLORS.card,
+    backgroundColor: COLORS.white,
     borderRadius: 12,
     padding: 10,
     marginBottom: 12,
@@ -291,7 +293,7 @@ const styles = StyleSheet.create({
   },
   selectedPaymentMethod: {
     borderColor: 'transparent',
-    backgroundColor: '#A40606',
+    backgroundColor: COLORS.yellow,
     // shadowColor: "#000",
   },
   paymentMethodContent: {
@@ -305,7 +307,7 @@ const styles = StyleSheet.create({
   },
   paymentMethodText: {
     fontSize: 15,
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Medium,
     flex: 1,
   },
@@ -313,15 +315,15 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#171010ff',
+    borderWidth: 2,
+    borderColor: 'grey',
     position: 'absolute',
     right: 15,
     top: 15,
   },
   radioButtonSelected: {
     borderColor: 'grey',
-    backgroundColor: '#171010ff',
+    backgroundColor: '#807979ff',
   },
 
   // Address Section
@@ -335,17 +337,17 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   changeAddressText: {
-    color: COLORS.text,
+    color: 'red',
     fontSize: 15,
     fontWeight: '600',
     fontFamily: FONTS.Medium,
   },
   selectedAddressCard: {
-    backgroundColor: COLORS.button,
+    backgroundColor: COLORS.white,
     borderRadius: 12,
     padding: 16,
     borderWidth: 1,
-    borderColor: COLORS.button,
+    borderColor: COLORS.theme,
     shadowColor: COLORS.black,
     shadowOffset: {
       width: 0,
@@ -363,7 +365,7 @@ const styles = StyleSheet.create({
   addressType: {
     fontSize: 16,
     fontWeight: '600',
-    color: COLORS.button,
+    color: COLORS.theme,
     marginLeft: 8,
     fontFamily: FONTS.Medium,
   },
@@ -383,20 +385,20 @@ const styles = StyleSheet.create({
   addressContactName: {
     fontSize: 16,
     fontWeight: '600',
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Medium,
     marginBottom: 4,
   },
   addressLine: {
     fontSize: 14,
-    color: COLORS.subtext,
+    color: COLORS.grey,
     fontFamily: FONTS.Regular,
     lineHeight: 20,
     marginBottom: 2,
   },
   addressPhone: {
     fontSize: 14,
-    color: COLORS.subtext,
+    color: COLORS.grey,
     fontFamily: FONTS.Regular,
     marginTop: 4,
   },
@@ -405,8 +407,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 15,
     borderWidth: 1,
-    borderColor: COLORS.button,
-    shadowColor: COLORS.text,
+    borderColor: COLORS.theme,
+    shadowColor: COLORS.black,
     shadowOffset: {
       width: 0,
       height: 1,
@@ -424,12 +426,17 @@ const styles = StyleSheet.create({
 
   // Bottom Section
   bottomSection: {
-    backgroundColor: COLORS.card,
+    paddingHorizontal: 16,
+    paddingBottom: Platform.OS === 'ios' ? 34 : 20,
+    paddingTop: 16,
+  },
+  payButton: {
+    backgroundColor: COLORS.DarkPink,
     height: 56,
+    borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 16,
-    shadowColor: COLORS.button,
+    shadowColor: '#E94560',
     shadowOffset: {
       width: 0,
       height: 4,
@@ -437,20 +444,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 6,
-  },
-  payButton: {
-    borderRadius: 15,
     overflow: 'hidden',
-  },
-  payButtonTouchable: {
-    paddingVertical: 18,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   payButtonText: {
     fontSize: 18,
     fontWeight: 'bold',
-    // color: COLORS.white,
+    color: '#FFFFFF',
     fontFamily: FONTS.Bold,
+    textAlign: 'center',
+    includeFontPadding: false,
+    textAlignVertical: 'center',
   },
 });

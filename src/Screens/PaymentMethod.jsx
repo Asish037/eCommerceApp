@@ -6,6 +6,7 @@ import {
   ScrollView,
   TextInput,
   Alert,
+  Platform,
 } from 'react-native';
 import React, {useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
@@ -274,28 +275,48 @@ const PaymentMethod = ({route}) => {
 
         {/* Dynamic Payment Form */}
         {renderPaymentForm()}
-        
-        {/* Bottom Payment Button */}
-        <View style={styles.bottomContainer}>
-          <TouchableOpacity
-            style={[styles.payButton, isProcessing && styles.payButtonDisabled]}
-            onPress={handlePayment}
-            disabled={isProcessing}>
-            <LinearGradient
-              colors={
-                isProcessing ? ['#393634ff', '#232220ff'] : ['#ff8400ff', '#af5e07ff']
-              }
-              style={styles.payButtonGradient}>
-              <Text style={styles.payButtonText}>
-                {isProcessing ? 'Processing...' : `Pay $${grandTotal}`}
-              </Text>
-              {isProcessing && (
-                <Text style={styles.payButtonSubtext}>Please wait</Text>
-              )}
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
       </ScrollView>
+      
+      {/* Bottom Payment Button - Fixed Position */}
+      <View style={styles.bottomContainer}>
+        <TouchableOpacity
+          style={[styles.payButton, isProcessing && styles.payButtonDisabled]}
+          onPress={handlePayment}
+          disabled={isProcessing}>
+          <LinearGradient
+            colors={
+              isProcessing ? [COLORS.grey, COLORS.grey] : COLORS.gradientButton
+            }
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 0}}
+            style={styles.payButtonGradient}>
+            <Text style={
+              Platform.OS === 'ios' 
+                ? {
+                    color: '#FFFFFF',
+                    fontSize: 18,
+                    fontFamily: 'System',
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                    includeFontPadding: false,
+                    textAlignVertical: 'center',
+                    letterSpacing: 0.5,
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: [{translateX: -45}, {translateY: -10}],
+                    zIndex: 1002,
+                  }
+                : styles.payButtonText
+            }>
+              {isProcessing ? 'Processing...' : `Pay $${grandTotal}`}
+            </Text>
+            {isProcessing && (
+              <Text style={styles.payButtonSubtext}>Please wait</Text>
+            )}
+          </LinearGradient>
+        </TouchableOpacity>
+      </View>
 
     </LinearGradient>
   );
@@ -306,17 +327,20 @@ export default PaymentMethod;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: '100%',
+    height: '100%',
   },
   header: {
     paddingHorizontal: 15,
-    paddingTop: 5,
+    paddingTop: Platform.OS === 'ios' ? 20 : 5,
   },
   scrollContainer: {
     flex: 1,
   },
   contentContainer: {
     paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingBottom: Platform.OS === 'ios' ? 120 : 100,
+    flexGrow: 1,
   },
   titleContainer: {
     marginTop: 20,
@@ -326,13 +350,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Bold,
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
-    color: COLORS.subtext,
+    color: COLORS.grey,
     fontFamily: FONTS.Regular,
     textAlign: 'center',
   },
@@ -353,7 +377,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.SemiBold,
     marginBottom: 15,
   },
@@ -365,12 +389,12 @@ const styles = StyleSheet.create({
   },
   summaryLabel: {
     fontSize: 16,
-    color: COLORS.subtext,
+    color: COLORS.grey,
     fontFamily: FONTS.Regular,
   },
   summaryValue: {
     fontSize: 16,
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Medium,
     fontWeight: '500',
   },
@@ -382,7 +406,7 @@ const styles = StyleSheet.create({
   totalLabel: {
     fontSize: 18,
     fontWeight: '600',
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.SemiBold,
   },
   totalValue: {
@@ -392,7 +416,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.Bold,
   },
   selectedMethodCard: {
-    backgroundColor: COLORS.card,
+    backgroundColor: COLORS.cream,
     borderRadius: 12,
     padding: 16,
     marginBottom: 20,
@@ -401,18 +425,18 @@ const styles = StyleSheet.create({
   },
   selectedMethodLabel: {
     fontSize: 14,
-    color: COLORS.subtext,
+    color: COLORS.grey,
     fontFamily: FONTS.Regular,
     marginBottom: 4,
   },
   selectedMethodText: {
     fontSize: 16,
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Medium,
     fontWeight: '600',
   },
   paymentFormContainer: {
-    backgroundColor: '#A40606',
+    backgroundColor: COLORS.white,
     borderRadius: 16,
     padding: 20,
     marginBottom: 20,
@@ -428,7 +452,7 @@ const styles = StyleSheet.create({
   formTitle: {
     fontSize: 20,
     fontWeight: '600',
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.SemiBold,
     marginBottom: 20,
     textAlign: 'center',
@@ -438,7 +462,7 @@ const styles = StyleSheet.create({
   },
   inputLabel: {
     fontSize: 14,
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Medium,
     marginBottom: 8,
     fontWeight: '500',
@@ -450,7 +474,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 14,
     fontSize: 16,
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Regular,
     backgroundColor: COLORS.white,
   },
@@ -467,7 +491,7 @@ const styles = StyleSheet.create({
   },
   optionsTitle: {
     fontSize: 16,
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Medium,
     marginBottom: 12,
     fontWeight: '500',
@@ -486,7 +510,7 @@ const styles = StyleSheet.create({
   },
   upiAppText: {
     fontSize: 12,
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Regular,
     textAlign: 'center',
   },
@@ -500,7 +524,7 @@ const styles = StyleSheet.create({
   },
   codDescription: {
     fontSize: 16,
-    color: COLORS.subtext,
+    color: COLORS.grey,
     fontFamily: FONTS.Regular,
     textAlign: 'center',
     lineHeight: 24,
@@ -512,51 +536,57 @@ const styles = StyleSheet.create({
   },
   codNotesTitle: {
     fontSize: 16,
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Medium,
     marginBottom: 8,
     fontWeight: '600',
   },
   codNotesText: {
     fontSize: 14,
-    color: COLORS.subtext,
+    color: COLORS.grey,
     fontFamily: FONTS.Regular,
     marginBottom: 4,
   },
   bottomContainer: {
-    // backgroundColor: COLORS.white,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
     paddingHorizontal: 20,
     paddingTop: 20,
-    paddingBottom: 30,
-    // shadowColor: COLORS.black,
-    // shadowOffset: {
-    //   width: 0,
-    //   height: -4,
-    // },
-    // shadowOpacity: 0.1,
-    // shadowRadius: 8,
-    // elevation: 10,
+    paddingBottom: Platform.OS === 'ios' ? 40 : 30,
+    backgroundColor: 'transparent',
+    zIndex: 1000,
   },
   payButton: {
+    width: '100%',
     backgroundColor: COLORS.button,
     borderRadius: 16,
     overflow: 'hidden',
+    minHeight: 60,
+    zIndex: 1001,
   },
   payButtonDisabled: {
     opacity: 0.7,
   },
   payButtonGradient: {
+    width: '100%',
     paddingVertical: 18,
     paddingHorizontal: 24,
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'relative',
+    minHeight: 60,
   },
   payButtonText: {
     fontSize: 18,
     color: COLORS.white,
     fontFamily: FONTS.Bold,
     fontWeight: 'bold',
-    marginBottom: 2,
+    textAlign: 'center',
+    includeFontPadding: false,
+    textAlignVertical: 'center',
+    letterSpacing: 0.5,
   },
   payButtonSubtext: {
     fontSize: 14,

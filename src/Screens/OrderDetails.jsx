@@ -26,9 +26,6 @@ const OrderDetails = ({route}) => {
   const navigation = useNavigation();
   const {items} = route.params;
   const [rating, setRating] = useState(0);
-  const [orders, setOrders] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const getStatusIcon = status => {
     switch (status) {
@@ -56,30 +53,6 @@ const OrderDetails = ({route}) => {
     }
   };
 
-  /*
-  useEffect(() => {
-    const fetchOrderDetails = async () => {
-      try {
-        const response = await fetch(`https://api.example.com/orders/${items.order_id}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch order details');
-        }
-        const data = await response.json();
-        setOrders(data.orders);
-        setError(null);
-      } catch (error) {
-        setError('An error occurred while fetching order details');
-        console.error("Error fetching order details:", error);
-        setOrders([]);  // clear orders data on error
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchOrderDetails();
-  }, [orderId]);
-  */
-
   const renderStars = () => {
     return Array.from({length: 5}, (_, index) => (
       <TouchableOpacity
@@ -88,7 +61,7 @@ const OrderDetails = ({route}) => {
         <MaterialCommunityIcons
           name={index < rating ? 'star' : 'star-outline'}
           size={moderateScale(25)}
-          color={index < rating ? COLORS.rating : COLORS.button}
+          color={index < rating ? '#FFD700' : COLORS.button}
         />
       </TouchableOpacity>
     ));
@@ -115,24 +88,6 @@ const OrderDetails = ({route}) => {
       </View>
     </View>
   );
-
-  // Render loading state
-  // if (isLoading) {
-  //   return (
-  //     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-  //       <ActivityIndicator size="large" color={COLORS.button} />
-  //     </View>
-  //   );
-  // }
-
-  // // Render error state
-  // if (error) {
-  //   return (
-  //     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-  //       <Text style={styles.errorText}>{error}</Text>
-  //     </View>
-  //   );
-  // }
 
   return (
     <LinearGradient colors={COLORS.gradient} style={styles.container}>
@@ -264,7 +219,7 @@ const OrderDetails = ({route}) => {
               <Text style={styles.ratingTitle}>How was your experience?</Text>
               <View style={styles.starsContainer}>{renderStars()}</View>
               <Text style={styles.ratingSubtitle}>
-                Rate & Review to earn MJ Credits
+                Rate & Review to earn Shopnova Credits
               </Text>
             </View>
           </View>
@@ -312,7 +267,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    padding: 10,
+    height: '100%',
   },
   scrollView: {
     flex: 1,
@@ -348,19 +303,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   statusTitle: {
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Bold,
     fontSize: moderateScale(17),
     fontWeight: '700',
   },
   statusSubtitle: {
-    color: COLORS.subtext,
+    color: COLORS.button,
     fontFamily: FONTS.Medium,
     fontSize: moderateScale(13),
     marginTop: moderateScale(2),
   },
   statusDate: {
-    color: COLORS.text || '#474545ff',
+    color: COLORS.gray || '#474545ff',
     fontFamily: FONTS.Regular,
     fontSize: moderateScale(12),
     marginTop: moderateScale(4),
@@ -372,7 +327,7 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(15),
   },
   paymentStatus: {
-    fontFamily: FONTS.subtext,
+    fontFamily: FONTS.Bold,
     fontSize: moderateScale(11),
     fontWeight: '700',
   },
@@ -381,7 +336,7 @@ const styles = StyleSheet.create({
     marginTop: moderateScale(10),
   },
   sectionTitle: {
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Bold,
     fontSize: moderateScale(15),
     fontWeight: '700',
@@ -423,7 +378,7 @@ const styles = StyleSheet.create({
     lineHeight: moderateScale(18),
   },
   orderItemBrand: {
-    color: COLORS.iconText,
+    color: COLORS.button,
     fontFamily: FONTS.Medium,
     fontSize: moderateScale(12),
     marginTop: moderateScale(2),
@@ -434,12 +389,12 @@ const styles = StyleSheet.create({
     marginTop: moderateScale(5),
   },
   orderItemSpec: {
-    color: COLORS.subtext || '#181717ff',
+    color: COLORS.gray || '#181717ff',
     fontFamily: FONTS.Regular,
     fontSize: moderateScale(11),
   },
   orderItemPrice: {
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Bold,
     fontSize: moderateScale(14),
     fontWeight: '700',
@@ -464,7 +419,7 @@ const styles = StyleSheet.create({
     marginBottom: moderateScale(5),
   },
   addressName: {
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Bold,
     fontSize: moderateScale(14),
     fontWeight: '650',
@@ -478,7 +433,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   addressText: {
-    color: COLORS.subtext || '#343232ff',
+    color: COLORS.gray || '#343232ff',
     fontFamily: FONTS.Regular,
     fontSize: moderateScale(12),
     lineHeight: moderateScale(16),
@@ -505,18 +460,18 @@ const styles = StyleSheet.create({
     borderBottomColor: 'rgba(0, 0, 0, 0.1)',
   },
   summaryLabel: {
-    color: COLORS.subtext || '#2b2929ff',
+    color: COLORS.gray || '#2b2929ff',
     fontFamily: FONTS.Regular,
     fontSize: moderateScale(14),
   },
   summaryValue: {
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Medium,
     fontSize: moderateScale(14),
     fontWeight: '500',
   },
   summaryValueTotal: {
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Bold,
     fontSize: moderateScale(15),
     fontWeight: '700',
@@ -546,7 +501,7 @@ const styles = StyleSheet.create({
     paddingVertical: moderateScale(5),
   },
   contactText: {
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Medium,
     fontSize: moderateScale(14),
     marginLeft: moderateScale(10),
@@ -577,7 +532,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   ratingTitle: {
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Bold,
     fontSize: moderateScale(14),
     fontWeight: '600',
@@ -588,7 +543,7 @@ const styles = StyleSheet.create({
     marginBottom: moderateScale(7),
   },
   ratingSubtitle: {
-    color: COLORS.subtext || '#3b3a3aff',
+    color: COLORS.gray || '#3b3a3aff',
     fontFamily: FONTS.Regular,
     fontSize: moderateScale(12),
   },
@@ -613,7 +568,7 @@ const styles = StyleSheet.create({
     marginBottom: moderateScale(8),
   },
   reviewerName: {
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Bold,
     fontSize: moderateScale(14),
     fontWeight: '700',
@@ -622,7 +577,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   reviewComment: {
-    color: COLORS.subtext || '#2c2a2aff',
+    color: COLORS.gray || '#2c2a2aff',
     fontFamily: FONTS.Regular,
     fontSize: moderateScale(13),
     lineHeight: moderateScale(18),

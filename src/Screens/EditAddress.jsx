@@ -12,6 +12,7 @@ import {
   Animated,
   Keyboard,
   KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import {COLORS} from '../Constant/Colors';
 import {FONTS} from '../Constant/Font';
@@ -45,22 +46,6 @@ const EditAddress = ({route}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [keyboardVisible, setKeyboardVisible] = useState(false);
   const fadeAnim = useState(new Animated.Value(0))[0];
-
-  /*
-  const [formData , SetFormData] = useState({
-    pincode: '',
-    houseNumber: '',
-    roadName: '',
-    contactName: '',
-    phoneNumber: '',
-    addressType: 'Home',
-    isDefault: false,
-  });
-  const [errors, setErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-
-  */
-
 
   useEffect(() => {
     // Animate screen entrance
@@ -134,57 +119,6 @@ const EditAddress = ({route}) => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-  /*
-  const saveNewAddress = async() => {
-    console.log('save button pressed!'); 
-    if (!validateForm()) {
-      Toast.show('Please fill all required fields correctly!', Toast.SHORT);
-      return;
-    }
-
-    setIsLoading(true);
-
-    const isEditing = !!route.params?.addressData;
-    const method = isEditing ? 'PUT' : 'POST';
-    const URL = isEditing ? `https://your-api.com/addresses/${route.params.addressData.id}`
-        : 'https://your-api.com/addresses';
-
-    try {
-      const payload = { ...formData };
-      if (isEditing) {
-        payload.id = route.params.addressData.id;
-      }
-      const response = await fetch(URL, {
-        method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error('Network response was not ok');
-      }
-      const savedData = await response.json();
-      console.log('Address saved successfully:', savedData);
-
-      if (isEditing) {
-        navigation.navigate('AddressScreen', { updatedAddress: savedData });
-        Toast.show('Address updated successfully!', Toast.SHORT);
-      } else {
-        navigation.navigate('AddressScreen', { newAddress: savedData });
-        Toast.show('Address added successfully!', Toast.SHORT);
-      }
-    } catch (error) {
-      console.error('Error saving address:', error);
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
-  }
-  
-  */
 
   const saveNewAddress = async () => {
     console.log('Save button pressed!'); // Debug log
@@ -303,7 +237,9 @@ const EditAddress = ({route}) => {
         backgroundColor={COLORS.gradientButton[1]}
         barStyle="light-content"
         /> */}
-      <KeyboardAvoidingView behavior="padding" style={{flex: 1}}>
+      <KeyboardAvoidingView 
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
+        style={{flex: 1}}>
         <Animated.View style={[styles.animatedContainer, {opacity: fadeAnim}]}>
           <LinearGradient colors={COLORS.gradient} style={styles.container}>
             <Header />
@@ -319,7 +255,7 @@ const EditAddress = ({route}) => {
                   <MaterialIcons
                     name="location-on"
                     size={24}
-                    color={COLORS.gradientButton[1]}
+                    color={COLORS.black}
                   />
                   <Text style={styles.sectionTitle}>Address Details</Text>
                 </View>
@@ -327,10 +263,10 @@ const EditAddress = ({route}) => {
                 <View style={{marginBottom: 20}}>
                   <Text
                     style={{
-                      fontSize: 15,
+                      fontSize: 16,
                       fontWeight: 'bold',
                       marginBottom: 5,
-                      color: COLORS.subtext,
+                      color: COLORS.black,
                     }}>
                     Pincode:
                   </Text>
@@ -338,7 +274,7 @@ const EditAddress = ({route}) => {
                     style={{
                       height: 50,
                       borderWidth: 1,
-                      borderColor: COLORS.gradientButton[1],
+                      borderColor: COLORS.grey,
                       backgroundColor: COLORS.white,
                       paddingHorizontal: 15,
                       borderRadius: 8,
@@ -360,10 +296,10 @@ const EditAddress = ({route}) => {
                 <View style={{marginBottom: 20}}>
                   <Text
                     style={{
-                      fontSize: 15,
+                      fontSize: 16,
                       fontWeight: 'bold',
                       marginBottom: 5,
-                      color: COLORS.subtext,
+                      color: COLORS.black,
                     }}>
                     House/Flat/Building No.:
                   </Text>
@@ -371,7 +307,7 @@ const EditAddress = ({route}) => {
                     style={{
                       height: 50,
                       borderWidth: 1,
-                      borderColor: COLORS.gradientButton[1],
+                      borderColor: COLORS.grey,
                       backgroundColor: COLORS.white,
                       paddingHorizontal: 15,
                       borderRadius: 8,
@@ -395,10 +331,10 @@ const EditAddress = ({route}) => {
                 <View style={{marginBottom: 20}}>
                   <Text
                     style={{
-                      fontSize: 15,
+                      fontSize: 16,
                       fontWeight: 'bold',
                       marginBottom: 5,
-                      color: COLORS.subtext,
+                      color: COLORS.black,
                     }}>
                     Road Name/Area/Colony:
                   </Text>
@@ -406,7 +342,7 @@ const EditAddress = ({route}) => {
                     style={{
                       height: 50,
                       borderWidth: 1,
-                      borderColor: COLORS.gradientButton[1],
+                      borderColor: COLORS.grey,
                       backgroundColor: COLORS.white,
                       paddingHorizontal: 15,
                       borderRadius: 8,
@@ -450,7 +386,7 @@ const EditAddress = ({route}) => {
                           color={
                             formData.addressType === type
                               ? COLORS.white
-                              : COLORS.button
+                              : COLORS.orange
                           }
                         />
                         <Text
@@ -476,7 +412,7 @@ const EditAddress = ({route}) => {
                     <MaterialIcons
                       name="star"
                       size={20}
-                      color={COLORS.button}
+                      color={COLORS.white}
                     />
                     <Text style={styles.defaultToggleText}>
                       Set as default address
@@ -500,7 +436,7 @@ const EditAddress = ({route}) => {
                   <MaterialIcons
                     name="contact-phone"
                     size={24}
-                    color={COLORS.icon}
+                    color={COLORS.black}
                   />
                   <Text style={styles.sectionTitle}>Contact Information</Text>
                 </View>
@@ -508,10 +444,10 @@ const EditAddress = ({route}) => {
                 <View style={{marginBottom: 20}}>
                   <Text
                     style={{
-                      fontSize: 15,
+                      fontSize: 16,
                       fontWeight: 'bold',
                       marginBottom: 5,
-                      color: COLORS.subtext,
+                      color: COLORS.black,
                     }}>
                     Contact Name:
                   </Text>
@@ -519,7 +455,7 @@ const EditAddress = ({route}) => {
                     style={{
                       height: 50,
                       borderWidth: 1,
-                      borderColor: COLORS.gradientButton[1],
+                      borderColor: COLORS.grey,
                       backgroundColor: COLORS.white,
                       paddingHorizontal: 15,
                       borderRadius: 8,
@@ -543,10 +479,10 @@ const EditAddress = ({route}) => {
                 <View style={{marginBottom: 20}}>
                   <Text
                     style={{
-                      fontSize: 15,
+                      fontSize: 16,
                       fontWeight: 'bold',
                       marginBottom: 5,
-                      color: COLORS.subtext,
+                      color: COLORS.black,
                     }}>
                     Phone Number:
                   </Text>
@@ -554,7 +490,7 @@ const EditAddress = ({route}) => {
                     style={{
                       height: 50,
                       borderWidth: 1,
-                      borderColor: COLORS.gradientButton[1],
+                      borderColor: COLORS.grey,
                       backgroundColor: COLORS.white,
                       paddingHorizontal: 15,
                       borderRadius: 8,
@@ -576,18 +512,13 @@ const EditAddress = ({route}) => {
                 </View>
 
                 {/* Save Button inside ScrollView */}
-                <View
-                  style={{
-                    alignItems: 'center',
-                    marginTop: 30,
-                    marginBottom: 20,
-                  }}>
+                <View style={styles.buttonContainer}>
                   <GradientButton
                     title={isLoading ? 'Saving...' : 'Save Address'}
                     onPress={saveNewAddress}
                     disabled={isLoading}
                     style={{
-                      width: '80%',
+                      width: '100%',
                       borderRadius: moderateScale(15),
                     }}
                   />
@@ -606,37 +537,45 @@ export default EditAddress;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: COLORS.gradientButton[1],
+    width: '100%',
+    height: '100%',
+    backgroundColor: COLORS.gradient[0], // Set background color to match gradient start
   },
   animatedContainer: {
     flex: 1,
   },
   container: {
     flex: 1,
-    padding: 15,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'transparent',
   },
   scrollView: {
     flex: 1,
+    width: '100%',
   },
   scrollContentContainer: {
-    paddingBottom: verticalScale(20),
+    paddingBottom: verticalScale(100),
+    flexGrow: 1,
   },
   formContainer: {
-    padding: moderateScale(10),
+    paddingHorizontal: moderateScale(15),
+    paddingTop: moderateScale(10),
   },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: verticalScale(10),
+    marginTop: verticalScale(15),
     marginBottom: verticalScale(25),
     paddingBottom: verticalScale(10),
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.gradientButton[1],
+    borderBottomColor: COLORS.grey,
+    paddingHorizontal: moderateScale(5),
   },
   sectionTitle: {
     fontSize: moderateScale(16),
     fontWeight: '600',
-    color: COLORS.text,
+    color: COLORS.black,
     marginLeft: moderateScale(8),
     fontFamily: fonts.medium,
   },
@@ -647,14 +586,14 @@ const styles = StyleSheet.create({
   inputLabel: {
     fontSize: moderateScale(14),
     fontWeight: '600',
-    color: COLORS.text,
+    color: COLORS.black,
     marginBottom: verticalScale(8),
     fontFamily: fonts.medium,
   },
   textInput: {
     height: 50,
     borderWidth: 1,
-    borderColor: COLORS.gradientButton[1],
+    borderColor: COLORS.grey,
     backgroundColor: COLORS.white,
     paddingHorizontal: 15,
     borderRadius: 8,
@@ -675,12 +614,9 @@ const styles = StyleSheet.create({
   buttonContainer: {
     // Remove absolute positioning
     alignItems: 'center', // center the button
-    paddingHorizontal: moderateScale(10),
-    paddingVertical: verticalScale(10),
-    marginTop: verticalScale(10),
-    marginBottom: verticalScale(10),
-    backgroundColor: 'transparent', // Remove debug color
-    // Normal flex layout instead of absolute positioning
+    marginTop: verticalScale(30),
+    marginBottom: verticalScale(20),
+    paddingHorizontal: moderateScale(15),
   },
   saveButton: {
     width: '80%',
@@ -724,7 +660,7 @@ const styles = StyleSheet.create({
   addressTypeText: {
     fontSize: moderateScale(14),
     fontWeight: '500',
-    color: COLORS.text,
+    color: COLORS.black,
     marginLeft: moderateScale(6),
     fontFamily: fonts.medium,
   },
@@ -770,7 +706,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: moderateScale(2),
   },
   toggleSwitchActive: {
-    backgroundColor: COLORS.button,
+    backgroundColor: COLORS.black,
   },
   toggleIndicator: {
     width: moderateScale(22),

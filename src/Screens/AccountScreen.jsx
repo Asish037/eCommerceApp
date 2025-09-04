@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+// import {useTheme} from '../Context/ThemeContext';
 import {COLORS} from '../Constant/Colors';
 import {FONTS} from '../Constant/Font';
 import {moderateScale} from '../PixelRatio';
@@ -21,6 +22,8 @@ import {CartContext} from '../Context/CartContext';
 const ViewProfile = () => {
   const navigation = useNavigation();
   const {user, loadUserData} = useContext(CartContext);
+  // const {getThemeColors} = useTheme();
+  // const themeColors = getThemeColors();
 
   // Reload user data whenever this screen comes into focus
   useFocusEffect(
@@ -269,32 +272,32 @@ export default ViewProfile;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
-    // paddingHorizontal: moderateScale(10),
-    // paddingTop: moderateScale(5),
+    width: '100%',
+    height: '100%',
   },
   scrollContainer: {
+    flexGrow: 1,
     paddingBottom: moderateScale(20),
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: moderateScale(4),
+    paddingHorizontal: moderateScale(15),
     paddingVertical: moderateScale(10),
+    marginTop: Platform.OS === 'ios' ? moderateScale(30) : moderateScale(20),
     marginBottom: moderateScale(10),
   },
   headerTitle: {
     fontSize: moderateScale(25),
     fontWeight: '700',
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Bold,
   },
   settingsButton: {
     padding: moderateScale(8),
     borderRadius: moderateScale(8),
-    // backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    backgroundColor: 'transparent'
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
   },
   profileSection: {
     flexDirection: 'row',
@@ -329,13 +332,13 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: moderateScale(20),
     fontWeight: '700',
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Bold,
     marginBottom: moderateScale(4),
   },
   userEmail: {
     fontSize: moderateScale(14),
-    color: COLORS.subtext,
+    color: '#06080aff',
     fontWeight: '500',
     fontFamily: FONTS.Regular,
   },
@@ -368,7 +371,7 @@ const styles = StyleSheet.create({
   },
   statLabel: {
     fontSize: moderateScale(13),
-    color: COLORS.text,
+    color: '#000000ff',
     fontFamily: FONTS.Regular,
     fontWeight: '500',
   },
@@ -378,7 +381,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: moderateScale(18),
     fontWeight: '600',
-    color: COLORS.text,
+    color: '#000000ff',
     fontFamily: FONTS.Bold,
     marginBottom: moderateScale(8),
     paddingHorizontal: moderateScale(12),
@@ -415,7 +418,7 @@ const styles = StyleSheet.create({
   },
   orderLabel: {
     fontSize: moderateScale(12),
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Medium,
     textAlign: 'center',
     fontWeight: '600',
@@ -454,7 +457,7 @@ const styles = StyleSheet.create({
   menuText: {
     flex: 1,
     fontSize: moderateScale(14),
-    color: COLORS.text,
+    color: COLORS.black,
     fontFamily: FONTS.Medium,
     fontWeight: '650',
     lineHeight: moderateScale(15),

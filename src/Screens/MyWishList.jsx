@@ -14,7 +14,7 @@ import Tags from '../Components/Tags';
 import WishlistCard from '../Components/WishlistCard';
 import data from '../data/data.json';
 import {useNavigation} from '@react-navigation/native';
-import {COLORS} from '../Constant/Colors';
+import { COLORS } from '../Constant/Colors';
 
 const MyWishList = () => {
   const [products, setProducts] = useState(data.products);
@@ -106,8 +106,6 @@ const MyWishList = () => {
       <FlatList
         data={filteredProducts}
         numColumns={2}
-        columnWrapperStyle={styles.row}
-        contentContainerStyle={styles.listContainer}
         renderItem={({item}) => (
           <WishlistCard
             item={item}
@@ -130,16 +128,9 @@ export default MyWishList;
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
-    padding: 16,
-    marginBottom: 16,
+    padding: 5,
   },
-  listContainer: {
-    paddingHorizontal: 5,
-  },
-  row: {
-    justifyContent: 'flex-start',
-    paddingHorizontal: 5,
-  },
+
   headingText: {
     fontSize: 28,
     color: '#000000',

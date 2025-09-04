@@ -22,6 +22,34 @@ import {FONTS} from '../Constant/Font';
 const Settings = () => {
   const navigation = useNavigation();
 
+  console.log('Rendering Settings Screen');
+  const handleLogout = () => {
+    console.log('Logout pressed - handleLogout function called');
+    try {
+      Alert.alert(
+        'Logout',
+        'Are you sure you want to logout?',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+            onPress: () => console.log('Logout cancelled'),
+          },
+          {
+            text: 'Logout',
+            onPress: () => {
+              console.log('Logout confirmed');
+              navigation.navigate('Landing');
+            },
+          },
+        ],
+        {cancelable: true},
+      );
+    } catch (error) {
+      console.error('Error showing logout alert:', error);
+    }
+  };
+
   return (
     <LinearGradient style={styles.container} colors={COLORS.gradient}>
       <Header />
@@ -129,12 +157,17 @@ const Settings = () => {
 
             <TouchableOpacity
               style={styles.menuItem}
-              onPress={() =>
-                Alert.alert(
-                  'Coming Soon',
-                  'Rewards collection feature will be available soon!',
-                )
-              }>
+              onPress={() => {
+                console.log('Rewards button pressed');
+                try {
+                  Alert.alert(
+                    'Coming Soon',
+                    'Rewards collection feature will be available soon!',
+                  );
+                } catch (error) {
+                  console.error('Error showing rewards alert:', error);
+                }
+              }}>
               <View
                 style={[
                   styles.menuIconContainer,
@@ -192,12 +225,17 @@ const Settings = () => {
 
             <TouchableOpacity
               style={styles.menuItem}
-              onPress={() =>
-                Alert.alert(
-                  'Contact Us',
-                  'Email: support@app.com\nPhone: +1-234-567-8900',
-                )
-              }>
+              onPress={() => {
+                console.log('Customer Service button pressed');
+                try {
+                  Alert.alert(
+                    'Contact Us',
+                    'Email: support@app.com\nPhone: +1-234-567-8900',
+                  );
+                } catch (error) {
+                  console.error('Error showing contact alert:', error);
+                }
+              }}>
               <View
                 style={[
                   styles.menuIconContainer,
@@ -253,9 +291,14 @@ const Settings = () => {
 
             <TouchableOpacity
               style={[styles.menuItem, styles.lastMenuItem]}
-              onPress={() =>
-                Alert.alert('App Info', 'Version: 1.0.0\nBuild: 100')
-              }>
+              onPress={() => {
+                console.log('About App button pressed');
+                try {
+                  Alert.alert('App Info', 'Version: 1.0.0\nBuild: 100');
+                } catch (error) {
+                  console.error('Error showing about alert:', error);
+                }
+              }}>
               <View
                 style={[
                   styles.menuIconContainer,
@@ -272,6 +315,31 @@ const Settings = () => {
                 <Text style={styles.menuSubText}>
                   App version and information
                 </Text>
+              </View>
+              <MaterialIcons
+                name="chevron-right"
+                size={moderateScale(24)}
+                color="#6C757D"
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.menuItem, styles.lastMenuItem]}
+              onPress={handleLogout}>
+              <View
+                style={[
+                  styles.menuIconContainer,
+                  {backgroundColor: '#FFEBEE'},
+                ]}>
+                <Ionicons
+                  name="log-out-outline"
+                  size={moderateScale(24)}
+                  color="#F44336"
+                />
+              </View>
+              <View style={styles.menuTextContainer}>
+                <Text style={styles.menuText}>Logout</Text>
+                <Text style={styles.menuSubText}>Sign out of your account</Text>
               </View>
               <MaterialIcons
                 name="chevron-right"

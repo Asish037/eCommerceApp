@@ -5570,7 +5570,7 @@
       "cardNumber": "9459153361622170",
       "cardType": "Interac",
       "currency": "SEK",
-      "iban": "24RO2TMJWQRNS73ZV0GVVCFP"
+      "iban": "24RO2TShopnovaWQRNS73ZV0GVVCFP"
     },
     "company": {
       "department": "Business Development",
@@ -6830,7 +6830,7 @@
       "cardNumber": "9676524532044930",
       "cardType": "BC Card",
       "currency": "EUR",
-      "iban": "2A1T6MF8TLMJG30DJW6VF4QP"
+      "iban": "2A1T6MF8TLShopnovaG30DJW6VF4QP"
     },
     "company": {
       "department": "Training",
@@ -8160,7 +8160,7 @@
       "cardNumber": "5739347905804766",
       "cardType": "Visa",
       "currency": "BRL",
-      "iban": "V8ZMJUYDG8C4703PJR3MVIGU"
+      "iban": "V8ZShopnovaUYDG8C4703PJR3MVIGU"
     },
     "company": {
       "department": "Services",
@@ -13690,7 +13690,7 @@
       "cardNumber": "8955473995911969",
       "cardType": "RuPay International",
       "currency": "TRY",
-      "iban": "69MJWXZ02DOGPS46JCZC7MSM"
+      "iban": "69ShopnovaWXZ02DOGPS46JCZC7MSM"
     },
     "company": {
       "department": "Services",

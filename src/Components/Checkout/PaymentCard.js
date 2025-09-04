@@ -1,7 +1,7 @@
 import {View, Text,Icon, Pressable} from 'react-native';
 import React from 'react';
 // import {Icon} from 'native-base';
-import GlobalStyle from '../Style/GlobalStyle';
+import GlobalStyle from '../GlobalStyle';
 import {COLORS} from '../../Constant/Colors';
 
 const PaymentCard = ({cardData, newPaymentCallbBack}) => {

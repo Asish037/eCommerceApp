@@ -39,7 +39,7 @@ const MyCoupons = () => {
                 <Text style={styles.headingText}>My Coupons</Text>
                 <MaterialCommunityIcons
                   name="wallet-giftcard"
-                  style={{color: COLORS.button, fontSize: moderateScale(30)}}
+                  style={{color: COLORS.lightbutton, fontSize: moderateScale(30)}}
                 />
               </View>
             </>
@@ -52,6 +52,8 @@ const MyCoupons = () => {
           <CouponCard item={item} handleCouponClick={handleCouponDetails} />
         )}
         showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.flatListContent}
+        style={styles.flatList}
       />
       <View></View>
     </LinearGradient>
@@ -59,8 +61,9 @@ const MyCoupons = () => {
 };
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    padding: 20,
+     flex: 1,
+      width: '100%',
+      height: '100%',
   },
 
   headingText: {
@@ -68,6 +71,9 @@ const styles = StyleSheet.create({
     color: '#000000',
     marginVertical: 20,
     fontFamily: 'Poppins-Regular',
+    fontWeight: '600',
+    textAlign: 'center',
+    flex: 1,
   },
   inputContainer: {
     width: '100%',
@@ -87,14 +93,21 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
   },
   headerSection: {
-    width: '90%',
+    width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
     borderBottomWidth: 0.2,
     borderColor: COLORS.textInput,
-    paddingBottom: 10,
+    paddingBottom: 15,
+  },
+  flatList: {
+    paddingHorizontal: 10,
+  },
+  flatListContent: {
+    paddingBottom: 20,
   },
 });
 export default MyCoupons;

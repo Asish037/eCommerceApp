@@ -7,7 +7,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../Components/Header';
 import Tags from '../Components/Tags';
@@ -16,12 +16,63 @@ import data from '../data/data.json';
 import {useNavigation} from '@react-navigation/native';
 import sale from '../assets/sale2.jpeg';
 import { COLORS } from '../Constant/Colors';
+// import { useTheme } from '../Context/ThemeContext';
+import axios from '../Components/axios';
+import qs from 'qs';
 
 const HomeScreen = () => {
-  const [products, setProducts] = useState(data.products);
+  // const [products, setProducts] = useState(data.products);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
+  // const {getThemeColors} = useTheme();
+  // const themeColors = getThemeColors();
+
+  let productList = {
+    method: 'GET',
+    url: 'product-list',
+    header: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    data: qs.stringify({}),
+  };
+
+  const fetchProducts = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios(productList);
+      const product = response.data.data.map((item)=>{
+        return {
+          id: item.id,
+          title: item.name,
+          price: item.price,
+          offer_price: item.offer_price,
+          description: item.description,
+          image: item.img,
+
+          // rating: {rate: 0 , count: 0},
+          isFavorite: false,
+        };
+      });
+      setProducts(product);
+
+      console.log('Products fetched:', response.data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+
   const handleProductDetails = item => {
-    navigation.navigate('PRODUCT_DETAILS', {item});
+    // HomeScreen
+    navigation.navigate('PRODUCT_DETAILS', { productId: item.id });
   };
   const toggleFavorite = item => {
     setProducts(
@@ -38,41 +89,33 @@ const HomeScreen = () => {
     );
   };
 
+  if (isLoading) {
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={{color: COLORS.black}}>Loading products...</Text>
+      </View>
+    );
+  }
+
   return (
     <LinearGradient colors={COLORS.gradient} style={styles.container}>
       <Header />
 
-      {/* <Tags /> */}
-
       <FlatList
+        style={styles.flatList}
+        contentContainerStyle={styles.flatListContent}
         ListHeaderComponent={
           <>
-            <>
-              <ImageBackground source={sale} style={styles.ImageBackground}>
-                <View style={styles.textContainer}>
-                  <Text style={styles.headerTitleMain}>Limited Time</Text>
-                  <Text style={styles.headerTitleSub}>OFFER</Text>
-                </View>
-              </ImageBackground>
-
-              {/* <Header /> */}
-              <View
-                style={{
-                  marginTop: 5,
-                  marginBottom: 0,
-                  justifyContent: 'flex-start',
-                }}>
-                {/* <Text style={styles.headingText}>Match Your Style</Text> */}
-                {/* <View style={styles.inputContainer}>
-                  <Image
-                    source={require('../assets/search.png')}
-                    style={styles.searchIcon}
-                  />
-                  <TextInput placeholder="Search" style={styles.textInput} />
-                </View> */}
-                <Tags />
+            <ImageBackground source={sale} style={styles.ImageBackground}>
+              <View style={styles.textContainer}>
+                <Text style={styles.headerTitleMain}>Limited Time</Text>
+                <Text style={styles.headerTitleSub}>OFFER</Text>
               </View>
-            </>
+            </ImageBackground>
+
+            <View style={styles.tagsContainer}>
+              <Tags />
+            </View>
           </>
         }
         data={products}
@@ -91,16 +134,16 @@ const HomeScreen = () => {
 };
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    padding: 10,
-    marginBottom: 16,
+    flex: 1,
+    width: '100%',
+    height: '100%',
   },
   ImageBackground: {
     height: 200,
-    justifyContent: 'flex-end',
-    alignItems: 'flex-start',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingBottom: 20,
-    paddingLeft: 20,
   },
   headingText: {
     fontSize: 28,
@@ -109,14 +152,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
   },
   textContainer: {
-    backgroundColor: 'transparent', // Semi-transparent black background
-    // paddingHorizontal: 20,
-    // paddingVertical: 10,
+    backgroundColor: 'transparent',
     borderRadius: 10,
     marginBottom: 0,
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
-
   headerTitleMain: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -125,7 +165,7 @@ const styles = StyleSheet.create({
   headerTitleSub: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#972525ff', // A standout color like gold
+    color: '#972525ff',
   },
   inputContainer: {
     width: '100%',
@@ -143,6 +183,18 @@ const styles = StyleSheet.create({
   textInput: {
     fontSize: 18,
     fontFamily: 'Poppins-Regular',
+  },
+  flatList: {
+    flex: 1,
+    width: '100%',
+  },
+  flatListContent: {
+    paddingBottom: 20,
+  },
+  tagsContainer: {
+    marginTop: 10,
+    marginBottom: 10,
+    paddingHorizontal: 10,
   },
 });
 export default HomeScreen;

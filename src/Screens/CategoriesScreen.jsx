@@ -8,6 +8,7 @@ import {
   FlatList,
   ScrollView,
   Dimensions,
+  Platform,
 } from 'react-native';
 import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {useRoute, useNavigation} from '@react-navigation/native';
@@ -367,12 +368,15 @@ export default CategoriesScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 12,
-    paddingTop: 16,
-    paddingBottom: 8,
+    width: '100%',
+    height: '100%',
   },
   searchContainer: {
     marginBottom: 20,
+    marginTop: Platform.OS === 'ios' ? 30 : 10,
+    paddingHorizontal: 16,
+    paddingTop: Platform.OS === 'ios' ? 30 : 16,
+    paddingBottom: 10,
     zIndex: 1000,
   },
   inputContainer: {
@@ -457,6 +461,7 @@ const styles = StyleSheet.create({
   },
   tabContainer: {
     marginBottom: 20,
+    marginTop: 10,
     maxHeight: 50,
   },
   tabContentContainer: {
@@ -495,21 +500,21 @@ const styles = StyleSheet.create({
   },
   productsContainer: {
     flex: 1,
-    paddingHorizontal: 4,
-    // padding: 16,
+    paddingHorizontal: 16,
+    paddingTop: Platform.OS === 'ios' ? 30 : 16,
   },
   productsGrid: {
+    paddingHorizontal: 4,
     paddingBottom: 20,
-    paddingTop: 8,
   },
   row: {
     justifyContent: 'space-between',
-    marginBottom: 16,
-    paddingHorizontal: 8,
+    marginBottom: 20,
+    paddingHorizontal: 4,
   },
   productCardContainer: {
-    width: '48%',
-    marginHorizontal: 0,
+    width: (width - 56) / 2, // Increased spacing between cards
+    marginHorizontal: 4,
   },
   noProductsContainer: {
     flex: 1,

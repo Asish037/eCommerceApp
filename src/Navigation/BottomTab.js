@@ -14,6 +14,9 @@ import ProductDetailsScreen from '../Screens/ProductDetailsScreen';
 import CartScreen from '../Screens/CartScreen';
 import CategoriesScreen from '../Screens/CategoriesScreen';
 import AccountScreen from '../Screens/AccountScreen';
+import PaymentScreen from '../Screens/PaymentScreen';
+import AddressScreen from '../Screens/AddressScreen';
+import MyWishList from '../Screens/MyWishList';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -41,7 +44,7 @@ const CartTabIcon = ({focused, size}) => {
             bottom: 22,
             height: 14,
             width: 14,
-            backgroundColor: '#E96E6E',
+            backgroundColor: '#E94560',
             borderRadius: 7,
             alignItems: 'center',
             justifyContent: 'center',
@@ -68,7 +71,7 @@ const CartTabIcon = ({focused, size}) => {
             bottom: 22,
             height: 14,
             width: 14,
-            backgroundColor: '#C0C0C0',
+            backgroundColor: '#666666',
             borderRadius: 7,
             alignItems: 'center',
             justifyContent: 'center',
@@ -88,11 +91,14 @@ const MyHomeStack = () => {
         headerShown: false,
       }}>
       <Stack.Screen name="HOME" component={HomeScreen} />
-      <Stack.Screen name="CATEGORIES" component={CategoriesScreen} />
+      <Stack.Screen name="Categories" component={CategoriesScreen} />
       <Stack.Screen name="CART" component={CartScreen} />
       <Stack.Screen name="ACCOUNT" component={AccountScreen} />
 
       <Stack.Screen name="PRODUCT_DETAILS" component={ProductDetailsScreen} />
+      <Stack.Screen name="Payment" component={PaymentScreen} />
+      <Stack.Screen name="AddressScreen" component={AddressScreen} />
+      <Stack.Screen name="MyWishList" component={MyWishList} />
       {/* <Stack.Screen name="ORDERS" component={Orders} /> */}
     </Stack.Navigator>
   );

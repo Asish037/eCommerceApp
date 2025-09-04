@@ -5,6 +5,7 @@ import {
   View,
   Image,
   Dimensions,
+  Platform,
 } from 'react-native';
 import React from 'react';
 import Header from '../Components/Header';
@@ -12,6 +13,7 @@ import {useNavigation} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {COLORS} from '../Constant/Colors';
 import {FONTS} from '../Constant/Font';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const {width, height} = Dimensions.get('window');
 
@@ -31,58 +33,60 @@ const OrderConfirm = ({route}) => {
 
   return (
     <LinearGradient colors={COLORS.gradient} style={styles.container}>
-      {/* Success Icon */}
-      <View style={styles.iconContainer}>
-        <View style={styles.successIcon}>
-          <Text style={styles.checkmark}>✓</Text>
-        </View>
-      </View>
-
-      <View style={styles.content}>
-        <Text style={styles.title}>Order Confirmed!</Text>
-        <Text style={styles.subtitle}>
-          Thank you for your purchase! Your order has been placed successfully
-          and will be delivered soon.
-        </Text>
-
-        {/* Order Summary Card */}
-        <View style={styles.orderSummaryCard}>
-          <Text style={styles.cardTitle}>Order Summary</Text>
-          <View style={styles.orderDetails}>
-            <View style={styles.detailRow}>
-              <Text style={styles.detailLabel}>Payment Method:</Text>
-              <Text style={styles.detailValue}>{selectedPaymentMethod}</Text>
-            </View>
-            <View style={styles.detailRow}>
-              <Text style={styles.detailLabel}>Total Amount:</Text>
-              <Text style={styles.detailValuePrice}>${total}</Text>
-            </View>
-            <View style={styles.detailRow}>
-              <Text style={styles.detailLabel}>Items Ordered:</Text>
-              <Text style={styles.detailValue}>{cartItems.length} items</Text>
-            </View>
+      <SafeAreaView style={styles.safeArea}>
+        {/* Success Icon */}
+        <View style={styles.iconContainer}>
+          <View style={styles.successIcon}>
+            <Text style={styles.checkmark}>✓</Text>
           </View>
         </View>
 
-        {/* Action Buttons */}
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Orders')}
-            style={[styles.button, styles.primaryButton]}>
-            <LinearGradient
-              colors={COLORS.gradientButton}
-              style={styles.gradientButton}>
-              <Text style={styles.primaryButtonText}>View All Orders</Text>
-            </LinearGradient>
-          </TouchableOpacity>
+        <View style={styles.content}>
+          <Text style={styles.title}>Order Confirmed!</Text>
+          <Text style={styles.subtitle}>
+            Thank you for your purchase! Your order has been placed successfully
+            and will be delivered soon.
+          </Text>
 
-          <TouchableOpacity
-            onPress={() => navigation.navigate('MainHome')}
-            style={[styles.button, styles.secondaryButton]}>
-            <Text style={styles.secondaryButtonText}>Keep Shopping</Text>
-          </TouchableOpacity>
+          {/* Order Summary Card */}
+          <View style={styles.orderSummaryCard}>
+            <Text style={styles.cardTitle}>Order Summary</Text>
+            <View style={styles.orderDetails}>
+              <View style={styles.detailRow}>
+                <Text style={styles.detailLabel}>Payment Method:</Text>
+                <Text style={styles.detailValue}>{selectedPaymentMethod}</Text>
+              </View>
+              <View style={styles.detailRow}>
+                <Text style={styles.detailLabel}>Total Amount:</Text>
+                <Text style={styles.detailValuePrice}>${total}</Text>
+              </View>
+              <View style={styles.detailRow}>
+                <Text style={styles.detailLabel}>Items Ordered:</Text>
+                <Text style={styles.detailValue}>{cartItems.length} items</Text>
+              </View>
+            </View>
+          </View>
+
+          {/* Action Buttons */}
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Orders')}
+              style={[styles.button, styles.primaryButton]}>
+              <LinearGradient
+                colors={COLORS.gradientButton}
+                style={styles.gradientButton}>
+                <Text style={styles.primaryButtonText}>View All Orders</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => navigation.navigate('MainHome')}
+              style={[styles.button, styles.secondaryButton]}>
+              <Text style={styles.secondaryButtonText}>Keep Shopping</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </SafeAreaView>
     </LinearGradient>
   );
 };
@@ -92,11 +96,16 @@ export default OrderConfirm;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 20,
-    paddingTop: 60,
+   width: '100%',
+   height: '100%',
+  },
+  safeArea: {
+    flex: 1,
+    paddingTop: Platform.OS === 'ios' ? 20 : 5, // Add padding for iOS status bar
   },
   iconContainer: {
     alignItems: 'center',
+    marginTop: Platform.OS === 'ios' ? 30 : 20, // Extra top margin for iOS
     marginBottom: 30,
   },
   successIcon: {
@@ -128,7 +137,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontFamily: FONTS.Bold,
-    color: COLORS.button,
+    color: COLORS.black,
     marginBottom: 15,
     textAlign: 'center',
   },
@@ -159,7 +168,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 18,
     fontFamily: FONTS.SemiBold,
-    color: COLORS.button,
+    color: COLORS.black,
     marginBottom: 15,
     textAlign: 'center',
   },
@@ -212,7 +221,7 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 12,
+    borderRadius: 12
   },
   primaryButtonText: {
     color: COLORS.white,
@@ -222,10 +231,10 @@ const styles = StyleSheet.create({
   secondaryButton: {
     backgroundColor: 'transparent',
     borderWidth: 2,
-    borderColor: COLORS.button,
+    borderColor: COLORS.lightbutton,
   },
   secondaryButtonText: {
-    color: COLORS.button,
+    color: COLORS.lightbutton,
     fontSize: 16,
     fontFamily: FONTS.Medium,
   },

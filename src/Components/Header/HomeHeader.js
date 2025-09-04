@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, Icon, Pressable} from 'react-native';
 // import {Icon} from 'native-base';
 import {moderateScale, verticalScale} from '../../PixelRatio';
@@ -7,9 +7,13 @@ import {FONTS} from '../../Constant/Font';
 import Navigation from '../../Service/Navigation';
 import {useSelector} from 'react-redux';
 import SimpleToast from 'react-native-simple-toast';
+// import {useTheme} from '../../Context/ThemeContext';
+// import ThemeSelectionModal from '../Modal/ThemeSelectionModal';
 
 export default function HomeHeader({arrowPress, ...props}) {
   const {userData, guestLogin} = useSelector(state => state.User);
+  // const {currentTheme, isDarkTheme} = useTheme();
+  // const [showThemeModal, setShowThemeModal] = useState(false);
 
   // console.log("userData",userData)
 
@@ -21,6 +25,10 @@ export default function HomeHeader({arrowPress, ...props}) {
     Navigation.navigate('MyAccount');
     // }
   };
+
+  // const toggleThemeModal = () => {
+  //   setShowThemeModal(!showThemeModal);
+  // };
 
   return (
     <View
@@ -60,34 +68,31 @@ export default function HomeHeader({arrowPress, ...props}) {
           />
         ) : null}
       </Pressable>
-      <TouchableOpacity onPress={() => Navigation.navigate('ChatList')}>
-        <Icon
-          name="email"
-          type="MaterialCommunityIcons"
-          style={{color: COLORS.white, fontSize: moderateScale(25)}}
-        />
-        {/* <View
-          style={{
-            width: moderateScale(18),
-            height: moderateScale(18),
-            borderRadius: moderateScale(10),
-            backgroundColor: COLORS.button,
-            justifyContent: 'center',
-            alignItems: 'center',
-            position: 'absolute',
-            right: -3,
-            top: -3,
-          }}>
-          <Text
-            style={{
-              color: COLORS.white,
-              fontFamily: FONTS.Medium,
-              fontSize: moderateScale(11),
-            }}>
-            3
-          </Text>
-        </View> */}
-      </TouchableOpacity>
+      <View style={{flexDirection: 'row', alignItems: 'center', gap: 15}}>
+        {/* Theme Toggle Button - Temporarily Disabled */}
+        {/* <TouchableOpacity onPress={toggleThemeModal}>
+          <Icon
+            name={isDarkTheme ? "sunny" : "moon"}
+            type="Ionicons"
+            style={{color: COLORS.white, fontSize: moderateScale(22)}}
+          />
+        </TouchableOpacity> */}
+        
+        {/* Chat Button */}
+        <TouchableOpacity onPress={() => Navigation.navigate('ChatList')}>
+          <Icon
+            name="email"
+            type="MaterialCommunityIcons"
+            style={{color: COLORS.white, fontSize: moderateScale(25)}}
+          />
+        </TouchableOpacity>
+      </View>
+      
+      {/* Theme Selection Modal - Temporarily Disabled */}
+      {/* <ThemeSelectionModal 
+        visible={showThemeModal} 
+        onClose={() => setShowThemeModal(false)} 
+      /> */}
     </View>
   );
 }

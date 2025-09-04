@@ -12,7 +12,7 @@ import {
   View,
 } from 'react-native';
 import SimpleToast from 'react-native-simple-toast';
-import CustomImageBackground from '../../Component/ImageBackground/CustomImageBackground';
+import CustomImageBackground from '../../Components/ImageBackground/CustomImageBackground';
 import {COLORS} from '../../Constant/Colors';
 import {FONTS} from '../../Constant/Font';
 import {moderateScale} from '../../PixelRatio';

@@ -12,6 +12,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import model5 from '../../assets/model5.jpg';
 import {COLORS} from '../../Constant/Colors';
 import {FONTS} from '../../Constant/Font';
+import { verticalScale } from '../../PixelRatio';
 
 const Otp = ({navigation, route}) => {
     const {data} = route.params;
@@ -123,8 +124,10 @@ const Otp = ({navigation, route}) => {
                             colors={
                                 otp.join('').length !== 6
                                 ? ['#ccc', '#ccc']
-                                : COLORS.gradientButton
+                                : ['#FFD700', '#FFA500', '#FF8C00']
                             }
+                            start={{x: 0, y: 0}}
+                            end={{x: 1, y: 0}}
                             style={styles.continueBtn}>
                             <Text style={styles.continueText}>CONTINUE</Text>
                         </LinearGradient>
@@ -238,15 +241,18 @@ const styles = StyleSheet.create({
   },
   continueContainer: {
     width: '100%',
+    height: verticalScale(40),
+    marginTop: 10,
+    marginBottom: 20,
+    justifyContent: 'center',
   },
   continueBtn: {
     width: '100%',
-    borderRadius: 8,
-    paddingVertical: 16,
-    paddingHorizontal: 24,
+    height: '100%',
+    borderRadius: 28,
     alignItems: 'center',
-    marginTop: 12,
-    marginBottom: 0,
+    justifyContent: 'center',
+    overflow: 'hidden',
   },
   continueText: {
     color: '#fff',

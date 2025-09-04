@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-import colors from '../common/colors';
+import {COLORS} from '../Constant/Colors';
 
 /**
  * mr - margin right
@@ -39,7 +39,7 @@ export const GenericStyles = StyleSheet.create({
     borderWidth: 0,
   },
   whiteBackgroundContainer: {
-    backgroundColor: colors.WHITE,
+    backgroundColor: COLORS.white,
     flex: 1,
   },
   bold: {
@@ -52,10 +52,10 @@ export const GenericStyles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   positiveText: {
-    color: colors.GREEN,
+    color: COLORS.green,
   },
   negativeText: {
-    color: colors.RED,
+    color: COLORS.red,
   },
   centerAlignedText: {
     textAlign: 'center',
@@ -66,34 +66,34 @@ export const GenericStyles = StyleSheet.create({
   },
   highlightedInfoText: {
     fontSize: 12,
-    backgroundColor: colors.LIGHT_RED,
+    backgroundColor: COLORS.lightRed,
     padding: 8,
     borderRadius: 2,
   },
   // use CustomCard when background is non-white else use this style
   card: {
-    borderColor: colors.SILVER,
+    borderColor: COLORS.silver,
     borderTopWidth: 1,
     borderRightWidth: 1,
     borderBottomWidth: 2,
     borderLeftWidth: 1,
     borderRadius: 5,
     padding: 12,
-    backgroundColor: colors.WHITE,
+    backgroundColor: COLORS.white,
   },
   underline: {
     textDecorationLine: 'underline',
   },
   greyBar: {
     height: 1,
-    backgroundColor: colors.SILVER,
+    backgroundColor: COLORS.silver,
   },
   p16: {
     padding: 16,
   },
   navigationHeaderBorder: {
     borderBottomWidth: 1,
-    borderBottomColor: colors.SILVER,
+    borderBottomColor: COLORS.silver,
   },
   rightAligned: {
     justifyContent: 'flex-end',

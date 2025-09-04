@@ -33,7 +33,7 @@ import {
   FullButtonComponent,
 } from '../../lib';
 import ErrorBoundary from '../../lib/ErrorBoundary';
-import colors from '../../common/colors';
+// import colors from '../../common/colors';
 import {isAndroid, logErrorWithMessage} from '../../utilities/helperFunctions';
 import TimerText from './TimerText';
 
@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   submitButtonText: {
-    color: colors.WHITE,
+    color: COLORS.white,
   },
   otpResendButton: {
     alignItems: 'center',
@@ -340,13 +340,13 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   otpResendButtonText: {
-    color: colors.ORANGE,
+    color: COLORS.orange,
     textTransform: 'none',
     textDecorationLine: 'underline',
   },
   otpText: {
     fontWeight: 'bold',
-    color: colors.BLUE,
+    color: COLORS.blue,
     fontSize: 18,
     width: '100%',
   },

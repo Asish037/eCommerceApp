@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Header} from 'react-native/Libraries/NewAppScreen';
 
+import Landing from './src/Screens/Auth/Landing';
 import AuthStack from './src/Navigation/AuthStack';
 import Register from './src/Screens/Auth/Register';
 import Otp from './src/Screens/Auth/Otp';
@@ -102,6 +103,11 @@ const MainStackNavigator = () => {
         component={ForgotPasswordScreen}
         options={{headerShown: false}}
       /> */}
+      <Stack.Screen
+        name="Landing"
+        component={Landing}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="Orders"
         component={Orders}
