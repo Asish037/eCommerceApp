@@ -41,6 +41,7 @@ import PaymentScreen from './src/Screens/PaymentScreen';
 import PaymentMethod from './src/Screens/PaymentMethod';
 import OrderConfirm from './src/Screens/OrderConfirm';
 import ConfirmOrder from './src/Screens/ConfirmOrder';
+import SubCategoriesScreen from './src/Screens/SubCategoriesScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -121,6 +122,14 @@ const MainStackNavigator = () => {
         component={CategoriesScreen}
         options={() => ({
           title: 'Categories',
+        })}
+      />
+      <Stack.Screen
+        name="SubCategories"
+        component={SubCategoriesScreen}
+        options={() => ({
+          title: 'Sub Categories',
+          headerShown: false,
         })}
       />
       <Stack.Screen

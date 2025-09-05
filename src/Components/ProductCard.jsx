@@ -7,14 +7,88 @@ import { useRoute } from '@react-navigation/native';
 // import {useTheme} from '../Context/ThemeContext';
 // import { formatPrice } from '../Screens/ProductDetailsScreen';
 
-const ProductCard = ({item, handleProductClick, toggleFavorite, }) => {
+const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = false}) => {
   const {cartItems, addToCartItem} = useContext(CartContext);
 
   const route = useRoute();
   const {img} = route?.params || {};
-  // const {getThemeColors} = useTheme();
-  // const themeColors = getThemeColors();
 
+  // Compact styles for categories screen
+  const compactStyles = StyleSheet.create({
+    container: {
+      alignItems: 'center',
+      marginHorizontal: 8,
+      marginVertical: 12,
+      width: 100,
+    },
+    imageContainer: {
+      width: 70,
+      height: 70,
+      borderRadius: 40,
+      backgroundColor: COLORS.white,
+      elevation: 3,
+      shadowColor: COLORS.black,
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.1,
+      shadowRadius: 3.84,
+      marginBottom: 8,
+      overflow: 'hidden',
+    },
+    coverImage: {
+      width: '100%',
+      height: '100%',
+      borderRadius: 40,
+      resizeMode: 'cover',
+    },
+    title: {
+      fontSize: 12,
+      fontFamily: fonts.medium,
+      fontWeight: '600',
+      color: COLORS.black,
+      textAlign: 'center',
+      lineHeight: 16,
+    },
+    price: {
+      fontSize: 12,
+      fontFamily: fonts.medium,
+      fontWeight: '700',
+      color: '#E94560',
+      textAlign: 'center',
+      marginTop: 4,
+    },
+    originalPrice: {
+      fontSize: 10,
+      fontFamily: fonts.regular,
+      textDecorationLine: 'line-through',
+      color: '#999',
+      textAlign: 'center',
+    },
+    likeContainer: {
+      position: 'absolute',
+      top: -5,
+      right: -5,
+      backgroundColor: COLORS.white,
+      borderRadius: 12,
+      padding: 4,
+      elevation: 2,
+      shadowColor: COLORS.black,
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.2,
+      shadowRadius: 1.41,
+    },
+    faviorate: {
+      height: 16,
+      width: 16,
+    },
+  });
+
+  // Normal styles
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -42,6 +116,7 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, }) => {
     contentContainer: {
       padding: 12,
       paddingBottom: 16,
+      flexGrow: 1,
     },
     title: {
       fontSize: 16,
@@ -74,8 +149,9 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, }) => {
     },
     description: {
       fontSize: 12,
-      fontFamily: fonts.regular,
-      color: COLORS.black,
+      fontFamily: fonts.medium,
+      color: '#000000ff',
+      fontWeight: '500',
       marginBottom: 8,
       lineHeight: 16,
     },
@@ -186,18 +262,94 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, }) => {
       addToCartItem(item);
     }
   };
+
+  // console.log('ProductCard image URL:', item.img || item.image);
+
+  // Render compact version for categories screen
+  if (isCompact) {
+    return (
+      <TouchableOpacity
+        style={compactStyles.container}
+        onPress={() => {
+          handleProductClick(item);
+        }}>
+        
+        <View style={compactStyles.imageContainer}>
+          <Image 
+            source={
+              (item.img || item.image) 
+                ? {uri: item.img || item.image}
+                : require('../assets/model1.jpg') // fallback image
+            } 
+            style={compactStyles.coverImage}
+          />
+          
+          {/* Favorite Button */}
+          <View style={compactStyles.likeContainer}>
+            <TouchableOpacity
+              onPress={() => {
+                toggleFavorite(item);
+              }}>
+              {item.isFavorite ? (
+                <Image
+                  source={require('../assets/favoriteFilled.png')}
+                  style={compactStyles.faviorate}
+                />
+              ) : (
+                <Image
+                  source={require('../assets/favorite.png')}
+                  style={compactStyles.faviorate}
+                />
+              )}
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <Text style={compactStyles.title} numberOfLines={2}>
+          {item.name || item.title}
+        </Text>
+        
+        {item.offer_price && (
+          <Text style={compactStyles.price}>
+            ₹{item.offer_price}
+          </Text>
+        )}
+        
+        {item.price && item.price !== item.offer_price && (
+          <Text style={compactStyles.originalPrice}>
+            ₹{item.price}
+          </Text>
+        )}
+      </TouchableOpacity>
+    );
+  }
+
+  // Original full card layout
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={() => {
         handleProductClick(item);
       }}>
-      <Image source={{uri: item.image}} style={styles.coverImage} />
+      <Image 
+        source={
+          (item.img || item.image) 
+            ? {uri: item.img || item.image}
+            : require('../assets/model1.jpg') // fallback image
+        } 
+        style={styles.coverImage}
+      />
 
       <View style={styles.contentContainer}>
         <Text style={styles.title} numberOfLines={2}>
-          {item.title}
+          {item.name || item.title}
         </Text>
+        
+        {/* Debug: Show image URL */}
+        <Text style={{fontSize: 10, color: 'gray', marginBottom: 4}} numberOfLines={1}>
+          IMG: {item.img || item.image || 'No image URL'}
+        </Text>
+        
         <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginBottom: 6, gap: 10}} >
           <Text style={styles.productOriginalPrice}>{(item.price)}</Text>
           <Text style={styles.productPrice}>{(item.offer_price)}</Text>

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -18,21 +18,113 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {CartContext} from '../Context/CartContext';
+import axios from '../Components/axios';
+import qs from 'qs';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const ViewProfile = () => {
   const navigation = useNavigation();
   const {user, loadUserData} = useContext(CartContext);
+  const [isLoading, setIsLoading] = useState(false);
   // const {getThemeColors} = useTheme();
   // const themeColors = getThemeColors();
 
   // Reload user data whenever this screen comes into focus
-  useFocusEffect(
-    React.useCallback(() => {
-      if (loadUserData) {
-        loadUserData();
+
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try{
+  //     setIsLoading(true);
+      
+  //     const token = await AsyncStorage.getItem('authToken'); 
+
+  //     // const config = {
+  //     //   method: 'get',
+  //     //   url: '/get-profile',
+  //     //   headers: {
+  //     //     'Accept': 'application/json',
+  //     //     "Authorization": `Bearer ${token}`,
+  //     //   },
+  //     //   // data: qs.stringify({}),
+  //     // }
+  //     // const response = await axios(config);
+  //     const response = await axios.get('get-profile', {
+  //       headers: {
+  //         Authorization: `Bearer ${JSON.parse(user)}`,
+  //       },
+  //     });
+ 
+  //     console.log("User data:", response.data);
+
+  //     const mappedData = {
+  //       id: response.data.id,
+  //       fullname: `${response.data.fname} ${response.data.lname}`,
+  //       email: response.data.email,
+  //       phone: response.data.phone,
+  //     }
+
+  //     loadUserData(mappedData);
+
+  //   }catch(error){
+  //       if (error.response) {
+  //         console.log("API error:", error.response.data);
+  //       } else {
+  //         console.log("Network/Setup error:", error.message);
+  //       }
+  //   }finally{
+  //     setIsLoading(false);
+  //   }
+  // }
+
+
+  //   fetchUserData();
+  // }, [loadUserData]);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        setIsLoading(true);
+        const token = await AsyncStorage.getItem('authToken');
+        if (!token) {
+          console.log("No auth token found in storage");
+          return;
+        }
+        const response = await axios.get('get-profile', {
+          headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`, 
+          },
+        });
+
+        console.log("Full Axios response:", response);
+        console.log("Raw API data:", response.data);
+
+        const mappedData = {
+          id: response.data.id,
+          fullname: `${response.data.fname} ${response.data.lname}`,
+          email: response.data.email,
+          phone: response.data.phone,
+        };
+
+        loadUserData(mappedData);
+
+      } catch (error) {
+        if (error.response) {
+          console.log("API error:", error.response.data);
+        } else {
+          console.log("Network/Setup error:", error.message);
+        }
+      } finally {
+        setIsLoading(false);
       }
-    }, [loadUserData]),
-  );
+    };
+
+    fetchUserData();
+  }, [loadUserData]);
+
+
+
 
   return (
     <LinearGradient colors={COLORS.gradient} style={styles.container}>
@@ -285,7 +377,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: moderateScale(15),
     paddingVertical: moderateScale(10),
-    marginTop: Platform.OS === 'ios' ? moderateScale(30) : moderateScale(20),
+    marginTop:  moderateScale(20),
     marginBottom: moderateScale(10),
   },
   headerTitle: {

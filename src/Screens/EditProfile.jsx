@@ -27,6 +27,8 @@ import CustomInput from '../Components/CustomInput';
 import Header from '../Components/Header';
 import {CartContext} from '../Context/CartContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from '../Components/axios';
+import qs from 'qs';
 
 const EditProfile = () => {
   const navigation = useNavigation();
@@ -52,12 +54,40 @@ const EditProfile = () => {
     }
 
     setdisabled(true);
+
+    try {
+      const token = await AsyncStorage.getItem('userToken');
+      const config ={
+        method: 'put',
+        url: 'https://yourapi.com/update-profile',
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        data: {
+          email: email,
+          mobileNumber: mobileNumber,
+          fullname: fullname,
+          profileImage: profileImageUri,
+        },
+      };
+
+      const response = await axios(config);
+      console.log(response.data);
+      
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      Toast.show('Failed to update profile. Please try again.');
+      setdisabled(false);
+      return;
+    }
+
+
+
     let updatedUserData = {
       ...user,
-      email: email,
-      mobileNumber: mobileNumber,
-      fullname: fullname,
-      profileImage: profileImageUri,
+      
     };
 
     try {

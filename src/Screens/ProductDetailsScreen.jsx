@@ -21,12 +21,18 @@ import qs from 'qs';
 const {width} = Dimensions.get('window');
 
 const ProductDetailsScreen = () => {
-   const {addToCartItem, cartItems} = useContext(CartContext);
+  const {addToCartItem, cartItems} = useContext(CartContext);
   const route = useRoute();
   const navigation = useNavigation();
 
   // const product = route.params.item;
-  const { productId } = route.params;
+  const { productId } = route.params || {};
+  
+  // Handle case where productId is not provided
+  if (!productId) {
+    console.error('No productId provided in route params');
+  }
+  
   const numericProductId = parseInt(productId, 10);
 
 
@@ -143,33 +149,38 @@ const ProductDetailsScreen = () => {
 
         const productData = response.data.data;
 
+        // Check if productData exists
+        if (!productData) {
+          console.error('No product data found in response');
+          throw new Error('Product not found');
+        }
+
         // Parse colors and sizes
-        const colors = parseColors(productData.key_features);
-        const sizes = parseSizes(productData.sizes);
+        const colors = parseColors(productData.key_features || '');
+        const sizes = parseSizes(productData.sizes || '');
 
         // Transform backend fields into frontend-friendly keys
         const formattedProduct = {
-          id: productData.id, // keep for cart logic
-          title: productData.name,
-          image: productData.img,  // backend gives "img"
-          price: productData.price,
-          offerPrice: productData.offer_price,
-          description: productData.description,
-          slug: productData.slug,
-          sku: productData.SKU,
-          rulingDeity: productData.ruling_deity,
-          benefits: productData.benefits,
-          howToUse: productData.how_to_use,
-          keyFeatures: productData.key_features,
-          safetyInformation: productData.safty_information,
-          categoryName: productData.category_name,
-          vendorName: productData.vendor_name,
+          id: productData.id, 
+          title: productData.name || 'Untitled Product',
+          image: productData.img || '',  // backend gives "img"
+          price: productData.price || 0,
+          offerPrice: productData.offer_price || productData.price || 0,
+          description: productData.description || 'No description available',
+          slug: productData.slug || '',
+          sku: productData.SKU || '',
+          rulingDeity: productData.ruling_deity || '',
+          benefits: productData.benefits || '',
+          howToUse: productData.how_to_use || '',
+          keyFeatures: productData.key_features || '',
+          safetyInformation: productData.safty_information || '',
+          categoryName: productData.category_name || '',
+          vendorName: productData.vendor_name || '',
           colors,
           sizes,
-          rating: 0,   // default since backend doesn’t give rating
-          reviews: [], // empty for now
-        };
-
+          rating: 0,   
+          reviews: [], 
+        };        
         setProductDetails(formattedProduct);
         console.log('Formatted product:', formattedProduct);
       } catch (error) {
@@ -180,14 +191,16 @@ const ProductDetailsScreen = () => {
     };
 
     fetchProductDetails();
-  }, [productId]);
+  }, [productId, numericProductId]);
 
 
 
   if (isLoading || !productDetails) {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={{color: COLORS.black}}>Loading product details...</Text>
+        <Text style={{color: COLORS.black}}>
+          {!productId ? 'Invalid product ID' : 'Loading product details...'}
+        </Text>
       </View>
     );
   }

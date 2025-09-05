@@ -23,7 +23,7 @@ const MyWishList = () => {
 
   const handleProductDetails = item => {
     console.log('hello==' + JSON.stringify(item));
-    navigation.navigate('PRODUCT_DETAILS', {item});
+    navigation.navigate('PRODUCT_DETAILS', { productId: item.id });
   };
 
   const handleSearchChange = searchText => {
