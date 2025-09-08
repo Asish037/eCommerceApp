@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   FlatList,
   StatusBar,
+  Alert,
 } from 'react-native';
 import {COLORS} from '../Constant/Colors';
 import {FONTS} from '../Constant/Font';
@@ -21,51 +22,96 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import myorderData from '../data/myorderData.json';
 import Header from '../Components/Header';
 import Moment from 'moment';
+import axios from '../Components/axios';
+import qs from 'qs';
+import asyncStorage from '@react-native-async-storage/async-storage';
+// import {useTheme} from '../Context/ThemeContext';
 
 const Orders = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const [ordersData, setOrdersData] = useState([]);
   const [allOrders] = useState(myorderData.orders);
+  const [isLoading, setIsLoading] = useState(true);
+  // const [error, setError] = useState(null);
 
   // Get route parameters
   const {status, title, filter} = route.params || {};
 
   useEffect(() => {
-    // Filter orders based on the parameters passed from AccountScreen
-    let filteredOrders = allOrders;
+    fetchOrders();
+  }, [filter]);
 
-    if (filter) {
-      switch (filter) {
-        case 'unpaid':
-          filteredOrders = allOrders.filter(
-            order => order.payment.payment_status !== 'Completed',
-          );
-          break;
-        case 'paid':
-          filteredOrders = allOrders.filter(
-            order =>
-              order.payment.payment_status === 'Completed' &&
-              order.shipping_status === 'Processing',
-          );
-          break;
-        case 'shipped':
-          filteredOrders = allOrders.filter(
-            order => order.shipping_status === 'Shipped',
-          );
-          break;
-        case 'delivered':
-          filteredOrders = allOrders.filter(
-            order => order.shipping_status === 'Delivered',
-          );
-          break;
-        default:
-          filteredOrders = allOrders;
-      }
+  const fetchOrders = async () => {
+  try {
+    setIsLoading(true);
+    const token = await asyncStorage.getItem('userToken');
+    const userId = await asyncStorage.getItem('userId');
+
+    if (!token) {
+      Alert.alert('Error', 'No auth token found. Please log in again.');
+      return;
     }
 
-    setOrdersData(filteredOrders);
-  }, [filter, allOrders]);
+    const response = await axios({
+      method: 'get',
+      url: `/order-list?userId=${userId}`,
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (response.status === 200) {
+      let fetchedOrders = response.data.data;
+
+      const updatedOrders = fetchedOrders.map(order => ({
+        ...order,
+        shipping_status: order.shipping_status || 'Processing',
+        payment: order.payment || { payment_status: 'Pending' },
+      }));
+
+      let filteredOrders = updatedOrders;
+      if (filter) {
+        switch (filter) {
+          case 'unpaid':
+            filteredOrders = updatedOrders.filter(
+              o => o.payment.payment_status !== 'Completed'
+            );
+            break;
+          case 'paid':
+            filteredOrders = updatedOrders.filter(
+              o =>
+                o.payment.payment_status === 'Completed' &&
+                o.shipping_status === 'Processing'
+            );
+            break;
+          case 'shipped':
+            filteredOrders = updatedOrders.filter(
+              o => o.shipping_status === 'Shipped'
+            );
+            break;
+          case 'delivered':
+            filteredOrders = updatedOrders.filter(
+              o => o.shipping_status === 'Delivered'
+            );
+            break;
+        }
+      }
+
+      setOrdersData(filteredOrders);
+    } else {
+      Alert.alert('Error', response.data.message || 'Something went wrong.');
+    }
+  } catch (err) {
+    console.error('Error fetching orders:', err);
+    // ✅ fallback to local dummy data
+    setOrdersData(myorderData.orders);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+    // Filter orders based on the parameters passed from AccountScreen
+  // let filteredOrders = allOrders;
+  // setOrdersData(filteredOrders);
 
   const getStatusIcon = status => {
     switch (status) {
@@ -93,17 +139,17 @@ const Orders = () => {
     }
   };
 
-  const renderOrderItem = ({item, index}) => (
+  const renderOrderItem = ({item}) => (
     <TouchableOpacity
-      onPress={() => {
-        navigation.navigate('OrderDetails', {items: item});
-      }}
+      onPress={() => navigation.navigate('OrderDetails', {items: item})}
       style={styles.orderCard}>
+      
+      {/* Header */}
       <View style={styles.orderHeader}>
         <View style={styles.orderIdSection}>
-          <Text style={styles.orderIdText}>Order #{item.order_id}</Text>
+          <Text style={styles.orderIdText}>Order #{item.id}</Text>
           <Text style={styles.orderDateText}>
-            {Moment(item.order_date).format('MMM DD, YYYY')}
+            {Moment(item.created_at).format('YYYY-MM-DD')}
           </Text>
         </View>
         <View style={styles.statusContainer}>
@@ -122,11 +168,12 @@ const Orders = () => {
         </View>
       </View>
 
+      {/* Order Content */}
       <View style={styles.orderContent}>
         <View style={styles.imageContainer}>
           <Image
             source={{
-              uri: item.items[0].thumbnail_image,
+              uri: `https://yourdomain.com/storage/${item.order_items[0].product_image}`, 
             }}
             style={styles.productImage}
           />
@@ -134,19 +181,21 @@ const Orders = () => {
 
         <View style={styles.productDetails}>
           <Text style={styles.productName} numberOfLines={2}>
-            {item.items[0].product_name}
+            {item.order_items[0].product_name}
           </Text>
-          <Text style={styles.brandText}>{item.items[0].brand}</Text>
+          <Text style={styles.brandText}>N/A</Text>
+
           <View style={styles.quantityPriceRow}>
             <Text style={styles.quantityText}>
-              Qty: {item.items[0].quantity}
+              Qty: {item.order_items[0].quantity}
             </Text>
-            <Text style={styles.priceText}>${item.payment.total_amount}</Text>
+            <Text style={styles.priceText}>${item.total.toFixed(2)}</Text>
           </View>
-          {item.items.length > 1 && (
+
+          {item.order_items.length > 1 && (
             <Text style={styles.moreItemsText}>
-              +{item.items.length - 1} more item
-              {item.items.length > 2 ? 's' : ''}
+              +{item.order_items.length - 1} more item
+              {item.order_items.length > 2 ? 's' : ''}
             </Text>
           )}
         </View>
@@ -160,6 +209,7 @@ const Orders = () => {
         </View>
       </View>
 
+      {/* Footer */}
       <View style={styles.orderFooter}>
         <View style={styles.paymentInfo}>
           <MaterialCommunityIcons
@@ -168,7 +218,7 @@ const Orders = () => {
             color={COLORS.button}
           />
           <Text style={styles.paymentText}>
-            {item.payment.payment_method} • {item.payment.payment_status}
+            {item.payment?.payment_method || 'N/A'} • {item.payment?.payment_status || 'Pending'}
           </Text>
         </View>
         {item.tracking_number && (
@@ -179,6 +229,7 @@ const Orders = () => {
       </View>
     </TouchableOpacity>
   );
+
 
   return (
     <LinearGradient
@@ -194,7 +245,7 @@ const Orders = () => {
       <FlatList
         data={ordersData}
         renderItem={renderOrderItem}
-        keyExtractor={(item, index) => `${item.order_id}-${index}`}
+        keyExtractor={(item, index) => `${item.id}-${index}`}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContainer}
         ListHeaderComponent={() => (
@@ -204,12 +255,16 @@ const Orders = () => {
               {ordersData.length} order{ordersData.length !== 1 ? 's' : ''} •
               Total: $
               {ordersData
-                .reduce(
-                  (sum, order) => sum + parseFloat(order.payment.total_amount),
-                  0,
-                )
+                .reduce((sum, order) => {
+                  const orderTotal = order.order_items.reduce((itemSum, item) => {
+                    const price = item.product_offer_price || item.product_price || 0;
+                    return itemSum + price * item.quantity;
+                  }, 0);
+                  return sum + orderTotal;
+                }, 0)
                 .toFixed(2)}
             </Text>
+
           </View>
         )}
         ListEmptyComponent={() => {

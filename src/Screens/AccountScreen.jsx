@@ -90,7 +90,7 @@ const ViewProfile = () => {
           console.log("No auth token found in storage");
           return;
         }
-        const response = await axios.get('get-profile', {
+        const response = await axios.get('/get-profile', {
           headers: {
             Accept: 'application/json',
             Authorization: `Bearer ${token}`, 

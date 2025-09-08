@@ -10,8 +10,8 @@ import {COLORS} from '../Constant/Colors';
 // import {useTheme} from '../Context/ThemeContext';
 
 const Tags = () => {
-  const [selected, setSelected] = useState("Trending Now");
-  const tags = ["Trending Now", "Featured", "New Arrivals", "Winter", "Summer"];
+  const [selected, setSelected] = useState("Best Sales");
+  const tags = ["Best Sales", "New Arrivals", "Rudraksha", "Pooja", "Mala"];
   // const {getThemeColors} = useTheme();
   // const themeColors = getThemeColors();
 

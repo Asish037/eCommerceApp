@@ -14,7 +14,8 @@ import Tags from '../Components/Tags';
 import ProductCard from '../Components/ProductCard';
 import data from '../data/data.json';
 import {useNavigation} from '@react-navigation/native';
-import sale from '../assets/sale2.jpeg';
+// import sale from '../assets/sale2.jpeg';
+import download from '../assets/download.jpeg';
 import { COLORS } from '../Constant/Colors';
 // import { useTheme } from '../Context/ThemeContext';
 import axios from '../Components/axios';
@@ -101,16 +102,18 @@ const HomeScreen = () => {
     <LinearGradient colors={COLORS.gradient} style={styles.container}>
       <Header />
 
+      {/* <Text style={styles.headingText}>Trending</Text> */}
+
       <FlatList
         style={styles.flatList}
         contentContainerStyle={styles.flatListContent}
         ListHeaderComponent={
           <>
-            <ImageBackground source={sale} style={styles.ImageBackground}>
-              <View style={styles.textContainer}>
+            <ImageBackground source={download} style={styles.ImageBackground}>
+              {/* <View style={styles.textContainer}>
                 <Text style={styles.headerTitleMain}>Limited Time</Text>
                 <Text style={styles.headerTitleSub}>OFFER</Text>
-              </View>
+              </View> */}
             </ImageBackground>
 
             <View style={styles.tagsContainer}>

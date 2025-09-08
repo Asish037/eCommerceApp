@@ -26,6 +26,9 @@ import GradientButton from '../Components/Button/GradientButton';
 import Toast from 'react-native-simple-toast';
 import {fonts} from '../utils/fonts';
 import Header from '../Components/Header';
+import axios from '../Components/axios'
+import qs from 'qs';
+import asyncStorage from '@react-native-async-storage/async-storage';
 
 const EditAddress = ({route}) => {
   const navigation = useNavigation();
@@ -128,53 +131,53 @@ const EditAddress = ({route}) => {
     }
 
     setIsLoading(true);
-
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const token =  await asyncStorage.getItem('userToken');
+      console.log('User token:', token); // Debug log
+      if (!token) {
+      Alert.alert("Error", "No auth token found. Please log in again.");
+      setIsLoading(false);
+      return;
+    }
 
-      // Create address object
-      const addressObject = {
+
+      //  payload in backend format
+      const payload = {
         id: addressData?.id || Date.now().toString(),
-        type: formData.addressType,
-        contactName: formData.contactName,
-        addressLine1: `${formData.houseNumber}, ${formData.roadName}`,
-        addressLine2: `${formData.pincode}`,
-        phoneNumber: formData.phoneNumber,
-        pincode: formData.pincode,
-        houseNumber: formData.houseNumber,
-        roadName: formData.roadName,
-        isDefault: formData.isDefault,
+        userId: addressData?.userId,
+        address_line_1: `${formData.houseNumber}, ${formData.roadName}`,
+        address_line_2: formData.pincode,
+        cityId: null,
+        countryId: null,
+        stateId: null,
+        zipcode: formData.pincode,
+        phone: formData.phoneNumber,
       };
 
-      setIsLoading(false);
+      const response = await axios.put('/update-address', payload, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      });
 
-      if (addressData) {
-        // Editing existing address
-        Toast.show('Address updated successfully!', Toast.SHORT);
-        if (fromAddressScreen) {
-          navigation.navigate('AddressScreen', {
-            updatedAddress: addressObject,
-          });
-        } else {
-          navigation.goBack();
-        }
+      console.log('API response:', response.data);
+
+      Toast.show('Address updated successfully!', Toast.SHORT);
+
+      if (fromAddressScreen) {
+        navigation.navigate('AddressScreen', { updatedAddress: response.data });
       } else {
-        // Adding new address
-        Toast.show('Address added successfully!', Toast.SHORT);
-        if (fromAddressScreen) {
-          navigation.navigate('AddressScreen', {
-            newAddress: addressObject,
-          });
-        } else {
-          navigation.goBack();
-        }
+        navigation.goBack();
       }
     } catch (error) {
-      setIsLoading(false);
+      console.error('Error saving address:', error);
       Alert.alert('Error', 'Failed to save address. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
+
 
   // const CustomHeader = () => (
   // <View style={styles.headerContainer}>

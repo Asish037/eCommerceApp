@@ -57,9 +57,17 @@ const EditProfile = () => {
 
     try {
       const token = await AsyncStorage.getItem('userToken');
-      const config ={
+      console.log('User token:', token); // Debug log
+      if (!token) {
+        Toast.show('No auth token found. Please log in again.');
+        setdisabled(false);
+        return;
+      }
+
+      // Make API call to update profile
+      const config = {
         method: 'put',
-        url: 'https://yourapi.com/update-profile',
+        url: '/update-profile',
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json",
@@ -83,11 +91,14 @@ const EditProfile = () => {
       return;
     }
 
-
+    // let updatedUserData = reponse.data
 
     let updatedUserData = {
       ...user,
-      
+      email: email,
+      mobileNumber: mobileNumber,
+      fullname: fullname,
+      profileImage: profileImageUri,
     };
 
     try {
