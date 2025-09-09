@@ -1,4 +1,5 @@
 import {
+  Alert,
   FlatList,
   Image,
   ImageBackground,
@@ -7,7 +8,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../Components/Header';
 import Tags from '../Components/Tags';
@@ -15,11 +16,176 @@ import WishlistCard from '../Components/WishlistCard';
 import data from '../data/data.json';
 import {useNavigation} from '@react-navigation/native';
 import { COLORS } from '../Constant/Colors';
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
+import axios from  '../Components/axios';
+import qs from 'qs';
 
 const MyWishList = () => {
-  const [products, setProducts] = useState(data.products);
-  const [filteredProducts, setFilteredProducts] = useState(data.products);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+  // const [like, setLike] = useState(false);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const loadWishlist = async () => {
+      const userId = await AsyncStorage.getItem('userId');
+      if (userId) {
+        fetchLikeProducts(userId);
+      }
+    };
+    loadWishlist();
+  }, []);
+
+
+  const normalizeWishlistItems = (wishlistItems = []) => {
+    return wishlistItems.map(prod => ({
+      id: prod.wishlist_id,
+      productId: prod.productId,
+      title: prod.product_name,
+      image: prod.product_image,
+      price: prod.product_offer_price || prod.product_price,
+      description: prod.product_description,
+      sku: prod.product_sku,
+      isFavorite: true, // since it's from wishlist
+    }));
+  };
+
+
+  const fetchLikeProducts = async (userId) => {
+    try {
+      setLoading(true);
+      const token = await AsyncStorage.getItem('token');
+      if (!token) {
+        console.log('No token found');
+        Alert.alert('Error', 'No auth token found. Please log in again.');
+        return;
+      }
+
+      const config = {
+        method: 'get',
+        url: `/get-wishlist?userId=${1}`,
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+      };
+
+      const response = await axios(config);
+
+      if (response.data?.data?.wishlist_items) {
+        const items = normalizeWishlistItems(response.data.data.wishlist_items);
+        setProducts(items);
+        setFilteredProducts(items);
+      } else {
+        setProducts([]);
+        setFilteredProducts([]);
+      }
+
+    } catch (error) {
+      console.error('Error in fetchLikeProducts:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const loadWishlist = async () => {
+      const userId = await AsyncStorage.getItem('userId');
+      console.log(" Loaded userId from AsyncStorage:", userId);
+      if (userId) {
+        fetchLikeProducts(userId);
+      } else {
+        console.log(" No userId found in AsyncStorage");
+      }
+    };
+    loadWishlist();
+  }, []);
+
+
+
+  const fetchAddLikeProducts = async (userId, productId) => {
+    try {
+      setLoading(true);
+      const token = await AsyncStorage.getItem('token');
+      if (!token) {
+        console.log('No token found');
+        Alert.alert('Error', 'No auth token found. Please log in again.');
+        return;
+      }
+
+      const config = {
+        method: 'post',
+        url: `/add-wishlist`,
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        data: { userId, productId },  
+      };
+
+      const response = await axios(config);
+
+      if (response.data?.data?.wishlist_items) {
+        const items = normalizeWishlistItems(response.data.data.wishlist_items);
+        setProducts(items);
+        setFilteredProducts(items);
+      }
+
+    } catch (error) {
+      console.error('Error in fetchAddLikeProducts:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  const removeFromWishlist = async (item) => {
+    try {
+      setLoading(true);
+      const token = await AsyncStorage.getItem('token');
+      const userId = await AsyncStorage.getItem('userId'); 
+      if (!token || !userId) {
+        console.log('No token or userId found');
+        Alert.alert('Error', 'No auth token found. Please log in again.');
+        return;
+      }
+
+      const config = {
+        method: 'delete',
+        url: `/remove-wishlist?userId=${userId}&productId=${item.productId}`,
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        data: {userId, productId: item.productId},
+      };
+
+      const response = await axios(config);
+
+      if (response.data?.data?.wishlist_items) {
+        // backend returns updated wishlist
+        const items = normalizeWishlistItems(response.data.data.wishlist_items);
+        setProducts(items);
+        setFilteredProducts(items);
+      } else {
+        // fallback: remove locally
+        setProducts(prev => prev.filter(prod => prod.id !== item.id));
+        setFilteredProducts(prev => prev.filter(prod => prod.id !== item.id));
+      }
+
+    } catch (error) {
+      console.error('Error in removeFromWishlist:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+
 
   const handleProductDetails = item => {
     console.log('hello==' + JSON.stringify(item));
@@ -30,71 +196,40 @@ const MyWishList = () => {
     if (searchText.trim() === '') {
       setFilteredProducts(products);
     } else {
-      const filtered = products.filter(
-        product =>
-          product.name.toLowerCase().includes(searchText.toLowerCase()) ||
-          product.category?.toLowerCase().includes(searchText.toLowerCase()),
+      const filtered = products.filter(product =>
+        product.title.toLowerCase().includes(searchText.toLowerCase())
       );
       setFilteredProducts(filtered);
     }
   };
 
-  const wishList = [
-    {
-      item_id: 1,
-      name: 'Wireless Headphones',
-      category: 'Electronics',
-      brand: 'Sony',
-      price: 150.0,
-      currency: 'USD',
-      link: 'https://example.com/product/wireless-headphones',
-      priority: 'High',
-      notes: 'Looking for noise-cancelling features.',
-    },
-    {
-      item_id: 2,
-      name: 'Coffee Maker',
-      category: 'Home Appliances',
-      brand: 'Keurig',
-      price: 99.99,
-      currency: 'USD',
-      link: 'https://example.com/product/coffee-maker',
-      priority: 'Medium',
-      notes: 'Prefer single-serve pod machine.',
-    },
-    {
-      item_id: 3,
-      name: 'Laptop Bag',
-      category: 'Accessories',
-      brand: 'Targus',
-      price: 45.0,
-      currency: 'USD',
-      link: 'https://example.com/product/laptop-bag',
-      priority: 'Low',
-      notes: 'Looking for something lightweight and durable.',
-    },
-  ];
 
-  const toggleFavorite = item => {
-    const updatedProducts = products.map(prod => {
-      if (prod.id === item.id) {
-        console.log('prod: ', prod);
-        return {
-          ...prod,
-          isFavorite: !prod.isFavorite,
-        };
+  const toggleFavorite = async (item) => {
+    try {
+      const userId = await AsyncStorage.getItem('userId'); // make sure you save this in AsyncStorage
+      if (!userId) return;
+
+      if (item.isFavorite) {
+        // already in wishlist → remove it
+        removeFromWishlist(item);
+      } else {
+        // not in wishlist → add it
+        fetchAddLikeProducts(userId, item.productId);
       }
-      return prod;
-    });
-    setProducts(updatedProducts);
-    setFilteredProducts(updatedProducts);
+    } catch (error) {
+      console.error('Error in toggleFavorite:', error);
+    }
   };
 
-  const removeFromWishlist = item => {
-    const updatedProducts = products.filter(prod => prod.id !== item.id);
-    setProducts(updatedProducts);
-    setFilteredProducts(updatedProducts);
-  };
+
+
+  // const removeFromWishlist = async (item) => {
+  //   const userId = await AsyncStorage.getItem('userId'); // adjust if you store it differently
+  //   if (!userId) return;
+
+  //   fetchRemoveProducts(item, userId);
+  // };
+
 
   return (
     <LinearGradient colors={COLORS.gradient} style={styles.container}>
@@ -106,9 +241,11 @@ const MyWishList = () => {
       <FlatList
         data={filteredProducts}
         numColumns={2}
+        keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
           <WishlistCard
             item={item}
+
             handleProductClick={handleProductDetails}
             toggleFavorite={toggleFavorite}
             removeFromWishlist={removeFromWishlist}
