@@ -1,4 +1,4 @@
-package com.mj
+package com.shopnova.app
 
 import android.app.Application
 import com.facebook.react.PackageList
@@ -12,6 +12,9 @@ import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.soloader.OpenSourceMergedSoMapping
 import com.facebook.soloader.SoLoader
 import com.oblador.vectoricons.VectorIconsPackage
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.os.Build
 
 class MainApplication : Application(), ReactApplication {
 
@@ -40,6 +43,22 @@ class MainApplication : Application(), ReactApplication {
     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
       // If you opted-in for the New Architecture, we load the native entry point for this app.
       load()
+    }
+    
+    // Create notification channel for Android 8.0+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      val channel = NotificationChannel(
+        "shopnova_channel",
+        "Shopnova Notifications",
+        NotificationManager.IMPORTANCE_HIGH
+      ).apply {
+        description = "Notifications for Shopnova app"
+        enableLights(true)
+        enableVibration(true)
+      }
+      
+      val notificationManager = getSystemService(NotificationManager::class.java)
+      notificationManager.createNotificationChannel(channel)
     }
   }
 }

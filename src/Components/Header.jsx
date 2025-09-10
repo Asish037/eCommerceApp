@@ -6,20 +6,33 @@ import {
   View,
   TextInput,
   Animated,
+  Platform,
 } from 'react-native';
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useContext} from 'react';
 import {fonts} from '../utils/fonts';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {addToCart} from '../utils/helper';
 import {CartContext} from '../Context/CartContext';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {COLORS} from '../Constant/Colors';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import {moderateScale} from '../PixelRatio';
+// import {useTheme} from '../Context/ThemeContext';
+// import ThemeSelectionModal from './Modal/ThemeSelectionModal';
 
 const Header = ({isCart, onSearchChange}) => {
   const navigation = useNavigation();
   const route = useRoute();
+  const {getTotalQuantity} = useContext(CartContext);
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [searchText, setSearchText] = useState('');
   const searchInputRef = useRef(null);
   const searchAnimation = useRef(new Animated.Value(0)).current;
+  // const {isDarkTheme} = useTheme();
 
   // Screens where search should appear inline in header
   const inlineSearchScreens = [
@@ -56,8 +69,14 @@ const Header = ({isCart, onSearchChange}) => {
         onSearchChange && onSearchChange('');
       }
     } else {
-      // Navigate to categories screen
-      navigation.navigate('CATEGORIES', {focusSearch: true});
+      // Navigate to categories screen based on current context
+      if (route.name === 'HOME' || route.name === 'HOME_STACK' || route.name === 'MainHome') {
+        // If on home screen, navigate to bottom tab categories
+        navigation.navigate('categories', {focusSearch: true});
+      } else {
+        // Otherwise navigate to main stack Categories
+        navigation.navigate('Categories', {focusSearch: true});
+      }
     }
   };
 
@@ -73,9 +92,11 @@ const Header = ({isCart, onSearchChange}) => {
           handleSearchPress();
           break;
         case 'favorites':
+          // Navigate to wishlist screen
           navigation.navigate('MyWishList');
           break;
         case 'cart':
+          // Navigate to cart screen
           navigation.navigate('CART');
           break;
         default:
@@ -90,7 +111,8 @@ const Header = ({isCart, onSearchChange}) => {
     try {
       if (route.name === 'HOME' || route.name === 'MainHome') {
         // On home screen, show menu drawer
-        navigation.navigate('MenuDrawer');
+        //navigation.navigate('MenuDrawer');
+        navigation.navigate('Settings');
       } else {
         // On other screens, go back
         if (navigation.canGoBack()) {
@@ -105,127 +127,194 @@ const Header = ({isCart, onSearchChange}) => {
       navigation.navigate('HOME');
     }
   };
-  return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.appDrawerContainer}>
-          <TouchableOpacity
-            onPress={handleBack}
-            style={styles.appDrawerContainer}>
-            {route.name === 'HOME' || route.name === 'MainHome' ? (
-              <Image
-                source={require('../assets/apps.png')}
-                style={styles.appDrawerIcon}
-              />
-            ) : (
-              <Image
-                source={require('../assets/arrowback.png')}
-                style={styles.appDrawerIcon}
-              />
-            )}
-          </TouchableOpacity>
+
+  // Cart Icon Component with Badge
+  const CartIconWithBadge = ({style, onPress}) => {
+    const totalQuantity = getTotalQuantity();
+    
+    return (
+      <TouchableOpacity onPress={onPress} style={style}>
+        <View style={{position: 'relative'}}>
+          <Ionicons
+            name="cart"
+            size={moderateScale(20)}
+            color={COLORS.button}
+            style={styles.appCartIcon}
+          />
+          {/* <Image
+            //
+            source={require('../assets/focused/shopping_cart.png')}
+            style={{
+              height: 24,
+              width: 24,
+              resizeMode: 'center',
+            }}
+          /> */}
+          {totalQuantity > 0 && (
+            <View
+              style={{
+                position: 'absolute',
+                right: -5,
+                bottom: 15,
+                height: 14,
+                width: 14,
+                backgroundColor: COLORS.black,
+                borderRadius: 7,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={{color: 'white', fontSize: 10, fontWeight: 'bold'}}>
+                {totalQuantity}
+              </Text>
+            </View>
+          )}
         </View>
+      </TouchableOpacity>
+    );
+  };
 
-        {/* Dynamic Icon Container */}
-        {inlineSearchScreens.includes(route.name) && showSearchInput ? (
-          // Show search input inline when search is active
-          <Animated.View
-            style={[
-              styles.inlineSearchContainer,
-              {
-                width: searchAnimation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [120, 250],
-                }),
-                opacity: searchAnimation,
-              },
-            ]}>
-            <View style={styles.inlineInputContainer}>
-              <Image
-                source={require('../assets/search.png')}
-                style={styles.inlineSearchIcon}
-              />
-              <TextInput
-                ref={searchInputRef}
-                placeholder="Search..."
-                style={styles.inlineTextInput}
-                value={searchText}
-                onChangeText={handleSearchTextChange}
-                onBlur={() => {
-                  if (!searchText) {
-                    setShowSearchInput(false);
-                  }
-                }}
-              />
-              {searchText.length > 0 && (
-                <TouchableOpacity
-                  onPress={() => {
-                    setSearchText('');
-                    onSearchChange && onSearchChange('');
-                  }}
-                  style={styles.inlineClearButton}>
-                  <Text style={styles.clearText}>×</Text>
-                </TouchableOpacity>
+
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <View style={styles.appDrawerContainer}>
+            <TouchableOpacity
+              onPress={handleBack}
+              style={styles.appDrawerContainer}>
+              {route.name === 'HOME' || route.name === 'MainHome' ? (
+                <Ionicons
+                  name="menu"
+                  size={moderateScale(20)}
+                  color = {COLORS.button}
+                  style={styles.appDrawerIcon}
+                />
+              ) : (
+                <Ionicons
+                  name="arrow-back"
+                  size={moderateScale(20)}
+                  color = {COLORS.button}
+                  style={styles.appDrawerIcon}
+                />
               )}
-            </View>
-
-            {/* Compressed right icons */}
-            <View style={styles.compressedIconContainer}>
-              <TouchableOpacity onPress={() => handleIconPress('favorites')}>
-                <Image
-                  source={require('../assets/favoriteFilled.png')}
-                  style={styles.compressedIcon}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => handleIconPress('cart')}>
-                <Image
-                  source={require('../assets/focused/shopping_cart.png')}
-                  style={styles.compressedIcon}
-                />
-              </TouchableOpacity>
-            </View>
-          </Animated.View>
-        ) : (
-          // Show normal icons when search is not active
-          <View style={styles.iconContainer}>
-            <TouchableOpacity onPress={() => handleIconPress('search')}>
-              <Image
-                source={require('../assets/focusedSearch.png')}
-                style={styles.appSearchIcon}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleIconPress('favorites')}>
-              <Image
-                source={require('../assets/favoriteFilled.png')}
-                style={styles.appFavoriteIcon}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleIconPress('cart')}>
-              <Image
-                source={require('../assets/focused/shopping_cart.png')}
-                style={styles.appCartIcon}
-              />
             </TouchableOpacity>
           </View>
-        )}
-      </View>
 
-      {/* Remove the old animated search container below */}
-    </View>
+          {/* Dynamic Icon Container */}
+          {inlineSearchScreens.includes(route.name) && showSearchInput ? (
+            // Show search input inline when search is active
+            <Animated.View
+              style={[
+                styles.inlineSearchContainer,
+                {
+                  width: searchAnimation.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [120, 250],
+                  }),
+                  opacity: searchAnimation,
+                },
+              ]}>
+              <View style={styles.inlineInputContainer}>
+                <Ionicons
+                  name="search"
+                  size={moderateScale(20)}
+                  color="red" 
+                  style={styles.inlineSearchIcon}
+                />
+                <TextInput
+                  ref={searchInputRef}
+                  placeholder="Search..."
+                  style={styles.inlineTextInput}
+                  value={searchText}
+                  onChangeText={handleSearchTextChange}
+                  onBlur={() => {
+                    if (!searchText) {
+                      setShowSearchInput(false);
+                    }
+                  }}
+                />
+                {searchText.length > 0 && (
+                  <TouchableOpacity
+                    onPress={() => {
+                      setSearchText('');
+                      onSearchChange && onSearchChange('');
+                    }}
+                    style={styles.inlineClearButton}>
+                    <Text style={styles.clearText}>×</Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+
+              {/* Compressed right icons */}
+              <View style={styles.compressedIconContainer}>
+                <TouchableOpacity onPress={() => handleIconPress('favorites')}>
+                  <Ionicons
+                    name="heart"
+                    size={moderateScale(20)}
+                    color={COLORS.button}
+                    style={styles.compressedIcon}
+                  />
+                </TouchableOpacity>
+                <CartIconWithBadge 
+                  onPress={() => handleIconPress('cart')}
+                  style={styles.compressedIcon}
+                />
+              </View>
+            </Animated.View>
+          ) : (
+            // Show normal icons when search is not active
+            <View style={styles.iconContainer}>
+              <TouchableOpacity onPress={() => handleIconPress('search')}>
+                <Ionicons
+                  name="search"
+                  size={moderateScale(20)}
+                  color={COLORS.button}
+                  style={styles.appSearchIcon}
+                  // color={isDarkTheme ? 'white' : 'black'}
+                  // color={'black'}
+                />
+              
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleIconPress('favorites')}>
+                <Ionicons
+                  name="heart"
+                  size={moderateScale(20)}
+                  color={COLORS.button}
+                  style={styles.appFavoriteIcon}
+
+                />
+              </TouchableOpacity>
+              <CartIconWithBadge 
+                onPress={() => handleIconPress('cart')}
+                style={styles.appCartIcon}
+              />
+            </View>
+          )}
+        </View>
+
+        {/* Remove the old animated search container below */}
+        
+        {/* Theme Selection Modal - Disabled */}
+      </View>
+    </SafeAreaView>
   );
 };
 export default Header;
 
 const styles = StyleSheet.create({
+  safeArea: {
+    backgroundColor: 'transparent',
+  },
   container: {
     width: '100%',
     padding: 5,
+    paddingTop: Platform.OS === 'ios' ? 10 : 15,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // paddingVertical: 5,
+    paddingTop: Platform.OS === 'ios' ? 5 : 0,
   },
   appDrawerContainer: {
     backgroundColor: 'transparent',
@@ -234,33 +323,38 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     // marginBottom: 1 ,
     // paddingLeft: 12,
+    // marginHorizontal: 5,
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
   },
   appDrawerIcon: {
     height: 24,
     width: 24,
+    tintColor: COLORS.button,
     // marginLeft: 10,
   },
   appSearchIcon: {
     height: 24,
     width: 24,
-    marginLeft: 10,
+    marginLeft: 5,
+    tintColor: COLORS.button
   },
   appFavoriteIcon: {
     height: 24,
     width: 24,
-    marginLeft: 10,
+    marginLeft: 5,
+    tintColor: COLORS.button
   },
   appCartIcon: {
     height: 24,
     width: 24,
-    marginLeft: 10,
+    marginLeft: 5,
+    // tintColor: COLORS.button
   },
   iconContainer: {
     flexDirection: 'row',
-    width: 120,
-    justifyContent: 'space-between',
+    width: 140,
+    justifyContent: 'space-evenly',
     alignItems: 'center',
   },
   // New inline search styles

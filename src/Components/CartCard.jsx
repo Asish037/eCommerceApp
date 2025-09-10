@@ -2,10 +2,120 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useContext} from 'react';
 import {fonts} from '../utils/fonts';
 import {CartContext} from '../Context/CartContext';
+import {COLORS} from '../Constant/Colors';
+// import {useTheme} from '../Context/ThemeContext';
 
 const CartCard = ({item, handleDelete}) => {
   console.log(JSON.stringify(item));
   const {updateCartItemQuantity} = useContext(CartContext);
+  // const {getThemeColors} = useTheme();
+  // const themeColors = getThemeColors();
+
+  const styles = StyleSheet.create({
+    card: {
+      backgroundColor: COLORS.white,
+      borderRadius: 16,
+      marginVertical: 8,
+      marginHorizontal: 4,
+      padding: 16,
+      shadowColor: COLORS.black,
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.1,
+      shadowRadius: 8,
+      elevation: 4,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    imageContainer: {
+      marginRight: 16,
+    },
+    image: {
+      height: 80,
+      width: 80,
+      resizeMode: 'contain',
+      borderRadius: 12,
+    },
+    content: {
+      flex: 1,
+    },
+    headerRow: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'flex-start',
+      marginBottom: 4,
+    },
+    title: {
+      fontSize: 16,
+      fontWeight: '600',
+      fontFamily: fonts.medium,
+      color: COLORS.black,
+      flex: 1,
+      marginRight: 12,
+      lineHeight: 20,
+    },
+    sizeRow: {
+      marginBottom: 8,
+    },
+    sizeLabel: {
+      fontSize: 14,
+      fontFamily: fonts.regular,
+      color: COLORS.grey,
+    },
+    price: {
+      fontSize: 16,
+      fontFamily: fonts.medium,
+      color: COLORS.black,
+      fontWeight: '600',
+      marginBottom: 12,
+    },
+    deleteButton: {
+      backgroundColor: 'transparent',
+      padding: 4,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    deleteIcon: {
+      height: 16,
+      width: 16,
+      tintColor: COLORS.grey,
+    },
+    bottomRow: {
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+    },
+    quantityContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: COLORS.white,
+      borderRadius: 16,
+      paddingHorizontal: 2,
+    },
+    quantityButton: {
+      backgroundColor: COLORS.grey,
+      borderRadius: 12,
+      width: 24,
+      height: 24,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    quantityButtonText: {
+      color: COLORS.white,
+      fontSize: 14,
+      fontWeight: '600',
+      fontFamily: fonts.medium,
+    },
+    quantityText: {
+      fontSize: 14,
+      fontWeight: '600',
+      fontFamily: fonts.medium,
+      color: COLORS.black,
+      marginHorizontal: 10,
+    },
+  });
 
   const currentQuantity = item.quantity || 1;
 
@@ -50,11 +160,13 @@ const CartCard = ({item, handleDelete}) => {
 
         <View style={styles.bottomRow}>
           <View style={styles.quantityContainer}>
-            <TouchableOpacity
-              onPress={() => handleQuantityChange('decrement')}
-              style={styles.quantityButton}>
-              <Text style={styles.quantityButtonText}>-</Text>
-            </TouchableOpacity>
+            {currentQuantity > 1 && (
+              <TouchableOpacity
+                onPress={() => handleQuantityChange('decrement')}
+                style={styles.quantityButton}>
+                <Text style={styles.quantityButtonText}>-</Text>
+              </TouchableOpacity>
+            )}
             <Text style={styles.quantityText}>{currentQuantity}</Text>
             <TouchableOpacity
               onPress={() => handleQuantityChange('increment')}
@@ -69,109 +181,3 @@ const CartCard = ({item, handleDelete}) => {
 };
 
 export default CartCard;
-
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    marginVertical: 8,
-    marginHorizontal: 4,
-    padding: 16,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  imageContainer: {
-    marginRight: 16,
-  },
-  image: {
-    height: 80,
-    width: 80,
-    resizeMode: 'contain',
-    borderRadius: 12,
-  },
-  content: {
-    flex: 1,
-  },
-  headerRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: 4,
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: '600',
-    fontFamily: fonts.medium,
-    color: '#2C2C2C',
-    flex: 1,
-    marginRight: 12,
-    lineHeight: 20,
-  },
-  sizeRow: {
-    marginBottom: 8,
-  },
-  sizeLabel: {
-    fontSize: 14,
-    fontFamily: fonts.regular,
-    color: '#666666',
-  },
-  price: {
-    fontSize: 16,
-    fontFamily: fonts.medium,
-    color: '#2C2C2C',
-    fontWeight: '600',
-    marginBottom: 12,
-  },
-  deleteButton: {
-    backgroundColor: 'transparent',
-    padding: 4,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  deleteIcon: {
-    height: 16,
-    width: 16,
-    tintColor: '#999999',
-  },
-  bottomRow: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  quantityContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#F8F8F8',
-    borderRadius: 16,
-    paddingHorizontal: 2,
-  },
-  quantityButton: {
-    backgroundColor: '#E5E5E5',
-    borderRadius: 12,
-    width: 24,
-    height: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  quantityButtonText: {
-    color: '#2C2C2C',
-    fontSize: 14,
-    fontWeight: '600',
-    fontFamily: fonts.medium,
-  },
-  quantityText: {
-    fontSize: 14,
-    fontWeight: '600',
-    fontFamily: fonts.medium,
-    color: '#2C2C2C',
-    marginHorizontal: 10,
-  },
-});

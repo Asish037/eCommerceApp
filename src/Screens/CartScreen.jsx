@@ -1,24 +1,103 @@
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from '../Components/axios';
+import Toast from 'react-native-simple-toast';
+
 import Header from '../Components/Header';
 import CartCard from '../Components/CartCard';
-import {fonts} from '../utils/fonts';
-import {CartContext} from '../Context/CartContext';
-import {COLORS} from '../Constant/Colors';
-import {FONTS} from '../Constant/Font';
-import {useNavigation} from '@react-navigation/native';
+import { CartContext } from '../Context/CartContext';
+import { fonts } from '../utils/fonts';
+import { FONTS } from '../Constant/Font';
+import { COLORS } from '../Constant/Colors';
 
 const CartScreen = () => {
-  const {cartItems, deleteCartItem, totalPrice} = useContext(CartContext);
+  const { cartItems, deleteCartItem, totalPrice } = useContext(CartContext);
   const navigation = useNavigation();
 
-  const handleDeleteItem = async id => {
-    await deleteCartItem(id);
-  };
-
+  // constants for totals
   const shippingCost = 0.0;
   const grandTotal = (parseFloat(totalPrice) + shippingCost).toFixed(2);
+
+  const handleCheckout = async () => {
+    try {
+      const token = await AsyncStorage.getItem('userToken');
+      if (!token) {
+        Toast.show('No auth token found. Please log in again.');
+        return;
+      }
+
+      if (cartItems.length === 0) {
+        Toast.show('Please add items to your cart before proceeding.');
+        return;
+      }
+
+      const payload = {
+        items: cartItems.map(item => ({
+          product_id: item.id || item.productId || 'unknown', // handle undefined id
+          quantity: item.quantity,
+          price: item.price,
+        })),
+        subtotal: totalPrice,
+        shipping: shippingCost,
+        total: grandTotal,
+      };
+
+      console.log('Checkout payload:', payload);
+
+      const response = await axios.post('/add-cart', payload, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log('Add to cart response:', response.data);
+
+      if (response.status === 200) {
+        navigation.navigate('Payment', { grandTotal, cartItems });
+      } else {
+        Toast.show(response.data.message || 'Something went wrong on the server.');
+      }
+    } catch (error) {
+      console.error('Error during checkout:', error);
+      Toast.show('Checkout failed. Please try again.');
+    }
+  };
+
+  const handleDeleteItem = async itemId => {
+    try {
+      const token = await AsyncStorage.getItem('userToken');
+      if (!token) {
+        Toast.show('No authentication token found. Please log in.');
+        return;
+      }
+
+      const response = await axios.delete(`/delete-cart?cartId=${itemId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.status === 200) {
+        deleteCartItem(itemId);
+        Toast.show('Item removed from cart.');
+      } else {
+        Toast.show(response.data.message || 'Could not remove item.');
+      }
+    } catch (error) {
+      console.error('Error deleting cart item:', error);
+      Toast.show('Failed to remove item. Please try again.');
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -26,9 +105,10 @@ const CartScreen = () => {
         <View style={styles.header}>
           <Header isCart={true} />
         </View>
+
         <FlatList
           data={cartItems}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <CartCard item={item} handleDelete={handleDeleteItem} />
           )}
           showsVerticalScrollIndicator={false}
@@ -37,26 +117,27 @@ const CartScreen = () => {
             paddingBottom: 20,
             paddingHorizontal: 16,
           }}
-          keyExtractor={item => item.id.toString()}
+          keyExtractor={(item, index) => item.id ? item.id.toString() : index.toString()}
         />
       </LinearGradient>
-      {/* separator */}
-      {/* <View style={styles.separator} /> */}
 
-      {/* Bottom Total Section with White Background */}
+      {/* Bottom Total Section */}
       <View style={styles.bottomContainer}>
         <View style={styles.totalSection}>
           <View style={styles.totalRow}>
             <Text style={styles.totalLabel}>Subtotal:</Text>
             <Text style={styles.totalValue}>${totalPrice}</Text>
           </View>
+
           <View style={styles.totalRow}>
             <Text style={styles.totalLabel}>Shipping:</Text>
             <Text style={styles.totalValue}>
               {shippingCost === 0 ? 'Free' : `$${shippingCost.toFixed(2)}`}
             </Text>
           </View>
+
           <View style={styles.divider} />
+
           <View style={styles.totalRow}>
             <Text style={styles.grandTotalLabel}>Total:</Text>
             <Text style={styles.grandTotalValue}>${grandTotal}</Text>
@@ -65,9 +146,7 @@ const CartScreen = () => {
 
         <TouchableOpacity
           style={styles.checkoutButton}
-          onPress={() =>
-            navigation.navigate('Payment', {grandTotal, cartItems})
-          }>
+          onPress={handleCheckout}>
           <Text style={styles.checkoutButtonText}>Proceed to Checkout</Text>
         </TouchableOpacity>
       </View>
@@ -89,18 +168,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   bottomContainer: {
-    backgroundColor: '#ddbbbbff',
-    // borderTopLeftRadius: 50,
-    // borderTopRightRadius: 50,
+    backgroundColor: COLORS.white,
     height: 260,
     paddingHorizontal: 15,
     paddingTop: 24,
     paddingBottom: 34,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: -4,
-    },
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 0, height: -4 },
     shadowOpacity: 0.1,
     shadowRadius: 12,
     elevation: 8,
@@ -154,10 +228,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 16,
     shadowColor: '#E94560',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 6,

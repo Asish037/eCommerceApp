@@ -6,10 +6,36 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
+import {COLORS} from '../Constant/Colors';
+// import {useTheme} from '../Context/ThemeContext';
 
 const Tags = () => {
   const [selected, setSelected] = useState("Trending Now");
   const tags = ["Trending Now", "Featured", "New Arrivals", "Winter", "Summer"];
+  // const {getThemeColors} = useTheme();
+  // const themeColors = getThemeColors();
+
+  const styles = StyleSheet.create({
+    tagText: {
+      fontSize: 16,
+      fontFamily: "Poppins-Regular",
+      borderRadius: 20,
+      paddingHorizontal: 15,
+      paddingVertical: 5,
+      marginHorizontal: 10,
+      color: COLORS.grey,
+      backgroundColor: COLORS.white,
+      fontWeight: "700",
+    },
+    isSelected: {
+      backgroundColor: COLORS.button,
+      color: "#FFFFFF",
+    },
+    container: {
+      marginVertical: 10,
+    },
+  });
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -37,24 +63,3 @@ const Tags = () => {
 };
 
 export default Tags;
-
-const styles = StyleSheet.create({
-  tagText: {
-    fontSize: 16,
-    fontFamily: "Poppins-Regular",
-    borderRadius: 20,
-    paddingHorizontal: 15,
-    paddingVertical: 5,
-    marginHorizontal: 10,
-    color: "#c4c4c4ff",
-    backgroundColor: "#5a4c4cc7",
-    fontWeight: "700",
-  },
-  isSelected: {
-    backgroundColor: "#9d2c2cff",
-    color: "#FFFFFF",
-  },
-  container: {
-    marginVertical: 10,
-  },
-});

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "47084693662",
+    "project_id": "shopnova-bed49",
+    "storage_bucket": "shopnova-bed49.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47084693662:android:3c1c4de69a131c5542738f",
+        "android_client_info": {
+          "package_name": "com.shopnova.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhL1_dAM5GEJwyBFzPZx-KzIjiYSJqKJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

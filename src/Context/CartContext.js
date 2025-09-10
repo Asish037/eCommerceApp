@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createContext, useEffect, useState, useContext} from 'react';
 import {Text} from 'react-native';
+import AppLoader from '../Components/AppLoader';
 
 export const CartContext = createContext();
 
@@ -9,12 +10,14 @@ export const CartProvider = ({children}) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
   const [messages, setMessages] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [wishlist, setWishlist] = useState([]);
 
   useEffect(() => {
     const loadData = async () => {
-      await loadUserData();
+      await loadAuthData();
       await loadMessages();
       await loadCartItems();
       setIsLoading(false);
@@ -22,14 +25,28 @@ export const CartProvider = ({children}) => {
 
     loadData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  const loadUserData = async () => {
+  const loadAuthData = async () => {
     try {
-      const userData = await AsyncStorage.getItem('userData');
-      if (userData) {
-        setUser(JSON.parse(userData));
+      console.log('Loading auth data from AsyncStorage...');
+      const [userData, storedToken] = await AsyncStorage.multiGet(['userData', 'userToken']);
+      
+      console.log('Loaded userData:', userData[1]);
+      console.log('Loaded token:', storedToken[1]);
+      
+      if (userData[1]) {
+        const parsedUser = JSON.parse(userData[1]);
+        setUser(parsedUser);
+        console.log('User data set in state:', parsedUser);
       }
+      
+      if (storedToken[1]) {
+        setToken(storedToken[1]);
+        console.log('Token set in state:', storedToken[1]);
+      }
+      
+      console.log('Auth data loading completed');
     } catch (error) {
-      console.error('Error loading user data:', error);
+      console.error('Error loading auth data:', error);
     }
   };
 
@@ -44,23 +61,72 @@ export const CartProvider = ({children}) => {
     }
   };
 
-  const login = async userData => {
-    setUser(userData);
+  const login = async (userData, authToken = null) => {
+    console.log('login called with userData:', userData);
+    console.log('login called with authToken:', authToken);
+    
     try {
+      // First save to AsyncStorage
       await AsyncStorage.setItem('userData', JSON.stringify(userData));
+      console.log('User data saved to AsyncStorage');
+      
+      if (authToken) {
+        console.log('Saving token to AsyncStorage:', authToken);
+        await AsyncStorage.setItem('userToken', authToken);
+        console.log('Token saved to AsyncStorage');
+      }
+      
+      // Then update React state
+      setUser(userData);
+      if (authToken) {
+        setToken(authToken);
+        console.log('Token set in React state');
+      }
+      
+      console.log('Login completed successfully');
     } catch (error) {
-      console.error('Error saving user data:', error);
+      console.error('Error in login function:', error);
+    }
+  };
+
+  const setAuthToken = async (authToken) => {
+    console.log('setAuthToken called with:', authToken);
+    try {
+      // First save to AsyncStorage
+      await AsyncStorage.setItem('userToken', authToken);
+      console.log('Token saved to AsyncStorage successfully');
+      
+      // Then update React state
+      setToken(authToken);
+      console.log('Token set in React state');
+      
+      // Verify it was saved
+      const savedToken = await AsyncStorage.getItem('userToken');
+      console.log('Verification - saved token:', savedToken);
+    } catch (error) {
+      console.error('Error saving token:', error);
     }
   };
 
   const logout = async () => {
     setUser(null);
+    setToken(null);
     try {
       await AsyncStorage.removeItem('userData');
+      await AsyncStorage.removeItem('userToken');
     } catch (error) {
       console.error('Error removing user data:', error);
     }
   };
+  const addToWishlist = (item) => {
+    setWishlist((prev) => [...prev, item]);
+  }
+  const removeFromWishlist = (productId) => {
+    setWishlist((prev) => prev.filter((prod) => prod.productId !== productId));
+  }
+  const isFavorite = (productId) => {
+    return wishlist.some((prod) => prod.productId === productId);
+  }
 
   const saveMessage = async (roomName, messageData) => {
     const updatedMessages = {
@@ -93,17 +159,31 @@ export const CartProvider = ({children}) => {
   };
 
   const addToCartItem = async item => {
+    console.log('Adding item to cart:', item);
     let cartItems = await AsyncStorage.getItem('cart');
     cartItems = cartItems ? JSON.parse(cartItems) : [];
-    let isExist = cartItems.findIndex(cart => cart.id === item.id);
+    
+    // Handle different possible id fields
+    const itemId = item.id || item.productId || item.product_id;
+    let isExist = cartItems.findIndex(cart => {
+      const cartId = cart.id || cart.productId || cart.product_id;
+      return cartId === itemId;
+    });
+    
     if (isExist === -1) {
-      cartItems.push({...item, quantity: 1});
+      // Ensure the item has an id field
+      const itemToAdd = {
+        ...item,
+        id: itemId || Date.now().toString(), // fallback id if none exists
+        quantity: 1
+      };
+      cartItems.push(itemToAdd);
       calculateTotalPrice(cartItems);
       setCartItems(cartItems);
       await AsyncStorage.setItem('cart', JSON.stringify(cartItems));
     }
   };
-
+ 
   const deleteCartItem = async id => {
     let cartItems = await AsyncStorage.getItem('cart');
     cartItems = cartItems ? JSON.parse(cartItems) : [];
@@ -138,7 +218,7 @@ export const CartProvider = ({children}) => {
   };
 
   if (isLoading) {
-    return <Text>Loading...</Text>; // Or any loading indicator you prefer
+    return <AppLoader message="Loading your data..." />;
   }
 
   const getTotalQuantity = () => {
@@ -153,11 +233,17 @@ export const CartProvider = ({children}) => {
     totalPrice,
     getTotalQuantity,
     user,
+    token,
     login,
     logout,
-    loadUserData,
+    setAuthToken,
+    loadAuthData,
     saveMessage,
     messages,
+    wishlist,
+    addToWishlist,
+    removeFromWishlist,
+    isFavorite,
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
