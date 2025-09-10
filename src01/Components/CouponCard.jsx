@@ -2,7 +2,10 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {fonts} from '../utils/fonts';
 import {moderateScale, verticalScale} from '../PixelRatio';
+<<<<<<< HEAD
 import { COLORS } from '../Constant/Colors';
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 const CouponCard = ({item, handleCouponClick}) => {
   return (
@@ -14,8 +17,13 @@ const CouponCard = ({item, handleCouponClick}) => {
       <View style={styles.imgContent}>
         <Image source={{uri: item.image_url}} style={styles.coverImage} />
         <View style={styles.contentContainer}>
+<<<<<<< HEAD
           <Text style={styles.title} numberOfLines={2}>{item.title}</Text>
           <Text style={styles.price} numberOfLines={2}>{item.description}</Text>
+=======
+          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.price}>{item.description}</Text>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
           <Text style={styles.title}>Code : {item.code}</Text>
           <Text style={styles.price}>Expiry: {item.valid_until}</Text>
           <Text style={styles.viewProducts}>View Products</Text>
@@ -29,6 +37,7 @@ export default CouponCard;
 
 const styles = StyleSheet.create({
   container: {
+<<<<<<< HEAD
     width: '100%',
     marginHorizontal: 15,
     marginVertical: 12,
@@ -37,10 +46,20 @@ const styles = StyleSheet.create({
   coverImage: {
     height: 100,
     width: 90,
+=======
+    flex: 1,
+    marginHorizontal: 10,
+    marginVertical: 10,
+  },
+  coverImage: {
+    height: 100,
+    width: 100,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     borderRadius: 20,
     position: 'relative',
   },
   contentContainer: {
+<<<<<<< HEAD
     padding: 15,
     flex: 1,
     justifyContent: 'center',
@@ -96,5 +115,23 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: COLORS.button,
     marginTop: 8,
+=======
+    padding: 10,
+  },
+  title: {
+    fontSize: 18,
+    fontFamily: fonts.regular,
+    fontWeight: '700',
+    color: '#444444',
+  },
+  imgContent: {
+    flexDirection: 'row',
+    width: moderateScale(300),
+    height: verticalScale(100),
+    //backgroundColor: 'blue',
+  },
+  viewProducts:{
+    textDecorationLine: 'underline',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   }
 });

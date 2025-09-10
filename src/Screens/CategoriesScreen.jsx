@@ -18,8 +18,11 @@ import LinearGradient from 'react-native-linear-gradient';
 import ProductCard from '../Components/ProductCard';
 import {COLORS} from '../Constant/Colors';
 import axios from '../Components/axios';
+<<<<<<< HEAD
 import AppLoader from '../Components/AppLoader';
 import GeneralLoader from '../Components/GeneralLoader';
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import qs from 'qs';
 
 const {width} = Dimensions.get('window');
@@ -40,7 +43,10 @@ const CategoriesScreen = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [subCategories, setSubCategories] = useState([]);
   const [currentView, setCurrentView] = useState('categories'); // 'categories', 'products'
+<<<<<<< HEAD
   const [isInitialLoading, setIsInitialLoading] = useState(true); // Track initial complete loading
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
   const {categoryId, categoryName} = route.params || {};
 
@@ -50,7 +56,11 @@ const CategoriesScreen = () => {
       // If coming from another screen with specific category
       const category = {id: categoryId, name: categoryName};
       setSelectedCategory(category);
+<<<<<<< HEAD
       fetchSubCategories(categoryId, true, true); // Show loading and mark as initial load
+=======
+      fetchSubCategories(categoryId);
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     }
   }, [categoryId, categoryName]);
 
@@ -72,6 +82,7 @@ const CategoriesScreen = () => {
 
         const categoriesData = response.data.data || [];
         setCategories(categoriesData);
+<<<<<<< HEAD
         
         // If no categories, set initial loading to false
         if (categoriesData.length === 0) {
@@ -80,6 +91,10 @@ const CategoriesScreen = () => {
       } catch (error) {
         console.error('Error fetching categories:', error);
         setIsInitialLoading(false); // Set to false even on error
+=======
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       } finally {
         setIsLoading(false);
       }
@@ -92,7 +107,11 @@ const CategoriesScreen = () => {
   useEffect(() => {
     if (categories.length > 0 && !selectedCategory) {
       setSelectedCategory(categories[0]);
+<<<<<<< HEAD
       fetchSubCategories(categories[0].id, false, true); // Don't show loading for auto-selection, but mark as initial load
+=======
+      fetchSubCategories(categories[0].id);
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     }
   }, [categories, selectedCategory]);
 
@@ -127,11 +146,17 @@ const CategoriesScreen = () => {
   };
 
   // Fetch subcategories
+<<<<<<< HEAD
   const fetchSubCategories = async (catId, showLoading = true, isInitialLoad = false) => {
     try {
       if (showLoading) {
         setIsLoading(true);
       }
+=======
+  const fetchSubCategories = async catId => {
+    try {
+      setIsLoading(true);
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       const config = {
         method: 'get',
         url: `/get-sub-categories?categoryId=${catId}`,
@@ -169,12 +194,16 @@ const CategoriesScreen = () => {
       await fetchProductsBySpecificCategory(catId);
       // Keep currentView as 'categories' - UI will automatically show products
     } finally {
+<<<<<<< HEAD
       if (showLoading) {
         setIsLoading(false);
       }
       if (isInitialLoad) {
         setIsInitialLoading(false);
       }
+=======
+      setIsLoading(false);
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     }
   };
 
@@ -324,6 +353,7 @@ const CategoriesScreen = () => {
       .slice(0, 3)
       .map(([word]) => word);
 
+<<<<<<< HEAD
     sortedKeywords.forEach(keyword => uniqueSuggestions.add(keyword));
 
     const suggestionArray = Array.from(uniqueSuggestions).slice(0, 8); // Limit to 8 suggestions
@@ -364,6 +394,48 @@ const CategoriesScreen = () => {
     setFilteredProducts(filtered);
   };
 
+=======
+      sortedKeywords.forEach(keyword => uniqueSuggestions.add(keyword));
+
+      const suggestionArray = Array.from(uniqueSuggestions).slice(0, 8); // Limit to 8 suggestions
+      setSuggestions(suggestionArray);
+      setShowSuggestions(suggestionArray.length > 0);
+    };
+
+  //  Search filter
+  const handleSearchChange = text => {
+    setSearchText(text);
+
+    // Generate suggestions
+    generateSuggestions(text);
+
+    if (text.trim() === '') {
+      setShowSuggestions(false);
+      // Reset to current view's products
+      if (currentView === 'products' && selectedCategory) {
+        fetchProductsByCategory(selectedCategory, selectedSubCategory);
+      } else {
+        setFilteredProducts([]);
+      }
+      return;
+    }
+
+    // Filter products based on search text
+    const sourceProducts = currentView === 'products' ? filteredProducts : allProducts;
+
+    const filtered = sourceProducts.filter(
+      product =>
+        (product.name &&
+          product.name.toLowerCase().includes(text.toLowerCase())) ||
+        (product.description &&
+          product.description.toLowerCase().includes(text.toLowerCase())) ||
+        (product.category_name &&
+          product.category_name.toLowerCase().includes(text.toLowerCase())),
+    );
+    setFilteredProducts(filtered);
+  };
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   // Handle suggestion selection
   const handleSuggestionSelect = suggestion => {
     setSearchText(suggestion);
@@ -417,8 +489,18 @@ const CategoriesScreen = () => {
     </TouchableOpacity>
   );
 
+<<<<<<< HEAD
   if (isInitialLoading) {
     return <AppLoader message="Loading categories..." />;
+=======
+  if (isLoading && currentView === 'categories') {
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator size="large" color={COLORS.primary} />
+        <Text style={{marginTop: 10, color: COLORS.black}}>Loading...</Text>
+      </View>
+    );
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   }
 
   // Render category item for left side
@@ -562,12 +644,19 @@ const CategoriesScreen = () => {
                 {selectedCategory ? selectedCategory.name : 'Subcategories'}
               </Text>
               {isLoading ? (
+<<<<<<< HEAD
                 <GeneralLoader 
                   message="Loading subcategories..." 
                   size="small"
                   containerStyle={styles.rightPanelLoading}
                   textStyle={styles.rightPanelLoadingText}
                 />
+=======
+                <View style={styles.rightPanelLoading}>
+                  <ActivityIndicator size="small" color={COLORS.button} />
+                  <Text style={styles.rightPanelLoadingText}>Loading...</Text>
+                </View>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
               ) : (
                 <FlatList
                   data={subCategories}

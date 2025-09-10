@@ -6,16 +6,24 @@ import {
   View,
   TextInput,
   Animated,
+<<<<<<< HEAD
   Platform,
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 } from 'react-native';
 import React, {useState, useRef, useEffect} from 'react';
 import {fonts} from '../utils/fonts';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {addToCart} from '../utils/helper';
 import {CartContext} from '../Context/CartContext';
+<<<<<<< HEAD
 import {SafeAreaView} from 'react-native-safe-area-context';
 // import {useTheme} from '../Context/ThemeContext';
 // import ThemeSelectionModal from './Modal/ThemeSelectionModal';
+=======
+import { COLORS } from '../Constant/Colors';
+import ionicons from 'react-native-vector-icons/Ionicons';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 const Header = ({isCart, onSearchChange}) => {
   const navigation = useNavigation();
@@ -24,7 +32,10 @@ const Header = ({isCart, onSearchChange}) => {
   const [searchText, setSearchText] = useState('');
   const searchInputRef = useRef(null);
   const searchAnimation = useRef(new Animated.Value(0)).current;
+<<<<<<< HEAD
   // const {isDarkTheme} = useTheme();
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
   // Screens where search should appear inline in header
   const inlineSearchScreens = [
@@ -61,6 +72,7 @@ const Header = ({isCart, onSearchChange}) => {
         onSearchChange && onSearchChange('');
       }
     } else {
+<<<<<<< HEAD
       // Navigate to categories screen based on current context
       if (route.name === 'HOME' || route.name === 'HOME_STACK' || route.name === 'MainHome') {
         // If on home screen, navigate to bottom tab categories
@@ -69,6 +81,10 @@ const Header = ({isCart, onSearchChange}) => {
         // Otherwise navigate to main stack Categories
         navigation.navigate('Categories', {focusSearch: true});
       }
+=======
+      // Navigate to categories screen
+      navigation.navigate('CATEGORIES', {focusSearch: true});
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     }
   };
 
@@ -84,11 +100,17 @@ const Header = ({isCart, onSearchChange}) => {
           handleSearchPress();
           break;
         case 'favorites':
+<<<<<<< HEAD
           // Navigate to wishlist screen
           navigation.navigate('MyWishList');
           break;
         case 'cart':
           // Navigate to cart screen
+=======
+          navigation.navigate('MyWishList');
+          break;
+        case 'cart':
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
           navigation.navigate('CART');
           break;
         default:
@@ -103,8 +125,13 @@ const Header = ({isCart, onSearchChange}) => {
     try {
       if (route.name === 'HOME' || route.name === 'MainHome') {
         // On home screen, show menu drawer
+<<<<<<< HEAD
         //navigation.navigate('MenuDrawer');
         navigation.navigate('Settings');
+=======
+        navigation.navigate('Settings');
+        // navigation.openDrawer();
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       } else {
         // On other screens, go back
         if (navigation.canGoBack()) {
@@ -119,6 +146,7 @@ const Header = ({isCart, onSearchChange}) => {
       navigation.navigate('HOME');
     }
   };
+<<<<<<< HEAD
 
 
   return (
@@ -215,11 +243,85 @@ const Header = ({isCart, onSearchChange}) => {
                 <Image
                   source={require('../assets/favoriteFilled.png')}
                   style={styles.appFavoriteIcon}
+=======
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <View style={styles.appDrawerContainer}>
+          <TouchableOpacity
+            onPress={handleBack}
+            style={styles.appDrawerContainer}>
+            {route.name === 'HOME' || route.name === 'MainHome' ? (
+              <Image
+                source={require('../assets/apps.png')}
+                style={styles.appDrawerIcon}
+              />
+            ) : (
+              <Image
+                source={require('../assets/arrowback.png')}
+                style={styles.appDrawerIcon}
+              />
+            )}
+          </TouchableOpacity>
+        </View>
+
+        {/* Dynamic Icon Container */}
+        {inlineSearchScreens.includes(route.name) && showSearchInput ? (
+          // Show search input inline when search is active
+          <Animated.View
+            style={[
+              styles.inlineSearchContainer,
+              {
+                width: searchAnimation.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [120, 250],
+                }),
+                opacity: searchAnimation,
+              },
+            ]}>
+            <View style={styles.inlineInputContainer}>
+              <Image
+                source={require('../assets/search.png')}
+                style={styles.inlineSearchIcon}
+                tintColor={COLORS.yellow}
+              />
+              <TextInput
+                ref={searchInputRef}
+                placeholder="Search..."
+                style={styles.inlineTextInput}
+                value={searchText}
+                onChangeText={handleSearchTextChange}
+                onBlur={() => {
+                  if (!searchText) {
+                    setShowSearchInput(false);
+                  }
+                }}
+              />
+              {searchText.length > 0 && (
+                <TouchableOpacity
+                  onPress={() => {
+                    setSearchText('');
+                    onSearchChange && onSearchChange('');
+                  }}
+                  style={styles.inlineClearButton}>
+                  <Text style={styles.clearText}>×</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+
+            {/* Compressed right icons */}
+            <View style={styles.compressedIconContainer}>
+              <TouchableOpacity onPress={() => handleIconPress('favorites')}>
+                <Image
+                  source={require('../assets/favoriteFilled.png')}
+                  style={styles.compressedIcon}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                 />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => handleIconPress('cart')}>
                 <Image
                   source={require('../assets/focused/shopping_cart.png')}
+<<<<<<< HEAD
                   style={styles.appCartIcon}
                 />
               </TouchableOpacity>
@@ -232,11 +334,46 @@ const Header = ({isCart, onSearchChange}) => {
         {/* Theme Selection Modal - Disabled */}
       </View>
     </SafeAreaView>
+=======
+                  style={styles.compressedIcon}
+                />
+              </TouchableOpacity>
+            </View>
+          </Animated.View>
+        ) : (
+          // Show normal icons when search is not active
+          <View style={styles.iconContainer}>
+            <TouchableOpacity onPress={() => handleIconPress('search')}>
+              <Image
+                source={require('../assets/focusedSearch.png')}
+                style={styles.appSearchIcon}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => handleIconPress('favorites')}>
+              <Image
+                source={require('../assets/favoriteFilled.png')}
+                style={styles.appFavoriteIcon}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => handleIconPress('cart')}>
+              <Image
+                source={require('../assets/focused/shopping_cart.png')}
+                style={styles.appCartIcon}
+              />
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
+
+      {/* Remove the old animated search container below */}
+    </View>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   );
 };
 export default Header;
 
 const styles = StyleSheet.create({
+<<<<<<< HEAD
   safeArea: {
     backgroundColor: 'transparent',
   },
@@ -244,12 +381,21 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 5,
     paddingTop: Platform.OS === 'ios' ? 10 : 5,
+=======
+  container: {
+    width: '100%',
+    padding: 8,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+<<<<<<< HEAD
     paddingTop: Platform.OS === 'ios' ? 5 : 0,
+=======
+    // paddingVertical: 5,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   appDrawerContainer: {
     backgroundColor: 'transparent',
@@ -264,26 +410,46 @@ const styles = StyleSheet.create({
   appDrawerIcon: {
     height: 24,
     width: 24,
+<<<<<<< HEAD
+=======
+    tintColor: COLORS.icon
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     // marginLeft: 10,
   },
   appSearchIcon: {
     height: 24,
     width: 24,
     marginLeft: 10,
+<<<<<<< HEAD
+=======
+    tintColor: COLORS.icon
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   appFavoriteIcon: {
     height: 24,
     width: 24,
     marginLeft: 10,
+<<<<<<< HEAD
+=======
+    tintColor: COLORS.icon
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   appCartIcon: {
     height: 24,
     width: 24,
     marginLeft: 10,
+<<<<<<< HEAD
   },
   iconContainer: {
     flexDirection: 'row',
     width: 150,
+=======
+    tintColor: COLORS.icon
+  },
+  iconContainer: {
+    flexDirection: 'row',
+    width: 120,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     justifyContent: 'space-between',
     alignItems: 'center',
   },

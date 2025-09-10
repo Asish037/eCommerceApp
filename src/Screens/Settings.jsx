@@ -40,6 +40,34 @@ const Settings = () => {
     );
   };
 
+  console.log('Rendering Settings Screen');
+  const handleLogout = () => {
+    console.log('Logout pressed - handleLogout function called');
+    try {
+      Alert.alert(
+        'Logout',
+        'Are you sure you want to logout?',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+            onPress: () => console.log('Logout cancelled'),
+          },
+          {
+            text: 'Logout',
+            onPress: () => {
+              console.log('Logout confirmed');
+              navigation.navigate('Landing');
+            },
+          },
+        ],
+        {cancelable: true},
+      );
+    } catch (error) {
+      console.error('Error showing logout alert:', error);
+    }
+  };
+
   return (
     <LinearGradient style={styles.container} colors={COLORS.gradient}>
       <Header />
@@ -147,12 +175,17 @@ const Settings = () => {
 
             <TouchableOpacity
               style={styles.menuItem}
-              onPress={() =>
-                Alert.alert(
-                  'Coming Soon',
-                  'Rewards collection feature will be available soon!',
-                )
-              }>
+              onPress={() => {
+                console.log('Rewards button pressed');
+                try {
+                  Alert.alert(
+                    'Coming Soon',
+                    'Rewards collection feature will be available soon!',
+                  );
+                } catch (error) {
+                  console.error('Error showing rewards alert:', error);
+                }
+              }}>
               <View
                 style={[
                   styles.menuIconContainer,
@@ -210,12 +243,17 @@ const Settings = () => {
 
             <TouchableOpacity
               style={styles.menuItem}
-              onPress={() =>
-                Alert.alert(
-                  'Contact Us',
-                  'Email: support@app.com\nPhone: +1-234-567-8900',
-                )
-              }>
+              onPress={() => {
+                console.log('Customer Service button pressed');
+                try {
+                  Alert.alert(
+                    'Contact Us',
+                    'Email: support@app.com\nPhone: +1-234-567-8900',
+                  );
+                } catch (error) {
+                  console.error('Error showing contact alert:', error);
+                }
+              }}>
               <View
                 style={[
                   styles.menuIconContainer,
@@ -271,9 +309,14 @@ const Settings = () => {
 
             <TouchableOpacity
               style={[styles.menuItem, styles.lastMenuItem]}
-              onPress={() =>
-                Alert.alert('App Info', 'Version: 1.0.0\nBuild: 100')
-              }>
+              onPress={() => {
+                console.log('About App button pressed');
+                try {
+                  Alert.alert('App Info', 'Version: 1.0.0\nBuild: 100');
+                } catch (error) {
+                  console.error('Error showing about alert:', error);
+                }
+              }}>
               <View
                 style={[
                   styles.menuIconContainer,
@@ -297,13 +340,21 @@ const Settings = () => {
                 color="#6C757D"
               />
             </TouchableOpacity>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
             <TouchableOpacity
               style={[styles.menuItem, styles.lastMenuItem]}
               onPress={handleLogout}>
               <View
                 style={[
                   styles.menuIconContainer,
+<<<<<<< HEAD
                   { backgroundColor: '#FFEBEE' },
+=======
+                  {backgroundColor: '#FFEBEE'},
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                 ]}>
                 <Ionicons
                   name="log-out-outline"
@@ -321,7 +372,10 @@ const Settings = () => {
                 color="#6C757D"
               />
             </TouchableOpacity>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
           </View>
         </View>
       </ScrollView>
@@ -344,14 +398,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: moderateScale(23),
     fontWeight: '700',
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Bold,
     marginTop: moderateScale(4),
     marginBottom: moderateScale(4),
   },
   subtitle: {
     fontSize: moderateScale(13),
-    color: '#2c2c2c',
+    color: COLORS.subtext,
     fontFamily: FONTS.Regular,
     lineHeight: moderateScale(20),
   },
@@ -364,7 +418,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: moderateScale(16),
     fontWeight: '600',
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Medium,
     marginBottom: moderateScale(10),
     paddingHorizontal: moderateScale(6),
@@ -408,16 +462,16 @@ const styles = StyleSheet.create({
   },
   menuText: {
     fontSize: moderateScale(14),
-    color: COLORS.black,
+    color: COLORS.text,
     fontFamily: FONTS.Medium,
     fontWeight: '600',
     lineHeight: moderateScale(20),
     marginBottom: moderateScale(2),
   },
   menuSubText: {
-    fontSize: moderateScale(13),
-    color: '#6C757D',
+    fontSize: moderateScale(12),
+    color: COLORS.subtext,
     fontFamily: FONTS.Regular,
-    lineHeight: moderateScale(16),
+    lineHeight: moderateScale(15),
   },
 });

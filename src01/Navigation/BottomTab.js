@@ -14,9 +14,12 @@ import ProductDetailsScreen from '../Screens/ProductDetailsScreen';
 import CartScreen from '../Screens/CartScreen';
 import CategoriesScreen from '../Screens/CategoriesScreen';
 import AccountScreen from '../Screens/AccountScreen';
+<<<<<<< HEAD
 import PaymentScreen from '../Screens/PaymentScreen';
 import AddressScreen from '../Screens/AddressScreen';
 import MyWishList from '../Screens/MyWishList';
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -44,7 +47,11 @@ const CartTabIcon = ({focused, size}) => {
             bottom: 22,
             height: 14,
             width: 14,
+<<<<<<< HEAD
             backgroundColor: '#E94560',
+=======
+            backgroundColor: '#E96E6E',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
             borderRadius: 7,
             alignItems: 'center',
             justifyContent: 'center',
@@ -71,7 +78,11 @@ const CartTabIcon = ({focused, size}) => {
             bottom: 22,
             height: 14,
             width: 14,
+<<<<<<< HEAD
             backgroundColor: '#666666',
+=======
+            backgroundColor: '#C0C0C0',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
             borderRadius: 7,
             alignItems: 'center',
             justifyContent: 'center',
@@ -91,14 +102,21 @@ const MyHomeStack = () => {
         headerShown: false,
       }}>
       <Stack.Screen name="HOME" component={HomeScreen} />
+<<<<<<< HEAD
       <Stack.Screen name="Categories" component={CategoriesScreen} />
+=======
+      <Stack.Screen name="CATEGORIES" component={CategoriesScreen} />
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       <Stack.Screen name="CART" component={CartScreen} />
       <Stack.Screen name="ACCOUNT" component={AccountScreen} />
 
       <Stack.Screen name="PRODUCT_DETAILS" component={ProductDetailsScreen} />
+<<<<<<< HEAD
       <Stack.Screen name="Payment" component={PaymentScreen} />
       <Stack.Screen name="AddressScreen" component={AddressScreen} />
       <Stack.Screen name="MyWishList" component={MyWishList} />
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       {/* <Stack.Screen name="ORDERS" component={Orders} /> */}
     </Stack.Navigator>
   );

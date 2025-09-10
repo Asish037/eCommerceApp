@@ -6,8 +6,11 @@ import {
   Dimensions,
   ImageBackground,
   TouchableOpacity,
+<<<<<<< HEAD
   Platform,
   SafeAreaView,
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {COLORS} from '../../Constant/Colors';
@@ -44,6 +47,7 @@ export default function Landing() {
   // }, [])
 
   return (
+<<<<<<< HEAD
     Platform.OS === 'ios' ? (
       <SafeAreaView style={styles.container}>
         <ImageBackground source={model6} style={styles.bgimage} resizeMode="cover">
@@ -103,26 +107,87 @@ export default function Landing() {
         </View>
       </ImageBackground>
     )
+=======
+    //  <CustomImageBackground>
+    //   <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+    //      <Image
+    //      style={{width: width/1.5,resizeMode:'contain'}}
+    //      source={require('../../assets/logo.png')}
+    //      />
+    //      <View style={{height:150,width:'100%'}}>
+    //       <Swiper
+    //       style={styles.wrapper}
+    //       showsButtons={false}
+    //       dotColor={COLORS.textInput}
+    //       activeDotColor={COLORS.button}
+    //       >
+    //          {
+    //              DATA.map((it,key)=>
+    //               <View style={styles.slide} key={key}>
+    //                    <Text style={styles.text}>{it.title}</Text>
+    //                    <Text style={styles.subtext}>{it.subtitle}</Text>
+    //               </View>
+    //              )
+    //          }
+    //       </Swiper>
+    //      </View>
+    //    </View>
+    //    </CustomImageBackground>
+
+    <ImageBackground source={model6} style={styles.bgimage} resizeMode="cover">
+      <View style={styles.topContent}>
+        <View style={styles.logoContainer}>
+          <Text style={styles.logoText}>
+            <Text>Style</Text>
+            <Text style={styles.logoBold}>ON</Text>
+          </Text>
+        </View>
+        <View style={styles.taglineContainer}>
+          <Text style={styles.tagline}>Curating the Best You</Text>
+        </View>
+      </View>
+
+      <View style={styles.bottomContent}>
+        <TouchableOpacity
+          style={styles.exploreContainer}
+          onPress={() => Navigation.navigate('Register')}>
+          <LinearGradient
+            colors={COLORS.gradientButton}
+            style={styles.gradientButton}>
+            <Text style={styles.buttonText}>Lets Explore</Text>
+          </LinearGradient>
+        </TouchableOpacity>
+      </View>
+    </ImageBackground>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   );
 }
 
 const styles = StyleSheet.create({
+<<<<<<< HEAD
   container: {
     flex: 1,
     backgroundColor: Platform.OS === 'ios' ? 'black' : undefined,
   },
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   bgimage: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
+<<<<<<< HEAD
     paddingTop: 35,
     paddingBottom: 45,
+=======
+    paddingVertical: moderateScale(50),
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   topContent: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-start',
     width: '100%',
+<<<<<<< HEAD
     paddingTop: 10,
   },
   bottomContent: {
@@ -140,16 +205,41 @@ const styles = StyleSheet.create({
     marginBottom: 36,
     alignItems: 'flex-start',
     marginLeft: 20,
+=======
+  },
+  bottomContent: {
+    alignItems: 'center',
+    paddingBottom: moderateScale(20),
+  },
+  logoContainer: {
+    marginBottom: moderateScale(16),
+    alignItems: 'flex-start',
+    marginLeft: moderateScale(20),
+    width: '100%',
+  },
+  taglineContainer: {
+    marginBottom: moderateScale(32),
+    alignItems: 'flex-start',
+    marginLeft: moderateScale(20),
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     width: '100%',
   },
   logoText: {
     fontSize: 30,
     fontWeight: 'semibold',
+<<<<<<< HEAD
     color: 'red',
     letterSpacing: 1,
   },
   logoBold: {
     color: 'red',
+=======
+    color: COLORS.button,
+    letterSpacing: 1,
+  },
+  logoBold: {
+    color: COLORS.button,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontWeight: '900',
   },
   tagline: {
@@ -162,6 +252,7 @@ const styles = StyleSheet.create({
   exploreContainer: {
     width: '75%',
     alignSelf: 'center',
+<<<<<<< HEAD
     marginBottom: 10,
   },
   gradientButton: {
@@ -196,6 +287,21 @@ const styles = StyleSheet.create({
       letterSpacing: 0.5,
       transform: [{translateY: -20}],
     }),
+=======
+  },
+  gradientButton: {
+    width: '100%',
+    paddingVertical: moderateScale(12),
+    paddingHorizontal: moderateScale(20),
+    borderRadius: moderateScale(25),
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontSize: moderateScale(16),
+    fontFamily: FONTS.title,
+    fontWeight: 'bold',
+    color: COLORS.white,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
 });
 
@@ -225,4 +331,8 @@ const styles = StyleSheet.create({
 //         fontFamily:FONTS.Regular,
 //         textAlign:'center'
 //       }
+<<<<<<< HEAD
 //   })
+=======
+//   })
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd

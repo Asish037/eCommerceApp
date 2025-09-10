@@ -9,12 +9,17 @@ import {
 import React from 'react';
 import Header from '../Components/Header';
 import LinearGradient from 'react-native-linear-gradient';
+<<<<<<< HEAD
 import { moderateScale, verticalScale } from '../PixelRatio';
+=======
+import {moderateScale, verticalScale} from '../PixelRatio';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+<<<<<<< HEAD
 import { useNavigation } from '@react-navigation/native';
 import { COLORS } from '../Constant/Colors';
 import { FONTS } from '../Constant/Font';
@@ -23,6 +28,18 @@ const Settings = () => {
   const navigation = useNavigation();
   const handleLogout = () => {
     
+=======
+import {useNavigation} from '@react-navigation/native';
+import {COLORS} from '../Constant/Colors';
+import {FONTS} from '../Constant/Font';
+
+const Settings = () => {
+  const navigation = useNavigation();
+
+  console.log('Rendering Settings Screen');
+  const handleLogout = () => {
+    console.log('Logout pressed');
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     Alert.alert(
       'Logout',
       'Are you sure you want to logout?',
@@ -36,7 +53,11 @@ const Settings = () => {
           onPress: () => navigation.navigate('Landing'),
         },
       ],
+<<<<<<< HEAD
       { cancelable: true },
+=======
+      {cancelable: true},
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     );
   };
 
@@ -62,7 +83,11 @@ const Settings = () => {
               <View
                 style={[
                   styles.menuIconContainer,
+<<<<<<< HEAD
                   { backgroundColor: '#FFF3E0' },
+=======
+                  {backgroundColor: '#FFF3E0'},
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                 ]}>
                 <MaterialCommunityIcons
                   name="account-edit"
@@ -86,12 +111,20 @@ const Settings = () => {
             <TouchableOpacity
               style={styles.menuItem}
               onPress={() =>
+<<<<<<< HEAD
                 navigation.navigate('EditAddress', { pageTitle: 'Edit Address' })
+=======
+                navigation.navigate('EditAddress', {pageTitle: 'Edit Address'})
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
               }>
               <View
                 style={[
                   styles.menuIconContainer,
+<<<<<<< HEAD
                   { backgroundColor: '#E3F2FD' },
+=======
+                  {backgroundColor: '#E3F2FD'},
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                 ]}>
                 <MaterialIcons
                   name="location-on"
@@ -124,7 +157,11 @@ const Settings = () => {
               <View
                 style={[
                   styles.menuIconContainer,
+<<<<<<< HEAD
                   { backgroundColor: '#FFF8E1' },
+=======
+                  {backgroundColor: '#FFF8E1'},
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                 ]}>
                 <MaterialCommunityIcons
                   name="ticket-percent"
@@ -156,7 +193,11 @@ const Settings = () => {
               <View
                 style={[
                   styles.menuIconContainer,
+<<<<<<< HEAD
                   { backgroundColor: '#FCE4EC' },
+=======
+                  {backgroundColor: '#FCE4EC'},
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                 ]}>
                 <MaterialCommunityIcons
                   name="gift-outline"
@@ -189,7 +230,11 @@ const Settings = () => {
               <View
                 style={[
                   styles.menuIconContainer,
+<<<<<<< HEAD
                   { backgroundColor: '#E8F5E8' },
+=======
+                  {backgroundColor: '#E8F5E8'},
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                 ]}>
                 <MaterialCommunityIcons
                   name="help-circle-outline"
@@ -219,7 +264,11 @@ const Settings = () => {
               <View
                 style={[
                   styles.menuIconContainer,
+<<<<<<< HEAD
                   { backgroundColor: '#F3E5F5' },
+=======
+                  {backgroundColor: '#F3E5F5'},
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                 ]}>
                 <MaterialCommunityIcons
                   name="headset"
@@ -250,7 +299,11 @@ const Settings = () => {
               <View
                 style={[
                   styles.menuIconContainer,
+<<<<<<< HEAD
                   { backgroundColor: '#FFF3E0' },
+=======
+                  {backgroundColor: '#FFF3E0'},
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                 ]}>
                 <MaterialIcons
                   name="privacy-tip"
@@ -277,7 +330,11 @@ const Settings = () => {
               <View
                 style={[
                   styles.menuIconContainer,
+<<<<<<< HEAD
                   { backgroundColor: '#E1F5FE' },
+=======
+                  {backgroundColor: '#E1F5FE'},
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                 ]}>
                 <AntDesign
                   name="infocirlceo"
@@ -297,6 +354,7 @@ const Settings = () => {
                 color="#6C757D"
               />
             </TouchableOpacity>
+<<<<<<< HEAD
             <TouchableOpacity
               style={[styles.menuItem, styles.lastMenuItem]}
               onPress={handleLogout}>
@@ -304,6 +362,18 @@ const Settings = () => {
                 style={[
                   styles.menuIconContainer,
                   { backgroundColor: '#FFEBEE' },
+=======
+
+            <TouchableOpacity
+              style={[styles.menuItem, styles.lastMenuItem]}
+              onPress={handleLogout}>
+
+              
+              <View
+                style={[
+                  styles.menuIconContainer,
+                  {backgroundColor: '#FFEBEE'},
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                 ]}>
                 <Ionicons
                   name="log-out-outline"
@@ -321,7 +391,10 @@ const Settings = () => {
                 color="#6C757D"
               />
             </TouchableOpacity>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
           </View>
         </View>
       </ScrollView>
@@ -334,8 +407,13 @@ export default Settings;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+<<<<<<< HEAD
     width: '100%',
     height: '100%',
+=======
+    paddingHorizontal: moderateScale(10),
+    paddingTop: moderateScale(10),
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   headerContainer: {
     marginBottom: moderateScale(24),
@@ -344,14 +422,22 @@ const styles = StyleSheet.create({
   title: {
     fontSize: moderateScale(23),
     fontWeight: '700',
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Bold,
     marginTop: moderateScale(4),
     marginBottom: moderateScale(4),
   },
   subtitle: {
     fontSize: moderateScale(13),
+<<<<<<< HEAD
     color: '#2c2c2c',
+=======
+    color: COLORS.subtext,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Regular,
     lineHeight: moderateScale(20),
   },
@@ -364,7 +450,11 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: moderateScale(16),
     fontWeight: '600',
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Medium,
     marginBottom: moderateScale(10),
     paddingHorizontal: moderateScale(6),
@@ -408,16 +498,27 @@ const styles = StyleSheet.create({
   },
   menuText: {
     fontSize: moderateScale(14),
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Medium,
     fontWeight: '600',
     lineHeight: moderateScale(20),
     marginBottom: moderateScale(2),
   },
   menuSubText: {
+<<<<<<< HEAD
     fontSize: moderateScale(13),
     color: '#6C757D',
     fontFamily: FONTS.Regular,
     lineHeight: moderateScale(16),
+=======
+    fontSize: moderateScale(12),
+    color: COLORS.subtext,
+    fontFamily: FONTS.Regular,
+    lineHeight: moderateScale(15),
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
 });

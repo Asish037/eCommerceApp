@@ -14,6 +14,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {addToCart} from '../utils/helper';
 import {CartContext} from '../Context/CartContext';
 import {SafeAreaView} from 'react-native-safe-area-context';
+<<<<<<< HEAD
 import {COLORS} from '../Constant/Colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -21,6 +22,8 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {moderateScale} from '../PixelRatio';
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 // import {useTheme} from '../Context/ThemeContext';
 // import ThemeSelectionModal from './Modal/ThemeSelectionModal';
 
@@ -128,6 +131,7 @@ const Header = ({isCart, onSearchChange}) => {
     }
   };
 
+<<<<<<< HEAD
   // Cart Icon Component with Badge
   const CartIconWithBadge = ({style, onPress}) => {
     const totalQuantity = getTotalQuantity();
@@ -173,6 +177,8 @@ const Header = ({isCart, onSearchChange}) => {
     );
   };
 
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -183,6 +189,7 @@ const Header = ({isCart, onSearchChange}) => {
               onPress={handleBack}
               style={styles.appDrawerContainer}>
               {route.name === 'HOME' || route.name === 'MainHome' ? (
+<<<<<<< HEAD
                 <Ionicons
                   name="menu"
                   size={moderateScale(20)}
@@ -194,11 +201,21 @@ const Header = ({isCart, onSearchChange}) => {
                   name="arrow-back"
                   size={moderateScale(20)}
                   color = {COLORS.button}
+=======
+                <Image
+                  source={require('../assets/apps.png')}
+                  style={styles.appDrawerIcon}
+                />
+              ) : (
+                <Image
+                  source={require('../assets/arrowback.png')}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                   style={styles.appDrawerIcon}
                 />
               )}
             </TouchableOpacity>
           </View>
+<<<<<<< HEAD
 
           {/* Dynamic Icon Container */}
           {inlineSearchScreens.includes(route.name) && showSearchInput ? (
@@ -292,6 +309,93 @@ const Header = ({isCart, onSearchChange}) => {
           )}
         </View>
 
+=======
+
+          {/* Dynamic Icon Container */}
+          {inlineSearchScreens.includes(route.name) && showSearchInput ? (
+            // Show search input inline when search is active
+            <Animated.View
+              style={[
+                styles.inlineSearchContainer,
+                {
+                  width: searchAnimation.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [120, 250],
+                  }),
+                  opacity: searchAnimation,
+                },
+              ]}>
+              <View style={styles.inlineInputContainer}>
+                <Image
+                  source={require('../assets/search.png')}
+                  style={styles.inlineSearchIcon}
+                />
+                <TextInput
+                  ref={searchInputRef}
+                  placeholder="Search..."
+                  style={styles.inlineTextInput}
+                  value={searchText}
+                  onChangeText={handleSearchTextChange}
+                  onBlur={() => {
+                    if (!searchText) {
+                      setShowSearchInput(false);
+                    }
+                  }}
+                />
+                {searchText.length > 0 && (
+                  <TouchableOpacity
+                    onPress={() => {
+                      setSearchText('');
+                      onSearchChange && onSearchChange('');
+                    }}
+                    style={styles.inlineClearButton}>
+                    <Text style={styles.clearText}>×</Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+
+              {/* Compressed right icons */}
+              <View style={styles.compressedIconContainer}>
+                <TouchableOpacity onPress={() => handleIconPress('favorites')}>
+                  <Image
+                    source={require('../assets/favoriteFilled.png')}
+                    style={styles.compressedIcon}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => handleIconPress('cart')}>
+                  <Image
+                    source={require('../assets/focused/shopping_cart.png')}
+                    style={styles.compressedIcon}
+                  />
+                </TouchableOpacity>
+              </View>
+            </Animated.View>
+          ) : (
+            // Show normal icons when search is not active
+            <View style={styles.iconContainer}>
+              <TouchableOpacity onPress={() => handleIconPress('search')}>
+                <Image
+                  source={require('../assets/focusedSearch.png')}
+                  style={styles.appSearchIcon}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleIconPress('favorites')}>
+                <Image
+                  source={require('../assets/favoriteFilled.png')}
+                  style={styles.appFavoriteIcon}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleIconPress('cart')}>
+                <Image
+                  source={require('../assets/focused/shopping_cart.png')}
+                  style={styles.appCartIcon}
+                />
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
         {/* Remove the old animated search container below */}
         
         {/* Theme Selection Modal - Disabled */}
@@ -308,7 +412,11 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     padding: 5,
+<<<<<<< HEAD
     paddingTop: Platform.OS === 'ios' ? 10 : 15,
+=======
+    paddingTop: Platform.OS === 'ios' ? 10 : 5,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   header: {
     flexDirection: 'row',
@@ -353,8 +461,13 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     flexDirection: 'row',
+<<<<<<< HEAD
     width: 140,
     justifyContent: 'space-evenly',
+=======
+    width: 150,
+    justifyContent: 'space-between',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     alignItems: 'center',
   },
   // New inline search styles

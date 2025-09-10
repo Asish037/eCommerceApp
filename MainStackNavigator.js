@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import Landing from './src/Screens/Auth/Landing';
 import AuthStack from './src/Navigation/AuthStack';
 import Landing from './src/Screens/Auth/Landing';
 import Register from './src/Screens/Auth/Register';
@@ -36,6 +37,7 @@ import PaymentScreen from './src/Screens/PaymentScreen';
 import PaymentMethod from './src/Screens/PaymentMethod';
 import OrderConfirm from './src/Screens/OrderConfirm';
 import ConfirmOrder from './src/Screens/ConfirmOrder';
+import SubCategoriesScreen from './src/Screens/SubCategoriesScreen';
 
 // Other Components
 import CircularLoader from './src/Components/CircularLoader';
@@ -72,7 +74,12 @@ const MainStackNavigator = () => {
 
   return (
     <Stack.Navigator
+<<<<<<< HEAD
       initialRouteName={token ? 'MainHome' : 'AuthStack'}
+=======
+      // initialRouteName={'AuthStack'}
+      initialRouteName={'MainHome'}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       headerMode="none"
     >
       <Stack.Screen
@@ -119,6 +126,11 @@ const MainStackNavigator = () => {
       /> 
       {/* Main App Screens */}
       <Stack.Screen
+        name="Landing"
+        component={Landing}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
         name="Orders"
         component={Orders}
         options={() => ({
@@ -131,6 +143,14 @@ const MainStackNavigator = () => {
         component={CategoriesScreen}
         options={() => ({
           title: 'Categories',
+        })}
+      />
+      <Stack.Screen
+        name="SubCategories"
+        component={SubCategoriesScreen}
+        options={() => ({
+          title: 'Sub Categories',
+          headerShown: false,
         })}
       />
       <Stack.Screen

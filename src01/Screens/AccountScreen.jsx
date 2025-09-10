@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, {useContext, useEffect, useState} from 'react';
+=======
+import React, {useContext, useEffect} from 'react';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import {
   View,
   Text,
@@ -7,7 +11,10 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+<<<<<<< HEAD
 // import {useTheme} from '../Context/ThemeContext';
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import {COLORS} from '../Constant/Colors';
 import {FONTS} from '../Constant/Font';
 import {moderateScale} from '../PixelRatio';
@@ -18,14 +25,18 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {CartContext} from '../Context/CartContext';
+<<<<<<< HEAD
 import axios from '../Components/axios';
 import qs from 'qs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 const ViewProfile = () => {
   const navigation = useNavigation();
   const {user, loadUserData} = useContext(CartContext);
+<<<<<<< HEAD
   const [isLoading, setIsLoading] = useState(false);
   // const {getThemeColors} = useTheme();
   // const themeColors = getThemeColors();
@@ -125,6 +136,17 @@ const ViewProfile = () => {
 
 
 
+=======
+
+  // Reload user data whenever this screen comes into focus
+  useFocusEffect(
+    React.useCallback(() => {
+      if (loadUserData) {
+        loadUserData();
+      }
+    }, [loadUserData]),
+  );
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
   return (
     <LinearGradient colors={COLORS.gradient} style={styles.container}>
@@ -364,32 +386,54 @@ export default ViewProfile;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+<<<<<<< HEAD
     width: '100%',
     height: '100%',
   },
   scrollContainer: {
     flexGrow: 1,
+=======
+    padding: 10,
+    // paddingHorizontal: moderateScale(10),
+    // paddingTop: moderateScale(5),
+  },
+  scrollContainer: {
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     paddingBottom: moderateScale(20),
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+<<<<<<< HEAD
     paddingHorizontal: moderateScale(15),
     paddingVertical: moderateScale(10),
     marginTop:  moderateScale(20),
+=======
+    paddingHorizontal: moderateScale(4),
+    paddingVertical: moderateScale(10),
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     marginBottom: moderateScale(10),
   },
   headerTitle: {
     fontSize: moderateScale(25),
     fontWeight: '700',
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Bold,
   },
   settingsButton: {
     padding: moderateScale(8),
     borderRadius: moderateScale(8),
+<<<<<<< HEAD
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
+=======
+    // backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: 'transparent'
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   profileSection: {
     flexDirection: 'row',
@@ -424,13 +468,21 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: moderateScale(20),
     fontWeight: '700',
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Bold,
     marginBottom: moderateScale(4),
   },
   userEmail: {
     fontSize: moderateScale(14),
+<<<<<<< HEAD
     color: '#06080aff',
+=======
+    color: COLORS.subtext,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontWeight: '500',
     fontFamily: FONTS.Regular,
   },
@@ -463,7 +515,11 @@ const styles = StyleSheet.create({
   },
   statLabel: {
     fontSize: moderateScale(13),
+<<<<<<< HEAD
     color: '#000000ff',
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Regular,
     fontWeight: '500',
   },
@@ -473,7 +529,11 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: moderateScale(18),
     fontWeight: '600',
+<<<<<<< HEAD
     color: '#000000ff',
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Bold,
     marginBottom: moderateScale(8),
     paddingHorizontal: moderateScale(12),
@@ -510,7 +570,11 @@ const styles = StyleSheet.create({
   },
   orderLabel: {
     fontSize: moderateScale(12),
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Medium,
     textAlign: 'center',
     fontWeight: '600',
@@ -549,7 +613,11 @@ const styles = StyleSheet.create({
   menuText: {
     flex: 1,
     fontSize: moderateScale(14),
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Medium,
     fontWeight: '650',
     lineHeight: moderateScale(15),

@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 // Temporary simplified COLORS to debug import issues
 export const COLORS = {
     theme: '#DB9BAA',
@@ -29,3 +30,33 @@ export const COLORS = {
     card: '#fef5e7d3',
     DarkPink: '#E94560',
 };
+=======
+export const COLORS = {
+    theme : '#DB9BAA',
+    button: '#ff8400ff',
+    bottomTab:'#151822',
+    sbutton : '#aab29d',
+    textInput : '#E1B4C0',
+    white: '#fff',
+    lightgray: '#eee',
+    cream : '#FEF5E7',
+    black: '#000',
+    green: '#229954',
+    yellow:'yellow',
+    cyan: '#058d66ff',
+    orange:'orange',
+    liteBlack : '#0e293547',
+    gradient : ['#A40606', '#D98324'],
+    gradientButton : ['#ff8400ff', '#af5e07ff'],
+    pink: '#F4ADBD',
+    grey: '#4e4e4eff',
+    blue: '#0000FF',
+    red:'#FF0000',
+    card: '#fef5e7d3',
+    text: "#0b0707ff",
+    subtext: "#262525f0",
+    icon: "#ff8400ff",
+    iconText: "#ff8400ff",
+    rating: "#e0e318f3"
+}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd

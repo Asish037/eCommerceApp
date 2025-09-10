@@ -8,7 +8,11 @@ import {
 import React, {useState, useRef, forwardRef, useImperativeHandle} from 'react';
 
 import Feather from 'react-native-vector-icons/Feather';
+<<<<<<< HEAD
 // import {useTheme} from '@react-navigation/native';
+=======
+import {useTheme} from '@react-navigation/native';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import {COLORS} from '../Constant/Colors';
 import {moderateScale, verticalScale} from '../PixelRatio';
 import {FONTS} from '../Constant/Font';
@@ -40,7 +44,11 @@ import {FONTS} from '../Constant/Font';
       inputRef.current.focus();
     },
   }));
+<<<<<<< HEAD
   // const {colors} = useTheme();
+=======
+  const {colors} = useTheme();
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   console.log('deghhhh=='+JSON.stringify(props.type))
 
   const validateEmail = () => {
@@ -123,7 +131,11 @@ import {FONTS} from '../Constant/Font';
         style={[
           styles.inputLabel,
           {
+<<<<<<< HEAD
             color: COLORS.black,
+=======
+            color: colors.textPrimary,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
           },
         ]}>
         {props.label}
@@ -132,9 +144,15 @@ import {FONTS} from '../Constant/Font';
       <View style={styles.inputFieldContainer}>
         {props.icon}
         <TextInput
+<<<<<<< HEAD
           style={[styles.textInput, {color: COLORS.black}]}
           placeholder={props.placeholder}
           placeholderTextColor={COLORS.grey}
+=======
+          style={[styles.textInput, {color: colors.textPrimary}]}
+          placeholder={props.placeholder}
+          placeholderTextColor={colors.iconSecondary}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
           secureTextEntry={props.type === 'password' && secureTextEntery}
           keyboardType={props.keyboardType} 
           onChangeText={event => handleChange(event)}

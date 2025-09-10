@@ -6,11 +6,18 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
+<<<<<<< HEAD
 import { COLORS } from "../Constant/Colors";
 
 const Coupons = () => {
   const [selected, setSelected] = useState("Trending");
   const couponslist = ["Trending", "Discount", "Expiring Soon", "All"];
+=======
+
+const Coupons = () => {
+  const [selected, setSelected] = useState("Trending");
+  const couponslist = ["Trending", "Discount", "Expiriing Soon", "All"];
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   return (
     <View style={styles.container}>
       <FlatList
@@ -47,6 +54,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingVertical: 10,
     marginHorizontal: 10,
+<<<<<<< HEAD
     backgroundColor: COLORS.cream,
     color: COLORS.grey,
     fontWeight: "700",
@@ -54,6 +62,15 @@ const styles = StyleSheet.create({
   isSelected: {
     backgroundColor: COLORS.lightbutton,
     color: COLORS.orange,
+=======
+    backgroundColor: "#DFDCDC",
+    color: "#938F8F",
+    fontWeight: "700",
+  },
+  isSelected: {
+    backgroundColor: "#E96E6E",
+    color: "#FFFFFF",
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   container: {
     marginVertical: 10,

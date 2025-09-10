@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, {useState, useContext} from 'react';
+=======
+import React, {useState,useEffect, useContext} from 'react';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import {
   View,
   Text,
@@ -10,7 +14,10 @@ import {
   TouchableOpacity,
   StatusBar,
   Animated,
+<<<<<<< HEAD
   Platform,
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 } from 'react-native';
 import {COLORS} from '../Constant/Colors';
 import {FONTS} from '../Constant/Font';
@@ -27,11 +34,18 @@ import CustomInput from '../Components/CustomInput';
 import Header from '../Components/Header';
 import {CartContext} from '../Context/CartContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+<<<<<<< HEAD
 import axios from '../Components/axios';
 import qs from 'qs';
 
 const EditProfile = () => {
   const navigation = useNavigation();
+=======
+
+const EditProfile = () => {
+  const navigation = useNavigation();
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   const {user, login} = useContext(CartContext);
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [email, setemail] = useState(
@@ -47,12 +61,65 @@ const EditProfile = () => {
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE_5aeaS13y24e1D7KBOIPNUwGflPnLR8AuQQUQ6tHDnycRg_2woHNm3fX1K_UYtxizZw&usqp=CAU',
   );
 
+<<<<<<< HEAD
   const saveDetails = async () => {
+=======
+  /*
+  const {user, login} = useContext(CartContext);
+  const [fullName, setFullName] = useState('')
+  const [email, setEmail] = useState('')
+  const [mobileNumber, setMobileNumber] = useState('')
+  const [profileImageUri, setProfileImageUri] = useState('')
+  const [disabled, setDisabled] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const [isSaving, setIsSaving] = useState(false) 
+  */
+
+  /*
+  const fetchUserData = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch('https://api.example.com/user');
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log('User data fetched:', data);
+        setFullName(data.fullname);
+        setEmail(data.email);
+        setMobileNumber(data.mobileNumber);
+        setProfileImageUri(data.profileImage);
+      } else {
+        Toast.show(data.message || 'Failed to fetch user data');
+        console.error('API Error:', data);
+      }
+    } catch (error) {
+      Toast.show('An error occurred while fetching user data');
+      console.error('Error fetching user data:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(()=>{
+    if(user?.id){
+      fetchUserData();
+    }
+    else{
+      Toast.show('User not found');
+    }
+
+  }, [])
+
+  */
+  const saveDetails = async () => {
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     if (!email || !mobileNumber || !fullname) {
       Toast.show('Please fill all required fields!');
       return;
     }
 
+<<<<<<< HEAD
     setdisabled(true);
 
     try {
@@ -93,6 +160,65 @@ const EditProfile = () => {
 
     // let updatedUserData = reponse.data
 
+=======
+
+    // setIsSaving(true);
+    // let data = {
+    //   email: email,
+    //   mobileNumber: mobileNumber,
+    //   fullname: fullname,
+    //   profileImage: profileImageUri,
+    // };
+
+    /*
+    try{
+      const response = await fetch('https://api.example.com/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+    if (response.ok) {
+        // If API update is successful, also update local context and storage
+        await AsyncStorage.setItem('userData', JSON.stringify(updatedUserData));
+        await login(updatedUserData);
+        Toast.show('Profile Updated Successfully!', Toast.LONG);
+        setTimeout(() => {
+          navigation.goBack();
+        }, 1000);
+      } else {
+        const errorData = await response.json();
+        Toast.show(`Failed to save profile: ${errorData.message}`);
+        console.error('API Error:', errorData);
+      }
+    } catch (error) {
+      Toast.show('Failed to save profile. Please try again.');
+      console.error('Error saving profile:', error);
+    }
+
+    const handleImagePicker = () => {
+    Toast.show('Image picker functionality to be implemented');
+  };
+
+  // Conditionally render a loading screen
+  if (isLoading) {
+    return (
+      <LinearGradient colors={COLORS.gradient} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={styles.loadingContainer}>
+          <Text style={styles.loadingText}>Loading Profile...</Text>
+        </View>
+      </LinearGradient>
+    );
+  }
+    
+    */
+
+    setdisabled(true);
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     let updatedUserData = {
       ...user,
       email: email,
@@ -181,8 +307,13 @@ const EditProfile = () => {
                 <View style={styles.inputFieldContainer}>
                   <MaterialCommunityIcons
                     name="account-outline"
+<<<<<<< HEAD
                     size={16}
                     color={COLORS.black}
+=======
+                    size={25}
+                    color={COLORS.button}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                     style={styles.inputIcon}
                   />
                   <TextInput
@@ -200,8 +331,13 @@ const EditProfile = () => {
                 <View style={styles.inputFieldContainer}>
                   <MaterialCommunityIcons
                     name="email-outline"
+<<<<<<< HEAD
                     size={16}
                     color={COLORS.black}
+=======
+                    size={25}
+                    color={COLORS.button}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                     style={styles.inputIcon}
                   />
                   <TextInput
@@ -220,8 +356,13 @@ const EditProfile = () => {
                 <View style={styles.inputFieldContainer}>
                   <MaterialCommunityIcons
                     name="phone-outline"
+<<<<<<< HEAD
                     size={16}
                     color={COLORS.black}
+=======
+                    size={25}
+                    color={COLORS.button}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                     style={styles.inputIcon}
                   />
                   <TextInput
@@ -235,6 +376,7 @@ const EditProfile = () => {
                 </View>
               </View>
             </View>
+<<<<<<< HEAD
           </View>
         </ScrollView>
 
@@ -256,6 +398,32 @@ const EditProfile = () => {
             </Text>
           </TouchableOpacity>
         </View>
+=======
+
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={styles.cancelButton}
+                onPress={() => navigation.goBack()}>
+                <Text style={styles.cancelButtonText}>Cancel</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[styles.saveButton, disabled && styles.disabledButton]}
+                onPress={saveDetails}
+                disabled={disabled}
+                activeOpacity={0.8}>
+                <LinearGradient
+                  colors={disabled ? ['#ccc', '#999'] : ['#ff8400ff', '#af5e07ff']}
+                  style={styles.saveButtonGradient}>
+                  <Text style={styles.saveButtonText}>
+                    {disabled ? 'Saving...' : 'Save Changes'}
+                  </Text>
+                </LinearGradient>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       </LinearGradient>
     </>
   );
@@ -266,8 +434,12 @@ export default EditProfile;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+<<<<<<< HEAD
     width: '100%',
     height: '100%',
+=======
+    padding: moderateScale(10),
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   headerSection: {
     flexDirection: 'row',
@@ -291,7 +463,11 @@ const styles = StyleSheet.create({
     // color: COLORS.grey,
     fontFamily: FONTS.Regular,
     marginBottom: verticalScale(1),
+<<<<<<< HEAD
     color: '#3a3a3aff',
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   userName: {
     fontSize: moderateScale(18),
@@ -302,7 +478,11 @@ const styles = StyleSheet.create({
   },
   subText: {
     fontSize: moderateScale(12),
+<<<<<<< HEAD
     color: '#3a3a3aff',
+=======
+    color: COLORS.subtext,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Regular,
   },
   profileImageContainer: {
@@ -359,8 +539,12 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(10),
   },
   scrollContent: {
+<<<<<<< HEAD
     paddingBottom: verticalScale(120), // Add padding for bottom button
     flexGrow: 1,
+=======
+    paddingBottom: verticalScale(20),
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   formContainer: {
     marginHorizontal: moderateScale(4),
@@ -385,7 +569,11 @@ const styles = StyleSheet.create({
   },
   inputLabel: {
     fontSize: moderateScale(12),
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Bold,
     fontWeight: '600',
     marginBottom: verticalScale(6),
@@ -420,7 +608,11 @@ const styles = StyleSheet.create({
     height: 50,
     flex: 1,
     borderWidth: 1,
+<<<<<<< HEAD
     borderColor: COLORS.black,
+=======
+    borderColor: COLORS.gradientButton[1],
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     backgroundColor: COLORS.white,
     paddingHorizontal: 15,
     borderRadius: 8,
@@ -436,6 +628,7 @@ const styles = StyleSheet.create({
   },
   cancelButton: {
     flex: 1,
+<<<<<<< HEAD
     backgroundColor: COLORS.lightgray,
     borderRadius: moderateScale(12),
     paddingVertical: verticalScale(15),
@@ -493,6 +686,53 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: moderateScale(10),
   },
+=======
+    height: verticalScale(38),
+    borderRadius: moderateScale(10),
+    borderWidth: 2,
+    borderColor: '#e67700ff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
+  cancelButtonText: {
+    fontSize: moderateScale(13),
+    color: COLORS.button,
+    fontFamily: FONTS.Bold,
+    fontWeight: '700',
+  },
+  saveButton: {
+    flex: 1,
+    backgroundColor: COLORS.gradientButton[0],
+    height: verticalScale(38),
+    borderRadius: moderateScale(10),
+    overflow: 'hidden',
+    shadowColor: COLORS.button,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 4,
+  },
+  disabledButton: {
+    shadowOpacity: 0.1,
+    elevation: 1,
+  },
+  saveButtonGradient: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  saveButtonText: {
+    fontSize: moderateScale(13),
+    color: COLORS.white,
+    fontFamily: FONTS.Bold,
+    fontWeight: '600',
+  },
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
   // Legacy styles (can be removed if not used elsewhere)
   hedaerUserName: {
@@ -558,6 +798,7 @@ const styles = StyleSheet.create({
   icon: {
     marginHorizontal: 10,
   },
+<<<<<<< HEAD
   iosTextContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -581,4 +822,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: 'red', // Temporary debug background
   },
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 });

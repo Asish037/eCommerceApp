@@ -7,19 +7,26 @@ import {
   ScrollView,
   Dimensions,
 } from 'react-native';
+<<<<<<< HEAD
 import React, {useContext, useState, useEffect} from 'react';
+=======
+import React, {useContext, useState} from 'react';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../Components/Header';
 import {fonts} from '../utils/fonts';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {CartContext} from '../Context/CartContext';
 import {COLORS} from '../Constant/Colors';
+<<<<<<< HEAD
 import axios from '../Components/axios';
 import qs from 'qs';
 import ProductLoader from '../Components/ProductLoader';
 import ProductDetailsSkeleton from '../Components/ProductDetailsSkeleton';
 import ProductDetailsLoader from '../Components/ProductDetailsLoader';
 
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 const {width} = Dimensions.get('window');
 
@@ -27,6 +34,7 @@ const ProductDetailsScreen = () => {
   const {addToCartItem, cartItems} = useContext(CartContext);
   const route = useRoute();
   const navigation = useNavigation();
+<<<<<<< HEAD
 
   // const product = route.params.item;
   const { productId } = route.params || {};
@@ -40,6 +48,14 @@ const ProductDetailsScreen = () => {
 
 
   const getColorValue = color =>{
+=======
+  const product = route.params.item;
+
+  const
+
+  // Helper function to convert color names to hex codes for React Native
+  const getColorValue = color => {
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     const colorMap = {
       Black: '#000000',
       White: '#FFFFFF',
@@ -56,6 +72,7 @@ const ProductDetailsScreen = () => {
       Maroon: '#800000',
       Olive: '#808000',
       Cream: '#FFFDD0',
+<<<<<<< HEAD
       Golden: '#FFD700',
     };
     // If it's already a hex code, return it
@@ -108,11 +125,63 @@ const ProductDetailsScreen = () => {
 
   const [productDetails, setProductDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+=======
+    };
+
+    // If it's already a hex code, return it
+    if (color && color.startsWith('#')) {
+      return color;
+    }
+
+    // Otherwise, convert from name to hex
+    return colorMap[color] || '#CCCCCC'; // Default to light gray if color not found
+  };
+
+  // Helper function to get display name for colors
+  const getColorName = color => {
+    const colorNames = {
+      '#000000': 'Black',
+      '#FFFFFF': 'White',
+      '#B11D1D': 'Red',
+      '#1F44A3': 'Blue',
+      '#9F632A': 'Brown',
+      '#1D752B': 'Green',
+      '#91A1B0': 'Gray',
+      '#FFD700': 'Yellow',
+      '#FFA500': 'Orange',
+      '#800080': 'Purple',
+      '#FFC0CB': 'Pink',
+      '#000080': 'Navy',
+      '#800000': 'Maroon',
+      '#808000': 'Olive',
+      '#FFFDD0': 'Cream',
+      Black: 'Black',
+      White: 'White',
+      Red: 'Red',
+      Blue: 'Blue',
+      Brown: 'Brown',
+      Green: 'Green',
+      Gray: 'Gray',
+    };
+    return colorNames[color] || color;
+  };
+
+  // Dynamic state management
+  const [selectedSize, setSelectedSize] = useState(product.sizes?.[0] || 'M');
+  const [selectedColor, setSelectedColor] = useState(
+    getColorValue(product.colors?.[0]) || '#B11D1D',
+  );
+  const [activeTab, setActiveTab] = useState('description');
+
+  // Check if product is already in cart
+  const isInCart = cartItems.some(cartItem => cartItem.id === product.id);
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
   const handleSearchChange = searchText => {
     console.log('Searching in product details:', searchText);
   };
 
+<<<<<<< HEAD
   
 
   const parseColors = keyFeatures => {
@@ -221,6 +290,12 @@ const ProductDetailsScreen = () => {
         image: productDetails.image, // backend: img
         price: productDetails.price,
         offerPrice: productDetails.offerPrice,
+=======
+  const handleAddToCart = () => {
+    if (!isInCart) {
+      addToCartItem({
+        ...product,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
         color: selectedColor,
         size: selectedSize,
         selectedColorName: getColorName(selectedColor),
@@ -229,6 +304,7 @@ const ProductDetailsScreen = () => {
     }
   };
 
+<<<<<<< HEAD
   const formatPrice = (value) => {
   if (!value) return '';
   return new Intl.NumberFormat('en-IN', { 
@@ -244,6 +320,25 @@ const ProductDetailsScreen = () => {
   // Check if product is already in cart
   const isInCart = cartItems.some(cartItem => cartItem.id === productDetails.id);
 
+=======
+  // Render star rating
+  const renderStars = rating => {
+    const stars = [];
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
+
+    for (let i = 0; i < 5; i++) {
+      if (i < fullStars) {
+        stars.push('★');
+      } else if (i === fullStars && hasHalfStar) {
+        stars.push('☆');
+      } else {
+        stars.push('☆');
+      }
+    }
+    return stars.join('');
+  };
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
   // Render tab content
   const renderTabContent = () => {
@@ -251,6 +346,7 @@ const ProductDetailsScreen = () => {
       case 'description':
         return (
           <View style={styles.tabContent}>
+<<<<<<< HEAD
             <Text style={styles.sectionHeading}>Description</Text>
               <Text style={styles.descriptionText}>{productDetails.description || 'No description available'}</Text>
 
@@ -481,6 +577,227 @@ const ProductDetailsScreen = () => {
 export default ProductDetailsScreen;
 
 
+=======
+            <Text style={styles.descriptionText}>{product.description}</Text>
+            <View style={styles.specRow}>
+              <Text style={styles.specLabel}>Category:</Text>
+              <Text style={styles.specValue}>{product.category || 'N/A'}</Text>
+            </View>
+            <View style={styles.specRow}>
+              <Text style={styles.specLabel}>Gender:</Text>
+              <Text style={styles.specValue}>{product.gender || 'N/A'}</Text>
+            </View>
+          </View>
+        );
+      case 'reviews':
+        return (
+          <View style={styles.tabContent}>
+            {product.reviews && product.reviews.length > 0 ? (
+              product.reviews.map((review, index) => (
+                <View key={index} style={styles.reviewItem}>
+                  <View style={styles.reviewHeader}>
+                    <Text style={styles.reviewerName}>
+                      {review.reviewerName}
+                    </Text>
+                    <Text style={styles.reviewRating}>
+                      {renderStars(review.rating)} ({review.rating})
+                    </Text>
+                  </View>
+                  <Text style={styles.reviewText}>{review.reviewText}</Text>
+                </View>
+              ))
+            ) : (
+              <Text style={styles.noReviewsText}>No reviews yet</Text>
+            )}
+          </View>
+        );
+      case 'specs':
+        return (
+          <View style={styles.tabContent}>
+            <View style={styles.specRow}>
+              <Text style={styles.specLabel}>Available Sizes:</Text>
+              <Text style={styles.specValue}>
+                {product.sizes ? product.sizes.join(', ') : 'One Size'}
+              </Text>
+            </View>
+            <View style={styles.specRow}>
+              <Text style={styles.specLabel}>Available Colors:</Text>
+              <Text style={styles.specValue}>
+                {product.colors ? product.colors.length : 0} options
+              </Text>
+            </View>
+            <View style={styles.specRow}>
+              <Text style={styles.specLabel}>Rating:</Text>
+              <Text style={styles.specValue}>
+                {renderStars(product.rating)} ({product.rating}/5)
+              </Text>
+            </View>
+          </View>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <LinearGradient colors={COLORS.gradient} style={styles.container}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{paddingBottom: 20}}>
+        {/* Header */}
+        <View style={styles.header}>
+          <Header onSearchChange={handleSearchChange} />
+        </View>
+
+        {/* Product Image */}
+        <View style={styles.imageContainer}>
+          <Image source={{uri: product.image}} style={styles.coverImage} />
+        </View>
+
+        {/* Product Info */}
+        <View style={styles.contentContainer}>
+          {/* Title and Price */}
+          <View style={styles.titlePriceContainer}>
+            <Text style={styles.productTitle} numberOfLines={2}>
+              {product.title}
+            </Text>
+            <Text style={styles.productPrice}>${product.price}</Text>
+          </View>
+
+          {/* Rating */}
+          <View style={styles.ratingContainer}>
+            <Text style={styles.ratingStars}>
+              {renderStars(product.rating)}
+            </Text>
+            <Text style={styles.ratingText}>({product.rating}) Rating</Text>
+          </View>
+
+          {/* Size Selection */}
+          {product.sizes && product.sizes.length > 0 && (
+            <View style={styles.selectionSection}>
+              <Text style={styles.selectionTitle}>Size</Text>
+              <View style={styles.sizeContainer}>
+                {product.sizes.map((size, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    style={[
+                      styles.sizeButton,
+                      selectedSize === size && styles.selectedSizeButton,
+                    ]}
+                    onPress={() => setSelectedSize(size)}>
+                    <Text
+                      style={[
+                        styles.sizeButtonText,
+                        selectedSize === size && styles.selectedSizeText,
+                      ]}>
+                      {size}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </View>
+          )}
+
+          {/* Color Selection */}
+          {product.colors && product.colors.length > 0 && (
+            <View style={styles.selectionSection}>
+              <Text style={styles.selectionTitle}>Color</Text>
+              <View style={styles.colorContainer}>
+                {product.colors.map((color, index) => {
+                  const colorHex = getColorValue(color);
+                  return (
+                    <TouchableOpacity
+                      key={index}
+                      style={[
+                        styles.colorBorder,
+                        selectedColor === colorHex &&
+                          styles.selectedColorBorder,
+                      ]}
+                      onPress={() => setSelectedColor(colorHex)}>
+                      <View
+                        style={[
+                          styles.colorCircle,
+                          {backgroundColor: colorHex},
+                        ]}
+                      />
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
+              <Text style={styles.selectedColorText}>
+                Selected: {getColorName(selectedColor)}
+              </Text>
+            </View>
+          )}
+
+          {/* Tabs for Description, Reviews, Specs */}
+          <View style={styles.tabContainer}>
+            <TouchableOpacity
+              style={[
+                styles.tab,
+                activeTab === 'description' && styles.activeTab,
+              ]}
+              onPress={() => setActiveTab('description')}>
+              <Text
+                style={[
+                  styles.tabText,
+                  activeTab === 'description' && styles.activeTabText,
+                ]}>
+                Description
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.tab, activeTab === 'reviews' && styles.activeTab]}
+              onPress={() => setActiveTab('reviews')}>
+              <Text
+                style={[
+                  styles.tabText,
+                  activeTab === 'reviews' && styles.activeTabText,
+                ]}>
+                Reviews ({product.reviews?.length || 0})
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.tab, activeTab === 'specs' && styles.activeTab]}
+              onPress={() => setActiveTab('specs')}>
+              <Text
+                style={[
+                  styles.tabText,
+                  activeTab === 'specs' && styles.activeTabText,
+                ]}>
+                Specs
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Tab Content */}
+          {renderTabContent()}
+
+          {/* Add to Cart Button */}
+          <TouchableOpacity
+            style={[
+              styles.addToCartButton,
+              isInCart && styles.addToCartButtonDisabled,
+            ]}
+            onPress={handleAddToCart}
+            disabled={isInCart}>
+            <Text
+              style={[
+                styles.addToCartButtonText,
+                isInCart && styles.addToCartButtonTextDisabled,
+              ]}>
+              {isInCart ? 'Already in Cart' : 'Add to Cart'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </LinearGradient>
+  );
+};
+
+export default ProductDetailsScreen;
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -488,6 +805,7 @@ const styles = StyleSheet.create({
   header: {
     padding: 16,
   },
+<<<<<<< HEAD
   sectionHeading: {
   fontSize: 16,
   fontFamily: fonts.medium,
@@ -499,6 +817,8 @@ const styles = StyleSheet.create({
   textDecorationLine: 'underline',
 },
 
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   imageContainer: {
     height: 350,
     width: '100%',
@@ -521,7 +841,11 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   productTitle: {
+<<<<<<< HEAD
     fontSize: 20,
+=======
+    fontSize: 24,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: fonts.medium,
     fontWeight: '700',
     color: '#2C2C2C',
@@ -529,6 +853,7 @@ const styles = StyleSheet.create({
     marginRight: 16,
     lineHeight: 30,
   },
+<<<<<<< HEAD
   productOriginalPrice: {
     textDecorationLine: 'line-through',
     color: '#E94560',
@@ -538,6 +863,10 @@ const styles = StyleSheet.create({
   },
   productPrice: {
     fontSize: 22,
+=======
+  productPrice: {
+    fontSize: 26,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: fonts.medium,
     fontWeight: '700',
     color: '#E94560',
@@ -545,7 +874,11 @@ const styles = StyleSheet.create({
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+<<<<<<< HEAD
     marginBottom: 18,
+=======
+    marginBottom: 20,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   ratingStars: {
     fontSize: 18,
@@ -555,7 +888,11 @@ const styles = StyleSheet.create({
   ratingText: {
     fontSize: 14,
     fontFamily: fonts.regular,
+<<<<<<< HEAD
     color: '#141414ff',
+=======
+    color: '#666666',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   selectionSection: {
     marginBottom: 24,
@@ -564,7 +901,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: fonts.medium,
     fontWeight: '600',
+<<<<<<< HEAD
     color: '#1d1c1cff',
+=======
+    color: '#2C2C2C',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     marginBottom: 12,
   },
   sizeContainer: {
@@ -619,11 +960,18 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(0,0,0,0.1)',
   },
   selectedColorText: {
+<<<<<<< HEAD
     fontSize: 15,
     fontFamily: fonts.medium,
     color: '#000000ff',
     marginTop: 4,
     marginBottom: 5,
+=======
+    fontSize: 14,
+    fontFamily: fonts.regular,
+    color: '#666666',
+    marginTop: 4,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   tabContainer: {
     flexDirection: 'row',
@@ -654,7 +1002,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: fonts.medium,
     fontWeight: '500',
+<<<<<<< HEAD
     color: '#3c3a3aff',
+=======
+    color: '#666666',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   activeTabText: {
     color: '#fff9faff',
@@ -665,9 +1017,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   descriptionText: {
+<<<<<<< HEAD
     fontSize: 15,
     fontFamily: fonts.regular,
     color: COLORS.black,
+=======
+    fontSize: 16,
+    fontFamily: fonts.regular,
+    color: '#444444',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     lineHeight: 24,
     marginBottom: 16,
   },
@@ -682,7 +1040,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: fonts.medium,
     fontWeight: '600',
+<<<<<<< HEAD
     color: '#353434ff',
+=======
+    color: '#666666',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   specValue: {
     fontSize: 14,
@@ -753,5 +1115,9 @@ const styles = StyleSheet.create({
   addToCartButtonTextDisabled: {
     color: '#999999',
   },
+<<<<<<< HEAD
 })
 
+=======
+});
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd

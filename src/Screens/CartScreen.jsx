@@ -5,12 +5,19 @@ import {
   Text,
   TouchableOpacity,
   View,
+<<<<<<< HEAD
+=======
+  Alert,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from '../Components/axios';
+<<<<<<< HEAD
 import Toast from 'react-native-simple-toast';
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 import Header from '../Components/Header';
 import CartCard from '../Components/CartCard';
@@ -31,18 +38,33 @@ const CartScreen = () => {
     try {
       const token = await AsyncStorage.getItem('userToken');
       if (!token) {
+<<<<<<< HEAD
         Toast.show('No auth token found. Please log in again.');
+=======
+        Alert.alert('Error', 'No auth token found. Please log in again.');
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
         return;
       }
 
       if (cartItems.length === 0) {
+<<<<<<< HEAD
         Toast.show('Please add items to your cart before proceeding.');
+=======
+        Alert.alert(
+          'Cart is Empty',
+          'Please add items to your cart before proceeding.'
+        );
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
         return;
       }
 
       const payload = {
         items: cartItems.map(item => ({
+<<<<<<< HEAD
           product_id: item.id || item.productId || 'unknown', // handle undefined id
+=======
+          product_id: item.id, // adjust if backend expects productId
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
           quantity: item.quantity,
           price: item.price,
         })),
@@ -65,11 +87,22 @@ const CartScreen = () => {
       if (response.status === 200) {
         navigation.navigate('Payment', { grandTotal, cartItems });
       } else {
+<<<<<<< HEAD
         Toast.show(response.data.message || 'Something went wrong on the server.');
       }
     } catch (error) {
       console.error('Error during checkout:', error);
       Toast.show('Checkout failed. Please try again.');
+=======
+        Alert.alert(
+          'Checkout Error',
+          response.data.message || 'Something went wrong on the server.'
+        );
+      }
+    } catch (error) {
+      console.error('Error during checkout:', error);
+      Alert.alert('Error', 'Checkout failed. Please try again.');
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     }
   };
 
@@ -77,7 +110,11 @@ const CartScreen = () => {
     try {
       const token = await AsyncStorage.getItem('userToken');
       if (!token) {
+<<<<<<< HEAD
         Toast.show('No authentication token found. Please log in.');
+=======
+        Alert.alert('Error', 'No authentication token found. Please log in.');
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
         return;
       }
 
@@ -89,6 +126,7 @@ const CartScreen = () => {
 
       if (response.status === 200) {
         deleteCartItem(itemId);
+<<<<<<< HEAD
         Toast.show('Item removed from cart.');
       } else {
         Toast.show(response.data.message || 'Could not remove item.');
@@ -96,6 +134,18 @@ const CartScreen = () => {
     } catch (error) {
       console.error('Error deleting cart item:', error);
       Toast.show('Failed to remove item. Please try again.');
+=======
+        Alert.alert('Success', 'Item removed from cart.');
+      } else {
+        Alert.alert(
+          'Deletion Failed',
+          response.data.message || 'Could not remove item.'
+        );
+      }
+    } catch (error) {
+      console.error('Error deleting cart item:', error);
+      Alert.alert('Error', 'Failed to remove item. Please try again.');
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     }
   };
 

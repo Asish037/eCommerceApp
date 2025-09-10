@@ -48,11 +48,15 @@ export default function Register() {
   const [phone, setPhone] = React.useState('');
   const [error, setError] = React.useState('');
   const [fcmToken, setFcmToken] = React.useState('');
+<<<<<<< HEAD
   const [select_code, setSelectCode] = useState('91');
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   // const [email, setEmail] = React.useState('');
   // const [password, setPassword] = React.useState('');
 
   React.useEffect(() => {
+<<<<<<< HEAD
     // First request permission and generate FCM token, then get it from storage
     requestNotificationPermission().then(() => {
       // After permission is granted and token is generated, get it from storage
@@ -62,6 +66,9 @@ export default function Register() {
       // Even if permission fails, try to get existing token
       getStoredFcmToken();
     });
+=======
+    getStoredFcmToken();
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   }, []);
 
   const getStoredFcmToken = async () => {
@@ -98,6 +105,7 @@ export default function Register() {
       phone: phone
     };
     // ✅ Only include FCM token if it's available
+<<<<<<< HEAD
     if (fcmToken) {
       data.fcm_token = fcmToken;
     } else {
@@ -162,6 +170,24 @@ export default function Register() {
         visibilityTime: 4000,
       });
     }
+=======
+    // if (token) {
+    //   data.fcm_token = token;
+    // } else {
+    //   console.warn('FCM token not available');
+    // }
+    // console.log('Sending data:', data);
+    // let options = {
+    //   method: 'POST',
+    //   headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    //   data: qs.stringify(data),
+    //   url: 'login',
+    // };
+
+    // const res = await axios(options);
+    // console.log(res);
+    navigation.navigate('Otp', {data});
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   };
 
   return (

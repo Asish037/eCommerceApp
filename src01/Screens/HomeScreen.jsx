@@ -4,7 +4,10 @@ import {
   ImageBackground,
   StyleSheet,
   Text,
+<<<<<<< HEAD
   Alert,
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   TextInput,
   View,
 } from 'react-native';
@@ -17,6 +20,7 @@ import data from '../data/data.json';
 import {useNavigation} from '@react-navigation/native';
 import sale from '../assets/sale2.jpeg';
 import { COLORS } from '../Constant/Colors';
+<<<<<<< HEAD
 // import { useTheme } from '../Context/ThemeContext';
 import axios from '../Components/axios';
 import qs from 'qs';
@@ -119,17 +123,50 @@ const HomeScreen = () => {
 
     } catch (error) {
       console.error('Error in fetchAddLikeProducts:', error);
+=======
+import axios from 'axios';
+
+const HomeScreen = () => {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigation = useNavigation();
+ 
+
+  const apiUrl = 'https://ecom.kussoft.net/api/product-list';
+  const fetchProductItem = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(apiUrl);
+      setProducts(response.data.data);
+      console.log('Product Details:', response.data);     
+      // Handle the response as needed
+    } catch (error) {
+      console.error('Error fetching product details:', error);
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     } finally {
       setIsLoading(false);
     }
   };
 
+<<<<<<< HEAD
 
   const handleProductDetails = item => {
     // HomeScreen
     navigation.navigate('PRODUCT_DETAILS', { productId: item.id });
   };
   
+=======
+  useEffect(()=>{
+    fetchProductItem();
+  },[])
+
+  const handleProductDetails = item => {
+    navigation.navigate('PRODUCT_DETAILS', {item});
+  };
+
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   const toggleFavorite = item => {
     setProducts(
       products.map(prod => {
@@ -147,11 +184,17 @@ const HomeScreen = () => {
 
   if (isLoading) {
     return (
+<<<<<<< HEAD
       <GeneralLoader 
         message="Loading products..." 
         containerStyle={{ backgroundColor: COLORS.gradient[0] }}
         textColor={COLORS.black}
       />
+=======
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text>Loading...</Text>
+      </View>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     );
   }
 
@@ -159,6 +202,7 @@ const HomeScreen = () => {
     <LinearGradient colors={COLORS.gradient} style={styles.container}>
       <Header />
 
+<<<<<<< HEAD
       <FlatList
         style={styles.flatList}
         contentContainerStyle={styles.flatListContent}
@@ -179,10 +223,55 @@ const HomeScreen = () => {
         data={products}
         numColumns={2}
         renderItem={({item}) => (
+=======
+      {/* <Tags /> */}
+      {/* <Text style={styles.featuredProductsTitle}>Featured Products</Text> */}
+      <FlatList
+        ListHeaderComponent={
+          <>
+            <>
+              <ImageBackground source={sale} style={styles.ImageBackground}>
+                <View style={styles.textContainer}>
+                  <Text style={styles.headerTitleMain}>Limited Time</Text>
+                  <Text style={styles.headerTitleSub}>OFFER</Text>
+                </View>
+              </ImageBackground>
+
+              {/* <Header /> */}
+              <View
+                style={{
+                  marginTop: 5,
+                  marginBottom: 0,
+                  justifyContent: 'flex-start',
+                }}>
+                {/* <Text style={styles.headingText}>Match Your Style</Text> */}
+                {/* <View style={styles.inputContainer}>
+                  <Image
+                    source={require('../assets/search.png')}
+                    style={styles.searchIcon}
+                  />
+                  <TextInput placeholder="Search" style={styles.textInput} />
+                </View> */}
+                <Tags />
+              </View>
+            </>
+          </>
+        }
+        
+        data={products}
+        
+        numColumns={2}
+        renderItem={({item}) => (
+          
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
           <ProductCard
             item={item}
             handleProductClick={handleProductDetails}
             toggleFavorite={toggleFavorite}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
           />
         )}
         showsVerticalScrollIndicator={false}
@@ -192,6 +281,7 @@ const HomeScreen = () => {
 };
 const styles = StyleSheet.create({
   container: {
+<<<<<<< HEAD
     flex: 1,
     width: '100%',
     height: '100%',
@@ -202,6 +292,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 20,
+=======
+    // flex: 1,
+    padding: 10,
+    marginBottom: 16,
+  },
+  ImageBackground: {
+    height: 200,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-start',
+    paddingBottom: 20,
+    paddingLeft: 20,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   headingText: {
     fontSize: 28,
@@ -210,11 +312,22 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
   },
   textContainer: {
+<<<<<<< HEAD
     backgroundColor: 'transparent',
     borderRadius: 10,
     marginBottom: 0,
     alignItems: 'center',
   },
+=======
+    backgroundColor: 'transparent', // Semi-transparent black background
+    // paddingHorizontal: 20,
+    // paddingVertical: 10,
+    borderRadius: 10,
+    marginBottom: 0,
+    alignItems: 'flex-start',
+  },
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   headerTitleMain: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -223,7 +336,11 @@ const styles = StyleSheet.create({
   headerTitleSub: {
     fontSize: 32,
     fontWeight: 'bold',
+<<<<<<< HEAD
     color: '#972525ff',
+=======
+    color: '#972525ff', // A standout color like gold
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   inputContainer: {
     width: '100%',
@@ -242,6 +359,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Poppins-Regular',
   },
+<<<<<<< HEAD
   flatList: {
     flex: 1,
     width: '100%',
@@ -254,5 +372,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
   },
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 });
 export default HomeScreen;

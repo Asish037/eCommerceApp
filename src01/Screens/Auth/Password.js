@@ -13,16 +13,28 @@ import {
   ScrollView,
   Platform,
 } from 'react-native';
+<<<<<<< HEAD
 import GlobalStyles from '../../Components/GlobalStyle';
 import SocialLogin from '../../Components/SocialLogin';
+=======
+import GlobalStyles from '../../Component/GlobalStyle';
+import SocialLogin from '../../Component/SocialLogin';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import {COLORS} from '../../Constant/Colors';
 import {FONTS} from '../../Constant/Font';
 import {moderateScale, verticalScale} from '../../PixelRatio';
 import Navigation from '../../Service/Navigation';
+<<<<<<< HEAD
 import GradientButton from '../../Components/Button/GradientButton';
 import ImageWithTitle from '../../Components/Header/ImageWithTitle';
 import CheckBox from '@react-native-community/checkbox';
 import CustomImageBackground from '../../Components/ImageBackground/CustomImageBackground';
+=======
+import GradientButton from '../../Component/Button/GradientButton';
+import ImageWithTitle from '../../Component/Header/ImageWithTitle';
+import CheckBox from '@react-native-community/checkbox';
+import CustomImageBackground from '../../Component/ImageBackground/CustomImageBackground';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import Toast from 'react-native-simple-toast';
 import Auth from '../../Service/Auth';
 import {setUser} from '../../Redux/reducer/user';

@@ -21,6 +21,7 @@ const Privacy = () => {
   return (
     <LinearGradient colors={COLORS.gradient} style={styles.container}>
       <Header />
+<<<<<<< HEAD
       <View style={styles.contentWrapper}>
         <ScrollView
           contentContainerStyle={{flexGrow: 1}}
@@ -30,6 +31,15 @@ const Privacy = () => {
           <View style={styles.titleContainer}>
             <Text style={styles.titleHead}>Privacy Policy</Text>
           </View>
+=======
+      <ScrollView
+        contentContainerStyle={{flexGrow: 1}}
+        showsVerticalScrollIndicator={false}>
+        {/* <StatusBar color="#555" /> */}
+        <View style={styles.bodyContainer}>
+          <Text style={styles.titleHead}>Privacy Policy</Text>
+        </View>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
         <View style={styles.bodyContainer}>
           <Text style={styles.subHead}>Last Updated: January 2025</Text>
@@ -231,8 +241,12 @@ const Privacy = () => {
           the significant changes to the Privacy Policy, in the manner as may be
           required under applicable laws.
         </Text>
+<<<<<<< HEAD
         </ScrollView>
       </View>
+=======
+      </ScrollView>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     </LinearGradient>
   );
 };
@@ -242,6 +256,7 @@ export default Privacy;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+<<<<<<< HEAD
     borderColor: COLORS.black,
     borderWidth: 2,
     borderRadius: 10,
@@ -261,20 +276,38 @@ const styles = StyleSheet.create({
     paddingHorizontal: 0,
     paddingVertical: 10,
     marginHorizontal: 0,
+=======
+    marginHorizontal: 10,
+    marginVertical: 10,
+    borderColor: COLORS.black,
+    borderWidth: 2,
+    borderRadius: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 10,
+    alignContent: 'center',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   bodyContainer: {
     margin: 10,
   },
   titleHead: {
+<<<<<<< HEAD
     width: '100%',
     textAlign: 'center',
+=======
+    alignContent: 'center',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     color: COLORS.black,
     fontWeight: '800',
     fontFamily: fonts.bold,
     fontSize: 30,
     textDecorationLine: 'underline',
+<<<<<<< HEAD
     paddingHorizontal: 0,
     marginHorizontal: 0,
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   subHead: {
     alignContent: 'center',

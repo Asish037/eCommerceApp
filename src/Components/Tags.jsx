@@ -10,8 +10,13 @@ import {COLORS} from '../Constant/Colors';
 // import {useTheme} from '../Context/ThemeContext';
 
 const Tags = () => {
+<<<<<<< HEAD
   const [selected, setSelected] = useState("Trending Now");
   const tags = ["Trending Now", "Featured", "New Arrivals", "Winter", "Summer"];
+=======
+  const [selected, setSelected] = useState("Best Sales");
+  const tags = ["Best Sales", "New Arrivals", "Rudraksha", "Pooja", "Mala"];
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   // const {getThemeColors} = useTheme();
   // const themeColors = getThemeColors();
 
@@ -28,7 +33,11 @@ const Tags = () => {
       fontWeight: "700",
     },
     isSelected: {
+<<<<<<< HEAD
       backgroundColor: COLORS.button,
+=======
+      backgroundColor: COLORS.blue,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       color: "#FFFFFF",
     },
     container: {

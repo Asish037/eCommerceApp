@@ -39,7 +39,11 @@ const MyCoupons = () => {
                 <Text style={styles.headingText}>My Coupons</Text>
                 <MaterialCommunityIcons
                   name="wallet-giftcard"
+<<<<<<< HEAD
                   style={{color: COLORS.lightbutton, fontSize: moderateScale(30)}}
+=======
+                  style={{color: COLORS.button, fontSize: moderateScale(30)}}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                 />
               </View>
             </>
@@ -52,8 +56,11 @@ const MyCoupons = () => {
           <CouponCard item={item} handleCouponClick={handleCouponDetails} />
         )}
         showsVerticalScrollIndicator={false}
+<<<<<<< HEAD
         contentContainerStyle={styles.flatListContent}
         style={styles.flatList}
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       />
       <View></View>
     </LinearGradient>
@@ -61,9 +68,14 @@ const MyCoupons = () => {
 };
 const styles = StyleSheet.create({
   container: {
+<<<<<<< HEAD
      flex: 1,
       width: '100%',
       height: '100%',
+=======
+    // flex: 1,
+    padding: 20,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
 
   headingText: {
@@ -71,9 +83,12 @@ const styles = StyleSheet.create({
     color: '#000000',
     marginVertical: 20,
     fontFamily: 'Poppins-Regular',
+<<<<<<< HEAD
     fontWeight: '600',
     textAlign: 'center',
     flex: 1,
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   inputContainer: {
     width: '100%',
@@ -93,6 +108,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
   },
   headerSection: {
+<<<<<<< HEAD
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -108,6 +124,16 @@ const styles = StyleSheet.create({
   },
   flatListContent: {
     paddingBottom: 20,
+=======
+    width: '90%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    padding: 10,
+    borderBottomWidth: 0.2,
+    borderColor: COLORS.textInput,
+    paddingBottom: 10,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
 });
 export default MyCoupons;

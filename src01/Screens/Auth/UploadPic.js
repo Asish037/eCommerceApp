@@ -14,10 +14,17 @@ import {COLORS} from '../../Constant/Colors';
 import {FONTS} from '../../Constant/Font';
 import {moderateScale, verticalScale} from '../../PixelRatio';
 import Navigation from '../../Service/Navigation';
+<<<<<<< HEAD
 import GradientButton from '../../Components/Button/GradientButton';
 import ImageWithTitle from '../../Components/Header/ImageWithTitle';
 import CustomImageBackground from '../../Components/ImageBackground/CustomImageBackground';
 import TransparentButton from '../../Components/Button/TransparentButton';
+=======
+import GradientButton from '../../Component/Button/GradientButton';
+import ImageWithTitle from '../../Component/Header/ImageWithTitle';
+import CustomImageBackground from '../../Component/ImageBackground/CustomImageBackground';
+import TransparentButton from '../../Component/Button/TransparentButton';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import ImagePicker from 'react-native-image-crop-picker';
 import Toast from 'react-native-simple-toast';
 import Auth from '../../Service/Auth';

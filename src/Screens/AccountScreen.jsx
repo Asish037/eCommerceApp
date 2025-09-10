@@ -18,7 +18,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {CartContext} from '../Context/CartContext';
+<<<<<<< HEAD
 import {useAuth} from '../hooks/useAuth';
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import axios from '../Components/axios';
 import qs from 'qs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -26,8 +29,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ViewProfile = () => {
   const navigation = useNavigation();
+<<<<<<< HEAD
   const {user, loadAuthData} = useContext(CartContext);
   const { isAuthenticated, logout, getUserName, getUserPhone } = useAuth();
+=======
+  const {user, loadUserData} = useContext(CartContext);
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   const [isLoading, setIsLoading] = useState(false);
   // const {getThemeColors} = useTheme();
   // const themeColors = getThemeColors();
@@ -109,7 +116,11 @@ const ViewProfile = () => {
           phone: response.data.phone,
         };
 
+<<<<<<< HEAD
         loadAuthData();
+=======
+        loadUserData(mappedData);
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
       } catch (error) {
         if (error.response) {
@@ -123,7 +134,11 @@ const ViewProfile = () => {
     };
 
     fetchUserData();
+<<<<<<< HEAD
   }, [loadAuthData]);
+=======
+  }, [loadUserData]);
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 
 

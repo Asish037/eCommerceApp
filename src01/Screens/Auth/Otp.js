@@ -12,6 +12,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import model5 from '../../assets/model5.jpg';
 import {COLORS} from '../../Constant/Colors';
 import {FONTS} from '../../Constant/Font';
+<<<<<<< HEAD
 import { verticalScale } from '../../PixelRatio';
 import axios from '../../Components/axios';
 import qs from 'qs';
@@ -22,6 +23,11 @@ const Otp = ({navigation, route}) => {
     console.log('OTP Screen - Received params:', route.params);
     console.log('OTP Screen - user_id:', user_id);
     console.log('OTP Screen - phone:', phone);
+=======
+
+const Otp = ({navigation, route}) => {
+    const {data} = route.params;
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     const [otp, setOtp] = React.useState(['', '', '', '', '', '']);
     const [timer, setTimer] = React.useState(30);
     const [isResendDisabled, setIsResendDisabled] = React.useState(true);
@@ -50,13 +56,18 @@ const Otp = ({navigation, route}) => {
         }
     };
 
+<<<<<<< HEAD
     const handleContinue = async() => {
+=======
+    const handleContinue = () => {
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
         const enteredOtp = otp.join('');
         if (enteredOtp.length !== 6) {
             Alert.alert('Error', 'Please enter a valid 6-digit OTP.');
             return;
         }
         // Mock verification: accept 123456 as valid
+<<<<<<< HEAD
         // if (enteredOtp === '123456') {
         //     navigation.reset({
         //         index: 0,
@@ -129,6 +140,15 @@ const Otp = ({navigation, route}) => {
             position: 'top',
             visibilityTime: 4000,
           });
+=======
+        if (enteredOtp === '123456') {
+            navigation.reset({
+                index: 0,
+                routes: [{name: 'MainHome'}],
+            });
+        } else {
+            Alert.alert('Error', 'Invalid OTP!');
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
         }
     };
 
@@ -153,7 +173,11 @@ const Otp = ({navigation, route}) => {
                     <Text style={styles.title}>OTP Verification</Text>
                     <Text style={styles.subtitle}>
                         We have sent Verification code to{'\n'}
+<<<<<<< HEAD
                         <Text style={styles.phone}>{phone}</Text>{' '}
+=======
+                        <Text style={styles.phone}>{data?.phone}</Text>{' '}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                         <Text onPress={() => navigation.goBack()} style={styles.edit}>
                         Edit
                         </Text>
@@ -195,10 +219,15 @@ const Otp = ({navigation, route}) => {
                             colors={
                                 otp.join('').length !== 6
                                 ? ['#ccc', '#ccc']
+<<<<<<< HEAD
                                 : ['#FFD700', '#FFA500', '#FF8C00']
                             }
                             start={{x: 0, y: 0}}
                             end={{x: 1, y: 0}}
+=======
+                                : COLORS.gradientButton
+                            }
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                             style={styles.continueBtn}>
                             <Text style={styles.continueText}>CONTINUE</Text>
                         </LinearGradient>
@@ -232,13 +261,21 @@ const styles = StyleSheet.create({
   logoText: {
     fontSize: 24,
     fontWeight: 'semibold',
+<<<<<<< HEAD
     color: 'red',
+=======
+    color: COLORS.button,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     marginTop: 40,
     marginBottom: 10,
     textAlign: 'center',
   },
   logoBold: {
+<<<<<<< HEAD
     color: 'red',
+=======
+    color: COLORS.button,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontWeight: '900',
   },
   card: {
@@ -312,6 +349,7 @@ const styles = StyleSheet.create({
   },
   continueContainer: {
     width: '100%',
+<<<<<<< HEAD
     height: verticalScale(40),
     marginTop: 10,
     marginBottom: 20,
@@ -324,6 +362,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
+=======
+  },
+  continueBtn: {
+    width: '100%',
+    borderRadius: 8,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    marginTop: 12,
+    marginBottom: 0,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   continueText: {
     color: '#fff',

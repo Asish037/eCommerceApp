@@ -16,9 +16,12 @@ import {CartContext} from '../Context/CartContext';
 import {COLORS} from '../Constant/Colors';
 import axios from '../Components/axios';
 import qs from 'qs';
+<<<<<<< HEAD
 import ProductLoader from '../Components/ProductLoader';
 import ProductDetailsSkeleton from '../Components/ProductDetailsSkeleton';
 import ProductDetailsLoader from '../Components/ProductDetailsLoader';
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 
 const {width} = Dimensions.get('window');
@@ -199,6 +202,7 @@ const ProductDetailsScreen = () => {
 
 
   if (isLoading || !productDetails) {
+<<<<<<< HEAD
     if (!productId) {
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.white}}>
@@ -211,6 +215,15 @@ const ProductDetailsScreen = () => {
     
     // Show enhanced loader with text and skeleton for better UX
     return <ProductDetailsLoader />;
+=======
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={{color: COLORS.black}}>
+          {!productId ? 'Invalid product ID' : 'Loading product details...'}
+        </Text>
+      </View>
+    );
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   }
 
   const handleAddToCart = () => {
@@ -343,15 +356,24 @@ const ProductDetailsScreen = () => {
               <Text style={styles.ratingStars}>
                 {renderStars(productDetails.rating)}
               </Text>
+<<<<<<< HEAD
               <Text style={styles.ratingText}>({productDetails.rating}) Rating </Text>
+=======
+              <Text style={styles.ratingText}>({productDetails.rating}) Rating</Text>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
             </View>
               
             </View>
 
             {/* Prices */}
             <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 20, gap: 10}}>
+<<<<<<< HEAD
               <Text style={styles.productPrice}>{formatPrice(productDetails.offerPrice)}</Text>
               <Text style={styles.productOriginalPrice}>{formatPrice(productDetails.price)}</Text>
+=======
+              <Text style={styles.productOriginalPrice}>{formatPrice(productDetails.price)}</Text>
+              <Text style={styles.productPrice}>{formatPrice(productDetails.offerPrice)}</Text>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
             </View>
 
             {/* Size Selection */}
@@ -555,7 +577,11 @@ const styles = StyleSheet.create({
   ratingText: {
     fontSize: 14,
     fontFamily: fonts.regular,
+<<<<<<< HEAD
     color: '#090909ff',
+=======
+    color: '#141414ff',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   selectionSection: {
     marginBottom: 24,

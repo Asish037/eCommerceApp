@@ -6,7 +6,10 @@ import {
   ScrollView,
   TextInput,
   Alert,
+<<<<<<< HEAD
   Platform,
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 } from 'react-native';
 import React, {useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
@@ -275,6 +278,7 @@ const PaymentMethod = ({route}) => {
 
         {/* Dynamic Payment Form */}
         {renderPaymentForm()}
+<<<<<<< HEAD
       </ScrollView>
       
       {/* Bottom Payment Button - Fixed Position */}
@@ -317,6 +321,30 @@ const PaymentMethod = ({route}) => {
           </LinearGradient>
         </TouchableOpacity>
       </View>
+=======
+        
+        {/* Bottom Payment Button */}
+        <View style={styles.bottomContainer}>
+          <TouchableOpacity
+            style={[styles.payButton, isProcessing && styles.payButtonDisabled]}
+            onPress={handlePayment}
+            disabled={isProcessing}>
+            <LinearGradient
+              colors={
+                isProcessing ? ['#393634ff', '#232220ff'] : ['#ff8400ff', '#af5e07ff']
+              }
+              style={styles.payButtonGradient}>
+              <Text style={styles.payButtonText}>
+                {isProcessing ? 'Processing...' : `Pay $${grandTotal}`}
+              </Text>
+              {isProcessing && (
+                <Text style={styles.payButtonSubtext}>Please wait</Text>
+              )}
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
     </LinearGradient>
   );
@@ -327,20 +355,31 @@ export default PaymentMethod;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+<<<<<<< HEAD
     width: '100%',
     height: '100%',
   },
   header: {
     paddingHorizontal: 15,
     paddingTop: Platform.OS === 'ios' ? 20 : 5,
+=======
+  },
+  header: {
+    paddingHorizontal: 15,
+    paddingTop: 5,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   scrollContainer: {
     flex: 1,
   },
   contentContainer: {
     paddingHorizontal: 20,
+<<<<<<< HEAD
     paddingBottom: Platform.OS === 'ios' ? 120 : 100,
     flexGrow: 1,
+=======
+    paddingBottom: 20,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   titleContainer: {
     marginTop: 20,
@@ -350,13 +389,21 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Bold,
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
+<<<<<<< HEAD
     color: COLORS.grey,
+=======
+    color: COLORS.subtext,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Regular,
     textAlign: 'center',
   },
@@ -377,7 +424,11 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 18,
     fontWeight: '600',
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.SemiBold,
     marginBottom: 15,
   },
@@ -389,12 +440,20 @@ const styles = StyleSheet.create({
   },
   summaryLabel: {
     fontSize: 16,
+<<<<<<< HEAD
     color: COLORS.grey,
+=======
+    color: COLORS.subtext,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Regular,
   },
   summaryValue: {
     fontSize: 16,
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Medium,
     fontWeight: '500',
   },
@@ -406,7 +465,11 @@ const styles = StyleSheet.create({
   totalLabel: {
     fontSize: 18,
     fontWeight: '600',
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.SemiBold,
   },
   totalValue: {
@@ -416,7 +479,11 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.Bold,
   },
   selectedMethodCard: {
+<<<<<<< HEAD
     backgroundColor: COLORS.cream,
+=======
+    backgroundColor: COLORS.card,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     borderRadius: 12,
     padding: 16,
     marginBottom: 20,
@@ -425,18 +492,30 @@ const styles = StyleSheet.create({
   },
   selectedMethodLabel: {
     fontSize: 14,
+<<<<<<< HEAD
     color: COLORS.grey,
+=======
+    color: COLORS.subtext,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Regular,
     marginBottom: 4,
   },
   selectedMethodText: {
     fontSize: 16,
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Medium,
     fontWeight: '600',
   },
   paymentFormContainer: {
+<<<<<<< HEAD
     backgroundColor: COLORS.white,
+=======
+    backgroundColor: '#A40606',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     borderRadius: 16,
     padding: 20,
     marginBottom: 20,
@@ -452,7 +531,11 @@ const styles = StyleSheet.create({
   formTitle: {
     fontSize: 20,
     fontWeight: '600',
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.SemiBold,
     marginBottom: 20,
     textAlign: 'center',
@@ -462,7 +545,11 @@ const styles = StyleSheet.create({
   },
   inputLabel: {
     fontSize: 14,
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Medium,
     marginBottom: 8,
     fontWeight: '500',
@@ -474,7 +561,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 14,
     fontSize: 16,
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Regular,
     backgroundColor: COLORS.white,
   },
@@ -491,7 +582,11 @@ const styles = StyleSheet.create({
   },
   optionsTitle: {
     fontSize: 16,
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Medium,
     marginBottom: 12,
     fontWeight: '500',
@@ -510,7 +605,11 @@ const styles = StyleSheet.create({
   },
   upiAppText: {
     fontSize: 12,
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Regular,
     textAlign: 'center',
   },
@@ -524,7 +623,11 @@ const styles = StyleSheet.create({
   },
   codDescription: {
     fontSize: 16,
+<<<<<<< HEAD
     color: COLORS.grey,
+=======
+    color: COLORS.subtext,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Regular,
     textAlign: 'center',
     lineHeight: 24,
@@ -536,18 +639,27 @@ const styles = StyleSheet.create({
   },
   codNotesTitle: {
     fontSize: 16,
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Medium,
     marginBottom: 8,
     fontWeight: '600',
   },
   codNotesText: {
     fontSize: 14,
+<<<<<<< HEAD
     color: COLORS.grey,
+=======
+    color: COLORS.subtext,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Regular,
     marginBottom: 4,
   },
   bottomContainer: {
+<<<<<<< HEAD
     position: 'absolute',
     bottom: 0,
     left: 0,
@@ -565,28 +677,57 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     minHeight: 60,
     zIndex: 1001,
+=======
+    // backgroundColor: COLORS.white,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 30,
+    // shadowColor: COLORS.black,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: -4,
+    // },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 8,
+    // elevation: 10,
+  },
+  payButton: {
+    backgroundColor: COLORS.button,
+    borderRadius: 16,
+    overflow: 'hidden',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   payButtonDisabled: {
     opacity: 0.7,
   },
   payButtonGradient: {
+<<<<<<< HEAD
     width: '100%',
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     paddingVertical: 18,
     paddingHorizontal: 24,
     alignItems: 'center',
     justifyContent: 'center',
+<<<<<<< HEAD
     position: 'relative',
     minHeight: 60,
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   payButtonText: {
     fontSize: 18,
     color: COLORS.white,
     fontFamily: FONTS.Bold,
     fontWeight: 'bold',
+<<<<<<< HEAD
     textAlign: 'center',
     includeFontPadding: false,
     textAlignVertical: 'center',
     letterSpacing: 0.5,
+=======
+    marginBottom: 2,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   payButtonSubtext: {
     fontSize: 14,

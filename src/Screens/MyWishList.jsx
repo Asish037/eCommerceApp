@@ -8,18 +8,29 @@ import {
   TextInput,
   View,
 } from 'react-native';
+<<<<<<< HEAD
 import React, {useState, useEffect, useContext} from 'react';
+=======
+import React, {useState, useEffect} from 'react';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../Components/Header';
 import Tags from '../Components/Tags';
 import WishlistCard from '../Components/WishlistCard';
 import data from '../data/data.json';
 import {useNavigation} from '@react-navigation/native';
+<<<<<<< HEAD
 import {COLORS} from '../Constant/Colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from '../Components/axios';
 import qs from 'qs';
 import { CartContext } from '../Context/CartContext';
+=======
+import { COLORS } from '../Constant/Colors';
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
+import axios from  '../Components/axios';
+import qs from 'qs';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 const MyWishList = () => {
   const [products, setProducts] = useState([]);
@@ -28,6 +39,7 @@ const MyWishList = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const navigation = useNavigation();
 
+<<<<<<< HEAD
 
   const { user, token, removeFromWishlist: removeFromWishlistContext } = useContext(CartContext);
 
@@ -52,6 +64,18 @@ const MyWishList = () => {
       console.log('No user or user ID found in context');
     }
   }, [user]);
+=======
+  useEffect(() => {
+    const loadWishlist = async () => {
+      const userId = await AsyncStorage.getItem('userId');
+      if (userId) {
+        fetchLikeProducts(userId);
+      }
+    };
+    loadWishlist();
+  }, []);
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
   const normalizeWishlistItems = (wishlistItems = []) => {
     return wishlistItems.map(prod => ({
@@ -66,10 +90,18 @@ const MyWishList = () => {
     }));
   };
 
+<<<<<<< HEAD
   const fetchLikeProducts = async userId => {
     try {
       setLoading(true);
       const token = await AsyncStorage.getItem('userToken');
+=======
+
+  const fetchLikeProducts = async (userId) => {
+    try {
+      setLoading(true);
+      const token = await AsyncStorage.getItem('token');
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       if (!token) {
         console.log('No token found');
         Alert.alert('Error', 'No auth token found. Please log in again.');
@@ -78,6 +110,7 @@ const MyWishList = () => {
 
       const config = {
         method: 'get',
+<<<<<<< HEAD
         url: `/get-wishlist?userId=${userId}`,
         headers: {
           Accept: 'application/json',
@@ -85,6 +118,14 @@ const MyWishList = () => {
           Authorization: `Bearer ${token}`,
         },
         // data: {userId},
+=======
+        url: `/get-wishlist?userId=${1}`,
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       };
 
       const response = await axios(config);
@@ -97,6 +138,10 @@ const MyWishList = () => {
         setProducts([]);
         setFilteredProducts([]);
       }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     } catch (error) {
       console.error('Error in fetchLikeProducts:', error);
     } finally {
@@ -104,6 +149,7 @@ const MyWishList = () => {
     }
   };
 
+<<<<<<< HEAD
   // const fetchAddLikeProducts = async (userId, productId) => {
   //   try {
   //     setLoading(true);
@@ -155,11 +201,51 @@ const MyWishList = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+=======
+  useEffect(() => {
+    const loadWishlist = async () => {
+      const userId = await AsyncStorage.getItem('userId');
+      console.log(" Loaded userId from AsyncStorage:", userId);
+      if (userId) {
+        fetchLikeProducts(userId);
+      } else {
+        console.log(" No userId found in AsyncStorage");
+      }
+    };
+    loadWishlist();
+  }, []);
+
+
+
+  const fetchAddLikeProducts = async (userId, productId) => {
+    try {
+      setLoading(true);
+      const token = await AsyncStorage.getItem('token');
+      if (!token) {
+        console.log('No token found');
+        Alert.alert('Error', 'No auth token found. Please log in again.');
+        return;
+      }
+
+      const config = {
+        method: 'post',
+        url: `/add-wishlist`,
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        data: { userId, productId },  
+      };
+
+      const response = await axios(config);
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
       if (response.data?.data?.wishlist_items) {
         const items = normalizeWishlistItems(response.data.data.wishlist_items);
         setProducts(items);
         setFilteredProducts(items);
+<<<<<<< HEAD
         removeFromWishlistContext(item.productId);
       } else {
         // fallback: remove locally
@@ -169,13 +255,72 @@ const MyWishList = () => {
       }
     } catch (error) {
       console.error("Error removing from wishlist:", error.response?.data || error.message);
+=======
+      }
+
+    } catch (error) {
+      console.error('Error in fetchAddLikeProducts:', error);
+    } finally {
+      setLoading(false);
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     }
   };
 
 
+<<<<<<< HEAD
   const handleProductDetails = item => {
     console.log('hello==' + JSON.stringify(item));
     navigation.navigate('PRODUCT_DETAILS', {productId: item.id});
+=======
+  const removeFromWishlist = async (item) => {
+    try {
+      setLoading(true);
+      const token = await AsyncStorage.getItem('token');
+      const userId = await AsyncStorage.getItem('userId'); 
+      if (!token || !userId) {
+        console.log('No token or userId found');
+        Alert.alert('Error', 'No auth token found. Please log in again.');
+        return;
+      }
+
+      const config = {
+        method: 'delete',
+        url: `/remove-wishlist?userId=${userId}&productId=${item.productId}`,
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        data: {userId, productId: item.productId},
+      };
+
+      const response = await axios(config);
+
+      if (response.data?.data?.wishlist_items) {
+        // backend returns updated wishlist
+        const items = normalizeWishlistItems(response.data.data.wishlist_items);
+        setProducts(items);
+        setFilteredProducts(items);
+      } else {
+        // fallback: remove locally
+        setProducts(prev => prev.filter(prod => prod.id !== item.id));
+        setFilteredProducts(prev => prev.filter(prod => prod.id !== item.id));
+      }
+
+    } catch (error) {
+      console.error('Error in removeFromWishlist:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+
+
+  const handleProductDetails = item => {
+    console.log('hello==' + JSON.stringify(item));
+    navigation.navigate('PRODUCT_DETAILS', { productId: item.id });
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   };
 
   const handleSearchChange = searchText => {
@@ -183,12 +328,17 @@ const MyWishList = () => {
       setFilteredProducts(products);
     } else {
       const filtered = products.filter(product =>
+<<<<<<< HEAD
         product.title.toLowerCase().includes(searchText.toLowerCase()),
+=======
+        product.title.toLowerCase().includes(searchText.toLowerCase())
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       );
       setFilteredProducts(filtered);
     }
   };
 
+<<<<<<< HEAD
   const toggleFavorite = async item => {
     
     await removeFromWishlist(item);
@@ -209,12 +359,38 @@ const MyWishList = () => {
     // }
   };
 
+=======
+
+  const toggleFavorite = async (item) => {
+    try {
+      const userId = await AsyncStorage.getItem('userId'); // make sure you save this in AsyncStorage
+      if (!userId) return;
+
+      if (item.isFavorite) {
+        // already in wishlist → remove it
+        removeFromWishlist(item);
+      } else {
+        // not in wishlist → add it
+        fetchAddLikeProducts(userId, item.productId);
+      }
+    } catch (error) {
+      console.error('Error in toggleFavorite:', error);
+    }
+  };
+
+
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   // const removeFromWishlist = async (item) => {
   //   const userId = await AsyncStorage.getItem('userId'); // adjust if you store it differently
   //   if (!userId) return;
 
   //   fetchRemoveProducts(item, userId);
   // };
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
   return (
     <LinearGradient colors={COLORS.gradient} style={styles.container}>
@@ -226,12 +402,16 @@ const MyWishList = () => {
       <FlatList
         data={filteredProducts}
         numColumns={2}
+<<<<<<< HEAD
         columnWrapperStyle={styles.row}
         contentContainerStyle={styles.listContainer}
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
           <WishlistCard
             item={item}
+
             handleProductClick={handleProductDetails}
             toggleFavorite={toggleFavorite}
             removeFromWishlist={removeFromWishlist}

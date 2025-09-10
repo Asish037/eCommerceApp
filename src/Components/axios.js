@@ -1,11 +1,15 @@
 //import axios from 'axios';
 import axios from 'axios';
+<<<<<<< HEAD
 import AsyncStorage from '@react-native-async-storage/async-storage';
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 const instance = axios.create({
   baseURL: 'https://ecom.kussoft.net/api/',
 });
 
+<<<<<<< HEAD
 // Request interceptor to add auth token to all requests
 instance.interceptors.request.use(
   async (config) => {
@@ -44,4 +48,6 @@ instance.interceptors.response.use(
   }
 );
 
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 export default instance;

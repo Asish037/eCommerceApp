@@ -2,6 +2,10 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useContext} from 'react';
 import {fonts} from '../utils/fonts';
 import {CartContext} from '../Context/CartContext';
+<<<<<<< HEAD
+=======
+import { COLORS } from '../Constant/Colors';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 const ProductCard = ({
   item,
@@ -17,7 +21,12 @@ const ProductCard = ({
   // Truncate description to 4 words
   const truncatedDescription =
     item.description?.split(' ').slice(0, 4).join(' ') + '...' ||
+<<<<<<< HEAD
     'No description available...';
+=======
+    'Classic premier brand...';
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
   // Format rating display
   const renderStars = rating => {
@@ -128,10 +137,17 @@ export default ProductCard;
 
 const styles = StyleSheet.create({
   container: {
+<<<<<<< HEAD
     flex: 1,
     marginHorizontal: 10,
     marginVertical: 10,
     backgroundColor: '#FFFFFF',
+=======
+    width: '45%', // Fixed width instead of flex: 1
+    marginHorizontal: 8,
+    marginVertical: 10,
+    backgroundColor: COLORS.card,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     borderRadius: 20,
     elevation: 3,
     shadowColor: '#000',
@@ -141,6 +157,10 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
+<<<<<<< HEAD
+=======
+    overflow: 'hidden',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   coverImage: {
     height: 200,
@@ -165,6 +185,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: fonts.medium,
     fontWeight: '700',
+<<<<<<< HEAD
     color: '#E94560',
     marginBottom: 6,
   },
@@ -172,6 +193,15 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: fonts.regular,
     color: '#666666',
+=======
+    color: COLORS.button,
+    marginBottom: 6,
+  },
+  description: {
+    fontSize: 13,
+    fontFamily: fonts.regular,
+    color: '#000000ff',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     marginBottom: 8,
     lineHeight: 16,
   },
@@ -183,13 +213,21 @@ const styles = StyleSheet.create({
   rating: {
     fontSize: 12,
     fontFamily: fonts.regular,
+<<<<<<< HEAD
     color: '#FFA500',
+=======
+    color: COLORS.button,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     marginRight: 4,
   },
   ratingCount: {
     fontSize: 10,
     fontFamily: fonts.regular,
+<<<<<<< HEAD
     color: '#999999',
+=======
+    color: COLORS.button,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   cartButton: {
     flexDirection: 'row',
@@ -203,12 +241,21 @@ const styles = StyleSheet.create({
   cartButtonDefault: {
     backgroundColor: '#FFE4E6',
     borderWidth: 1,
+<<<<<<< HEAD
     borderColor: '#E94560',
   },
   cartButtonAdded: {
     backgroundColor: '#E94560',
     borderWidth: 1,
     borderColor: '#E94560',
+=======
+    borderColor: COLORS.button,
+  },
+  cartButtonAdded: {
+    backgroundColor: COLORS.button,
+    borderWidth: 1,
+    borderColor: COLORS.button,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   cartIcon: {
     width: 16,
@@ -216,7 +263,11 @@ const styles = StyleSheet.create({
     marginRight: 6,
   },
   cartIconDefault: {
+<<<<<<< HEAD
     tintColor: '#E94560',
+=======
+    tintColor: COLORS.button,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   cartIconAdded: {
     tintColor: '#FFFFFF',
@@ -227,7 +278,11 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   cartButtonTextDefault: {
+<<<<<<< HEAD
     color: '#E94560',
+=======
+    color: COLORS.button,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   cartButtonTextAdded: {
     color: '#FFFFFF',
@@ -267,10 +322,18 @@ const styles = StyleSheet.create({
   faviorate: {
     height: 20,
     width: 20,
+<<<<<<< HEAD
+=======
+    tintColor: COLORS.button,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   deleteIcon: {
     height: 20,
     width: 20,
+<<<<<<< HEAD
     tintColor: '#E94560', // Red color for delete icon
+=======
+    tintColor: COLORS.button, // Red color for delete icon
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
 });

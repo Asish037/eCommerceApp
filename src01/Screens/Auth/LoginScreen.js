@@ -215,19 +215,28 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   gradientButton: {
+<<<<<<< HEAD
     height: Platform.OS === 'ios' ? moderateScale(50) : 36,
+=======
+    height: 36,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     borderRadius: 15,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
   buttonText: {
+<<<<<<< HEAD
     fontSize: Platform.OS === 'ios' ? moderateScale(16) : 14,
     fontWeight: 'bold',
     color: Platform.OS === 'ios' ? '#FFFFFF' : undefined,
     textAlign: 'center',
     includeFontPadding: Platform.OS === 'ios' ? false : undefined,
     textAlignVertical: Platform.OS === 'ios' ? 'center' : undefined,
+=======
+    fontSize: 14,
+    fontWeight: 'bold',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   signInPrompt: {
     color: COLORS.button,

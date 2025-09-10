@@ -13,11 +13,14 @@ import model5 from '../../assets/model5.jpg';
 import {COLORS} from '../../Constant/Colors';
 import {FONTS} from '../../Constant/Font';
 import { verticalScale } from '../../PixelRatio';
+<<<<<<< HEAD
 import axios from '../../Components/axios';
 import qs from 'qs';
 import ToastMessage from 'react-native-toast-message';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CartContext } from '../../Context/CartContext';
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 const Otp = ({navigation, route}) => {
     const {user_id, phone} = route.params;

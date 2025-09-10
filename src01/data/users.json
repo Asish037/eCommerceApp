@@ -5570,7 +5570,11 @@
       "cardNumber": "9459153361622170",
       "cardType": "Interac",
       "currency": "SEK",
+<<<<<<< HEAD
       "iban": "24RO2TShopnovaWQRNS73ZV0GVVCFP"
+=======
+      "iban": "24RO2TMJWQRNS73ZV0GVVCFP"
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     },
     "company": {
       "department": "Business Development",
@@ -6830,7 +6834,11 @@
       "cardNumber": "9676524532044930",
       "cardType": "BC Card",
       "currency": "EUR",
+<<<<<<< HEAD
       "iban": "2A1T6MF8TLShopnovaG30DJW6VF4QP"
+=======
+      "iban": "2A1T6MF8TLMJG30DJW6VF4QP"
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     },
     "company": {
       "department": "Training",
@@ -8160,7 +8168,11 @@
       "cardNumber": "5739347905804766",
       "cardType": "Visa",
       "currency": "BRL",
+<<<<<<< HEAD
       "iban": "V8ZShopnovaUYDG8C4703PJR3MVIGU"
+=======
+      "iban": "V8ZMJUYDG8C4703PJR3MVIGU"
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     },
     "company": {
       "department": "Services",
@@ -13690,7 +13702,11 @@
       "cardNumber": "8955473995911969",
       "cardType": "RuPay International",
       "currency": "TRY",
+<<<<<<< HEAD
       "iban": "69ShopnovaWXZ02DOGPS46JCZC7MSM"
+=======
+      "iban": "69MJWXZ02DOGPS46JCZC7MSM"
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     },
     "company": {
       "department": "Services",

@@ -1,5 +1,9 @@
 import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import messaging from '@react-native-firebase/messaging';
+<<<<<<< HEAD
+=======
+import notifee, { AndroidImportance } from '@notifee/react-native';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform, Alert } from 'react-native';
  
@@ -32,6 +36,7 @@ export const requestNotificationPermission = async () => {
       return;
     }
 
+<<<<<<< HEAD
     // Register for remote messages (required for iOS)
     if (Platform.OS === 'ios') {
       await messaging().registerDeviceForRemoteMessages();
@@ -61,6 +66,19 @@ export const requestNotificationPermission = async () => {
     }
 
     // Notification channel is already created in MainApplication.kt for Android
+=======
+    const fcmToken = await messaging().getToken();
+    if (fcmToken) {
+      console.log('📲 FCM Token:', fcmToken);
+      await AsyncStorage.setItem('fcmToken', fcmToken);
+    }
+
+    await notifee.createChannel({
+      id: 'road-side',
+      name: 'RoadSide Notifications',
+      importance: AndroidImportance.HIGH,
+    });
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
   } catch (error) {
     console.error('❌ Notification permission error:', error);

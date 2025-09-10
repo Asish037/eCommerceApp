@@ -1,6 +1,10 @@
 import {StyleSheet} from 'react-native';
 
+<<<<<<< HEAD
 import {COLORS} from '../Constant/Colors';
+=======
+import colors from '../common/colors';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 /**
  * mr - margin right
@@ -39,7 +43,11 @@ export const GenericStyles = StyleSheet.create({
     borderWidth: 0,
   },
   whiteBackgroundContainer: {
+<<<<<<< HEAD
     backgroundColor: COLORS.white,
+=======
+    backgroundColor: colors.WHITE,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     flex: 1,
   },
   bold: {
@@ -52,10 +60,17 @@ export const GenericStyles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   positiveText: {
+<<<<<<< HEAD
     color: COLORS.green,
   },
   negativeText: {
     color: COLORS.red,
+=======
+    color: colors.GREEN,
+  },
+  negativeText: {
+    color: colors.RED,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   centerAlignedText: {
     textAlign: 'center',
@@ -66,34 +81,54 @@ export const GenericStyles = StyleSheet.create({
   },
   highlightedInfoText: {
     fontSize: 12,
+<<<<<<< HEAD
     backgroundColor: COLORS.lightRed,
+=======
+    backgroundColor: colors.LIGHT_RED,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     padding: 8,
     borderRadius: 2,
   },
   // use CustomCard when background is non-white else use this style
   card: {
+<<<<<<< HEAD
     borderColor: COLORS.silver,
+=======
+    borderColor: colors.SILVER,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     borderTopWidth: 1,
     borderRightWidth: 1,
     borderBottomWidth: 2,
     borderLeftWidth: 1,
     borderRadius: 5,
     padding: 12,
+<<<<<<< HEAD
     backgroundColor: COLORS.white,
+=======
+    backgroundColor: colors.WHITE,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   underline: {
     textDecorationLine: 'underline',
   },
   greyBar: {
     height: 1,
+<<<<<<< HEAD
     backgroundColor: COLORS.silver,
+=======
+    backgroundColor: colors.SILVER,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   p16: {
     padding: 16,
   },
   navigationHeaderBorder: {
     borderBottomWidth: 1,
+<<<<<<< HEAD
     borderBottomColor: COLORS.silver,
+=======
+    borderBottomColor: colors.SILVER,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   rightAligned: {
     justifyContent: 'flex-end',

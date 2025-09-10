@@ -17,7 +17,10 @@ import AccountScreen from '../Screens/AccountScreen';
 import PaymentScreen from '../Screens/PaymentScreen';
 import AddressScreen from '../Screens/AddressScreen';
 import MyWishList from '../Screens/MyWishList';
+<<<<<<< HEAD
 import { COLORS } from '../Constant/Colors';
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -45,7 +48,11 @@ const CartTabIcon = ({focused, size}) => {
             bottom: 22,
             height: 14,
             width: 14,
+<<<<<<< HEAD
             backgroundColor: COLORS.black,
+=======
+            backgroundColor: '#E94560',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
             borderRadius: 7,
             alignItems: 'center',
             justifyContent: 'center',

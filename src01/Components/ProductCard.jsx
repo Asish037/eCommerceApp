@@ -2,6 +2,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useContext} from 'react';
 import {fonts} from '../utils/fonts';
 import {CartContext} from '../Context/CartContext';
+<<<<<<< HEAD
 import {COLORS} from '../Constant/Colors';
 import { useRoute } from '@react-navigation/native';
 // import {useTheme} from '../Context/ThemeContext';
@@ -237,6 +238,19 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
   // Check if item is already in cart
   const isInCart = cartItems.some(cartItem => cartItem.id === item.id);
 
+=======
+import { COLORS } from '../Constant/Colors';
+import axios from 'axios';
+
+
+const ProductCard = ({item, handleProductClick, toggleFavorite}) => {
+  const {cartItems, addToCartItem} = useContext(CartContext);
+
+  // Check if item is already in cart
+  const isInCart = cartItems.some(cartItem => cartItem.id === item.id);
+
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   // Truncate description to 4 words
   const truncatedDescription =
     item.description?.split(' ').slice(0, 4).join(' ') + '...' ||
@@ -262,6 +276,7 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
       addToCartItem(item);
     }
   };
+<<<<<<< HEAD
 
   // console.log('ProductCard image URL:', item.img || item.image);
 
@@ -325,12 +340,16 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
   }
 
   // Original full card layout
+=======
+  
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={() => {
         handleProductClick(item);
       }}>
+<<<<<<< HEAD
       <Image 
         source={
           (item.img || item.image) 
@@ -354,6 +373,15 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
           <Text style={styles.productOriginalPrice}>{(item.price)}</Text>
           <Text style={styles.productPrice}>{(item.offer_price)}</Text>
         </View>
+=======
+      <Image source={{uri: item.image}} style={styles.coverImage} />
+
+      <View style={styles.contentContainer}>
+        <Text style={styles.title} numberOfLines={2}>
+          {item.title}
+        </Text>
+        <Text style={styles.price}>${item.price}</Text>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
         <Text style={styles.description} numberOfLines={2}>
           {truncatedDescription}
         </Text>
@@ -421,3 +449,139 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
 };
 
 export default ProductCard;
+<<<<<<< HEAD
+=======
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginVertical: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    marginHorizontal: 10,
+    backgroundColor: COLORS.card,
+    borderRadius: 20,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    overflow: 'hidden',
+    // height: 400
+  },
+  coverImage: {
+    height: 200,
+    width: '100%',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    resizeMode: 'cover',
+  },
+  contentContainer: {
+    padding: 10,
+    paddingBottom: 4,
+  },
+  title: {
+    fontSize: 16,
+    fontFamily: fonts.medium,
+    fontWeight: '600',
+    color: '#2C2C2C',
+    marginBottom: 4,
+    lineHeight: 20,
+  },
+  price: {
+    fontSize: 18,
+    fontFamily: fonts.medium,
+    fontWeight: '700',
+    color: COLORS.button,
+    marginBottom: 6,
+  },
+  description: {
+    fontSize: 12,
+    fontFamily: fonts.regular,
+    color: '#393939ff',
+    marginBottom: 8,
+    lineHeight: 16,
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  rating: {
+    fontSize: 12,
+    fontFamily: fonts.regular,
+    color: COLORS.button,
+    marginRight: 4,
+  },
+  ratingCount: {
+    fontSize: 10,
+    fontFamily: fonts.regular,
+    color: '#999999',
+  },
+  cartButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 12,
+    marginTop: 4,
+  },
+  cartButtonDefault: {
+    backgroundColor: '#FFE4E6',
+    borderWidth: 1,
+    borderColor: COLORS.button,
+  },
+  cartButtonAdded: {
+    backgroundColor: COLORS.button,
+    borderWidth: 1,
+    borderColor: COLORS.button,
+  },
+  cartIcon: {
+    width: 16,
+    height: 16,
+    marginRight: 6,
+  },
+  cartIconDefault: {
+    tintColor: COLORS.icon,
+  },
+  cartIconAdded: {
+    tintColor: '#FFFFFF',
+  },
+  cartButtonText: {
+    fontSize: 12,
+    fontFamily: fonts.medium,
+    fontWeight: '600',
+  },
+  cartButtonTextDefault: {
+    color: COLORS.button,
+  },
+  cartButtonTextAdded: {
+    color: '#FFFFFF',
+  },
+  likeContainer: {
+    position: 'absolute',
+    padding: 8,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 20,
+    right: 12,
+    top: 12,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+  },
+  faviorate: {
+    height: 20,
+    width: 20,
+    tintColor: COLORS.button,
+  },
+});
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, {useEffect, useState} from 'react';
+=======
+import React, {useEffect} from 'react';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import {
   Modal,
   Pressable,
@@ -8,7 +12,10 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+<<<<<<< HEAD
   Platform,
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 } from 'react-native';
 import GradientButton from '../../Components/Button/GradientButton';
 import ImageWithTitle from '../../Components/Header/ImageWithTitle';
@@ -18,7 +25,10 @@ import {moderateScale, verticalScale} from '../../PixelRatio';
 import moment from 'moment';
 //import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Toast from 'react-native-simple-toast';
+<<<<<<< HEAD
 import ToastMessage from 'react-native-toast-message';
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 // import Picker from '../../Components/DropDownPicker/Picker';
 import CountryCityModal from '../../Components/Modal/CountryCityModal';
 import {ETHNCITY_TYPE, GENDER} from '../../Constant/DATA';
@@ -30,10 +40,13 @@ import model4 from '../../assets/model9.jpg';
 import CustomInput from '../../Components/CustomInput';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+<<<<<<< HEAD
 import axios from '../../Components/axios';
 import qs from 'qs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { requestNotificationPermission } from '../../utils/requestNotificationPermission';
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 const datet = new Date();
 
@@ -47,6 +60,7 @@ export default function Register() {
   const [name, setName] = React.useState('');
   const [phone, setPhone] = React.useState('');
   const [error, setError] = React.useState('');
+<<<<<<< HEAD
   const [fcmToken, setFcmToken] = React.useState('');
   const [select_code, setSelectCode] = useState('91');
   // const [email, setEmail] = React.useState('');
@@ -87,10 +101,21 @@ export default function Register() {
       setError('Please enter your name.');
       return;
     }
+=======
+  const [isLoading, setIsLoading] = React.useState(false);
+  // const [email, setEmail] = React.useState('');
+  // const [password, setPassword] = React.useState('');
+
+  // const []
+
+  // Define the registerUser function to handle registration logic
+  const registerUser = () => {
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     if (!phone || phone.length < 9) {
       setError('Please enter a valid mobile number (at least 9 digits).');
       return;
     }
+<<<<<<< HEAD
     
     setError('');
     let data = {
@@ -164,6 +189,51 @@ export default function Register() {
     }
   };
 
+=======
+    if (!name) {
+      setError('Please enter your name.');
+      return;
+    }
+    setError('');
+    let data = {
+      name: name,
+      phone: phone,
+    };
+    navigation.navigate('Otp', {data});
+  };
+
+  /*
+  const handleloginRegister = async () => {
+
+    if (name === '') {
+      setError('Please enter your name.');
+      return;
+    }
+
+    if (!phone || phone.length < 9) {
+      setError('Please enter a valid mobile number (at least 9 digits).');
+      return;
+    }
+
+    setError(''); 
+    setIsLoading(true);
+
+    try{
+      const response = await fetch('https://your-api-endpoint.com/register', {
+        method: 'POST',
+        headers: {)
+    
+    }catch{}
+  
+  
+  
+  */
+
+
+
+
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   return (
     <View style={{flex: 1}}>
       <ImageBackground
@@ -178,10 +248,14 @@ export default function Register() {
         </View>
         {/* Login box at bottom, not full height */}
         <View style={styles.loginBoxOuter}>
+<<<<<<< HEAD
           <ScrollView 
             style={styles.loginBox}
             contentContainerStyle={styles.loginBoxContent}
             showsVerticalScrollIndicator={false}>
+=======
+          <View style={styles.loginBox}>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
             <Text style={styles.loginTitle}>Login / Signup</Text>
             {/* <Text style={styles.loginSubtitle}>
               Join us now to be a part of StyleON family.
@@ -202,7 +276,11 @@ export default function Register() {
             <View style={styles.inputRow}>
               <View style={styles.countryCodeBox}>
                 <Text style={styles.flag}>🇮🇳</Text>
+<<<<<<< HEAD
                 <Text style={styles.countryCode}>+{select_code}</Text>
+=======
+                <Text style={styles.countryCode}>+91</Text>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
               </View>
               <TextInput
                 style={styles.mobileInput}
@@ -219,17 +297,27 @@ export default function Register() {
               style={styles.continueContainer}
               onPress={registerUser}>
               <LinearGradient
+<<<<<<< HEAD
                 colors={['#FFD700', '#FFA500', '#FF8C00']}
                 start={{x: 0, y: 0}}
                 end={{x: 1, y: 0}}
+=======
+                colors={COLORS.gradientButton}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                 style={styles.continueBtn}>
                 <Text style={styles.continueText}>CONTINUE</Text>
               </LinearGradient>
             </TouchableOpacity>
+<<<<<<< HEAD
           </ScrollView>
         </View>
       </ImageBackground>
       <ToastMessage />
+=======
+          </View>
+        </View>
+      </ImageBackground>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     </View>
   );
 }
@@ -263,18 +351,31 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     position: 'absolute',
+<<<<<<< HEAD
     top: Platform.OS === 'ios' ? 40 : 30,
     left: Platform.OS === 'ios' ? 18 : 10,
+=======
+    top: 32,
+    left: 18,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     zIndex: 10,
   },
   logoText: {
     fontSize: 22,
     fontWeight: 'semibold',
+<<<<<<< HEAD
     color: 'red',
     letterSpacing: 1,
   },
   logoBold: {
     color: 'red',
+=======
+    color: COLORS.button,
+    letterSpacing: 1,
+  },
+  logoBold: {
+    color: COLORS.button,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontWeight: '900',
   },
   loginBoxOuter: {
@@ -295,6 +396,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
     paddingTop: 18,
     paddingBottom: 32,
+<<<<<<< HEAD
+=======
+    alignItems: 'flex-start',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     shadowColor: '#000',
     shadowOffset: {width: 0, height: -2},
     shadowOpacity: 0.08,
@@ -303,10 +408,13 @@ const styles = StyleSheet.create({
     minHeight: 180,
     marginBottom: 0,
   },
+<<<<<<< HEAD
   loginBoxContent: {
     flexGrow: 1,
     alignItems: 'flex-start',
   },
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   loginTitle: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -355,6 +463,7 @@ const styles = StyleSheet.create({
   },
   continueContainer: {
     width: '100%',
+<<<<<<< HEAD
     height: verticalScale(40),
     marginTop: 10,
     marginBottom: 20,
@@ -367,15 +476,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
+=======
+  },
+  continueBtn: {
+    width: '100%',
+    borderRadius: 8,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    marginTop: 12,
+    marginBottom: 0,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   continueText: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
     letterSpacing: 1,
+<<<<<<< HEAD
     textAlign: 'center',
     includeFontPadding: false,
     textAlignVertical: 'center',
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   errorText: {
     color: 'red',

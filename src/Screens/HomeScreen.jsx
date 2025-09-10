@@ -8,13 +8,18 @@ import {
   View,
   Alert,
 } from 'react-native';
+<<<<<<< HEAD
 import React, {useState, useEffect, useContext} from 'react';
+=======
+import React, {useState, useEffect} from 'react';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../Components/Header';
 import Tags from '../Components/Tags';
 import ProductCard from '../Components/ProductCard';
 import data from '../data/data.json';
 import {useNavigation} from '@react-navigation/native';
+<<<<<<< HEAD
 import sale from '../assets/sale2.jpeg';
 import backgroundSlider from '../assets/backgroundSlider.png';
 import { COLORS } from '../Constant/Colors';
@@ -24,10 +29,19 @@ import axios from '../Components/axios';
 import qs from 'qs';
 import AppLoader from '../Components/AppLoader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+=======
+// import sale from '../assets/sale2.jpeg';
+import download from '../assets/download.jpeg';
+import { COLORS } from '../Constant/Colors';
+// import { useTheme } from '../Context/ThemeContext';
+import axios from '../Components/axios';
+import qs from 'qs';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 const HomeScreen = () => {
   // const [products, setProducts] = useState(data.products);
   const [products, setProducts] = useState([]);
+<<<<<<< HEAD
   const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
   // const {getThemeColors} = useTheme();
@@ -35,6 +49,13 @@ const HomeScreen = () => {
     // const { userData } = useContext(CartContext);
     const {user, token} = useContext(CartContext);
     const { wishlist, isFavorite, addToWishlist, removeFromWishlist } = useContext(CartContext);
+=======
+  const [isLoading, setIsLoading] = useState(false);
+  const navigation = useNavigation();
+  // const {getThemeColors} = useTheme();
+  // const themeColors = getThemeColors();
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   let productList = {
     method: 'GET',
     url: 'product-list',
@@ -43,6 +64,46 @@ const HomeScreen = () => {
       'Content-Type': 'application/json',
     },
     data: qs.stringify({}),
+<<<<<<< HEAD
+=======
+  };
+
+  const fetchProducts = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios(productList);
+      const product = response.data.data.map((item)=>{
+        return {
+          id: item.id,
+          title: item.name,
+          price: item.price,
+          offer_price: item.offer_price,
+          description: item.description,
+          image: item.img,
+
+          // rating: {rate: 0 , count: 0},
+          isFavorite: false,
+        };
+      });
+      setProducts(product);
+
+      console.log('Products fetched:', response.data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+
+  const handleProductDetails = item => {
+    // HomeScreen
+    navigation.navigate('PRODUCT_DETAILS', { productId: item.id });
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   };
 
   const fetchProducts = async () => {
@@ -72,6 +133,7 @@ const HomeScreen = () => {
     }
   };
 
+<<<<<<< HEAD
  
   useEffect(() => {
     fetchProducts();
@@ -181,22 +243,39 @@ const HomeScreen = () => {
  
   if (isLoading) {
     return <AppLoader message="Loading products..." />;
+=======
+  if (isLoading) {
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={{color: COLORS.black}}>Loading products...</Text>
+      </View>
+    );
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   }
 
   return (
     <LinearGradient colors={COLORS.gradient} style={styles.container}>
       <Header />
 
+<<<<<<< HEAD
+=======
+      {/* <Text style={styles.headingText}>Trending</Text> */}
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       <FlatList
         style={styles.flatList}
         contentContainerStyle={styles.flatListContent}
         ListHeaderComponent={
           <>
+<<<<<<< HEAD
             <ImageBackground 
               source={backgroundSlider} 
               style={styles.ImageBackground}
               resizeMode="contain"
             >
+=======
+            <ImageBackground source={download} style={styles.ImageBackground}>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
               {/* <View style={styles.textContainer}>
                 <Text style={styles.headerTitleMain}>Limited Time</Text>
                 <Text style={styles.headerTitleSub}>OFFER</Text>
@@ -227,7 +306,10 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: '100%',
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   ImageBackground: {
     height: 200,
@@ -235,7 +317,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 20,
+<<<<<<< HEAD
     // marginTop: 1,
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   headingText: {
     fontSize: 28,

@@ -3,8 +3,12 @@
 export const COLORS = {
     theme: '#DB9BAA',
     //button: '#E94560',
+<<<<<<< HEAD
     //button: '#FFC000',
     button: '#f54a00',
+=======
+    button: '#FFC000',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     lightbutton: '#FFFDD0',
     bottomTab: '#151822',
     sbutton: '#aab29d',
@@ -19,11 +23,17 @@ export const COLORS = {
     orange: 'orange',
     liteBlack: '#0e293547',
     //gradient: ['#e3e3e3ff', '#c3adb1ff'],
+<<<<<<< HEAD
    // gradient: ['#FFD700', '#FFA500', '#FF8C00'],
     gradient: ['#fafafa', '#fdfdfd', '#fefefe'],
     //gradient: ['#FFFFF0','#F0E68C', '#ffc107'],
    // gradientButton: ['#F4BB44', '#FFDB58'],
     gradientButton: ['#f54a00', '#F99266'],
+=======
+    gradient: ['#FFD700', '#FFA500', '#FF8C00'],
+    //gradient: ['#FFFFF0','#F0E68C', '#ffc107'],
+    gradientButton: ['#F4BB44', '#FFDB58'],
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     //gradientButton: ['#d97979ff', '#E94560'],
     pink: '#F4ADBD',
     grey: '#4e4e4eff',

@@ -4,7 +4,10 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+<<<<<<< HEAD
   Platform,
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 } from 'react-native';
 import React, {useState} from 'react';
 import Header from '../Components/Header';
@@ -155,6 +158,7 @@ const PaymentScreen = () => {
 
       {/* Bottom Action Button */}
       <View style={styles.bottomSection}>
+<<<<<<< HEAD
         <TouchableOpacity
           style={styles.payButton}
           onPress={() => {
@@ -171,6 +175,26 @@ const PaymentScreen = () => {
             Pay ${parseFloat(total).toFixed(2)}
           </Text>
         </TouchableOpacity>
+=======
+        <View style={styles.payButton}>
+          <TouchableOpacity
+            style={styles.payButtonTouchable}
+            onPress={() => {
+              // Handle payment processing
+              navigation.navigate('ConfirmOrder', {
+                selectedPaymentMethod,
+                total,
+                cartItems,
+              });
+              console.log('Processing payment with:', selectedPaymentMethod);
+              // You can add payment processing logic here
+            }}>
+            <Text style={styles.payButtonText}>
+              Pay ${parseFloat(total).toFixed(2)}
+            </Text>
+          </TouchableOpacity>
+        </View>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       </View>
     </LinearGradient>
   );
@@ -181,6 +205,7 @@ export default PaymentScreen;
 const styles = StyleSheet.create({
   gradientContainer: {
     flex: 1,
+<<<<<<< HEAD
     width: '100%',
     height: '100%',
   },
@@ -193,24 +218,47 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS === 'ios' ? 20 : 10,
     marginBottom: 20,
     paddingHorizontal: 4,
+=======
+    padding: 10,
+  },
+  content: {
+    flex: 1,
+    paddingHorizontal: 10,
+  },
+  headerSection: {
+    marginTop: 10,
+    marginBottom: 15,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   screenTitle: {
     fontSize: 25,
     fontWeight: 'bold',
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Bold,
     marginBottom: 5,
   },
   screenSubtitle: {
     fontSize: 14,
     // color: COLORS.grey,
+<<<<<<< HEAD
     color: '#2c2c2c',
+=======
+    color: COLORS.subtext,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Regular,
   },
 
   // Order Summary Card
   summaryCard: {
+<<<<<<< HEAD
     backgroundColor: COLORS.white,
+=======
+    backgroundColor: COLORS.card,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     borderRadius: 15,
     padding: 20,
     marginBottom: 25,
@@ -226,7 +274,11 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 20,
     fontWeight: 'bold',
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Bold,
     marginBottom: 15,
   },
@@ -238,12 +290,20 @@ const styles = StyleSheet.create({
   },
   summaryLabel: {
     fontSize: 16,
+<<<<<<< HEAD
     color: COLORS.grey,
+=======
+    color: COLORS.subtext,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Regular,
   },
   summaryValue: {
     fontSize: 16,
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Medium,
   },
   divider: {
@@ -254,7 +314,11 @@ const styles = StyleSheet.create({
   totalLabel: {
     fontSize: 18,
     fontWeight: 'bold',
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Bold,
   },
   totalValue: {
@@ -271,12 +335,20 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Bold,
     marginBottom: 15,
   },
   paymentMethodCard: {
+<<<<<<< HEAD
     backgroundColor: COLORS.white,
+=======
+    backgroundColor: COLORS.card,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     borderRadius: 12,
     padding: 10,
     marginBottom: 12,
@@ -293,7 +365,11 @@ const styles = StyleSheet.create({
   },
   selectedPaymentMethod: {
     borderColor: 'transparent',
+<<<<<<< HEAD
     backgroundColor: COLORS.yellow,
+=======
+    backgroundColor: '#A40606',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     // shadowColor: "#000",
   },
   paymentMethodContent: {
@@ -307,7 +383,11 @@ const styles = StyleSheet.create({
   },
   paymentMethodText: {
     fontSize: 15,
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Medium,
     flex: 1,
   },
@@ -315,15 +395,24 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderRadius: 10,
+<<<<<<< HEAD
     borderWidth: 2,
     borderColor: 'grey',
+=======
+    borderWidth: 1,
+    borderColor: '#171010ff',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     position: 'absolute',
     right: 15,
     top: 15,
   },
   radioButtonSelected: {
     borderColor: 'grey',
+<<<<<<< HEAD
     backgroundColor: '#807979ff',
+=======
+    backgroundColor: '#171010ff',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
 
   // Address Section
@@ -337,17 +426,29 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   changeAddressText: {
+<<<<<<< HEAD
     color: 'red',
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontSize: 15,
     fontWeight: '600',
     fontFamily: FONTS.Medium,
   },
   selectedAddressCard: {
+<<<<<<< HEAD
     backgroundColor: COLORS.white,
     borderRadius: 12,
     padding: 16,
     borderWidth: 1,
     borderColor: COLORS.theme,
+=======
+    backgroundColor: COLORS.button,
+    borderRadius: 12,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: COLORS.button,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     shadowColor: COLORS.black,
     shadowOffset: {
       width: 0,
@@ -365,7 +466,11 @@ const styles = StyleSheet.create({
   addressType: {
     fontSize: 16,
     fontWeight: '600',
+<<<<<<< HEAD
     color: COLORS.theme,
+=======
+    color: COLORS.button,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     marginLeft: 8,
     fontFamily: FONTS.Medium,
   },
@@ -385,20 +490,32 @@ const styles = StyleSheet.create({
   addressContactName: {
     fontSize: 16,
     fontWeight: '600',
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Medium,
     marginBottom: 4,
   },
   addressLine: {
     fontSize: 14,
+<<<<<<< HEAD
     color: COLORS.grey,
+=======
+    color: COLORS.subtext,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Regular,
     lineHeight: 20,
     marginBottom: 2,
   },
   addressPhone: {
     fontSize: 14,
+<<<<<<< HEAD
     color: COLORS.grey,
+=======
+    color: COLORS.subtext,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontFamily: FONTS.Regular,
     marginTop: 4,
   },
@@ -407,8 +524,13 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 15,
     borderWidth: 1,
+<<<<<<< HEAD
     borderColor: COLORS.theme,
     shadowColor: COLORS.black,
+=======
+    borderColor: COLORS.button,
+    shadowColor: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     shadowOffset: {
       width: 0,
       height: 1,
@@ -426,6 +548,7 @@ const styles = StyleSheet.create({
 
   // Bottom Section
   bottomSection: {
+<<<<<<< HEAD
     paddingHorizontal: 16,
     paddingBottom: Platform.OS === 'ios' ? 34 : 20,
     paddingTop: 16,
@@ -437,6 +560,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#E94560',
+=======
+    backgroundColor: COLORS.card,
+    height: 56,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 16,
+    shadowColor: COLORS.button,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     shadowOffset: {
       width: 0,
       height: 4,
@@ -444,6 +575,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 6,
+<<<<<<< HEAD
     overflow: 'hidden',
   },
   payButtonText: {
@@ -454,5 +586,22 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     includeFontPadding: false,
     textAlignVertical: 'center',
+=======
+  },
+  payButton: {
+    borderRadius: 15,
+    overflow: 'hidden',
+  },
+  payButtonTouchable: {
+    paddingVertical: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  payButtonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    // color: COLORS.white,
+    fontFamily: FONTS.Bold,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
 });

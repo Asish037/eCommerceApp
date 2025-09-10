@@ -141,7 +141,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
+<<<<<<< HEAD
     height: '100%',
+=======
+    justifyContent: 'center',
+    padding: 20,
+    alignItems: 'center',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   headerSection: {
     width: '100%',

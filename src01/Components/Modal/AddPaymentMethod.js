@@ -3,8 +3,13 @@ import React, {useEffect, useState} from 'react';
 import {Pressable, StyleSheet, Text, Icon,  TextInput, View} from 'react-native';
 import {CreditCardInput} from 'react-native-credit-card-input';
 import SimpleToast from 'react-native-simple-toast';
+<<<<<<< HEAD
 import GradientButton from '../../Components/Button/GradientButton';
 import CustomImageBackground from '../../Components/ImageBackground/CustomImageBackground';
+=======
+import GradientButton from '../../Component/Button/GradientButton';
+import CustomImageBackground from '../../Component/ImageBackground/CustomImageBackground';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import {COLORS} from '../../Constant/Colors';
 import {FONTS} from '../../Constant/Font';
 import {moderateScale, verticalScale} from '../../PixelRatio';

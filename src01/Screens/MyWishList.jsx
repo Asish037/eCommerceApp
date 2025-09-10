@@ -1,5 +1,8 @@
 import {
+<<<<<<< HEAD
   Alert,
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   FlatList,
   Image,
   ImageBackground,
@@ -8,13 +11,18 @@ import {
   TextInput,
   View,
 } from 'react-native';
+<<<<<<< HEAD
 import React, {useState, useEffect} from 'react';
+=======
+import React, {useState} from 'react';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../Components/Header';
 import Tags from '../Components/Tags';
 import WishlistCard from '../Components/WishlistCard';
 import data from '../data/data.json';
 import {useNavigation} from '@react-navigation/native';
+<<<<<<< HEAD
 import { COLORS } from '../Constant/Colors';
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
 import axios from  '../Components/axios';
@@ -172,19 +180,39 @@ const MyWishList = () => {
   const handleProductDetails = item => {
     console.log('hello==' + JSON.stringify(item));
     navigation.navigate('PRODUCT_DETAILS', { productId: item.id });
+=======
+import {COLORS} from '../Constant/Colors';
+
+const MyWishList = () => {
+  const [products, setProducts] = useState(data.products);
+  const [filteredProducts, setFilteredProducts] = useState(data.products);
+  const navigation = useNavigation();
+
+  const handleProductDetails = item => {
+    console.log('hello==' + JSON.stringify(item));
+    navigation.navigate('PRODUCT_DETAILS', {item});
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   };
 
   const handleSearchChange = searchText => {
     if (searchText.trim() === '') {
       setFilteredProducts(products);
     } else {
+<<<<<<< HEAD
       const filtered = products.filter(product =>
         product.title.toLowerCase().includes(searchText.toLowerCase())
+=======
+      const filtered = products.filter(
+        product =>
+          product.name.toLowerCase().includes(searchText.toLowerCase()) ||
+          product.category?.toLowerCase().includes(searchText.toLowerCase()),
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       );
       setFilteredProducts(filtered);
     }
   };
 
+<<<<<<< HEAD
   const toggleFavorite = async (item) => {
     try {
       const userId = await AsyncStorage.getItem('userId'); // make sure you save this in AsyncStorage
@@ -208,6 +236,64 @@ const MyWishList = () => {
 
   //   fetchRemoveProducts(item, userId);
   // };
+=======
+  const wishList = [
+    {
+      item_id: 1,
+      name: 'Wireless Headphones',
+      category: 'Electronics',
+      brand: 'Sony',
+      price: 150.0,
+      currency: 'USD',
+      link: 'https://example.com/product/wireless-headphones',
+      priority: 'High',
+      notes: 'Looking for noise-cancelling features.',
+    },
+    {
+      item_id: 2,
+      name: 'Coffee Maker',
+      category: 'Home Appliances',
+      brand: 'Keurig',
+      price: 99.99,
+      currency: 'USD',
+      link: 'https://example.com/product/coffee-maker',
+      priority: 'Medium',
+      notes: 'Prefer single-serve pod machine.',
+    },
+    {
+      item_id: 3,
+      name: 'Laptop Bag',
+      category: 'Accessories',
+      brand: 'Targus',
+      price: 45.0,
+      currency: 'USD',
+      link: 'https://example.com/product/laptop-bag',
+      priority: 'Low',
+      notes: 'Looking for something lightweight and durable.',
+    },
+  ];
+
+  const toggleFavorite = item => {
+    const updatedProducts = products.map(prod => {
+      if (prod.id === item.id) {
+        console.log('prod: ', prod);
+        return {
+          ...prod,
+          isFavorite: !prod.isFavorite,
+        };
+      }
+      return prod;
+    });
+    setProducts(updatedProducts);
+    setFilteredProducts(updatedProducts);
+  };
+
+  const removeFromWishlist = item => {
+    const updatedProducts = products.filter(prod => prod.id !== item.id);
+    setProducts(updatedProducts);
+    setFilteredProducts(updatedProducts);
+  };
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
   return (
     <LinearGradient colors={COLORS.gradient} style={styles.container}>
@@ -219,11 +305,19 @@ const MyWishList = () => {
       <FlatList
         data={filteredProducts}
         numColumns={2}
+<<<<<<< HEAD
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
           <WishlistCard
             item={item}
 
+=======
+        columnWrapperStyle={styles.row}
+        contentContainerStyle={styles.listContainer}
+        renderItem={({item}) => (
+          <WishlistCard
+            item={item}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
             handleProductClick={handleProductDetails}
             toggleFavorite={toggleFavorite}
             removeFromWishlist={removeFromWishlist}
@@ -243,9 +337,22 @@ export default MyWishList;
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
+<<<<<<< HEAD
     padding: 5,
   },
 
+=======
+    padding: 16,
+    marginBottom: 16,
+  },
+  listContainer: {
+    paddingHorizontal: 5,
+  },
+  row: {
+    justifyContent: 'flex-start',
+    paddingHorizontal: 5,
+  },
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   headingText: {
     fontSize: 28,
     color: '#000000',

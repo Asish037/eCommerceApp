@@ -17,8 +17,13 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
   const compactStyles = StyleSheet.create({
     container: {
       alignItems: 'center',
+<<<<<<< HEAD
       marginHorizontal: 6,
       marginVertical: 10,
+=======
+      marginHorizontal: 8,
+      marginVertical: 12,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       width: 100,
     },
     imageContainer: {
@@ -41,10 +46,17 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
       width: '100%',
       height: '100%',
       borderRadius: 40,
+<<<<<<< HEAD
       resizeMode: 'contain',
     },
     title: {
       fontSize: 13,
+=======
+      resizeMode: 'cover',
+    },
+    title: {
+      fontSize: 12,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       fontFamily: fonts.medium,
       fontWeight: '600',
       color: COLORS.black,
@@ -55,7 +67,11 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
       fontSize: 12,
       fontFamily: fonts.medium,
       fontWeight: '700',
+<<<<<<< HEAD
       color: '#f54a00',
+=======
+      color: '#E94560',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       textAlign: 'center',
       marginTop: 4,
     },
@@ -63,7 +79,11 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
       fontSize: 10,
       fontFamily: fonts.regular,
       textDecorationLine: 'line-through',
+<<<<<<< HEAD
       color: '#3a3838ff',
+=======
+      color: '#999',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       textAlign: 'center',
     },
     likeContainer: {
@@ -119,7 +139,11 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
       flexGrow: 1,
     },
     title: {
+<<<<<<< HEAD
       fontSize: 15,
+=======
+      fontSize: 16,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       fontFamily: fonts.medium,
       fontWeight: '600',
       color: COLORS.black,
@@ -128,16 +152,27 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
     },
     productOriginalPrice: {
       textDecorationLine: 'line-through',
+<<<<<<< HEAD
       color: '#383636ff',
       fontWeight: '700',
       fontFamily: fonts.medium,
       fontSize: 15,
+=======
+      color: '#E94560',
+      fontWeight: '700',
+      fontFamily: fonts.medium,
+      fontSize: 16,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     },
     productPrice: {
       fontSize: 16,
       fontFamily: fonts.medium,
       fontWeight: '700',
+<<<<<<< HEAD
       color: '#f54a00',
+=======
+      color: '#E94560',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       // marginBottom: 6,
     },
     price: {
@@ -163,9 +198,14 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
     rating: {
       fontSize: 12,
       fontFamily: fonts.regular,
+<<<<<<< HEAD
       color: COLORS.black,
       marginRight: 4,
       fontWeight: '500',
+=======
+      color: COLORS.red,
+      marginRight: 4,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     },
     ratingCount: {
       fontSize: 10,
@@ -184,12 +224,21 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
     cartButtonDefault: {
       backgroundColor: COLORS.white,
       borderWidth: 1,
+<<<<<<< HEAD
       borderColor: COLORS.button,
     },
     cartButtonAdded: {
       backgroundColor: COLORS.button,
       borderWidth: 1,
       borderColor: COLORS.button,
+=======
+      borderColor: COLORS.blue,
+    },
+    cartButtonAdded: {
+      backgroundColor: COLORS.blue,
+      borderWidth: 1,
+      borderColor: COLORS.blue,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     },
     cartIcon: {
       width: 16,
@@ -197,7 +246,11 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
       marginRight: 6,
     },
     cartIconDefault: {
+<<<<<<< HEAD
       tintColor: COLORS.button,
+=======
+      tintColor: COLORS.blue,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     },
     cartIconAdded: {
       tintColor: '#FFFFFF',
@@ -208,7 +261,11 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
       fontWeight: '600',
     },
     cartButtonTextDefault: {
+<<<<<<< HEAD
       color: COLORS.button,
+=======
+      color: COLORS.blue,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     },
     cartButtonTextAdded: {
       color: '#FFFFFF',
@@ -286,7 +343,11 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
           />
           
           {/* Favorite Button */}
+<<<<<<< HEAD
           {/* <View style={compactStyles.likeContainer}>
+=======
+          <View style={compactStyles.likeContainer}>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
             <TouchableOpacity
               onPress={() => {
                 toggleFavorite(item);
@@ -303,6 +364,7 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
                 />
               )}
             </TouchableOpacity>
+<<<<<<< HEAD
           </View> */}
         </View>
 
@@ -311,6 +373,16 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
         </Text>
         
         {/* {item.offer_price && (
+=======
+          </View>
+        </View>
+
+        <Text style={compactStyles.title} numberOfLines={2}>
+          {item.name || item.title}
+        </Text>
+        
+        {item.offer_price && (
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
           <Text style={compactStyles.price}>
             ₹{item.offer_price}
           </Text>
@@ -320,7 +392,11 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
           <Text style={compactStyles.originalPrice}>
             ₹{item.price}
           </Text>
+<<<<<<< HEAD
         )} */}
+=======
+        )}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       </TouchableOpacity>
     );
   }
@@ -347,6 +423,7 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
         </Text>
         
         {/* Debug: Show image URL */}
+<<<<<<< HEAD
         {/* <Text style={{fontSize: 10, color: 'gray', marginBottom: 4}} numberOfLines={1}>
           IMG: {item.img || item.image || 'No image URL'}
         </Text> */}
@@ -356,6 +433,17 @@ const ProductCard = ({item, handleProductClick, toggleFavorite, isCompact = fals
           <Text style={styles.productOriginalPrice}>{"\u20B9"}{(item.price)}</Text>
         </View>
         {/* <Text style={styles.description} numberOfLines={2}>
+=======
+        <Text style={{fontSize: 10, color: 'gray', marginBottom: 4}} numberOfLines={1}>
+          IMG: {item.img || item.image || 'No image URL'}
+        </Text>
+        
+        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginBottom: 6, gap: 10}} >
+          <Text style={styles.productOriginalPrice}>{(item.price)}</Text>
+          <Text style={styles.productPrice}>{(item.offer_price)}</Text>
+        </View>
+        <Text style={styles.description} numberOfLines={2}>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
           {truncatedDescription}
         </Text> */}
 

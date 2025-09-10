@@ -33,7 +33,11 @@ import {
   FullButtonComponent,
 } from '../../lib';
 import ErrorBoundary from '../../lib/ErrorBoundary';
+<<<<<<< HEAD
 // import colors from '../../common/colors';
+=======
+import colors from '../../common/colors';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import {isAndroid, logErrorWithMessage} from '../../utilities/helperFunctions';
 import TimerText from './TimerText';
 
@@ -332,7 +336,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   submitButtonText: {
+<<<<<<< HEAD
     color: COLORS.white,
+=======
+    color: colors.WHITE,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   otpResendButton: {
     alignItems: 'center',
@@ -340,13 +348,21 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   otpResendButtonText: {
+<<<<<<< HEAD
     color: COLORS.orange,
+=======
+    color: colors.ORANGE,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     textTransform: 'none',
     textDecorationLine: 'underline',
   },
   otpText: {
     fontWeight: 'bold',
+<<<<<<< HEAD
     color: COLORS.blue,
+=======
+    color: colors.BLUE,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     fontSize: 18,
     width: '100%',
   },

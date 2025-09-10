@@ -15,16 +15,28 @@ import {COLORS} from '../../Constant/Colors';
 import {FONTS} from '../../Constant/Font';
 import {moderateScale, verticalScale} from '../../PixelRatio';
 import Navigation from '../../Service/Navigation';
+<<<<<<< HEAD
 import GradientButton from '../../Components/Button/GradientButton';
 import ImageWithTitle from '../../Components/Header/ImageWithTitle';
 import CustomImageBackground from '../../Components/ImageBackground/CustomImageBackground';
 import GlobalStyles from '../../Components/GlobalStyle';
 import PrefModal from '../../Components/Modal/PrefModal';
+=======
+import GradientButton from '../../Component/Button/GradientButton';
+import ImageWithTitle from '../../Component/Header/ImageWithTitle';
+import CustomImageBackground from '../../Component/ImageBackground/CustomImageBackground';
+import GlobalStyles from '../../Component/GlobalStyle';
+import PrefModal from '../../Component/Modal/PrefModal';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import Auth from '../../Service/Auth';
 import Toast from 'react-native-simple-toast';
 import {useDispatch} from 'react-redux';
 import {setUser} from '../../Redux/reducer/user';
+<<<<<<< HEAD
 import ThankYouModal from '../../Components/Modal/ThankYouModal';
+=======
+import ThankYouModal from '../../Component/Modal/ThankYouModal';
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 import {useNavigation} from '@react-navigation/native';
 
 export default function Preference() {

@@ -135,7 +135,11 @@ const AddressScreen = () => {
     setSelectedAddressId(address.id);
     if (fromPayment) {
       // Navigate back to payment screen with selected address
+<<<<<<< HEAD
       navigation.navigate('Payment', {
+=======
+      navigation.navigate('PaymentScreen', {
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
         selectedAddress: address,
         grandTotal: route.params?.grandTotal,
       });
@@ -162,7 +166,11 @@ const AddressScreen = () => {
             <MaterialIcons
               name={item.type === 'Home' ? 'home' : 'business'}
               size={20}
+<<<<<<< HEAD
               color={isSelected ? COLORS.black : COLORS.blue}
+=======
+              color={isSelected ? COLORS.white : COLORS.button}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
             />
             <Text
               style={[
@@ -178,7 +186,11 @@ const AddressScreen = () => {
             )}
           </View>
           {isSelected && fromPayment && (
+<<<<<<< HEAD
             <Ionicons name="checkmark-circle" size={24} color={COLORS.blue} />
+=======
+            <Ionicons name="checkmark-circle" size={24} color={COLORS.white} />
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
           )}
         </View>
 
@@ -283,14 +295,20 @@ const AddressScreen = () => {
           )} */}
         </View>
         {/* Subtitle */}
+<<<<<<< HEAD
         <View style={styles.subtitleContainer}>
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
         <Text style={styles.screenSubtitle}>
           {fromPayment
             ? 'Choose where you want your order delivered'
             : 'Add, edit or delete your saved addresses'}
         </Text>
+<<<<<<< HEAD
         </View>
        
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       </View>
 
       {/* Address List */}
@@ -426,8 +444,12 @@ export default AddressScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+<<<<<<< HEAD
     width: '100%',
     height: '100%',
+=======
+    padding: 10,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   headerSection: {
     marginTop: verticalScale(10),
@@ -447,6 +469,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.Bold,
     flex: 1,
   },
+<<<<<<< HEAD
   subtitleContainer: {
     alignItems: 'flex-start',
     marginTop: verticalScale(10),
@@ -461,6 +484,8 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontWeight: '400',
   },
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   headerEditButton: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -484,6 +509,15 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.Medium,
     marginLeft: moderateScale(4),
   },
+<<<<<<< HEAD
+=======
+  screenSubtitle: {
+    fontSize: moderateScale(14),
+    color: COLORS.gray || '#212020ff',
+    fontFamily: FONTS.Regular,
+    lineHeight: moderateScale(10),
+  },
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   addressList: {
     paddingHorizontal: moderateScale(10),
     paddingBottom: verticalScale(100),
@@ -507,14 +541,22 @@ const styles = StyleSheet.create({
     borderColor: '#f0f0f0',
   },
   selectedAddressCard: {
+<<<<<<< HEAD
     backgroundColor: COLORS.lightbutton,
     borderColor: COLORS.lightbutton,
+=======
+    backgroundColor: COLORS.button,
+    borderColor: COLORS.button,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     elevation: 4,
     shadowOpacity: 0.2,
   },
   selectableCard: {
     borderWidth: 2,
+<<<<<<< HEAD
     borderColor: COLORS.lightbutton,
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   addressCardHeader: {
     flexDirection: 'row',
@@ -529,7 +571,11 @@ const styles = StyleSheet.create({
   addressType: {
     fontSize: moderateScale(16),
     fontWeight: '600',
+<<<<<<< HEAD
     color: COLORS.blue,
+=======
+    color: COLORS.button,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     marginLeft: moderateScale(8),
     fontFamily: FONTS.Medium,
   },
@@ -570,7 +616,11 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(4),
   },
   selectedAddressText: {
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.white,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   addressActions: {
     flexDirection: 'row',
@@ -654,7 +704,11 @@ const styles = StyleSheet.create({
     bottom: verticalScale(20),
     left: moderateScale(20),
     right: moderateScale(20),
+<<<<<<< HEAD
     backgroundColor: COLORS.DarkPink,
+=======
+    backgroundColor: COLORS.button,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     borderRadius: moderateScale(12),
     padding: moderateScale(16),
     elevation: 3,

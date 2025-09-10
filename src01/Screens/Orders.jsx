@@ -9,7 +9,11 @@ import {
   TouchableWithoutFeedback,
   FlatList,
   StatusBar,
+<<<<<<< HEAD
   Alert,
+=======
+  ActivityIndicator
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 } from 'react-native';
 import {COLORS} from '../Constant/Colors';
 import {FONTS} from '../Constant/Font';
@@ -22,23 +26,37 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import myorderData from '../data/myorderData.json';
 import Header from '../Components/Header';
 import Moment from 'moment';
+<<<<<<< HEAD
 import axios from '../Components/axios';
 import qs from 'qs';
 import asyncStorage from '@react-native-async-storage/async-storage';
 // import {useTheme} from '../Context/ThemeContext';
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 const Orders = () => {
   const navigation = useNavigation();
   const route = useRoute();
+<<<<<<< HEAD
   const [ordersData, setOrdersData] = useState([]);
   const [allOrders] = useState(myorderData.orders);
   const [isLoading, setIsLoading] = useState(true);
   // const [error, setError] = useState(null);
+=======
+
+  const [ordersData, setOrdersData] = useState([]);
+  const [allOrders] = useState(myorderData.orders);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
   // Get route parameters
   const {status, title, filter} = route.params || {};
 
   useEffect(() => {
+<<<<<<< HEAD
     fetchOrders();
   }, [filter]);
 
@@ -112,6 +130,101 @@ const Orders = () => {
     // Filter orders based on the parameters passed from AccountScreen
   // let filteredOrders = allOrders;
   // setOrdersData(filteredOrders);
+=======
+    // Filter orders based on the parameters passed from AccountScreen
+    let filteredOrders = allOrders;
+
+    if (filter) {
+      switch (filter) {
+        case 'unpaid':
+          filteredOrders = allOrders.filter(
+            order => order.payment.payment_status !== 'Completed',
+          );
+          break;
+        case 'paid':
+          filteredOrders = allOrders.filter(
+            order =>
+              order.payment.payment_status === 'Completed' &&
+              order.shipping_status === 'Processing',
+          );
+          break;
+        case 'shipped':
+          filteredOrders = allOrders.filter(
+            order => order.shipping_status === 'Shipped',
+          );
+          break;
+        case 'delivered':
+          filteredOrders = allOrders.filter(
+            order => order.shipping_status === 'Delivered',
+          );
+          break;
+        default:
+          filteredOrders = allOrders;
+      }
+    }
+
+    setOrdersData(filteredOrders);
+  }, [filter, allOrders]);
+
+  /*
+    useEffect((
+      () => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch('https://api.example.com/orders');
+            if(!response.ok){
+              throw new Error('Failed to fetch orders');
+            
+            }
+            const data = await response.json();
+            let filteredOrders = data.orders;
+            if (filter) {
+              switch (filter) {
+                case 'unpaid':
+                  filteredOrders = allOrders.filter(
+                    order => order.payment.payment_status !== 'Completed',
+                  );
+                  break;
+                case 'paid':
+                  filteredOrders = allOrders.filter(
+                    order =>
+                      order.payment.payment_status === 'Completed' &&
+                      order.shipping_status === 'Processing',
+                  );
+                  break;
+                case 'shipped':
+                  filteredOrders = allOrders.filter(
+                    order => order.shipping_status === 'Shipped',
+                  );
+                  break;
+                case 'delivered':
+                  filteredOrders = allOrders.filter(
+                    order => order.shipping_status === 'Delivered',
+                  );
+                  break;
+                default:
+                  filteredOrders = allOrders;
+              }
+            }
+            setOrdersData(filteredOrders);  
+            setError(null);
+          } catch (error) {
+            setError('An error occurred while fetching orders');
+            console.error("Error fetching orders:", error);
+            setOrdersData([]);  // clear orders data on error
+          } finally {
+            setIsLoading(false);
+          }
+        };
+
+        fetchData();
+      }
+    ),[])
+  
+  */
+
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
   const getStatusIcon = status => {
     switch (status) {
@@ -139,6 +252,7 @@ const Orders = () => {
     }
   };
 
+<<<<<<< HEAD
   const renderOrderItem = ({item}) => (
     <TouchableOpacity
       onPress={() => navigation.navigate('OrderDetails', {items: item})}
@@ -150,6 +264,20 @@ const Orders = () => {
           <Text style={styles.orderIdText}>Order #{item.id}</Text>
           <Text style={styles.orderDateText}>
             {Moment(item.created_at).format('YYYY-MM-DD')}
+=======
+  const renderOrderItem = ({item, index}) => (
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('OrderDetails', {items: item});
+        // navigation.navigate('OrderDetails', {orderId: item.order_id});
+      }}
+      style={styles.orderCard}>
+      <View style={styles.orderHeader}>
+        <View style={styles.orderIdSection}>
+          <Text style={styles.orderIdText}>Order #{item.order_id}</Text>
+          <Text style={styles.orderDateText}>
+            {Moment(item.order_date).format('MMM DD, YYYY')}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
           </Text>
         </View>
         <View style={styles.statusContainer}>
@@ -168,12 +296,19 @@ const Orders = () => {
         </View>
       </View>
 
+<<<<<<< HEAD
       {/* Order Content */}
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       <View style={styles.orderContent}>
         <View style={styles.imageContainer}>
           <Image
             source={{
+<<<<<<< HEAD
               uri: `https://yourdomain.com/storage/${item.order_items[0].product_image}`, 
+=======
+              uri: item.items[0].thumbnail_image,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
             }}
             style={styles.productImage}
           />
@@ -181,6 +316,7 @@ const Orders = () => {
 
         <View style={styles.productDetails}>
           <Text style={styles.productName} numberOfLines={2}>
+<<<<<<< HEAD
             {item.order_items[0].product_name}
           </Text>
           <Text style={styles.brandText}>N/A</Text>
@@ -196,6 +332,21 @@ const Orders = () => {
             <Text style={styles.moreItemsText}>
               +{item.order_items.length - 1} more item
               {item.order_items.length > 2 ? 's' : ''}
+=======
+            {item.items[0].product_name}
+          </Text>
+          <Text style={styles.brandText}>{item.items[0].brand}</Text>
+          <View style={styles.quantityPriceRow}>
+            <Text style={styles.quantityText}>
+              Qty: {item.items[0].quantity}
+            </Text>
+            <Text style={styles.priceText}>${item.payment.total_amount}</Text>
+          </View>
+          {item.items.length > 1 && (
+            <Text style={styles.moreItemsText}>
+              +{item.items.length - 1} more item
+              {item.items.length > 2 ? 's' : ''}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
             </Text>
           )}
         </View>
@@ -209,7 +360,10 @@ const Orders = () => {
         </View>
       </View>
 
+<<<<<<< HEAD
       {/* Footer */}
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
       <View style={styles.orderFooter}>
         <View style={styles.paymentInfo}>
           <MaterialCommunityIcons
@@ -218,7 +372,11 @@ const Orders = () => {
             color={COLORS.button}
           />
           <Text style={styles.paymentText}>
+<<<<<<< HEAD
             {item.payment?.payment_method || 'N/A'} • {item.payment?.payment_status || 'Pending'}
+=======
+            {item.payment.payment_method} • {item.payment.payment_status}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
           </Text>
         </View>
         {item.tracking_number && (
@@ -230,7 +388,10 @@ const Orders = () => {
     </TouchableOpacity>
   );
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   return (
     <LinearGradient
       colors={COLORS.gradient || COLORS.gradient}
@@ -239,6 +400,7 @@ const Orders = () => {
         barStyle="dark-content"
         backgroundColor="transparent"
         translucent
+<<<<<<< HEAD
       /> */}
       <Header />
 
@@ -313,6 +475,101 @@ const Orders = () => {
           );
         }}
       />
+=======
+      />
+      {isLoading ? (
+        <View style={styles.centerContainer}>
+          <ActivityIndicator size="large" color={COLORS.button} />
+          <Text style={styles.loadingText}>Loading your orders...</Text>
+        </View>
+      ) : error ? (
+        <View style={styles.centerContainer}>
+          <MaterialIcons name="error-outline" size={moderateScale(60)} color={COLORS.red} />
+          <Text style={styles.errorText}>{error}</Text>
+        </View>
+      ) : (
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContainer}>
+          <View style={styles.headerSection}>
+            <Text style={styles.headerTitle}>{title || 'My Orders'}</Text>
+            <Text style={styles.headerSubtitle}>
+              {ordersData.length} order{ordersData.length !== 1 ? 's' : ''} • Total: ${ordersData.reduce((sum, order) => sum + parseFloat(order.payment.total_amount), 0).toFixed(2)}
+            </Text>
+          </View>
+      
+      
+      */}
+      <Header />
+
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.headerSection}>
+          <Text style={styles.headerTitle}>{title || 'My Orders'}</Text>
+          <Text style={styles.headerSubtitle}>
+            {ordersData.length} order{ordersData.length !== 1 ? 's' : ''} •
+            Total: $
+            {ordersData
+              .reduce(
+                (sum, order) => sum + parseFloat(order.payment.total_amount),
+                0,
+              )
+              .toFixed(2)}
+          </Text>
+        </View>
+        <FlatList
+          data={ordersData}
+          renderItem={renderOrderItem}
+          keyExtractor={item => item.order_id.toString()}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.listContainer}
+          ListEmptyComponent={() => {
+            const getEmptyMessage = () => {
+              switch (filter) {
+                case 'unpaid':
+                  return {
+                    title: 'No Pending Payments',
+                    message: 'All your orders are paid!',
+                  };
+                case 'paid':
+                  return {
+                    title: 'No Orders to Ship',
+                    message: 'No orders waiting to be shipped.',
+                  };
+                case 'shipped':
+                  return {
+                    title: 'No Shipped Orders',
+                    message: 'No orders are currently in transit.',
+                  };
+                case 'delivered':
+                  return {
+                    title: 'No Orders to Review',
+                    message: 'You have reviewed all delivered orders!',
+                  };
+                default:
+                  return {
+                    title: 'No Orders Found',
+                    message: 'Start shopping to see your orders here.',
+                  };
+              }
+            };
+
+            const emptyMsg = getEmptyMessage();
+
+            return (
+              <View style={styles.emptyContainer}>
+                <MaterialCommunityIcons
+                  name="package-variant"
+                  size={moderateScale(60)}
+                  color={COLORS.grey}
+                />
+                <Text style={styles.emptyTitle}>{emptyMsg.title}</Text>
+                <Text style={styles.emptyMessage}>{emptyMsg.message}</Text>
+              </View>
+            );
+          }}
+        />
+      </ScrollView>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     </LinearGradient>
   );
 };
@@ -323,7 +580,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
+<<<<<<< HEAD
     height: '100%',
+=======
+    padding: 10,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   scrollContainer: {
     flex: 1,
@@ -531,4 +792,26 @@ const styles = StyleSheet.create({
     paddingHorizontal: moderateScale(40),
     lineHeight: moderateScale(20),
   },
+<<<<<<< HEAD
 });
+=======
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    marginTop: moderateScale(10),
+    color: COLORS.black,
+    fontFamily: FONTS.Medium,
+  },
+  errorText: {
+    marginTop: moderateScale(10),
+    color: COLORS.red,
+    fontFamily: FONTS.Medium,
+    textAlign: 'center',
+    paddingHorizontal: moderateScale(20),
+  },
+});
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd

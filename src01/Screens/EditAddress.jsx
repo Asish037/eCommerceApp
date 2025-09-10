@@ -12,7 +12,10 @@ import {
   Animated,
   Keyboard,
   KeyboardAvoidingView,
+<<<<<<< HEAD
   Platform,
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 } from 'react-native';
 import {COLORS} from '../Constant/Colors';
 import {FONTS} from '../Constant/Font';
@@ -26,9 +29,12 @@ import GradientButton from '../Components/Button/GradientButton';
 import Toast from 'react-native-simple-toast';
 import {fonts} from '../utils/fonts';
 import Header from '../Components/Header';
+<<<<<<< HEAD
 import axios from '../Components/axios'
 import qs from 'qs';
 import asyncStorage from '@react-native-async-storage/async-storage';
+=======
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
 const EditAddress = ({route}) => {
   const navigation = useNavigation();
@@ -50,6 +56,25 @@ const EditAddress = ({route}) => {
   const [keyboardVisible, setKeyboardVisible] = useState(false);
   const fadeAnim = useState(new Animated.Value(0))[0];
 
+<<<<<<< HEAD
+=======
+  /*
+  const [formData , SetFormData] = useState({
+    pincode: '',
+    houseNumber: '',
+    roadName: '',
+    contactName: '',
+    phoneNumber: '',
+    addressType: 'Home',
+    isDefault: false,
+  });
+  const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+
+  */
+
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   useEffect(() => {
     // Animate screen entrance
     Animated.timing(fadeAnim, {
@@ -122,6 +147,60 @@ const EditAddress = ({route}) => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+<<<<<<< HEAD
+=======
+  /*
+  const saveNewAddress = async() => {
+    console.log('save button pressed!'); 
+    if (!validateForm()) {
+      Toast.show('Please fill all required fields correctly!', Toast.SHORT);
+      return;
+    }
+
+    setIsLoading(true);
+
+    const isEditing = !!route.params?.addressData;
+    const method = isEditing ? 'PUT' : 'POST';
+    const URL = isEditing ? `https://your-api.com/addresses/${route.params.addressData.id}`
+        : 'https://your-api.com/addresses';
+
+    try {
+      const payload = { ...formData };
+      if (isEditing) {
+        payload.id = route.params.addressData.id;
+      }
+      const response = await fetch(URL, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error('Network response was not ok');
+      }
+      const savedData = await response.json();
+      console.log('Address saved successfully:', savedData);
+
+      if (isEditing) {
+        navigation.navigate('AddressScreen', { updatedAddress: savedData });
+        Toast.show('Address updated successfully!', Toast.SHORT);
+      } else {
+        navigation.navigate('AddressScreen', { newAddress: savedData });
+        Toast.show('Address added successfully!', Toast.SHORT);
+      }
+    } catch (error) {
+      console.error('Error saving address:', error);
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  }
+  
+  */
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
 
   const saveNewAddress = async () => {
     console.log('Save button pressed!'); // Debug log
@@ -131,6 +210,7 @@ const EditAddress = ({route}) => {
     }
 
     setIsLoading(true);
+<<<<<<< HEAD
     try {
       const token =  await asyncStorage.getItem('userToken');
       console.log('User token:', token); // Debug log
@@ -179,6 +259,56 @@ const EditAddress = ({route}) => {
   };
 
 
+=======
+
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      // Create address object
+      const addressObject = {
+        id: addressData?.id || Date.now().toString(),
+        type: formData.addressType,
+        contactName: formData.contactName,
+        addressLine1: `${formData.houseNumber}, ${formData.roadName}`,
+        addressLine2: `${formData.pincode}`,
+        phoneNumber: formData.phoneNumber,
+        pincode: formData.pincode,
+        houseNumber: formData.houseNumber,
+        roadName: formData.roadName,
+        isDefault: formData.isDefault,
+      };
+
+      setIsLoading(false);
+
+      if (addressData) {
+        // Editing existing address
+        Toast.show('Address updated successfully!', Toast.SHORT);
+        if (fromAddressScreen) {
+          navigation.navigate('AddressScreen', {
+            updatedAddress: addressObject,
+          });
+        } else {
+          navigation.goBack();
+        }
+      } else {
+        // Adding new address
+        Toast.show('Address added successfully!', Toast.SHORT);
+        if (fromAddressScreen) {
+          navigation.navigate('AddressScreen', {
+            newAddress: addressObject,
+          });
+        } else {
+          navigation.goBack();
+        }
+      }
+    } catch (error) {
+      setIsLoading(false);
+      Alert.alert('Error', 'Failed to save address. Please try again.');
+    }
+  };
+
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   // const CustomHeader = () => (
   // <View style={styles.headerContainer}>
   // <TouchableOpacity
@@ -240,9 +370,13 @@ const EditAddress = ({route}) => {
         backgroundColor={COLORS.gradientButton[1]}
         barStyle="light-content"
         /> */}
+<<<<<<< HEAD
       <KeyboardAvoidingView 
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
         style={{flex: 1}}>
+=======
+      <KeyboardAvoidingView behavior="padding" style={{flex: 1}}>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
         <Animated.View style={[styles.animatedContainer, {opacity: fadeAnim}]}>
           <LinearGradient colors={COLORS.gradient} style={styles.container}>
             <Header />
@@ -258,7 +392,11 @@ const EditAddress = ({route}) => {
                   <MaterialIcons
                     name="location-on"
                     size={24}
+<<<<<<< HEAD
                     color={COLORS.black}
+=======
+                    color={COLORS.gradientButton[1]}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                   />
                   <Text style={styles.sectionTitle}>Address Details</Text>
                 </View>
@@ -266,10 +404,17 @@ const EditAddress = ({route}) => {
                 <View style={{marginBottom: 20}}>
                   <Text
                     style={{
+<<<<<<< HEAD
                       fontSize: 16,
                       fontWeight: 'bold',
                       marginBottom: 5,
                       color: COLORS.black,
+=======
+                      fontSize: 15,
+                      fontWeight: 'bold',
+                      marginBottom: 5,
+                      color: COLORS.subtext,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                     }}>
                     Pincode:
                   </Text>
@@ -277,7 +422,11 @@ const EditAddress = ({route}) => {
                     style={{
                       height: 50,
                       borderWidth: 1,
+<<<<<<< HEAD
                       borderColor: COLORS.grey,
+=======
+                      borderColor: COLORS.gradientButton[1],
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                       backgroundColor: COLORS.white,
                       paddingHorizontal: 15,
                       borderRadius: 8,
@@ -299,10 +448,17 @@ const EditAddress = ({route}) => {
                 <View style={{marginBottom: 20}}>
                   <Text
                     style={{
+<<<<<<< HEAD
                       fontSize: 16,
                       fontWeight: 'bold',
                       marginBottom: 5,
                       color: COLORS.black,
+=======
+                      fontSize: 15,
+                      fontWeight: 'bold',
+                      marginBottom: 5,
+                      color: COLORS.subtext,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                     }}>
                     House/Flat/Building No.:
                   </Text>
@@ -310,7 +466,11 @@ const EditAddress = ({route}) => {
                     style={{
                       height: 50,
                       borderWidth: 1,
+<<<<<<< HEAD
                       borderColor: COLORS.grey,
+=======
+                      borderColor: COLORS.gradientButton[1],
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                       backgroundColor: COLORS.white,
                       paddingHorizontal: 15,
                       borderRadius: 8,
@@ -334,10 +494,17 @@ const EditAddress = ({route}) => {
                 <View style={{marginBottom: 20}}>
                   <Text
                     style={{
+<<<<<<< HEAD
                       fontSize: 16,
                       fontWeight: 'bold',
                       marginBottom: 5,
                       color: COLORS.black,
+=======
+                      fontSize: 15,
+                      fontWeight: 'bold',
+                      marginBottom: 5,
+                      color: COLORS.subtext,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                     }}>
                     Road Name/Area/Colony:
                   </Text>
@@ -345,7 +512,11 @@ const EditAddress = ({route}) => {
                     style={{
                       height: 50,
                       borderWidth: 1,
+<<<<<<< HEAD
                       borderColor: COLORS.grey,
+=======
+                      borderColor: COLORS.gradientButton[1],
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                       backgroundColor: COLORS.white,
                       paddingHorizontal: 15,
                       borderRadius: 8,
@@ -389,7 +560,11 @@ const EditAddress = ({route}) => {
                           color={
                             formData.addressType === type
                               ? COLORS.white
+<<<<<<< HEAD
                               : COLORS.orange
+=======
+                              : COLORS.button
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                           }
                         />
                         <Text
@@ -415,7 +590,11 @@ const EditAddress = ({route}) => {
                     <MaterialIcons
                       name="star"
                       size={20}
+<<<<<<< HEAD
                       color={COLORS.white}
+=======
+                      color={COLORS.button}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                     />
                     <Text style={styles.defaultToggleText}>
                       Set as default address
@@ -439,7 +618,11 @@ const EditAddress = ({route}) => {
                   <MaterialIcons
                     name="contact-phone"
                     size={24}
+<<<<<<< HEAD
                     color={COLORS.black}
+=======
+                    color={COLORS.icon}
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                   />
                   <Text style={styles.sectionTitle}>Contact Information</Text>
                 </View>
@@ -447,10 +630,17 @@ const EditAddress = ({route}) => {
                 <View style={{marginBottom: 20}}>
                   <Text
                     style={{
+<<<<<<< HEAD
                       fontSize: 16,
                       fontWeight: 'bold',
                       marginBottom: 5,
                       color: COLORS.black,
+=======
+                      fontSize: 15,
+                      fontWeight: 'bold',
+                      marginBottom: 5,
+                      color: COLORS.subtext,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                     }}>
                     Contact Name:
                   </Text>
@@ -458,7 +648,11 @@ const EditAddress = ({route}) => {
                     style={{
                       height: 50,
                       borderWidth: 1,
+<<<<<<< HEAD
                       borderColor: COLORS.grey,
+=======
+                      borderColor: COLORS.gradientButton[1],
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                       backgroundColor: COLORS.white,
                       paddingHorizontal: 15,
                       borderRadius: 8,
@@ -482,10 +676,17 @@ const EditAddress = ({route}) => {
                 <View style={{marginBottom: 20}}>
                   <Text
                     style={{
+<<<<<<< HEAD
                       fontSize: 16,
                       fontWeight: 'bold',
                       marginBottom: 5,
                       color: COLORS.black,
+=======
+                      fontSize: 15,
+                      fontWeight: 'bold',
+                      marginBottom: 5,
+                      color: COLORS.subtext,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                     }}>
                     Phone Number:
                   </Text>
@@ -493,7 +694,11 @@ const EditAddress = ({route}) => {
                     style={{
                       height: 50,
                       borderWidth: 1,
+<<<<<<< HEAD
                       borderColor: COLORS.grey,
+=======
+                      borderColor: COLORS.gradientButton[1],
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                       backgroundColor: COLORS.white,
                       paddingHorizontal: 15,
                       borderRadius: 8,
@@ -515,13 +720,26 @@ const EditAddress = ({route}) => {
                 </View>
 
                 {/* Save Button inside ScrollView */}
+<<<<<<< HEAD
                 <View style={styles.buttonContainer}>
+=======
+                <View
+                  style={{
+                    alignItems: 'center',
+                    marginTop: 30,
+                    marginBottom: 20,
+                  }}>
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                   <GradientButton
                     title={isLoading ? 'Saving...' : 'Save Address'}
                     onPress={saveNewAddress}
                     disabled={isLoading}
                     style={{
+<<<<<<< HEAD
                       width: '100%',
+=======
+                      width: '80%',
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
                       borderRadius: moderateScale(15),
                     }}
                   />
@@ -540,15 +758,20 @@ export default EditAddress;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+<<<<<<< HEAD
     width: '100%',
     height: '100%',
     backgroundColor: COLORS.gradient[0], // Set background color to match gradient start
+=======
+    backgroundColor: COLORS.gradientButton[1],
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   animatedContainer: {
     flex: 1,
   },
   container: {
     flex: 1,
+<<<<<<< HEAD
     width: '100%',
     height: '100%',
     backgroundColor: 'transparent',
@@ -564,21 +787,45 @@ const styles = StyleSheet.create({
   formContainer: {
     paddingHorizontal: moderateScale(15),
     paddingTop: moderateScale(10),
+=======
+    padding: 15,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  scrollContentContainer: {
+    paddingBottom: verticalScale(20),
+  },
+  formContainer: {
+    padding: moderateScale(10),
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
+<<<<<<< HEAD
     marginTop: verticalScale(15),
     marginBottom: verticalScale(25),
     paddingBottom: verticalScale(10),
     borderBottomWidth: 1,
     borderBottomColor: COLORS.grey,
     paddingHorizontal: moderateScale(5),
+=======
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(25),
+    paddingBottom: verticalScale(10),
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.gradientButton[1],
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   sectionTitle: {
     fontSize: moderateScale(16),
     fontWeight: '600',
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     marginLeft: moderateScale(8),
     fontFamily: fonts.medium,
   },
@@ -589,14 +836,22 @@ const styles = StyleSheet.create({
   inputLabel: {
     fontSize: moderateScale(14),
     fontWeight: '600',
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     marginBottom: verticalScale(8),
     fontFamily: fonts.medium,
   },
   textInput: {
     height: 50,
     borderWidth: 1,
+<<<<<<< HEAD
     borderColor: COLORS.grey,
+=======
+    borderColor: COLORS.gradientButton[1],
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     backgroundColor: COLORS.white,
     paddingHorizontal: 15,
     borderRadius: 8,
@@ -617,9 +872,18 @@ const styles = StyleSheet.create({
   buttonContainer: {
     // Remove absolute positioning
     alignItems: 'center', // center the button
+<<<<<<< HEAD
     marginTop: verticalScale(30),
     marginBottom: verticalScale(20),
     paddingHorizontal: moderateScale(15),
+=======
+    paddingHorizontal: moderateScale(10),
+    paddingVertical: verticalScale(10),
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(10),
+    backgroundColor: 'transparent', // Remove debug color
+    // Normal flex layout instead of absolute positioning
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   saveButton: {
     width: '80%',
@@ -663,7 +927,11 @@ const styles = StyleSheet.create({
   addressTypeText: {
     fontSize: moderateScale(14),
     fontWeight: '500',
+<<<<<<< HEAD
     color: COLORS.black,
+=======
+    color: COLORS.text,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
     marginLeft: moderateScale(6),
     fontFamily: fonts.medium,
   },
@@ -709,7 +977,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: moderateScale(2),
   },
   toggleSwitchActive: {
+<<<<<<< HEAD
     backgroundColor: COLORS.black,
+=======
+    backgroundColor: COLORS.button,
+>>>>>>> 5222bad0a19ef89e29941a2d8e16cfd8e6af7edd
   },
   toggleIndicator: {
     width: moderateScale(22),
